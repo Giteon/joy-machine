@@ -179,7 +179,7 @@ wet nurse [japanese sponge bath, *F*]
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
-bunson burner [bitch]
+bunson burner [bitch, .2]
 hellen keller [jerking off all over town, *F*]
 magic mike [wazowski, .2]
 scooby doo [velma 4k stuck in washing machine, .2, *F*]
@@ -217,6 +217,7 @@ low libido (magic the gathering/penis boy)
 chained to radiator
 authentic home-cooked
 animal style
+criterion collection
 type-3
 I-Spy
 180p
@@ -232,6 +233,7 @@ for her pleasure
 lifetime subscription
 sucked dry
 bottled from the source
+eldritch
 farm to table
 victory royale
 cum-colored
@@ -241,6 +243,7 @@ family plan
 kill on site
 hong-kong style
 9 trillion dead
+and a-one and a-two and-a
 [fucking] color blind
 super-auto [fucking]
 touch-based non-sexual [non-(poly/monog) partnership, *F*]
@@ -271,9 +274,10 @@ NUKE IN DA CLUB [HA HA, .3]
 switch it up like nintendo [I MISS US]
 face down stroking my shit [wrist fractured [8 month recovery]]
 ten times tintinuous
+i said oo girl shock me like an electric eel
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
-fuckkkk id do anything for it
+[unnggghhh] fuckkkk id do anything for it
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at?
 fucking turn around bend over [lemme see the nutrition facts]
@@ -286,13 +290,14 @@ etc etc and so on in such a way
 and subway take away everything you love
 what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
+CANCELLED
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
 and let the [fucking] bunny eat the carrot
 RICH MILLIONAIRE
 at least that's what they're saying [i dont fucking know]
 THE CITY IS MINE
-your skin oh yeah your skin and bones, turn in to something beautiful
+your skin [ohhhh yeah] oh yeah your skin and bones turn iiiiin to something beautiful
 in good christian fun
 emits poweful pheromone brain scrambled
 within 1000 feet of a school
@@ -301,7 +306,7 @@ DANGER WILL ROBINSON [DANGER [DANGER]]
 100 concubines (NOT virgins, robust sexual references)
 🥺🥺🥺
 leave no trace search history wiped
-why buy the cow when you can have the milk for free
+why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
 using a complex system of pulleys and levers
 10 lashings goddess
@@ -315,10 +320,9 @@ dave & busters [dave & busters dave & busters, .15]
 and SCENE
 walk the plank [bitch, .4]
 RELEASE THE SNAKES
-but thats up to you
 por favor
 no refunds
-Siri when is July [oops unsend [haha. siri hold my calls]]
+Siri "when is July" [oops unsend [haha. siri hold my calls]]
 NIGHTMARE NIGHTMARE
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT
@@ -382,5 +386,50 @@ const parseLists = (text) => {
   return lists;
 };
 
+// NSFW words list for safe mode filtering (only words that actually appear in the lists and are truly offensive)
+const nsfwWords = [
+  // Profanity
+  'fucking', 'fuck', 'fuckkkk', 'fuck-ass', 'fuck my fucking ass',
+  'bitch', 'bitch-ass', 'yuppy bitch',
+  'slut', 'whore', 'cunt', 'slutty vegan',
+  'shit',
+  
+  // Sexual content
+  'pussy', 'pussy taste test', 'pussy popping', 'pussy slay mama',
+  'cock', 'cock shame',
+  'jerking off', 'jerking off face down', 'jerking off all over town',
+  'cum', 'cum-colored', 'precum', 'dot jizz',
+  'orgasm', 'orgasmatron',
+  'sexual', 'gone sexual',
+  'nipple', 'nipple scene uncensored',
+  'wet nurse', 'japanese sponge bath',
+  'breastmilk',
+  'penis', 'penis boy',
+  'balls', 'my balls',
+  'ass', 'fuck-ass',
+  'taint', 'tip-to-taint',
+  'porn', 'monster porn', 'jerking',
+  'breedable', 'submissive breedable',
+  'ahegao', 'mommy milker', 'sudoku eyes',
+  'sabrina carpenter creaming jeans',
+  'quirked up [white boy with a little bit of swagger busts it down sexual style',
+  'touch-based non-sexual',
+  '100 concubines (NOT virgins, robust sexual references)',
+  
+  // Violence
+  'blood', 'blood (drenched/soaked)',
+  'torture', 'torture dungeon', 'japanese water torture',
+  'kill', 'kill on site',
+  'death', 'instant death', 'death by hypoxia', 'death immenent',
+  'cut major arteries to drain blood as fast as possible',
+  'holocaust', 'imitation holocaust crab',
+  
+  // Drugs
+  'cocaine'
+];
+
 // Create the word lists
 window.wordLists = parseLists(listsText);
+
+// Expose NSFW words for safe mode filtering
+window.nsfwWords = nsfwWords;

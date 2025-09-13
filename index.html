@@ -80,7 +80,17 @@
     </div>
 
     <!-- Format Display -->
-    <div id="format-display" class="text-center text-gray-400 text-xs mt-2"></div>
+    <!-- <div id="format-display" class="text-center text-gray-400 text-xs mt-2"></div> -->
+  </div>
+
+  <!-- Safe Mode Toggle -->
+  <div class="fixed bottom-4 right-4 sm:bottom-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:right-auto flex items-center space-x-3 z-10">
+    <label for="safe-mode-toggle" class="text-sm text-gray-600 cursor-pointer">
+      Safe Mode
+    </label>
+    <button id="safe-mode-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 p-1">
+      <span id="safe-mode-slider" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+    </button>
   </div>
 
   <!-- Import the word lists -->
@@ -89,9 +99,9 @@
   <script>
     // --- CONFIGURATION ---
     const CONFIG = {
-      fillDuration: 300000, // 300 seconds in milliseconds
+      fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.1, // 1% of total steps when clicked
+      advanceAmount: 0.2, // 2% of total steps when clicked
       typoChance: 0.01, // 1% chance per letter
       typoCorrectionChance: 0.8, // 80% chance to catch typo
       doubleBeastChance: 0.5, // 50% chance for two beasts
@@ -99,6 +109,8 @@
       doubleCandyChance: 0.05, // 5% chance for two candies
       fuckingChance: 0.1, // 10% chance to add "fucking"
       thinkingPauseChance: 0.1, // 10% chance for thinking pause
+      allCapsChance: 0.05, // 5% chance for all caps (except beast)
+      safeMode: false, // Safe mode state
       typingSpeed: {
         space: { min: 10, max: 26.67 },
         vowel: { min: 13.33, max: 33.33 },
@@ -127,12 +139,49 @@
     const phraseOutput = document.getElementById('phrase-output');
     const copyBtn = document.getElementById('copy-btn');
     const toast = document.getElementById('toast');
+    const safeModeToggle = document.getElementById('safe-mode-toggle');
+    const safeModeSlider = document.getElementById('safe-mode-slider');
     let fillInterval;
     let currentFill = 0;
     const totalSteps = CONFIG.fillDuration / CONFIG.updateInterval; // Total number of steps
     let isComplete = false;
 
     // --- FUNCTIONS ---
+    /**
+     * Generates a random "weeeeee" with 4-10 'e's
+     * @returns {string} A random weeeeee string
+     */
+    const generateWeeeeee = () => {
+      const eCount = Math.floor(Math.random() * 7) + 4; // 4-10 'e's
+      return 'we' + 'e'.repeat(eCount);
+    };
+
+    /**
+     * Replaces NSFW words with appropriate alternatives if safe mode is enabled
+     * @param {string} text The text to filter
+     * @returns {string} The filtered text
+     */
+    const filterNSFW = (text) => {
+      if (!CONFIG.safeMode) return text;
+      
+      let filteredText = text;
+      
+      // Replace 'fucking' specifically with 'freaking'
+      filteredText = filteredText.replace(/\bfucking\b/gi, 'freaking');
+      
+      // Check other NSFW words and replace with weeeeee
+      window.nsfwWords.forEach(nsfwWord => {
+        // Skip 'fucking' since we handled it above
+        if (nsfwWord.toLowerCase() === 'fucking') return;
+        
+        // Create case-insensitive regex for the word
+        const regex = new RegExp(`\\b${nsfwWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+        filteredText = filteredText.replace(regex, generateWeeeeee());
+      });
+      
+      return filteredText;
+    };
+
     /**
      * Selects a random item from a given array and processes brackets.
      * @param {Array} arr The array to pick from.
@@ -476,6 +525,37 @@
             wordTracking.candy.modifications.push('fucking');
         }
         
+        // Apply all caps to non-beast items (2% chance each)
+        if (Math.random() < CONFIG.allCapsChance) {
+            processedIntro = processedIntro.toUpperCase();
+            wordTracking.intro.final = processedIntro;
+            wordTracking.intro.modifications.push('all-caps');
+        }
+        
+        if (Math.random() < CONFIG.allCapsChance) {
+            finalNoun = finalNoun.toUpperCase();
+            wordTracking.noun.final = finalNoun;
+            wordTracking.noun.modifications.push('all-caps');
+        }
+        
+        if (Math.random() < CONFIG.allCapsChance) {
+            finalCandy = finalCandy.toUpperCase();
+            wordTracking.candy.final = finalCandy;
+            wordTracking.candy.modifications.push('all-caps');
+        }
+        
+        if (Math.random() < CONFIG.allCapsChance) {
+            processedAdjective = processedAdjective.toUpperCase();
+            wordTracking.adjective.final = processedAdjective;
+            wordTracking.adjective.modifications.push('all-caps');
+        }
+        
+        if (Math.random() < CONFIG.allCapsChance) {
+            processedFinale = processedFinale.toUpperCase();
+            wordTracking.finale.final = processedFinale;
+            wordTracking.finale.modifications.push('all-caps');
+        }
+        
         // Check for hard stops before generating phrase
         let hasHardStop = false;
         let hardStopWord = '';
@@ -549,16 +629,18 @@
         phrase = phrase.replace(/\*F\*/g, '');
         phrase = phrase.replace(/\*B\*/g, '');
         
+        // Apply safe mode filtering if enabled
+        phrase = filterNSFW(phrase);
         
         // Animate typing the phrase
         typeOutPhrase(phrase);
         
         // Generate detailed format display
-        const formatDisplay = document.getElementById('format-display');
-        if (formatDisplay) {
-            const detailedFormat = generateDetailedFormatString(phrase, randomFormat, wordTracking, formatIndex + 1);
-            formatDisplay.textContent = `Format ${formatIndex + 1}: ${detailedFormat}`;
-        }
+        // const formatDisplay = document.getElementById('format-display');
+        // if (formatDisplay) {
+        //     const detailedFormat = generateDetailedFormatString(phrase, randomFormat, wordTracking, formatIndex + 1);
+        //     formatDisplay.textContent = `Format ${formatIndex + 1}: ${detailedFormat}`;
+        // }
         
         // Copy button will be shown after typing animation completes
     };
@@ -682,6 +764,31 @@
       } else if (state === 'ready') {
         btnText.textContent = 'GO';
       }
+    };
+
+    /**
+     * Updates safe mode toggle appearance
+     */
+    const updateSafeModeToggle = () => {
+      if (CONFIG.safeMode) {
+        safeModeToggle.classList.add('bg-blue-500');
+        safeModeToggle.classList.remove('bg-gray-200');
+        safeModeSlider.classList.add('translate-x-5');
+        safeModeSlider.classList.remove('translate-x-0');
+      } else {
+        safeModeToggle.classList.remove('bg-blue-500');
+        safeModeToggle.classList.add('bg-gray-200');
+        safeModeSlider.classList.remove('translate-x-5');
+        safeModeSlider.classList.add('translate-x-0');
+      }
+    };
+
+    /**
+     * Toggles safe mode on/off
+     */
+    const toggleSafeMode = () => {
+      CONFIG.safeMode = !CONFIG.safeMode;
+      updateSafeModeToggle();
     };
     
     /**
@@ -1020,6 +1127,9 @@
     // Copy button functionality
     copyBtn.addEventListener('click', copyToClipboard);
     
+    // Safe mode toggle functionality
+    safeModeToggle.addEventListener('click', toggleSafeMode);
+    
     // Add click functionality to advance loading by 1% or restart when ready
     generateBtn.addEventListener('click', () => {
       if (!isComplete) {
@@ -1053,6 +1163,9 @@
     });
 
     // --- INITIALIZATION ---
+    // Initialize safe mode toggle
+    updateSafeModeToggle();
+    
     // Start the auto-fill animation when the page loads
     startAutoFill();
 
