@@ -272,7 +272,7 @@ SEND [UNSEND SEND [FUCK]]
 THAT COULD BE A SHOW
 NUKE IN DA CLUB [HA HA, .3]
 switch it up like nintendo [I MISS US]
-face down stroking my shit [wrist fractured [8 month recovery]]
+face down stroking my shit [wrist fractured [8 month recovery [BEAUTIFUL NURSE KISSES IT BETTER but changes her mind and pulls the plug]]]
 ten times tintinuous
 i said oo girl shock me like an electric eel
 handed 15 cellphones pushed into pool when least expected
