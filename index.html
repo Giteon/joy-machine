@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pure and Infinite Joy Machine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Crimson Text', serif;
+    }
+    /* Styles for the button fill-up mechanic */
+    #generate-btn {
+      position: relative;
+      overflow: hidden;
+      /* Base background for the empty state */
+      background-color: #e5e7eb; /* gray-200 */
+      transition: background-color 0.3s ease;
+    }
+    #generate-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #cccccc; /* gray for filling state */
+      /* Use a CSS variable for the width, controlled by JS */
+      width: var(--fill-width, 0%);
+      transition: none; /* No transition by default */
+    }
+    #generate-btn.filling::before {
+      transition: width 0.2s ease-out; /* Only animate when filling */
+    }
+    #generate-btn .btn-text {
+        position: relative; /* Ensures text stays on top of the fill */
+        z-index: 1;
+    }
+    /* Button states */
+    #generate-btn.filling {
+      background-color: #e5e7eb; /* gray-200 */
+    }
+    #generate-btn.filling .btn-text {
+      color: #9ca3af; /* light grey while filling */
+    }
+    #generate-btn.ready::before {
+      background-color: #3b82f6; /* blue-500 - make the fill blue when ready */
+    }
+    #generate-btn.ready .btn-text {
+      color: white; /* white when ready */
+    }
+
+  </style>
+</head>
+<body class="bg-gray-100 text-black min-h-screen p-4">
+  <div class="flex flex-col items-center justify-start min-h-screen space-y-6 pt-16">
+    <!-- Header -->
+    <h1 class="text-2xl font-semibold text-gray-900">Test</h1>
+
+    <!-- Generate Button -->
+    <button id="generate-btn" class="font-bold py-2 px-6 rounded-lg text-sm transition-colors duration-300 w-full max-w-md">
+      <span class="btn-text"></span>
+    </button>
+
+    <!-- Phrase Display Area -->
+    <div class="flex items-center justify-center w-full max-w-md gap-2">
+      <p id="phrase-output" class="text-xl font-medium text-gray-900 text-center flex-1"></p>
+      <button id="copy-btn" class="opacity-0 transition-opacity duration-200 hover:bg-gray-200 p-2 rounded">
+        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="text-center text-gray-500 text-sm opacity-0 transition-opacity duration-100 pointer-events-none">
+      copied!
+    </div>
+
+    <!-- Format Display -->
+    <div id="format-display" class="text-center text-gray-400 text-xs mt-2"></div>
+  </div>
+
+  <!-- Import the word lists -->
+  <script src="lists.js"></script>
+  
+  <script>
+    // --- CONFIGURATION ---
+    const CONFIG = {
+      fillDuration: 30000, // 30 seconds in milliseconds
+      updateInterval: 50, // Update every 50ms for smooth animation
+      advanceAmount: 0.5, // 1% of total steps when clicked
+      typoChance: 0.01, // 1% chance per letter
+      typoCorrectionChance: 0.8, // 80% chance to catch typo
+      doubleBeastChance: 0.5, // 50% chance for two beasts
+      tripleBeastChance: 0.3, // 30% chance for three beasts (if already two)
+      doubleCandyChance: 0.05, // 5% chance for two candies
+      fuckingChance: 0.1, // 10% chance to add "fucking"
+      thinkingPauseChance: 0.08, // 8% chance for thinking pause
+      typingSpeed: {
+        space: { min: 10, max: 26.67 },
+        vowel: { min: 13.33, max: 33.33 },
+        consonant: { min: 16.67, max: 40 },
+        number: { min: 20, max: 46.67 },
+        punctuation: { min: 23.33, max: 53.33 }
+      }
+    };
+
+    // QWERTY keyboard layout for typo generation
+    const QWERTY_MAP = {
+        'q': ['a', 'w'], 'w': ['q', 'a', 's', 'e'], 'e': ['w', 's', 'd', 'r'],
+        'r': ['e', 'd', 'f', 't'], 't': ['r', 'f', 'g', 'y'], 'y': ['t', 'g', 'h', 'u'],
+        'u': ['y', 'h', 'j', 'i'], 'i': ['u', 'j', 'k', 'o'], 'o': ['i', 'k', 'l', 'p'],
+        'p': ['o', 'l'], 'a': ['q', 'w', 's', 'z'], 's': ['a', 'w', 'e', 'd', 'x', 'z'],
+        'd': ['s', 'e', 'r', 'f', 'c', 'x'], 'f': ['d', 'r', 't', 'g', 'v', 'c'],
+        'g': ['f', 't', 'y', 'h', 'b', 'v'], 'h': ['g', 'y', 'u', 'j', 'n', 'b'],
+        'j': ['h', 'u', 'i', 'k', 'm', 'n'], 'k': ['j', 'i', 'o', 'l', 'm'],
+        'l': ['k', 'o', 'p'], 'z': ['a', 's', 'x'], 'x': ['z', 's', 'd', 'c'],
+        'c': ['x', 'd', 'f', 'v'], 'v': ['c', 'f', 'g', 'b'], 'b': ['v', 'g', 'h', 'n'],
+        'n': ['b', 'h', 'j', 'm'], 'm': ['n', 'j', 'k']
+    };
+
+    // --- DOM ELEMENTS & STATE ---
+    const generateBtn = document.getElementById('generate-btn');
+    const phraseOutput = document.getElementById('phrase-output');
+    const copyBtn = document.getElementById('copy-btn');
+    const toast = document.getElementById('toast');
+    let fillInterval;
+    let currentFill = 0;
+    const totalSteps = CONFIG.fillDuration / CONFIG.updateInterval; // Total number of steps
+    let isComplete = false;
+
+    // --- FUNCTIONS ---
+    /**
+     * Selects a random item from a given array and processes brackets.
+     * @param {Array} arr The array to pick from.
+     * @returns {*} A random item from the array with brackets processed.
+     */
+    const getRandomItem = (arr) => {
+      const rawItem = arr[Math.floor(Math.random() * arr.length)];
+      const { result } = processBrackets(rawItem);
+      return result;
+    };
+
+    /**
+     * Creates a word tracking object for detailed format display
+     */
+    const createWordTracking = (original) => ({
+        original,
+        final: original,
+        modifications: [],
+        addons: [],
+        alternates: [],
+        hardStop: false,
+        beastStop: false
+    });
+
+    /**
+     * Processes alternates in a word (content in parentheses with / separators)
+     */
+    const processAlternates = (word) => {
+        let result = word;
+        let alternates = [];
+        const alternatesRegex = /\(([^)]*(?:\/[^)]*)+)\)/g;
+        let match;
+        
+        while ((match = alternatesRegex.exec(word)) !== null) {
+            const alternatesContent = match[1];
+            const options = alternatesContent.split('/').map(opt => opt.trim());
+            
+            // Check if any option has custom probability
+            const hasCustomProbabilities = options.some(opt => opt.includes(',') && /,\s*\d*\.?\d+$/.test(opt));
+            
+            let selectedOption;
+            if (hasCustomProbabilities) {
+                // Parse options with probabilities
+                const weightedOptions = [];
+                options.forEach(opt => {
+                    const probMatch = opt.match(/^(.+),\s*(\d*\.?\d+)$/);
+                    if (probMatch) {
+                        const content = probMatch[1].trim();
+                        const weight = parseFloat(probMatch[2]);
+                        weightedOptions.push({ content, weight });
+                    } else {
+                        weightedOptions.push({ content: opt, weight: 1 });
+                    }
+                });
+                
+                const totalWeight = weightedOptions.reduce((sum, opt) => sum + opt.weight, 0);
+                let random = Math.random() * totalWeight;
+                
+                for (const opt of weightedOptions) {
+                    random -= opt.weight;
+                    if (random <= 0) {
+                        selectedOption = opt.content;
+                        break;
+                    }
+                }
+            } else {
+                const selectedIndex = Math.floor(Math.random() * options.length);
+                selectedOption = options[selectedIndex];
+                alternates.push(`alt: ${selectedOption}`);
+            }
+            
+            result = result.replace(match[0], selectedOption);
+        }
+        
+        return { result, alternates };
+    };
+
+    /**
+     * Processes brackets (add-ons) in a word from innermost to outermost
+     */
+    const processBrackets = (word) => {
+        let result = word;
+        let addons = [];
+        let hasHardStop = false;
+        let hasBeastStop = false;
+        
+        // Check for *B* at the end of the main word (not in brackets)
+        if (result.includes(', *B*') || result.endsWith(' *B*')) {
+            hasBeastStop = true;
+            // Remove the *B* marker from the result
+            result = result.replace(/,\s*\*B\*|\s*\*B\*$/, '');
+        }
+        
+        let changed = true;
+        while (changed) {
+            changed = false;
+            
+            // Find the innermost bracket (no brackets inside it)
+            const innermostBracketRegex = /\[([^\[\]]+)\]/;
+            const bracketMatch = result.match(innermostBracketRegex);
+            
+            if (bracketMatch) {
+                const bracketContent = bracketMatch[1];
+                
+                // Check for custom probability
+                const probabilityMatch = bracketContent.match(/^(.+),\s*(\d*\.?\d+)(?:,\s*\*F\*|\*B\*)?$/);
+                let probability = 0.5;
+                let contentToProcess = bracketContent;
+                
+                if (probabilityMatch) {
+                    contentToProcess = probabilityMatch[1].trim();
+                    probability = parseFloat(probabilityMatch[2]);
+                } else {
+                    // Check if it's just content with *F* or *B* (no probability)
+                    const hardStopMatch = bracketContent.match(/^(.+),\s*\*F\*$/);
+                    const beastStopMatch = bracketContent.match(/^(.+),\s*\*B\*$/);
+                    if (hardStopMatch) {
+                        contentToProcess = hardStopMatch[1].trim();
+                        probability = 0.5; // default probability
+                    } else if (beastStopMatch) {
+                        contentToProcess = beastStopMatch[1].trim();
+                        probability = 0.5; // default probability
+                    }
+                }
+                
+                const shouldInclude = Math.random() < probability;
+                
+                if (shouldInclude) {
+                    // Clean the content before adding it to the result
+                    let cleanContent = contentToProcess;
+                    
+                    // Remove hard stop marker (*F*) from the content
+                    cleanContent = cleanContent.replace(/\*F\*/g, '');
+                    
+                    // Remove any remaining probability info that might be in the content
+                    cleanContent = cleanContent.replace(/,\s*\d*\.?\d+\s*$/, '');
+                    cleanContent = cleanContent.replace(/,\s*\d*\.?\d+\s*,/, ',');
+                    
+                    result = result.replace(bracketMatch[0], cleanContent);
+                    
+                    // Track the full bracket content including probability for display
+                    addons.push(bracketContent);
+                    
+                    // Check for hard stop (*F*)
+                    if (bracketContent.includes('*F*')) {
+                        hasHardStop = true;
+                    }
+                    
+                    // Check for beast stop (*B*)
+                    if (bracketContent.includes('*B*')) {
+                        hasBeastStop = true;
+                    }
+                } else {
+                    result = result.replace(bracketMatch[0], '');
+                }
+                
+                changed = true;
+            }
+        }
+        
+        return { result: result.replace(/\s+/g, ' ').trim(), addons, hasHardStop, hasBeastStop };
+    };
+    
+
+
+    /**
+     * Generates a new phrase and displays it.
+     */
+    const generateNewPhrase = () => {
+        // Hide copy button while generating new phrase
+        copyBtn.classList.add('opacity-0');
+        
+        // Define the possible formats (now using intro + word order)
+        const formats = [
+            (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${a} ${c} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${a} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${c} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${a} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${a} ${c} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${n} ${a} ${c} ${f}`
+        ];
+        
+        // Pick a random format
+        const randomFormat = formats[Math.floor(Math.random() * formats.length)];
+        const formatIndex = formats.indexOf(randomFormat);
+        
+        // Get random items from each list (raw, before processing)
+        const [intro, beast, noun, candy, adjective, finale] = window.wordLists.map(arr => arr[Math.floor(Math.random() * arr.length)]);
+        
+        // Track the actual words and their modifications for detailed display
+        const wordTracking = {
+            intro: createWordTracking(intro),
+            beast: createWordTracking(beast),
+            noun: createWordTracking(noun),
+            candy: createWordTracking(candy),
+            adjective: createWordTracking(adjective),
+            finale: createWordTracking(finale)
+        };
+        
+        // Process each word with tracking
+        const processWordWithTracking = (word, tracking) => {
+            // Process alternates first
+            const { result: afterAlternates, alternates } = processAlternates(word);
+            
+            // Process brackets
+            const { result, addons, hasHardStop, hasBeastStop } = processBrackets(afterAlternates);
+            
+            // Update tracking
+            tracking.final = result;
+            tracking.addons = addons;
+            tracking.alternates = alternates;
+            tracking.hardStop = hasHardStop;
+            tracking.beastStop = hasBeastStop;
+            tracking.original = word; // Store original for display purposes
+            
+            // Check for hard stop immediately after processing
+            if (hasHardStop) {
+                // Hard stop triggered - generate phrase with just this word
+                let phrase;
+                if (tracking === wordTracking.intro) {
+                    phrase = result;
+                } else if (tracking === wordTracking.beast) {
+                    phrase = randomFormat(processedIntro, result, '', '', '', '');
+                } else if (tracking === wordTracking.noun) {
+                    phrase = randomFormat(processedIntro, finalBeast, result, '', '', '');
+                } else if (tracking === wordTracking.candy) {
+                    phrase = randomFormat(processedIntro, finalBeast, finalNoun, result, '', '');
+                } else if (tracking === wordTracking.adjective) {
+                    phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, result, '');
+                } else if (tracking === wordTracking.finale) {
+                    phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, result);
+                }
+                typeOutPhrase(phrase);
+                return result; // Return early to stop further processing
+            }
+            
+            return result;
+        };
+        
+        // Process each word
+        const processedIntro = processWordWithTracking(intro, wordTracking.intro);
+        const processedBeast = processWordWithTracking(beast, wordTracking.beast);
+        const processedNoun = processWordWithTracking(noun, wordTracking.noun);
+        const processedCandy = processWordWithTracking(candy, wordTracking.candy);
+        const processedAdjective = processWordWithTracking(adjective, wordTracking.adjective);
+        const processedFinale = processWordWithTracking(finale, wordTracking.finale);
+        
+        
+        
+        // Apply random duplications
+        let finalBeast = processedBeast;
+        let finalNoun = processedNoun;
+        let finalCandy = processedCandy;
+        
+        // Check for beast stop after first beast
+        if (wordTracking.beast.beastStop) {
+            // Beast stop triggered by first beast - skip beast duplications
+            // Continue with normal processing (noun, candy, adjective, finale)
+        } else if (Math.random() < CONFIG.doubleBeastChance) {
+            // Get a different beast (avoid duplicates)
+            let secondBeast;
+            do {
+                secondBeast = window.wordLists[1][Math.floor(Math.random() * window.wordLists[1].length)];
+            } while (secondBeast === beast); // Keep trying until we get a different beast
+            
+            const secondBeastTracking = createWordTracking(secondBeast);
+            const secondBeastProcessed = processWordWithTracking(secondBeast, secondBeastTracking);
+            finalBeast = `${processedBeast} ${secondBeastProcessed}`;
+            wordTracking.beast.final = finalBeast;
+            wordTracking.beast.modifications.push('double');
+            // Merge add-ons from both beasts
+            wordTracking.beast.addons = [...wordTracking.beast.addons, ...secondBeastTracking.addons];
+            wordTracking.beast.alternates = [...wordTracking.beast.alternates, ...secondBeastTracking.alternates];
+            
+            // Check for beast stop after second beast
+            if (wordTracking.beast.beastStop) {
+                // Beast stop triggered by second beast - skip third beast
+            } else if (Math.random() < CONFIG.tripleBeastChance) {
+                // Get a different third beast (avoid duplicates with first two)
+                let thirdBeast;
+                do {
+                    thirdBeast = window.wordLists[1][Math.floor(Math.random() * window.wordLists[1].length)];
+                } while (thirdBeast === beast || thirdBeast === secondBeast); // Keep trying until we get a different beast
+                
+                const thirdBeastTracking = createWordTracking(thirdBeast);
+                const thirdBeastProcessed = processWordWithTracking(thirdBeast, thirdBeastTracking);
+                finalBeast = `${finalBeast} ${thirdBeastProcessed}`;
+                wordTracking.beast.final = finalBeast;
+                wordTracking.beast.modifications.push('triple');
+                // Merge add-ons from third beast
+                wordTracking.beast.addons = [...wordTracking.beast.addons, ...thirdBeastTracking.addons];
+                wordTracking.beast.alternates = [...wordTracking.beast.alternates, ...thirdBeastTracking.alternates];
+            }
+        }
+
+        // 5% chance to add a second candy right before the noun
+        if (Math.random() < CONFIG.doubleCandyChance) {
+            // Get a different candy (avoid duplicates)
+            let secondCandy;
+            do {
+                secondCandy = window.wordLists[3][Math.floor(Math.random() * window.wordLists[3].length)];
+            } while (secondCandy === candy); // Keep trying until we get a different candy
+            
+            const secondCandyTracking = createWordTracking(secondCandy);
+            const secondCandyProcessed = processWordWithTracking(secondCandy, secondCandyTracking);
+            finalCandy = `${processedCandy} ${secondCandyProcessed}`;
+            wordTracking.candy.final = finalCandy;
+            wordTracking.candy.modifications.push('double');
+            // Merge add-ons from both candies
+            wordTracking.candy.addons = [...wordTracking.candy.addons, ...secondCandyTracking.addons];
+            wordTracking.candy.alternates = [...wordTracking.candy.alternates, ...secondCandyTracking.alternates];
+        }
+        
+        // 10% chance to add "fucking" before beast, noun, and candy
+        if (Math.random() < CONFIG.fuckingChance) {
+            finalBeast = `fucking ${finalBeast}`;
+            wordTracking.beast.final = finalBeast;
+            wordTracking.beast.modifications.push('fucking');
+        }
+        
+        // 10% chance to add "fucking" after the entire set of beasts
+        if (Math.random() < 0.1) {
+            finalBeast = `${finalBeast} fucking`;
+            wordTracking.beast.final = finalBeast;
+            wordTracking.beast.modifications.push('fucking-after');
+        }
+        if (Math.random() < CONFIG.fuckingChance) {
+            finalNoun = `fucking ${finalNoun}`;
+            wordTracking.noun.final = finalNoun;
+            wordTracking.noun.modifications.push('fucking');
+        }
+        if (Math.random() < CONFIG.fuckingChance) {
+            finalCandy = `fucking ${finalCandy}`;
+            wordTracking.candy.final = finalCandy;
+            wordTracking.candy.modifications.push('fucking');
+        }
+        
+        // Check for hard stops before generating phrase
+        let hasHardStop = false;
+        let hardStopWord = '';
+        
+        // Debug: log hard stop status for each word type
+        console.log('Hard stop check:', {
+            intro: wordTracking.intro.hardStop,
+            beast: wordTracking.beast.hardStop,
+            noun: wordTracking.noun.hardStop,
+            candy: wordTracking.candy.hardStop,
+            adjective: wordTracking.adjective.hardStop,
+            finale: wordTracking.finale.hardStop
+        });
+        console.log('Words:', {
+            intro: processedIntro,
+            beast: finalBeast,
+            noun: finalNoun,
+            candy: finalCandy,
+            adjective: processedAdjective,
+            finale: processedFinale
+        });
+        
+        // Check each word type for hard stops
+        if (wordTracking.intro.hardStop) {
+            hasHardStop = true;
+            hardStopWord = processedIntro;
+        } else if (wordTracking.beast.hardStop) {
+            hasHardStop = true;
+            hardStopWord = finalBeast;
+        } else if (wordTracking.noun.hardStop) {
+            hasHardStop = true;
+            hardStopWord = finalNoun;
+        } else if (wordTracking.candy.hardStop) {
+            hasHardStop = true;
+            hardStopWord = finalCandy;
+        } else if (wordTracking.adjective.hardStop) {
+            hasHardStop = true;
+            hardStopWord = processedAdjective;
+        } else if (wordTracking.finale.hardStop) {
+            hasHardStop = true;
+            hardStopWord = processedFinale;
+        }
+        
+        // Generate phrase using the selected format with modified words
+        let phrase;
+        if (hasHardStop) {
+            // If there's a hard stop, generate the phrase up to that point
+            // We need to determine which word type triggered the hard stop and build the phrase accordingly
+            if (wordTracking.intro.hardStop) {
+                phrase = processedIntro;
+            } else if (wordTracking.beast.hardStop) {
+                phrase = randomFormat(processedIntro, finalBeast, '', '', '', '');
+            } else if (wordTracking.noun.hardStop) {
+                phrase = randomFormat(processedIntro, finalBeast, finalNoun, '', '', '');
+            } else if (wordTracking.candy.hardStop) {
+                phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, '', '');
+            } else if (wordTracking.adjective.hardStop) {
+                phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, '');
+            } else if (wordTracking.finale.hardStop) {
+                phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, processedFinale);
+            }
+        } else {
+            // Normal phrase generation
+            phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, processedFinale);
+        }
+        
+        // Clean up any double "fucking" in a row
+        phrase = phrase.replace(/\bfucking\s+fucking\b/g, 'fucking');
+        
+        // Remove hard stop markers (*F*) and beast stop markers (*B*) from final phrase
+        phrase = phrase.replace(/\*F\*/g, '');
+        phrase = phrase.replace(/\*B\*/g, '');
+        
+        
+        // Animate typing the phrase
+        typeOutPhrase(phrase);
+        
+        // Generate detailed format display
+        const formatDisplay = document.getElementById('format-display');
+        if (formatDisplay) {
+            const detailedFormat = generateDetailedFormatString(phrase, randomFormat, wordTracking, formatIndex + 1);
+            formatDisplay.textContent = `Format ${formatIndex + 1}: ${detailedFormat}`;
+        }
+        
+        // Copy button will be shown after typing animation completes
+    };
+    
+    // Helper function to generate detailed format string with inline annotations
+    const generateDetailedFormatString = (phrase, format, wordTracking, formatNumber) => {
+        // Create a test phrase to determine the format structure
+        const testPhrase = format('I', 'B', 'N', 'C', 'A', 'F');
+        const testParts = testPhrase.split(' ');
+        
+        // Map test parts to their types
+        const typeMap = {};
+        testParts.forEach((part, index) => {
+            if (part === 'I') typeMap[index] = 'I';
+            else if (part === 'B') typeMap[index] = 'B';
+            else if (part === 'N') typeMap[index] = 'N';
+            else if (part === 'C') typeMap[index] = 'C';
+            else if (part === 'A') typeMap[index] = 'A';
+            else if (part === 'F') typeMap[index] = 'F';
+        });
+        
+        let result = [];
+        let literalWords = [];
+        
+        // Process each part of the test phrase
+        testParts.forEach((testPart, testIndex) => {
+            if (testPart === 'I' || testPart === 'B' || testPart === 'N' || testPart === 'C' || testPart === 'A' || testPart === 'F') {
+                // This is a variable position - first flush any accumulated literal words
+                if (literalWords.length > 0) {
+                    result.push(`"${literalWords.join(' ')}"`);
+                    literalWords = [];
+                }
+                
+                const type = typeMap[testIndex];
+                const wordData = wordTracking[type === 'I' ? 'intro' : type === 'B' ? 'beast' : type === 'N' ? 'noun' : type === 'C' ? 'candy' : type === 'A' ? 'adjective' : 'finale'];
+                
+                // Use the final processed word, not the original
+                let displayWord = wordData.final;
+                
+                // Add quotes around "fucking" if it was added (before or after)
+                if (wordData.modifications.includes('fucking')) {
+                    displayWord = displayWord.replace(/^fucking /, '"fucking" ');
+                }
+                if (wordData.modifications.includes('fucking-after')) {
+                    displayWord = displayWord.replace(/ fucking$/, ' "fucking"');
+                }
+                
+                // Remove hard stop markers (*F*) and beast stop markers (*B*) from display
+                displayWord = displayWord.replace(/\*F\*/g, '');
+                displayWord = displayWord.replace(/\*B\*/g, '');
+                
+                // Add back brackets for add-ons that were actually included
+                if (wordData.addons.length > 0) {
+                    wordData.addons.forEach(addon => {
+                        const cleanAddon = addon.replace(/,\s*\d*\.?\d+$/, '');
+                        // Find where this addon content appears in the final word and wrap it in brackets
+                        if (wordData.final.includes(cleanAddon)) {
+                            displayWord = displayWord.replace(cleanAddon, `[${cleanAddon}]`);
+                        }
+                    });
+                }
+                
+                // Add back alternates for alternates that were actually selected
+                if (wordData.alternates.length > 0) {
+                    wordData.alternates.forEach(alt => {
+                        const cleanAlt = alt.replace('alt: ', '');
+                        // Find where this alternate content appears in the final word and wrap it in parentheses
+                        if (wordData.final.includes(cleanAlt)) {
+                            displayWord = displayWord.replace(cleanAlt, `(${cleanAlt})`);
+                        }
+                    });
+                }
+                
+                // Add the processed word as a single unit
+                result.push(displayWord);
+                
+                // Add type annotation after brackets
+                result[result.length - 1] += ` (${type})`;
+                
+                // Add hard stop marker if this word triggered a hard stop
+                if (wordData.hardStop) {
+                    result[result.length - 1] += ' *F*';
+                }
+                
+                // Add beast stop marker if this word triggered a beast stop
+                if (wordData.beastStop) {
+                    result[result.length - 1] += ' *B*';
+                }
+                
+                // Add modification annotations
+                if (wordData.modifications.includes('triple')) {
+                    result[result.length - 1] += ' (3)';
+                } else if (wordData.modifications.includes('double')) {
+                    result[result.length - 1] += ' (2)';
+                }
+            } else {
+                // This is literal text - accumulate it
+                literalWords.push(testPart);
+            }
+        });
+        
+        // Flush any remaining literal words
+        if (literalWords.length > 0) {
+            result.push(`"${literalWords.join(' ')}"`);
+        }
+        
+        return result.join(' ');
+    };
+    
+    /**
+     * Updates button state classes and text
+     */
+    const updateButtonState = (state) => {
+      generateBtn.classList.remove('filling', 'ready');
+      generateBtn.classList.add(state);
+      
+      // Update button text based on state
+      const btnText = generateBtn.querySelector('.btn-text');
+      if (state === 'filling') {
+        btnText.textContent = '';
+      } else if (state === 'ready') {
+        btnText.textContent = 'GO';
+      }
+    };
+    
+    /**
+     * Shows toast notification
+     */
+    const showToast = () => {
+      toast.classList.remove('opacity-0');
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+      }, 2000);
+    };
+    
+    /**
+     * Animate typing out a phrase with realistic human-like patterns including typo correction
+     */
+    const typeOutPhrase = (phrase) => {
+        // Clear the phrase output first
+        phraseOutput.textContent = '';
+        
+        let currentIndex = 0;
+        let typingSpeed = 1.0; // Dynamic speed multiplier
+        let lastCharTime = 0;
+        let pendingCorrections = []; // Track typos that need correction
+        let displayedText = ''; // Track what's actually displayed
+        let hasActiveTypo = false; // Prevent multiple typos
+        
+        const typeNextChar = () => {
+            if (currentIndex < phrase.length) {
+                const char = phrase[currentIndex];
+                const prevChar = currentIndex > 0 ? phrase[currentIndex - 1] : '';
+                
+                // Check if we should introduce a typo (1% chance per letter, but only if no active typo)
+                let actualChar = char;
+                let shouldMakeTypo = !hasActiveTypo && Math.random() < CONFIG.typoChance && char.match(/[a-zA-Z]/);
+                
+                if (shouldMakeTypo) {
+                    // Make a typo based on QWERTY keyboard layout
+                    actualChar = getTypoChar(char);
+                    hasActiveTypo = true; // Prevent more typos
+                }
+                
+                // Add the character (typo or correct)
+                displayedText += actualChar;
+                phraseOutput.textContent = displayedText;
+                currentIndex++;
+                
+                // Check if we're at the end of a word (space or end of phrase)
+                const isEndOfWord = char === ' ' || currentIndex >= phrase.length;
+                
+                if (isEndOfWord && hasActiveTypo) {
+                    // We've finished typing a word that had a typo - check if we should correct it
+                    // Calculate correction chance based on typo position
+                    let correctionChance = CONFIG.typoCorrectionChance; // Default 80%
+                    
+                    // Find the start of the current word in the phrase
+                    let wordStartIndex = currentIndex - 1;
+                    while (wordStartIndex > 0 && phrase[wordStartIndex - 1] !== ' ') {
+                        wordStartIndex--;
+                    }
+                    
+                    // Find the start of the current word in displayed text
+                    let displayedWordStartIndex = displayedText.length - 1;
+                    while (displayedWordStartIndex > 0 && displayedText[displayedWordStartIndex - 1] !== ' ') {
+                        displayedWordStartIndex--;
+                    }
+                    
+                    // Get the displayed word (what we actually typed)
+                    const displayedWord = displayedText.substring(displayedWordStartIndex).trim();
+                    
+                    // Get the correct word from the original phrase
+                    const correctWord = phrase.substring(wordStartIndex, currentIndex).trim();
+                    
+                    // Find the first character that differs
+                    let typoPosition = 0;
+                    while (typoPosition < Math.min(displayedWord.length, correctWord.length) && 
+                           displayedWord[typoPosition] === correctWord[typoPosition]) {
+                        typoPosition++;
+                    }
+                    
+                    // Adjust correction chance based on typo position
+                    if (typoPosition === 0) {
+                        correctionChance = 1.0; // 100% chance for first letter
+                    } else if (typoPosition > 0 && typoPosition < displayedWord.length - 1) {
+                        correctionChance = 0.65; // 65% chance for middle letters
+                    }
+                    // Last letter keeps the default 80% chance
+                    
+                    if (Math.random() < correctionChance) {
+                        // Compare and correct if different
+                        if (correctWord !== displayedWord) {
+                            correctWordTypo(wordStartIndex, correctWord, displayedWordStartIndex);
+                            return; // Don't continue until correction is done
+                        }
+                    }
+                    
+                    // Reset typo flag for next word
+                    hasActiveTypo = false;
+                }
+                
+                // Calculate realistic delay based on multiple factors
+                let baseDelay = getBaseDelay(actualChar, prevChar);
+                
+                // Apply dynamic speed variation (human rhythm changes)
+                typingSpeed += (Math.random() - 0.5) * 0.1; // Gradual speed changes
+                typingSpeed = Math.max(0.3, Math.min(1.8, typingSpeed)); // Clamp between 0.3x and 1.8x
+                baseDelay *= typingSpeed;
+                
+                // Add natural rhythm variations
+                const rhythmVariation = 0.5 + Math.random() * 1.0; // 0.5x to 1.5x variation
+                baseDelay *= rhythmVariation;
+                
+                // Simulate typing bursts (fast sequences followed by pauses)
+                const timeSinceLastChar = Date.now() - lastCharTime;
+                if (timeSinceLastChar > 200) { // After a pause, start with slower typing
+                    baseDelay *= 1.5;
+                }
+                
+                // Natural pauses after punctuation
+                if (prevChar.match(/[.!?]/)) {
+                    baseDelay += 33.33 + Math.random() * 66.67; // Extra pause after sentences (3/4ths slower)
+                } else if (prevChar.match(/[,;:]/)) {
+                    baseDelay += 13.33 + Math.random() * 33.33; // Shorter pause after commas (3/4ths slower)
+                }
+                
+                // Occasional longer thinking pauses (more frequent than before)
+                if (Math.random() < CONFIG.thinkingPauseChance) { // 8% chance
+                    baseDelay += 66.67 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
+                }
+                
+                // Simulate finger fatigue (gradually slower over time)
+                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.05; // Up to 5% slower
+                baseDelay *= fatigueFactor;
+                
+                // Word boundaries get slight pauses
+                if (char === ' ') {
+                    baseDelay += 6.67 + Math.random() * 13.33; // 3/4ths slower
+                }
+                
+                lastCharTime = Date.now();
+                
+                // Schedule next character
+                setTimeout(typeNextChar, Math.round(baseDelay));
+            } else {
+                // Typing complete - show copy button
+                copyBtn.classList.remove('opacity-0');
+            }
+        };
+        
+        // Function to correct a word typo by comparing and fixing
+        const correctWordTypo = (wordStartIndex, correctWord, displayedWordStartIndex) => {
+            // Get the current displayed word
+            const displayedWord = displayedText.substring(displayedWordStartIndex).trim();
+            
+            // Find the first character that differs
+            let typoPosition = 0;
+            while (typoPosition < Math.min(displayedWord.length, correctWord.length) && 
+                   displayedWord[typoPosition] === correctWord[typoPosition]) {
+                typoPosition++;
+            }
+            
+            // If no difference found, something went wrong - just continue
+            if (typoPosition >= displayedWord.length && displayedWord.length === correctWord.length) {
+                hasActiveTypo = false;
+                typeNextChar();
+                return;
+            }
+            
+            // Debug logging
+            console.log('Typo correction:', {
+                displayedWord,
+                correctWord,
+                typoPosition,
+                wordStartIndex
+            });
+            
+            // Calculate how many characters to backspace (from end of word to typo position, including the typo)
+            const charsToBackspace = displayedWord.length - typoPosition + 1;
+            let backspaceCount = 0;
+            
+            const backspace = () => {
+                if (backspaceCount < charsToBackspace) {
+                    displayedText = displayedText.substring(0, displayedText.length - 1);
+                    phraseOutput.textContent = displayedText;
+                    backspaceCount++;
+                    
+                    console.log(`Backspace ${backspaceCount}/${charsToBackspace}: "${displayedText}"`);
+                    
+                    // Slow down as we approach the typo (start fast, end slow)
+                    const progress = backspaceCount / charsToBackspace; // 0 to 1
+                    const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
+                    const baseDelay = 15 + Math.random() * 25; // Original fast delay
+                    const delay = baseDelay * speedMultiplier; // Apply slowdown
+                    
+                    setTimeout(backspace, delay);
+                } else {
+                    console.log(`Backspace complete. Continuing from phrase position ${wordStartIndex + typoPosition}`);
+                    // Now continue typing from the typo position
+                    continueTypingFromWordTypo(wordStartIndex + typoPosition);
+                }
+            };
+            
+            backspace();
+        };
+        
+        // Function to continue typing from a word typo position
+        const continueTypingFromWordTypo = (phrasePosition) => {
+            console.log(`Continuing from phrase position ${phrasePosition}, character: "${phrase[phrasePosition]}"`);
+            // Update currentIndex to match where we are in the original phrase
+            currentIndex = phrasePosition;
+            
+            // Reset typo flag and continue normal typing
+            hasActiveTypo = false;
+            typeNextChar();
+        };
+        
+        // Function to continue typing from the typo position
+        const continueTypingFromTypo = (typoIndex) => {
+            // Update currentIndex to match where we are in the original phrase
+            currentIndex = typoIndex;
+            
+            // Reset typo flag and continue normal typing
+            hasActiveTypo = false;
+            typeNextChar();
+        };
+        
+        // Function to retype a word correctly (kept for compatibility)
+        const retypeWord = (wordStartIndex, wordEndIndex) => {
+            let retypeIndex = wordStartIndex;
+            const retype = () => {
+                if (retypeIndex < wordEndIndex) {
+                    const char = phrase[retypeIndex];
+                    displayedText += char;
+                    phraseOutput.textContent = displayedText;
+                    retypeIndex++;
+                    setTimeout(retype, 15 + Math.random() * 25); // Fast retyping
+                } else {
+                    // Word retyped correctly
+                    
+                    // Remove this correction from pending list
+                    const correctionIndex = pendingCorrections.findIndex(c => c.typoIndex === wordStartIndex);
+                    if (correctionIndex !== -1) {
+                        pendingCorrections.splice(correctionIndex, 1);
+                    }
+                    
+                    // Reset the active typo flag
+                    hasActiveTypo = false;
+                    
+                    // Continue typing from where we left off in the original phrase
+                    setTimeout(typeNextChar, 25 + Math.random() * 50); // Brief pause before continuing
+                }
+            };
+            
+            retype();
+        };
+        
+        // Helper function to get a typo character based on QWERTY layout
+        const getTypoChar = (char) => {
+            const lowerChar = char.toLowerCase();
+            if (QWERTY_MAP[lowerChar]) {
+                const typoOptions = QWERTY_MAP[lowerChar];
+                const selectedTypo = typoOptions[Math.floor(Math.random() * typoOptions.length)];
+                return char === char.toUpperCase() ? selectedTypo.toUpperCase() : selectedTypo;
+            }
+            return char; // No typo possible, return original
+        };
+        
+        // Helper function to get base delay for character types
+        const getBaseDelay = (char, prevChar) => {
+            if (char === ' ') {
+                return CONFIG.typingSpeed.space.min + Math.random() * (CONFIG.typingSpeed.space.max - CONFIG.typingSpeed.space.min);
+            } else if (char.match(/[a-zA-Z]/)) {
+                // Vowels are typically typed faster than consonants
+                if (char.match(/[aeiouAEIOU]/)) {
+                    return CONFIG.typingSpeed.vowel.min + Math.random() * (CONFIG.typingSpeed.vowel.max - CONFIG.typingSpeed.vowel.min);
+                } else {
+                    return CONFIG.typingSpeed.consonant.min + Math.random() * (CONFIG.typingSpeed.consonant.max - CONFIG.typingSpeed.consonant.min);
+                }
+            } else if (char.match(/[0-9]/)) {
+                return CONFIG.typingSpeed.number.min + Math.random() * (CONFIG.typingSpeed.number.max - CONFIG.typingSpeed.number.min);
+            } else {
+                return CONFIG.typingSpeed.punctuation.min + Math.random() * (CONFIG.typingSpeed.punctuation.max - CONFIG.typingSpeed.punctuation.min);
+            }
+        };
+        
+        // Start typing
+        lastCharTime = Date.now();
+        typeNextChar();
+    };
+
+
+    /**
+     * Copies phrase to clipboard
+     */
+    const copyToClipboard = async () => {
+      try {
+        await navigator.clipboard.writeText(phraseOutput.textContent);
+        showToast();
+      } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = phraseOutput.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast();
+      }
+    };
+    
+    /**
+     * Starts the auto-fill animation
+     */
+    const startAutoFill = () => {
+      if (isComplete) return; // Don't restart if already complete
+      
+      currentFill = 0;
+      // Temporarily disable transition for instant reset
+      generateBtn.style.setProperty('--fill-width', '0%');
+      updateButtonState('filling');
+      
+      fillInterval = setInterval(() => {
+        currentFill++;
+        const fillPercentage = (currentFill / totalSteps) * 100;
+        generateBtn.style.setProperty('--fill-width', `${fillPercentage}%`);
+        
+        // When the button is full, mark as ready (no phrase generation yet)
+        if (currentFill >= totalSteps) {
+          clearInterval(fillInterval);
+          updateButtonState('ready');
+            isComplete = true;
+        }
+      }, CONFIG.updateInterval);
+    };
+
+    // --- EVENT LISTENERS ---
+    // Copy button functionality
+    copyBtn.addEventListener('click', copyToClipboard);
+    
+    // Add click functionality to advance loading by 1% or restart when ready
+    generateBtn.addEventListener('click', () => {
+      if (!isComplete) {
+        // Advance the fill by 1%
+        const advanceAmount = totalSteps * CONFIG.advanceAmount; // 1% of total steps
+        currentFill = Math.min(currentFill + advanceAmount, totalSteps);
+        
+        const fillPercentage = (currentFill / totalSteps) * 100;
+        generateBtn.style.setProperty('--fill-width', `${fillPercentage}%`);
+        
+        // Check if we've reached completion
+        if (currentFill >= totalSteps) {
+          clearInterval(fillInterval);
+          updateButtonState('ready');
+          isComplete = true;
+        }
+      } else {
+        // Button is ready - generate new phrase and restart
+        generateNewPhrase();
+        isComplete = false;
+        
+        // Remove ready class first to disable transition
+        generateBtn.classList.remove('ready');
+        generateBtn.style.setProperty('--fill-width', '0%');
+        
+        // Force a reflow
+        generateBtn.offsetHeight;
+        
+        startAutoFill();
+      }
+    });
+
+    // --- INITIALIZATION ---
+    // Start the auto-fill animation when the page loads
+    startAutoFill();
+
+  </script>
+
+</body>
+</html>
