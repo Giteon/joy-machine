@@ -152,7 +152,7 @@ precum [premarket [postmarket]]
 spike the punch
 instant death
 iranian steakhouse
-cardio mezzanine [death by hypoxia, .3 [no response to thoughtful email, *F*]]
+cardio mezzanine [death by hypoxia [no response to thoughtful email, *F*]]
 thimble of milk
 syndicated television
 bisexual boyfriend [(trough/simulator)]

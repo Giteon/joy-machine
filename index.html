@@ -110,7 +110,11 @@
       fuckingChance: 0.15, // 15% chance to add "fucking"
       thinkingPauseChance: 0.1, // 10% chance for thinking pause
       allCapsChance: 0.1, // 10% chance for all caps (except beast)
-      itemTimeoutDuration: 15, // Number of phrases before item can be used again
+      itemTimeoutDuration: 20, // Number of phrases before item can be used again
+      skipSpaceChance: 0.008, // .8% chance to skip spaces between words
+      skipLetterChance: 0.005, // .5% chance to skip letters in words
+      doubleLetterChance: 0.002, // .2% chance to double letters in words
+      swapLettersChance: 0.005, // .5% chance to swap two letters in phrase
       safeMode: false, // Safe mode state
       typingSpeed: {
         space: { min: 10, max: 26.67 },
@@ -121,18 +125,17 @@
       }
     };
 
-    // QWERTY keyboard layout for typo generation
+    // QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
     const QWERTY_MAP = {
-        'q': ['a', 'w'], 'w': ['q', 'a', 's', 'e'], 'e': ['w', 's', 'd', 'r'],
-        'r': ['e', 'd', 'f', 't'], 't': ['r', 'f', 'g', 'y'], 'y': ['t', 'g', 'h', 'u'],
-        'u': ['y', 'h', 'j', 'i'], 'i': ['u', 'j', 'k', 'o'], 'o': ['i', 'k', 'l', 'p'],
-        'p': ['o', 'l'], 'a': ['q', 'w', 's', 'z'], 's': ['a', 'w', 'e', 'd', 'x', 'z'],
-        'd': ['s', 'e', 'r', 'f', 'c', 'x'], 'f': ['d', 'r', 't', 'g', 'v', 'c'],
-        'g': ['f', 't', 'y', 'h', 'b', 'v'], 'h': ['g', 'y', 'u', 'j', 'n', 'b'],
-        'j': ['h', 'u', 'i', 'k', 'm', 'n'], 'k': ['j', 'i', 'o', 'l', 'm'],
-        'l': ['k', 'o', 'p'], 'z': ['a', 's', 'x'], 'x': ['z', 's', 'd', 'c'],
-        'c': ['x', 'd', 'f', 'v'], 'v': ['c', 'f', 'g', 'b'], 'b': ['v', 'g', 'h', 'n'],
-        'n': ['b', 'h', 'j', 'm'], 'm': ['n', 'j', 'k']
+        'q': ['w'], 'w': ['q', 'e'], 'e': ['w', 'r'],
+        'r': ['e', 't'], 't': ['r', 'y'], 'y': ['t', 'u'],
+        'u': ['y', 'i'], 'i': ['u', 'o'], 'o': ['i', 'p'],
+        'p': ['o'], 'a': ['s'], 's': ['a', 'd'],
+        'd': ['s', 'f'], 'f': ['d', 'g'], 'g': ['f', 'h'],
+        'h': ['g', 'j'], 'j': ['h', 'k'], 'k': ['j', 'l'],
+        'l': ['k'], 'z': ['x'], 'x': ['z', 'c'],
+        'c': ['x', 'v'], 'v': ['c', 'b'], 'b': ['v', 'n'],
+        'n': ['b', 'm'], 'm': ['n']
     };
 
     // --- DOM ELEMENTS & STATE ---
@@ -211,6 +214,53 @@
       
       // If all items are on timeout (shouldn't happen with 10 timeout and variety, but safety check)
       return availableItems.length > 0 ? availableItems : allItems;
+    };
+
+    /**
+     * Applies letter swapping chaos to a phrase (respecting word boundaries)
+     */
+    const applyLetterSwapping = (phrase) => {
+      if (Math.random() >= CONFIG.swapLettersChance) {
+        return phrase; // No swapping this time
+      }
+
+      // Convert phrase to array for easier manipulation
+      const chars = phrase.split('');
+      
+      // Find all eligible positions (not first/last letters of words, not spaces)
+      const eligiblePositions = [];
+      
+      for (let i = 0; i < chars.length; i++) {
+        const char = chars[i];
+        if (char === ' ') continue; // Skip spaces
+        
+        // Check if this is first or last letter of a word
+        const isFirstLetter = (i === 0 || chars[i - 1] === ' ');
+        const isLastLetter = (i === chars.length - 1 || chars[i + 1] === ' ');
+        
+        if (!isFirstLetter && !isLastLetter) {
+          eligiblePositions.push(i);
+        }
+      }
+      
+      // Need at least 2 eligible positions to swap
+      if (eligiblePositions.length < 2) {
+        return phrase; // Not enough letters to swap
+      }
+      
+      // Pick two random eligible positions
+      const pos1 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
+      let pos2;
+      do {
+        pos2 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
+      } while (pos2 === pos1);
+      
+      // Swap the characters
+      const temp = chars[pos1];
+      chars[pos1] = chars[pos2];
+      chars[pos2] = temp;
+      
+      return chars.join('');
     };
 
     /**
@@ -706,6 +756,9 @@
         // Apply safe mode filtering if enabled
         phrase = filterNSFW(phrase);
         
+        // Apply letter swapping chaos (1% chance)
+        phrase = applyLetterSwapping(phrase);
+        
         // Add used items to timeout list to prevent repetition
         addItemToTimeout('intro', intro);
         addItemToTimeout('beast', beast);
@@ -922,9 +975,40 @@
                 const char = phrase[currentIndex];
                 const prevChar = currentIndex > 0 ? phrase[currentIndex - 1] : '';
                 
-                // Check if we should introduce a typo (1% chance per letter, but only if no active typo)
+                // Check for various random effects
                 let actualChar = char;
-                let shouldMakeTypo = !hasActiveTypo && Math.random() < CONFIG.typoChance && char.match(/[a-zA-Z]/);
+                let shouldSkip = false;
+                let shouldDouble = false;
+                
+                // 1% chance to skip spaces between words
+                if (char === ' ' && Math.random() < CONFIG.skipSpaceChance) {
+                    shouldSkip = true;
+                }
+                
+                // Check if this is the first or last letter of a word (immune to skipping/doubling)
+                let isFirstLetterOfWord = false;
+                let isLastLetterOfWord = false;
+                
+                if (char !== ' ') {
+                    // Check if previous char is space or start of phrase (first letter of word)
+                    isFirstLetterOfWord = (currentIndex === 0 || phrase[currentIndex - 1] === ' ');
+                    
+                    // Check if next char is space or end of phrase (last letter of word)
+                    isLastLetterOfWord = (currentIndex === phrase.length - 1 || phrase[currentIndex + 1] === ' ');
+                }
+                
+                // .5% chance to skip letters in words (not spaces, not first/last letters)
+                if (char !== ' ' && !isFirstLetterOfWord && !isLastLetterOfWord && Math.random() < CONFIG.skipLetterChance) {
+                    shouldSkip = true;
+                }
+                
+                // .2% chance to double letters in words (not spaces, not first/last letters)
+                if (char !== ' ' && !isFirstLetterOfWord && !isLastLetterOfWord && Math.random() < CONFIG.doubleLetterChance) {
+                    shouldDouble = true;
+                }
+                
+                // Check if we should introduce a typo (1% chance per letter, but only if no active typo and not skipping)
+                let shouldMakeTypo = !shouldSkip && !hasActiveTypo && Math.random() < CONFIG.typoChance && char.match(/[a-zA-Z]/);
                 
                 if (shouldMakeTypo) {
                     // Make a typo based on QWERTY keyboard layout
@@ -932,8 +1016,17 @@
                     hasActiveTypo = true; // Prevent more typos
                 }
                 
-                // Add the character (typo or correct)
-                displayedText += actualChar;
+                // Apply the effects
+                if (shouldSkip) {
+                    // Skip this character entirely - don't add to displayedText
+                } else if (shouldDouble) {
+                    // Add the character twice
+                    displayedText += actualChar + actualChar;
+                } else {
+                    // Add the character normally (could be original or typo)
+                    displayedText += actualChar;
+                }
+                
                 phraseOutput.textContent = displayedText;
                 currentIndex++;
                 
