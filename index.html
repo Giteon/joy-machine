@@ -103,13 +103,14 @@
       updateInterval: 50, // Update every 50ms for smooth animation
       advanceAmount: 0.05, // 2% of total steps when clicked
       typoChance: 0.01, // 1% chance per letter
-      typoCorrectionChance: 0.8, // 80% chance to catch typo
+      typoCorrectionChance: 0.9, // 90% chance to catch typo
       doubleBeastChance: 0.5, // 50% chance for two beasts
       tripleBeastChance: 0.3, // 30% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
-      fuckingChance: 0.1, // 10% chance to add "fucking"
+      fuckingChance: 0.15, // 15% chance to add "fucking"
       thinkingPauseChance: 0.1, // 10% chance for thinking pause
-      allCapsChance: 0.05, // 5% chance for all caps (except beast)
+      allCapsChance: 0.1, // 10% chance for all caps (except beast)
+      itemTimeoutDuration: 15, // Number of phrases before item can be used again
       safeMode: false, // Safe mode state
       typingSpeed: {
         space: { min: 10, max: 26.67 },
@@ -145,8 +146,73 @@
     let currentFill = 0;
     const totalSteps = CONFIG.fillDuration / CONFIG.updateInterval; // Total number of steps
     let isComplete = false;
+    let typingTimeouts = []; // Track active typing timeouts to prevent conflicts
+    let isTyping = false; // Track if typing animation is currently active
+    
+    // Item timeout system - track recently used items to prevent repetition
+    let itemTimeouts = {
+        intro: new Map(), // Map of item -> remaining timeout count
+        beast: new Map(),
+        noun: new Map(),
+        candy: new Map(),
+        adjective: new Map(),
+        finale: new Map()
+    };
 
     // --- FUNCTIONS ---
+    /**
+     * Clears all active typing timeouts to prevent conflicts
+     */
+    const clearTypingTimeouts = () => {
+      typingTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+      typingTimeouts = [];
+      isTyping = false;
+    };
+
+    /**
+     * Adds an item to the timeout list
+     */
+    const addItemToTimeout = (listType, item) => {
+      itemTimeouts[listType].set(item, CONFIG.itemTimeoutDuration);
+    };
+
+    /**
+     * Decrements all timeout counters and removes expired items
+     */
+    const decrementTimeouts = () => {
+      Object.keys(itemTimeouts).forEach(listType => {
+        const timeoutMap = itemTimeouts[listType];
+        const itemsToRemove = [];
+        
+        timeoutMap.forEach((count, item) => {
+          const newCount = count - 1;
+          if (newCount <= 0) {
+            itemsToRemove.push(item);
+          } else {
+            timeoutMap.set(item, newCount);
+          }
+        });
+        
+        itemsToRemove.forEach(item => timeoutMap.delete(item));
+      });
+    };
+
+    /**
+     * Gets available items from a list, excluding those on timeout
+     */
+    const getAvailableItems = (listIndex) => {
+      const listTypes = ['intro', 'beast', 'noun', 'candy', 'adjective', 'finale'];
+      const listType = listTypes[listIndex];
+      const allItems = window.wordLists[listIndex];
+      const timeoutMap = itemTimeouts[listType];
+      
+      // Filter out items that are on timeout
+      const availableItems = allItems.filter(item => !timeoutMap.has(item));
+      
+      // If all items are on timeout (shouldn't happen with 10 timeout and variety, but safety check)
+      return availableItems.length > 0 ? availableItems : allItems;
+    };
+
     /**
      * Generates a random "weeeeee" with 4-10 'e's
      * @returns {string} A random weeeeee string
@@ -354,6 +420,9 @@
         // Hide copy button while generating new phrase
         copyBtn.classList.add('opacity-0');
         
+        // Clear any existing typing animations to prevent conflicts
+        clearTypingTimeouts();
+        
         // Define the possible formats (now using intro + word order)
         const formats = [
             (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
@@ -374,8 +443,20 @@
         const randomFormat = formats[Math.floor(Math.random() * formats.length)];
         const formatIndex = formats.indexOf(randomFormat);
         
-        // Get random items from each list (raw, before processing)
-        const [intro, beast, noun, candy, adjective, finale] = window.wordLists.map(arr => arr[Math.floor(Math.random() * arr.length)]);
+        // Get random items from each list (raw, before processing), excluding items on timeout
+        const availableIntros = getAvailableItems(0);
+        const availableBeasts = getAvailableItems(1);
+        const availableNouns = getAvailableItems(2);
+        const availableCandies = getAvailableItems(3);
+        const availableAdjectives = getAvailableItems(4);
+        const availableFinales = getAvailableItems(5);
+        
+        const intro = availableIntros[Math.floor(Math.random() * availableIntros.length)];
+        const beast = availableBeasts[Math.floor(Math.random() * availableBeasts.length)];
+        const noun = availableNouns[Math.floor(Math.random() * availableNouns.length)];
+        const candy = availableCandies[Math.floor(Math.random() * availableCandies.length)];
+        const adjective = availableAdjectives[Math.floor(Math.random() * availableAdjectives.length)];
+        const finale = availableFinales[Math.floor(Math.random() * availableFinales.length)];
         
         // Track the actual words and their modifications for detailed display
         const wordTracking = {
@@ -403,37 +484,18 @@
             tracking.beastStop = hasBeastStop;
             tracking.original = word; // Store original for display purposes
             
-            // Check for hard stop immediately after processing
-            if (hasHardStop) {
-                // Hard stop triggered - generate phrase with just this word
-                let phrase;
-                if (tracking === wordTracking.intro) {
-                    phrase = result;
-                } else if (tracking === wordTracking.beast) {
-                    phrase = randomFormat(processedIntro, result, '', '', '', '');
-                } else if (tracking === wordTracking.noun) {
-                    phrase = randomFormat(processedIntro, finalBeast, result, '', '', '');
-                } else if (tracking === wordTracking.candy) {
-                    phrase = randomFormat(processedIntro, finalBeast, finalNoun, result, '', '');
-                } else if (tracking === wordTracking.adjective) {
-                    phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, result, '');
-                } else if (tracking === wordTracking.finale) {
-                    phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, result);
-                }
-                typeOutPhrase(phrase);
-                return result; // Return early to stop further processing
-            }
+            // Hard stop handling will be done after all words are processed
             
             return result;
         };
         
         // Process each word
-        const processedIntro = processWordWithTracking(intro, wordTracking.intro);
-        const processedBeast = processWordWithTracking(beast, wordTracking.beast);
-        const processedNoun = processWordWithTracking(noun, wordTracking.noun);
-        const processedCandy = processWordWithTracking(candy, wordTracking.candy);
-        const processedAdjective = processWordWithTracking(adjective, wordTracking.adjective);
-        const processedFinale = processWordWithTracking(finale, wordTracking.finale);
+        let processedIntro = processWordWithTracking(intro, wordTracking.intro);
+        let processedBeast = processWordWithTracking(beast, wordTracking.beast);
+        let processedNoun = processWordWithTracking(noun, wordTracking.noun);
+        let processedCandy = processWordWithTracking(candy, wordTracking.candy);
+        let processedAdjective = processWordWithTracking(adjective, wordTracking.adjective);
+        let processedFinale = processWordWithTracking(finale, wordTracking.finale);
         
         
         
@@ -442,16 +504,22 @@
         let finalNoun = processedNoun;
         let finalCandy = processedCandy;
         
+        // Track additional items used in this phrase for timeout system
+        let additionalItemsUsed = [];
+        
         // Check for beast stop after first beast
         if (wordTracking.beast.beastStop) {
             // Beast stop triggered by first beast - skip beast duplications
             // Continue with normal processing (noun, candy, adjective, finale)
         } else if (Math.random() < CONFIG.doubleBeastChance) {
-            // Get a different beast (avoid duplicates)
-            let secondBeast;
-            do {
-                secondBeast = window.wordLists[1][Math.floor(Math.random() * window.wordLists[1].length)];
-            } while (secondBeast === beast); // Keep trying until we get a different beast
+            // Get a different beast (avoid duplicates and items on timeout)
+            let availableSecondBeasts = getAvailableItems(1).filter(item => item !== beast);
+            // If no available beasts (shouldn't happen), fall back to all beasts except the current one
+            if (availableSecondBeasts.length === 0) {
+                availableSecondBeasts = window.wordLists[1].filter(item => item !== beast);
+            }
+            const secondBeast = availableSecondBeasts[Math.floor(Math.random() * availableSecondBeasts.length)];
+            additionalItemsUsed.push({type: 'beast', item: secondBeast});
             
             const secondBeastTracking = createWordTracking(secondBeast);
             const secondBeastProcessed = processWordWithTracking(secondBeast, secondBeastTracking);
@@ -463,14 +531,17 @@
             wordTracking.beast.alternates = [...wordTracking.beast.alternates, ...secondBeastTracking.alternates];
             
             // Check for beast stop after second beast
-            if (wordTracking.beast.beastStop) {
-                // Beast stop triggered by second beast - skip third beast
+            if (wordTracking.beast.beastStop || secondBeastTracking.beastStop) {
+                // Beast stop triggered by first or second beast - skip third beast
             } else if (Math.random() < CONFIG.tripleBeastChance) {
-                // Get a different third beast (avoid duplicates with first two)
-                let thirdBeast;
-                do {
-                    thirdBeast = window.wordLists[1][Math.floor(Math.random() * window.wordLists[1].length)];
-                } while (thirdBeast === beast || thirdBeast === secondBeast); // Keep trying until we get a different beast
+                // Get a different third beast (avoid duplicates with first two and items on timeout)
+                let availableThirdBeasts = getAvailableItems(1).filter(item => item !== beast && item !== secondBeast);
+                // If no available beasts (shouldn't happen), fall back to all beasts except the current ones
+                if (availableThirdBeasts.length === 0) {
+                    availableThirdBeasts = window.wordLists[1].filter(item => item !== beast && item !== secondBeast);
+                }
+                const thirdBeast = availableThirdBeasts[Math.floor(Math.random() * availableThirdBeasts.length)];
+                additionalItemsUsed.push({type: 'beast', item: thirdBeast});
                 
                 const thirdBeastTracking = createWordTracking(thirdBeast);
                 const thirdBeastProcessed = processWordWithTracking(thirdBeast, thirdBeastTracking);
@@ -485,11 +556,14 @@
 
         // 5% chance to add a second candy right before the noun
         if (Math.random() < CONFIG.doubleCandyChance) {
-            // Get a different candy (avoid duplicates)
-            let secondCandy;
-            do {
-                secondCandy = window.wordLists[3][Math.floor(Math.random() * window.wordLists[3].length)];
-            } while (secondCandy === candy); // Keep trying until we get a different candy
+            // Get a different candy (avoid duplicates and items on timeout)
+            let availableSecondCandies = getAvailableItems(3).filter(item => item !== candy);
+            // If no available candies (shouldn't happen), fall back to all candies except the current one
+            if (availableSecondCandies.length === 0) {
+                availableSecondCandies = window.wordLists[3].filter(item => item !== candy);
+            }
+            const secondCandy = availableSecondCandies[Math.floor(Math.random() * availableSecondCandies.length)];
+            additionalItemsUsed.push({type: 'candy', item: secondCandy});
             
             const secondCandyTracking = createWordTracking(secondCandy);
             const secondCandyProcessed = processWordWithTracking(secondCandy, secondCandyTracking);
@@ -631,6 +705,22 @@
         
         // Apply safe mode filtering if enabled
         phrase = filterNSFW(phrase);
+        
+        // Add used items to timeout list to prevent repetition
+        addItemToTimeout('intro', intro);
+        addItemToTimeout('beast', beast);
+        addItemToTimeout('noun', noun);
+        addItemToTimeout('candy', candy);
+        addItemToTimeout('adjective', adjective);
+        addItemToTimeout('finale', finale);
+        
+        // Add additional beasts and candies that were used
+        additionalItemsUsed.forEach(({type, item}) => {
+            addItemToTimeout(type, item);
+        });
+        
+        // Decrement all timeout counters for next phrase
+        decrementTimeouts();
         
         // Animate typing the phrase
         typeOutPhrase(phrase);
@@ -805,8 +895,20 @@
      * Animate typing out a phrase with realistic human-like patterns including typo correction
      */
     const typeOutPhrase = (phrase) => {
+        // Safety check - ensure phrase is defined
+        if (!phrase || typeof phrase !== 'string') {
+            console.error('typeOutPhrase called with invalid phrase:', phrase);
+            return;
+        }
+        
+        // Clear any existing typing animations to prevent conflicts
+        clearTypingTimeouts();
+        
         // Clear the phrase output first
         phraseOutput.textContent = '';
+        
+        // Mark typing as active
+        isTyping = true;
         
         let currentIndex = 0;
         let typingSpeed = 1.0; // Dynamic speed multiplier
@@ -930,10 +1032,13 @@
                 lastCharTime = Date.now();
                 
                 // Schedule next character
-                setTimeout(typeNextChar, Math.round(baseDelay));
+                const timeoutId = setTimeout(typeNextChar, Math.round(baseDelay));
+                typingTimeouts.push(timeoutId);
             } else {
-                // Typing complete - show copy button
+                // Typing complete - show copy button and mark typing as inactive
                 copyBtn.classList.remove('opacity-0');
+                isTyping = false;
+                typingTimeouts = []; // Clear the timeout array since we're done
             }
         };
         
@@ -974,17 +1079,15 @@
                     phraseOutput.textContent = displayedText;
                     backspaceCount++;
                     
-                    console.log(`Backspace ${backspaceCount}/${charsToBackspace}: "${displayedText}"`);
-                    
                     // Slow down as we approach the typo (start fast, end slow)
                     const progress = backspaceCount / charsToBackspace; // 0 to 1
                     const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
                     const baseDelay = 15 + Math.random() * 25; // Original fast delay
                     const delay = baseDelay * speedMultiplier; // Apply slowdown
                     
-                    setTimeout(backspace, delay);
+                    const timeoutId = setTimeout(backspace, delay);
+                    typingTimeouts.push(timeoutId);
                 } else {
-                    console.log(`Backspace complete. Continuing from phrase position ${wordStartIndex + typoPosition}`);
                     // Now continue typing from the typo position
                     continueTypingFromWordTypo(wordStartIndex + typoPosition);
                 }
@@ -995,7 +1098,6 @@
         
         // Function to continue typing from a word typo position
         const continueTypingFromWordTypo = (phrasePosition) => {
-            console.log(`Continuing from phrase position ${phrasePosition}, character: "${phrase[phrasePosition]}"`);
             // Update currentIndex to match where we are in the original phrase
             currentIndex = phrasePosition;
             
@@ -1023,7 +1125,8 @@
                     displayedText += char;
                     phraseOutput.textContent = displayedText;
                     retypeIndex++;
-                    setTimeout(retype, 15 + Math.random() * 25); // Fast retyping
+                    const timeoutId = setTimeout(retype, 15 + Math.random() * 25); // Fast retyping
+                    typingTimeouts.push(timeoutId);
                 } else {
                     // Word retyped correctly
                     
@@ -1037,7 +1140,8 @@
                     hasActiveTypo = false;
                     
                     // Continue typing from where we left off in the original phrase
-                    setTimeout(typeNextChar, 25 + Math.random() * 50); // Brief pause before continuing
+                    const timeoutId = setTimeout(typeNextChar, 25 + Math.random() * 50); // Brief pause before continuing
+                    typingTimeouts.push(timeoutId);
                 }
             };
             
@@ -1130,8 +1234,8 @@
     // Safe mode toggle functionality
     safeModeToggle.addEventListener('click', toggleSafeMode);
     
-    // Add click functionality to advance loading by 1% or restart when ready
-    generateBtn.addEventListener('click', () => {
+    // Function to advance progress bar
+    const advanceProgress = () => {
       if (!isComplete) {
         // Advance the fill by 1%
         const advanceAmount = totalSteps * CONFIG.advanceAmount; // 1% of total steps
@@ -1146,6 +1250,14 @@
           updateButtonState('ready');
           isComplete = true;
         }
+      }
+    };
+
+    // Add click functionality to advance loading by 1% or restart when ready
+    generateBtn.addEventListener('click', (event) => {
+      if (!isComplete) {
+        // Advance progress when button is clicked during filling
+        advanceProgress();
       } else {
         // Button is ready - generate new phrase and restart
         generateNewPhrase();
@@ -1159,6 +1271,15 @@
         generateBtn.offsetHeight;
         
         startAutoFill();
+      }
+    });
+
+    // Add document-level click listener to advance progress from anywhere on screen
+    document.addEventListener('click', (event) => {
+      // Only advance progress if we're not complete and not clicking on the generate button
+      // (to avoid double advancement when clicking the button)
+      if (!isComplete && event.target !== generateBtn && !generateBtn.contains(event.target)) {
+        advanceProgress();
       }
     });
 

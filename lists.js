@@ -2,16 +2,23 @@
 const listsText = `INTRO (I)
 fucking ultimate chicken
 fucking chicken horse
-ultimate fucking
 fucking horse chicken
-ultimate chicken time
-ultamate
+fucking horse ultimate chicken time
 fucking
+crazy
+crazy chicken
+crazy horse fucking chicken
+ultimate
+ultimate fucking
+ultimate crazy chicken
 ultimate chicken
+ultimate chicken time
+ultimate horse chicken
+ultimate fucking chicken horse
 horse ultimate
-ultimate
-ultimate chicken
-ultimate
+horse chicken fucking
+chicken horse time crazy fucking
+chicken time horse
 
 BEAST (B)
 [secret, *B*] aardvark
@@ -37,7 +44,7 @@ elephant
 ferret
 fish [neck, *B*]
 fox
-frog
+[crazy, *B*] frog
 gerbil
 giraffe
 giraffe
@@ -153,7 +160,6 @@ orgasmatron 3000
 topamax sprinkle [300,000mg [lethal dose, *F*]]
 ratatouille [magic cheese]
 [cleopatra] past life regression [ran over by car [500 times] *F*]
-boing boing yoga ball [blacked out [no memories], *F*]
 ikea chair [sabrina carpenter creaming jeans, *F*]
 walter goggins [aimee lou wood [nipple scene uncensored, *F*]]
 show of force
@@ -169,29 +175,33 @@ freaky friday
 tip-to-taint
 laffy taffy
 she-shed [wasp infestation]
+chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
 [fucking] candy flip
 ding dong [ditch]
 54321 [54321]
+boing boing [yoga ball [blacked out no memories, *F*]]
 gamer gunk
 gutterball
 wet nurse [japanese sponge bath, *F*]
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
-bunson burner [bitch, .2]
-hellen keller [jerking off all over town, *F*]
+bunson burner [bitch, .2, *F*]
+hellen keller [jerking off ALL over town, *F*]
 magic mike [wazowski, .2]
-scooby doo [velma 4k stuck in washing machine, .2, *F*]
+scooby doo [velma 4k stuck in washing machine 4k, .2, *F*]
 tiny desk
-chester cheeta
+chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip, .1, *F*]
 dunkin donut[s]
 zoboomafoo
 beach blanket babylon
 baby bonnet
-labubu [lafufu [lagoogoo]]
+labubu [lafufu]
 bing bong
 cottage cheese
+ZING
+ding [ding ding, *F*]]
 pussy slay mama
 daily dingle
 party popper
@@ -223,18 +233,18 @@ I-Spy
 180p
 clown
 quirked up [white boy with a little bit of swagger busts it down sexual style, *F*]
-benegesserit
+benegesserit [voice glitch discovered for free and infinite loose cigarettes, *F*]
 bitch[-ass, .2]
 funtivity [by hermis, *F*]
-egg-laden [females]
+egg-laden [female]
 clown [party, .3]
 knee-high [swampwater]
 for her pleasure
 lifetime subscription
 sucked dry
 bottled from the source
-eldritch
-farm to table
+eldritch [shed demon, .1]
+farm to table [tip to taint, .3]
 victory royale
 cum-colored
 zero swag [detected]
@@ -244,7 +254,7 @@ kill on site
 hong-kong style
 9 trillion dead
 and a-one and a-two and-a
-[fucking] color blind
+color blind
 super-auto [fucking]
 touch-based non-sexual [non-(poly/monog) partnership, *F*]
 ontologically (evil/sexy/bad person)
@@ -259,7 +269,7 @@ boy phone girl phone
 ahegao [mommy milker [sudoku eyes, 0.6, *F*]]
 
 FINALE (F)
-time
+Capiesch?
 YOUNG [(Skylar Gisondo/Jenna Orteg/Coleman Domingo) YOUNG, .2]
 cat kitty cat cat kitty cat cat
 dot com [dot jizz [dot edu]]
@@ -271,19 +281,21 @@ shit cup runneth over [my balls, .3]
 SEND [UNSEND SEND [FUCK]]
 THAT COULD BE A SHOW
 NUKE IN DA CLUB [HA HA, .3]
-switch it up like nintendo [I MISS US]
-face down stroking my shit [wrist fractured [8 month recovery [BEAUTIFUL NURSE KISSES IT BETTER but changes her mind and pulls the plug]]]
+switch it up like nintendo [REMEMBER US? I MISS US]
+face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
-i said oo girl shock me like an electric eel
+i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
+Accidentally enlisted in army, sent to the front-lines to sniff out mines.
 [unnggghhh] fuckkkk id do anything for it
+consciousness uploaded to rat, rat dies, consciousness uploaded to new rat [etc until heat death of universe].
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at?
 fucking turn around bend over [lemme see the nutrition facts]
-trail gone cold [dog dead [no GF]]
+trail gone cold [dog dead [memories deleted from google drive [no storage remaining must delete all cherished memories]]]
 MAYO MOMENT
-how many calories in 30 advil
+hey google how many calories in 30 advil
 LOL (LOTS OF LOVE)
 infertile if dog
 etc etc and so on in such a way
@@ -293,15 +305,15 @@ mmmm ice cold water mmmmm[mmmmmmm]
 CANCELLED
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
+car door left unlocked, hair stolen by witch, naruto run into witch's basement, drained of life energy until become a husk
 and let the [fucking] bunny eat the carrot
 RICH MILLIONAIRE
-at least that's what they're saying [i dont fucking know]
 THE CITY IS MINE
 your skin [ohhhh yeah] oh yeah your skin and bones turn iiiiin to something beautiful
 in good christian fun
 emits poweful pheromone brain scrambled
 within 1000 feet of a school
-take off glasses it is revealed she is actually beautiful
+take off glasses it is revealed she is actually beautiful[!]
 DANGER WILL ROBINSON [DANGER [DANGER]]
 100 concubines (NOT virgins, robust sexual references)
 🥺🥺🥺
@@ -310,6 +322,7 @@ why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
 using a complex system of pulleys and levers
 10 lashings goddess
+please make my day I would really love it if you made my day [miss]
 oh nooo oh fuckkk sorry kareem i ate all the drywall I thought it was cottage cheeseeee
 [ok sorry goddess, .2] yes chef sorry chef
 we'll take the check
@@ -340,6 +353,7 @@ slumber party hang upsidedown and cut major arteries to drain blood as fast as p
 xiaohongshu
 on my desk YESTERDAY
 green moose, guava juice large fries, chocolate shake
+type shit
 300hz binaural beats [mozart gray noise flow state] for study work migraine focus [cure vision]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏
