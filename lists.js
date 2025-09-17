@@ -31,7 +31,8 @@ cockroach
 [cocaine, *B*] dog
 crab
 crocodile [dundee, *B*]
-currasow
+[jiminy, *B*] cricket
+[spotted australian, *B*] currasow
 cow
 [disco, *B*] snail
 deer [in headlights, *B*]
@@ -109,6 +110,7 @@ hinge premium [diahhrea from tube]
 GROK
 propranolol [8000mg]
 coke zero [friends or family, *F*]
+pokemon go [fuck yourself, *F*]
 nutritional yeast [infection, .3]
 gents blend
 syndicated [television]
@@ -134,7 +136,7 @@ u sure? 😏😏😏
 saggitarius [rising]
 citronela ring pop
 kim petras [coconut [perfect pitch, .2]]
-kurt vonnegut
+kurt vonnegut [um ok so this is officially my life!, .2, *F*]
 goblin mode
 breastmilk [on the cheap, .25]
 hungry tax [press button to feed nutrition cube, *F*]
@@ -189,6 +191,7 @@ yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
 bunson burner [bitch, .2, *F*]
 hellen keller [jerking off ALL over town, *F*]
+shakira [shakira [ooh baby when you talk like that you make a woman go mad, .2, *F*]]
 magic mike [wazowski, .2]
 scooby doo [velma 4k stuck in washing machine 4k, .2, *F*]
 tiny desk
@@ -199,7 +202,6 @@ beach blanket babylon
 baby bonnet
 labubu [lafufu]
 bing bong
-cottage cheese
 ZING
 ding [ding ding, *F*]]
 pussy slay mama
@@ -235,7 +237,7 @@ clown
 quirked up [white boy with a little bit of swagger busts it down sexual style, *F*]
 benegesserit [voice glitch discovered for free and infinite loose cigarettes, *F*]
 bitch[-ass, .2]
-funtivity [by hermis, *F*]
+funtivity [by hermis [is ear seeding the solution to cortisol face?, .15, *F*]]
 egg-laden [female]
 clown [party, .3]
 knee-high [swampwater]
@@ -284,6 +286,7 @@ NUKE IN DA CLUB [HA HA, .3]
 switch it up like nintendo [REMEMBER US? I MISS US]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
+so no cube? [ok so no cube?]
 i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
@@ -299,10 +302,12 @@ hey google how many calories in 30 advil
 LOL (LOTS OF LOVE)
 infertile if dog
 etc etc and so on in such a way
-and subway take away everything you love
+and subway take away everything you love [100% AGREE, .2]
 what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
+hannukah oh hannukah let's light the menorah [bitch, .2]
 CANCELLED
+shot dead by alec baldwin [,alec baldwin pardoned [and given purple heart]]
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
 car door left unlocked, hair stolen by witch, naruto run into witch's basement, drained of life energy until become a husk
@@ -323,7 +328,7 @@ in 5-7 business days
 using a complex system of pulleys and levers
 10 lashings goddess
 please make my day I would really love it if you made my day [miss]
-oh nooo oh fuckkk sorry kareem i ate all the drywall I thought it was cottage cheeseeee
+oh nooo oh fuckkk sorry kareem i ate all the drywall I thought it was cottage cheeseeee [oh noooooo [fuuuckkkkk]]
 [ok sorry goddess, .2] yes chef sorry chef
 we'll take the check
 translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/russian/spanish/swedish/turkish/vietnamese) 30 times
@@ -406,15 +411,17 @@ const nsfwWords = [
   'fucking', 'fuck', 'fuckkkk', 'fuck-ass', 'fuck my fucking ass',
   'bitch', 'bitch-ass', 'yuppy bitch',
   'slut', 'whore', 'cunt', 'slutty vegan',
-  'shit',
+  'shit', 'type shit', 'shit cup runneth over', 'shit cup runneth over my balls',
+  'fuck yourself',
   
-  // Sexual content
+  // Sexual
   'pussy', 'pussy taste test', 'pussy popping', 'pussy slay mama',
   'cock', 'cock shame',
   'jerking off', 'jerking off face down', 'jerking off all over town',
   'cum', 'cum-colored', 'precum', 'dot jizz',
   'orgasm', 'orgasmatron',
   'sexual', 'gone sexual',
+  'sucked dry', 'suck the dust off the tip',
   'nipple', 'nipple scene uncensored',
   'wet nurse', 'japanese sponge bath',
   'breastmilk',
@@ -426,8 +433,9 @@ const nsfwWords = [
   'breedable', 'submissive breedable',
   'ahegao', 'mommy milker', 'sudoku eyes',
   'sabrina carpenter creaming jeans',
-  'quirked up [white boy with a little bit of swagger busts it down sexual style',
-  'touch-based non-sexual',
+  'busts it down sexual style',
+  'touch-based non-sexual', 
+  'virgins',
   '100 concubines (NOT virgins, robust sexual references)',
   
   // Violence
@@ -436,10 +444,10 @@ const nsfwWords = [
   'kill', 'kill on site',
   'death', 'instant death', 'death by hypoxia', 'death immenent',
   'cut major arteries to drain blood as fast as possible',
-  'holocaust', 'imitation holocaust crab',
+  'holocaust', 'imitation holocaust crab', 'schoolbus explosion', 'shot dead by alec baldwin', '9/11',
   
   // Drugs
-  'cocaine'
+  'cocaine', 'cocaine dog', 'nutritional yeast infection'
 ];
 
 // Create the word lists

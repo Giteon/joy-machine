@@ -19,6 +19,7 @@
       /* Base background for the empty state */
       background-color: #e5e7eb; /* gray-200 */
       transition: background-color 0.3s ease;
+      cursor: default; /* Default cursor during loading */
     }
     #generate-btn::before {
       content: '';
@@ -51,6 +52,9 @@
     #generate-btn.ready .btn-text {
       color: white; /* white when ready */
     }
+    #generate-btn.ready {
+      cursor: pointer; /* Pointer cursor only when ready (showing "GO") */
+    }
 
   </style>
 </head>
@@ -76,7 +80,7 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="text-center text-gray-500 text-sm opacity-0 transition-opacity duration-100 pointer-events-none">
-      copied!
+      copied
     </div>
 
     <!-- Format Display -->
@@ -286,10 +290,12 @@
       filteredText = filteredText.replace(/\bfucking\b/gi, 'freaking');
       
       // Check other NSFW words and replace with weeeeee
-      window.nsfwWords.forEach(nsfwWord => {
-        // Skip 'fucking' since we handled it above
-        if (nsfwWord.toLowerCase() === 'fucking') return;
-        
+      // Sort by length (longest first) to ensure compound words are processed before their components
+      const sortedNsfwWords = window.nsfwWords
+        .filter(word => word.toLowerCase() !== 'fucking') // Skip 'fucking' since we handled it above
+        .sort((a, b) => b.length - a.length);
+      
+      sortedNsfwWords.forEach(nsfwWord => {
         // Create case-insensitive regex for the word
         const regex = new RegExp(`\\b${nsfwWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
         filteredText = filteredText.replace(regex, generateWeeeeee());
