@@ -1,24 +1,31 @@
 // Word lists for the Pure and Infinite Joy Machine
 const listsText = `INTRO (I)
+fucking
 fucking ultimate chicken
 fucking chicken horse
 fucking horse chicken
 fucking horse ultimate chicken time
-fucking
+fucking crazy chicken
 crazy
 crazy chicken
 crazy horse fucking chicken
+crazy time horse
+crazy chicken ultimate
 ultimate
 ultimate fucking
 ultimate crazy chicken
+ultimate horse
 ultimate chicken
 ultimate chicken time
 ultimate horse chicken
 ultimate fucking chicken horse
 horse ultimate
+horse chicken crazy
 horse chicken fucking
 chicken horse time crazy fucking
 chicken time horse
+chicken time ultimate
+chicken fucking crazy time
 
 BEAST (B)
 [secret, *B*] aardvark
@@ -50,7 +57,6 @@ gerbil
 giraffe
 giraffe
 goat
-godzilla
 goldfish
 goose
 gorilla
@@ -203,7 +209,7 @@ baby bonnet
 labubu [lafufu]
 bing bong
 ZING
-ding [ding ding, *F*]]
+ding [ding ding, *F*]
 pussy slay mama
 daily dingle
 party popper
@@ -310,7 +316,7 @@ CANCELLED
 shot dead by alec baldwin [,alec baldwin pardoned [and given purple heart]]
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
-car door left unlocked, hair stolen by witch, naruto run into witch's basement, drained of life energy until become a husk
+car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until become a husk
 and let the [fucking] bunny eat the carrot
 RICH MILLIONAIRE
 THE CITY IS MINE

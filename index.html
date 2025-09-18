@@ -107,18 +107,20 @@
       updateInterval: 50, // Update every 50ms for smooth animation
       advanceAmount: 0.05, // 2% of total steps when clicked
       typoChance: 0.01, // 1% chance per letter
-      typoCorrectionChance: 0.9, // 90% chance to catch typo
+      typoCorrectionChance: 0.95, // 95% chance to catch typo
       doubleBeastChance: 0.5, // 50% chance for two beasts
       tripleBeastChance: 0.3, // 30% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
       fuckingChance: 0.15, // 15% chance to add "fucking"
       thinkingPauseChance: 0.1, // 10% chance for thinking pause
       allCapsChance: 0.1, // 10% chance for all caps (except beast)
-      itemTimeoutDuration: 20, // Number of phrases before item can be used again
-      skipSpaceChance: 0.008, // .8% chance to skip spaces between words
-      skipLetterChance: 0.005, // .5% chance to skip letters in words
+      itemTimeoutDuration: 25, // Number of phrases before item can be used again
+      skipSpaceChance: 0.007, // .7% chance to skip spaces between words
+      skipLetterChance: 0.003, // .3% chance to skip letters in words
       doubleLetterChance: 0.002, // .2% chance to double letters in words
       swapLettersChance: 0.005, // .5% chance to swap two letters in phrase
+      emojiChance: 0.008, // 0.8% chance to add emoji after words
+      testMode: true, // Test mode - instant progress bar fill
       safeMode: false, // Safe mode state
       typingSpeed: {
         space: { min: 10, max: 26.67 },
@@ -128,6 +130,15 @@
         punctuation: { min: 23.33, max: 53.33 }
       }
     };
+
+    // Emoji list for chaos mode
+    const emojiList = [
+      // Original emojis from copypasta
+      '🚨', '🗞️', '⏰', '👏', '🇺🇸', '🤩', '🗣️', '‼️', '💥', '❗️', '🫡', '📆', '🏋️', '🆘', '😍', '👴🏻', '🔛', '🏳️‍🌈', '🍌', '💇‍♀️', '💆', '🍑', '🍒', '👨‍🎤', '🥩', '🥴', '🍆', '🫨', '👩‍❤️‍💋‍👩', '🦅', '💦', '🍩', '🌊', '🛌', '🧎', '😹', '☎️', '🍼', '🤤', '🩲', '😈', '📜', '🔥', '💪', '❕', '🎊', '🎉', '💩', '🫵🏻', '👠', '🗳️', '🚫', '🧮', '🙇', '🙇‍♀️', '♨️', '🙏', '🦏', '🤯', '🍾', '💀', '👺', '👻', '🦗', '😵‍💫', '😱', '💂', '💂‍♀️', '💅', '😮‍💨', '💨', '🛐', '👽', '🛸', '🐻', '😝', '🌽', '🔫', '🦨', '🕳️', '🥵', '💋', '❎', '👏🏽', '🏛️', '🙅‍♂️', '🛑', '😤', '🥜', '🫗', '🍯', '🍸', '🧠', '🌀', '🌭', '👎', '🥺', '👐🏽', '🚼', '❌', '🤐', '🔇', '🤫', '💪🏻', '🥇', '📢', '😩', '📐', '💌', '📫', '💢', '👀', '🪩', '🗽', '👯‍♀️', '🔙', '🈲', '🚩', '⛓️', '😜', '🥸', '😳', '🫦', '🪢', '👋', '➕', '🤠', '💍', '♋️', '⛓️‍💥', '⏳', '💯', '💣', '😏', '😫', '😘', '👁️', '🧖‍♂️', '👌', '😉', '🗓', '🤲', '🌳', '🙈', '🫶', '👉', '👈', '🛎', '❤️‍🔥', '⛽️', '🗿', '🪨', '🖊', '💄', '👅', '🤛🏻', '😰', '😨', '📸', '🎥', '🤳', '📤', '🍰', '🙀', '👊', '☑️', '✅', '💝', '👩‍🦽', '😎', '👬', '👨‍❤️‍💋‍👨', '👍', '💐', '💸', '🐸', '🌎', '🌈', '😛', '📟', '💁🏽', '🤧', '😂', '🎭', '🙊', '💧', '☺️', '🦣', '🎀', '👈', '🌹', '😭', '🐢', '📦', '👩', '😲', '🕶️', '😠', '🚥', '👯', '😴', '🎮', '🪡', '🏭', '😬', '🎁', '🎂', '🐝', '🧚🏽‍♀️', '🚀', '🥳', '🐨', '👫', '❓', '💃🏻', '🕗', '😃', '👧', '🎙️', '🖥️', '🥷🏿', '🧔🏽', '🏇', '🧞‍♂️', '🗡️', '🏐', '🥲', '🦵', '😯', '✨', '🙌', '🫲', '🖐️', '🖕', '💔', '🌪️', '🌬️', '🚵', '✌🏻', '✌🏽', '👾',
+      
+      // Additional chaos emojis
+      '🤡', '🥶', '🤮', '😵', '🤪', '🤬', '🤌', '🫰', '🤟', '🫵', '🤙', '⚡', '🔪', '⚰️', '🧨', '🪓', '🌮', '🍕', '🥓', '🧄', '🥒', '🍄', '🐍', '🦈', '🐙', '🦀', '🦇', '⭐', '💫', '🌟', '🔴', '⚫', '🟢'
+    ];
 
     // QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
     const QWERTY_MAP = {
@@ -265,6 +276,31 @@
       chars[pos2] = temp;
       
       return chars.join('');
+    };
+
+    /**
+     * Applies emoji chaos to a phrase (adds random emojis after words)
+     */
+    const applyEmojiChaos = (phrase) => {
+      const words = phrase.split(' ');
+      const result = [];
+      
+      for (let i = 0; i < words.length; i++) {
+        result.push(words[i]);
+        
+        // Check if we should add an emoji after this word
+        if (Math.random() < CONFIG.emojiChance) {
+          const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
+          result.push(randomEmoji);
+        }
+        
+        // Add space back (except for last word)
+        if (i < words.length - 1) {
+          result.push(' ');
+        }
+      }
+      
+      return result.join('');
     };
 
     /**
@@ -484,7 +520,7 @@
             (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
             (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${a} ${c} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${a} ${b} ${n} ${f}`,
             (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${a} ${f}`,
@@ -499,29 +535,38 @@
         const randomFormat = formats[Math.floor(Math.random() * formats.length)];
         const formatIndex = formats.indexOf(randomFormat);
         
-        // Get random items from each list (raw, before processing), excluding items on timeout
-        const availableIntros = getAvailableItems(0);
-        const availableBeasts = getAvailableItems(1);
-        const availableNouns = getAvailableItems(2);
-        const availableCandies = getAvailableItems(3);
-        const availableAdjectives = getAvailableItems(4);
-        const availableFinales = getAvailableItems(5);
+        // Create a readable format string for logging
+        const getFormatString = (format) => {
+            const testResult = format('I', 'B', 'N', 'C', 'A', 'F');
+            return testResult.replace(/I/g, 'I').replace(/B/g, 'B').replace(/N/g, 'N')
+                            .replace(/C/g, 'C').replace(/A/g, 'A').replace(/F/g, 'F');
+        };
+        const formatString = getFormatString(randomFormat);
         
-        const intro = availableIntros[Math.floor(Math.random() * availableIntros.length)];
-        const beast = availableBeasts[Math.floor(Math.random() * availableBeasts.length)];
-        const noun = availableNouns[Math.floor(Math.random() * availableNouns.length)];
-        const candy = availableCandies[Math.floor(Math.random() * availableCandies.length)];
-        const adjective = availableAdjectives[Math.floor(Math.random() * availableAdjectives.length)];
-        const finale = availableFinales[Math.floor(Math.random() * availableFinales.length)];
+        // Determine which word types are needed for this format
+        const needsIntro = formatString.includes('I');
+        const needsBeast = formatString.includes('B');
+        const needsNoun = formatString.includes('N');
+        const needsCandy = formatString.includes('C');
+        const needsAdjective = formatString.includes('A');
+        const needsFinale = formatString.includes('F');
         
-        // Track the actual words and their modifications for detailed display
+        // Only get random items for the word types we actually need
+        const intro = needsIntro ? getAvailableItems(0)[Math.floor(Math.random() * getAvailableItems(0).length)] : null;
+        const beast = needsBeast ? getAvailableItems(1)[Math.floor(Math.random() * getAvailableItems(1).length)] : null;
+        const noun = needsNoun ? getAvailableItems(2)[Math.floor(Math.random() * getAvailableItems(2).length)] : null;
+        const candy = needsCandy ? getAvailableItems(3)[Math.floor(Math.random() * getAvailableItems(3).length)] : null;
+        const adjective = needsAdjective ? getAvailableItems(4)[Math.floor(Math.random() * getAvailableItems(4).length)] : null;
+        const finale = needsFinale ? getAvailableItems(5)[Math.floor(Math.random() * getAvailableItems(5).length)] : null;
+        
+        // Track the actual words and their modifications for detailed display (only for needed types)
         const wordTracking = {
-            intro: createWordTracking(intro),
-            beast: createWordTracking(beast),
-            noun: createWordTracking(noun),
-            candy: createWordTracking(candy),
-            adjective: createWordTracking(adjective),
-            finale: createWordTracking(finale)
+            intro: intro ? createWordTracking(intro) : null,
+            beast: beast ? createWordTracking(beast) : null,
+            noun: noun ? createWordTracking(noun) : null,
+            candy: candy ? createWordTracking(candy) : null,
+            adjective: adjective ? createWordTracking(adjective) : null,
+            finale: finale ? createWordTracking(finale) : null
         };
         
         // Process each word with tracking
@@ -545,13 +590,13 @@
             return result;
         };
         
-        // Process each word
-        let processedIntro = processWordWithTracking(intro, wordTracking.intro);
-        let processedBeast = processWordWithTracking(beast, wordTracking.beast);
-        let processedNoun = processWordWithTracking(noun, wordTracking.noun);
-        let processedCandy = processWordWithTracking(candy, wordTracking.candy);
-        let processedAdjective = processWordWithTracking(adjective, wordTracking.adjective);
-        let processedFinale = processWordWithTracking(finale, wordTracking.finale);
+        // Process each word (only the ones we need)
+        let processedIntro = intro ? processWordWithTracking(intro, wordTracking.intro) : '';
+        let processedBeast = beast ? processWordWithTracking(beast, wordTracking.beast) : '';
+        let processedNoun = noun ? processWordWithTracking(noun, wordTracking.noun) : '';
+        let processedCandy = candy ? processWordWithTracking(candy, wordTracking.candy) : '';
+        let processedAdjective = adjective ? processWordWithTracking(adjective, wordTracking.adjective) : '';
+        let processedFinale = finale ? processWordWithTracking(finale, wordTracking.finale) : '';
         
         
         
@@ -563,11 +608,14 @@
         // Track additional items used in this phrase for timeout system
         let additionalItemsUsed = [];
         
-        // Check for beast stop after first beast
-        if (wordTracking.beast.beastStop) {
+        // Track how many "fucking"s were added for logging
+        let fucksGiven = 0;
+        
+        // Check for beast stop after first beast (only if beast is used)
+        if (needsBeast && wordTracking.beast?.beastStop) {
             // Beast stop triggered by first beast - skip beast duplications
             // Continue with normal processing (noun, candy, adjective, finale)
-        } else if (Math.random() < CONFIG.doubleBeastChance) {
+        } else if (needsBeast && Math.random() < CONFIG.doubleBeastChance) {
             // Get a different beast (avoid duplicates and items on timeout)
             let availableSecondBeasts = getAvailableItems(1).filter(item => item !== beast);
             // If no available beasts (shouldn't happen), fall back to all beasts except the current one
@@ -610,8 +658,8 @@
             }
         }
 
-        // 5% chance to add a second candy right before the noun
-        if (Math.random() < CONFIG.doubleCandyChance) {
+        // 5% chance to add a second candy (only if candy is used)
+        if (needsCandy && Math.random() < CONFIG.doubleCandyChance) {
             // Get a different candy (avoid duplicates and items on timeout)
             let availableSecondCandies = getAvailableItems(3).filter(item => item !== candy);
             // If no available candies (shouldn't happen), fall back to all candies except the current one
@@ -631,56 +679,64 @@
             wordTracking.candy.alternates = [...wordTracking.candy.alternates, ...secondCandyTracking.alternates];
         }
         
-        // 10% chance to add "fucking" before beast, noun, and candy
-        if (Math.random() < CONFIG.fuckingChance) {
+        // 10% chance to add "fucking" before beast (only if beast is used)
+        if (needsBeast && Math.random() < CONFIG.fuckingChance) {
             finalBeast = `fucking ${finalBeast}`;
             wordTracking.beast.final = finalBeast;
             wordTracking.beast.modifications.push('fucking');
+            fucksGiven++;
         }
         
-        // 10% chance to add "fucking" after the entire set of beasts
-        if (Math.random() < 0.1) {
+        // 10% chance to add "fucking" after the entire set of beasts (only if beast is used)
+        if (needsBeast && Math.random() < 0.1) {
             finalBeast = `${finalBeast} fucking`;
             wordTracking.beast.final = finalBeast;
             wordTracking.beast.modifications.push('fucking-after');
+            fucksGiven++;
         }
-        if (Math.random() < CONFIG.fuckingChance) {
+        
+        // 10% chance to add "fucking" before noun (only if noun is used)
+        if (needsNoun && Math.random() < CONFIG.fuckingChance) {
             finalNoun = `fucking ${finalNoun}`;
             wordTracking.noun.final = finalNoun;
             wordTracking.noun.modifications.push('fucking');
+            fucksGiven++;
         }
-        if (Math.random() < CONFIG.fuckingChance) {
+        
+        // 10% chance to add "fucking" before candy (only if candy is used)
+        if (needsCandy && Math.random() < CONFIG.fuckingChance) {
             finalCandy = `fucking ${finalCandy}`;
             wordTracking.candy.final = finalCandy;
             wordTracking.candy.modifications.push('fucking');
+            fucksGiven++;
         }
         
-        // Apply all caps to non-beast items (2% chance each)
-        if (Math.random() < CONFIG.allCapsChance) {
+        // Apply all caps to non-beast items (2% chance each, only if used)
+        if (needsIntro && Math.random() < CONFIG.allCapsChance) {
             processedIntro = processedIntro.toUpperCase();
             wordTracking.intro.final = processedIntro;
             wordTracking.intro.modifications.push('all-caps');
         }
         
-        if (Math.random() < CONFIG.allCapsChance) {
+        if (needsNoun && Math.random() < CONFIG.allCapsChance) {
             finalNoun = finalNoun.toUpperCase();
             wordTracking.noun.final = finalNoun;
             wordTracking.noun.modifications.push('all-caps');
         }
         
-        if (Math.random() < CONFIG.allCapsChance) {
+        if (needsCandy && Math.random() < CONFIG.allCapsChance) {
             finalCandy = finalCandy.toUpperCase();
             wordTracking.candy.final = finalCandy;
             wordTracking.candy.modifications.push('all-caps');
         }
         
-        if (Math.random() < CONFIG.allCapsChance) {
+        if (needsAdjective && Math.random() < CONFIG.allCapsChance) {
             processedAdjective = processedAdjective.toUpperCase();
             wordTracking.adjective.final = processedAdjective;
             wordTracking.adjective.modifications.push('all-caps');
         }
         
-        if (Math.random() < CONFIG.allCapsChance) {
+        if (needsFinale && Math.random() < CONFIG.allCapsChance) {
             processedFinale = processedFinale.toUpperCase();
             wordTracking.finale.final = processedFinale;
             wordTracking.finale.modifications.push('all-caps');
@@ -690,41 +746,59 @@
         let hasHardStop = false;
         let hardStopWord = '';
         
-        // Debug: log hard stop status for each word type
-        console.log('Hard stop check:', {
-            intro: wordTracking.intro.hardStop,
-            beast: wordTracking.beast.hardStop,
-            noun: wordTracking.noun.hardStop,
-            candy: wordTracking.candy.hardStop,
-            adjective: wordTracking.adjective.hardStop,
-            finale: wordTracking.finale.hardStop
-        });
-        console.log('Words:', {
-            intro: processedIntro,
-            beast: finalBeast,
-            noun: finalNoun,
-            candy: finalCandy,
-            adjective: processedAdjective,
-            finale: processedFinale
-        });
+        // Combined debug output (only show word types that were actually used)
+        const debugOutput = {
+            format: `${formatIndex + 1} (${formatString})`,
+            fucksGiven: fucksGiven,
+            hardStops: {},
+            words: {}
+        };
         
-        // Check each word type for hard stops
-        if (wordTracking.intro.hardStop) {
+        // Only include word types that were actually processed
+        if (needsIntro) {
+            debugOutput.hardStops.intro = wordTracking.intro?.hardStop || false;
+            debugOutput.words.intro = processedIntro;
+        }
+        if (needsBeast) {
+            debugOutput.hardStops.beast = wordTracking.beast?.hardStop || false;
+            debugOutput.words.beast = finalBeast;
+        }
+        if (needsNoun) {
+            debugOutput.hardStops.noun = wordTracking.noun?.hardStop || false;
+            debugOutput.words.noun = finalNoun;
+        }
+        if (needsCandy) {
+            debugOutput.hardStops.candy = wordTracking.candy?.hardStop || false;
+            debugOutput.words.candy = finalCandy;
+        }
+        if (needsAdjective) {
+            debugOutput.hardStops.adjective = wordTracking.adjective?.hardStop || false;
+            debugOutput.words.adjective = processedAdjective;
+        }
+        if (needsFinale) {
+            debugOutput.hardStops.finale = wordTracking.finale?.hardStop || false;
+            debugOutput.words.finale = processedFinale;
+        }
+        
+        console.log('🎪 Joy Machine Debug:', debugOutput);
+        
+        // Check each word type for hard stops (only the ones that were processed)
+        if (needsIntro && wordTracking.intro?.hardStop) {
             hasHardStop = true;
             hardStopWord = processedIntro;
-        } else if (wordTracking.beast.hardStop) {
+        } else if (needsBeast && wordTracking.beast?.hardStop) {
             hasHardStop = true;
             hardStopWord = finalBeast;
-        } else if (wordTracking.noun.hardStop) {
+        } else if (needsNoun && wordTracking.noun?.hardStop) {
             hasHardStop = true;
             hardStopWord = finalNoun;
-        } else if (wordTracking.candy.hardStop) {
+        } else if (needsCandy && wordTracking.candy?.hardStop) {
             hasHardStop = true;
             hardStopWord = finalCandy;
-        } else if (wordTracking.adjective.hardStop) {
+        } else if (needsAdjective && wordTracking.adjective?.hardStop) {
             hasHardStop = true;
             hardStopWord = processedAdjective;
-        } else if (wordTracking.finale.hardStop) {
+        } else if (needsFinale && wordTracking.finale?.hardStop) {
             hasHardStop = true;
             hardStopWord = processedFinale;
         }
@@ -734,17 +808,17 @@
         if (hasHardStop) {
             // If there's a hard stop, generate the phrase up to that point
             // We need to determine which word type triggered the hard stop and build the phrase accordingly
-            if (wordTracking.intro.hardStop) {
+            if (needsIntro && wordTracking.intro?.hardStop) {
                 phrase = processedIntro;
-            } else if (wordTracking.beast.hardStop) {
+            } else if (needsBeast && wordTracking.beast?.hardStop) {
                 phrase = randomFormat(processedIntro, finalBeast, '', '', '', '');
-            } else if (wordTracking.noun.hardStop) {
+            } else if (needsNoun && wordTracking.noun?.hardStop) {
                 phrase = randomFormat(processedIntro, finalBeast, finalNoun, '', '', '');
-            } else if (wordTracking.candy.hardStop) {
+            } else if (needsCandy && wordTracking.candy?.hardStop) {
                 phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, '', '');
-            } else if (wordTracking.adjective.hardStop) {
+            } else if (needsAdjective && wordTracking.adjective?.hardStop) {
                 phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, '');
-            } else if (wordTracking.finale.hardStop) {
+            } else if (needsFinale && wordTracking.finale?.hardStop) {
                 phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, processedFinale);
             }
         } else {
@@ -762,16 +836,19 @@
         // Apply safe mode filtering if enabled
         phrase = filterNSFW(phrase);
         
-        // Apply letter swapping chaos (1% chance)
+        // Apply letter swapping chaos (0.5% chance)
         phrase = applyLetterSwapping(phrase);
         
-        // Add used items to timeout list to prevent repetition
-        addItemToTimeout('intro', intro);
-        addItemToTimeout('beast', beast);
-        addItemToTimeout('noun', noun);
-        addItemToTimeout('candy', candy);
-        addItemToTimeout('adjective', adjective);
-        addItemToTimeout('finale', finale);
+        // Apply emoji chaos (0.8% chance to add emoji after words)
+        phrase = applyEmojiChaos(phrase);
+        
+        // Add used items to timeout list to prevent repetition (only the ones that were actually used)
+        if (needsIntro && intro) addItemToTimeout('intro', intro);
+        if (needsBeast && beast) addItemToTimeout('beast', beast);
+        if (needsNoun && noun) addItemToTimeout('noun', noun);
+        if (needsCandy && candy) addItemToTimeout('candy', candy);
+        if (needsAdjective && adjective) addItemToTimeout('adjective', adjective);
+        if (needsFinale && finale) addItemToTimeout('finale', finale);
         
         // Add additional beasts and candies that were used
         additionalItemsUsed.forEach(({type, item}) => {
@@ -932,6 +1009,7 @@
       }
     };
 
+
     /**
      * Toggles safe mode on/off
      */
@@ -1090,42 +1168,54 @@
                 }
                 
                 // Calculate realistic delay based on multiple factors
-                let baseDelay = getBaseDelay(actualChar, prevChar);
+                let baseDelay;
                 
-                // Apply dynamic speed variation (human rhythm changes)
-                typingSpeed += (Math.random() - 0.5) * 0.1; // Gradual speed changes
-                typingSpeed = Math.max(0.3, Math.min(1.8, typingSpeed)); // Clamp between 0.3x and 1.8x
-                baseDelay *= typingSpeed;
-                
-                // Add natural rhythm variations
-                const rhythmVariation = 0.5 + Math.random() * 1.0; // 0.5x to 1.5x variation
-                baseDelay *= rhythmVariation;
-                
-                // Simulate typing bursts (fast sequences followed by pauses)
-                const timeSinceLastChar = Date.now() - lastCharTime;
-                if (timeSinceLastChar > 200) { // After a pause, start with slower typing
-                    baseDelay *= 1.5;
+                if (CONFIG.testMode) {
+                    // Test mode: super fast typing (1-3ms per character)
+                    baseDelay = 1 + Math.random() * 2;
+                } else {
+                    // Normal mode: realistic human typing
+                    baseDelay = getBaseDelay(actualChar, prevChar);
+                    
+                    // Apply dynamic speed variation (human rhythm changes)
+                    typingSpeed += (Math.random() - 0.5) * 0.1; // Gradual speed changes
+                    typingSpeed = Math.max(0.3, Math.min(1.8, typingSpeed)); // Clamp between 0.3x and 1.8x
+                    baseDelay *= typingSpeed;
+                    
+                    // Add natural rhythm variations
+                    const rhythmVariation = 0.5 + Math.random() * 1.0; // 0.5x to 1.5x variation
+                    baseDelay *= rhythmVariation;
                 }
                 
-                // Natural pauses after punctuation
-                if (prevChar.match(/[.!?]/)) {
-                    baseDelay += 33.33 + Math.random() * 66.67; // Extra pause after sentences (3/4ths slower)
-                } else if (prevChar.match(/[,;:]/)) {
-                    baseDelay += 13.33 + Math.random() * 33.33; // Shorter pause after commas (3/4ths slower)
-                }
-                
-                // Occasional longer thinking pauses (more frequent than before)
-                if (Math.random() < CONFIG.thinkingPauseChance) { // 8% chance
-                    baseDelay += 66.67 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
-                }
-                
-                // Simulate finger fatigue (gradually slower over time)
-                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.05; // Up to 5% slower
-                baseDelay *= fatigueFactor;
-                
-                // Word boundaries get slight pauses
-                if (char === ' ') {
-                    baseDelay += 6.67 + Math.random() * 13.33; // 3/4ths slower
+                if (!CONFIG.testMode) {
+                    // Normal mode: apply all the realistic human typing effects
+                    
+                    // Simulate typing bursts (fast sequences followed by pauses)
+                    const timeSinceLastChar = Date.now() - lastCharTime;
+                    if (timeSinceLastChar > 200) { // After a pause, start with slower typing
+                        baseDelay *= 1.5;
+                    }
+                    
+                    // Natural pauses after punctuation
+                    if (prevChar.match(/[.!?]/)) {
+                        baseDelay += 33.33 + Math.random() * 66.67; // Extra pause after sentences (3/4ths slower)
+                    } else if (prevChar.match(/[,;:]/)) {
+                        baseDelay += 13.33 + Math.random() * 33.33; // Shorter pause after commas (3/4ths slower)
+                    }
+                    
+                    // Occasional longer thinking pauses (more frequent than before)
+                    if (Math.random() < CONFIG.thinkingPauseChance) { // 8% chance
+                        baseDelay += 66.67 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
+                    }
+                    
+                    // Simulate finger fatigue (gradually slower over time)
+                    const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.05; // Up to 5% slower
+                    baseDelay *= fatigueFactor;
+                    
+                    // Word boundaries get slight pauses
+                    if (char === ' ') {
+                        baseDelay += 6.67 + Math.random() * 13.33; // 3/4ths slower
+                    }
                 }
                 
                 lastCharTime = Date.now();
@@ -1178,11 +1268,17 @@
                     phraseOutput.textContent = displayedText;
                     backspaceCount++;
                     
-                    // Slow down as we approach the typo (start fast, end slow)
-                    const progress = backspaceCount / charsToBackspace; // 0 to 1
-                    const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
-                    const baseDelay = 15 + Math.random() * 25; // Original fast delay
-                    const delay = baseDelay * speedMultiplier; // Apply slowdown
+                    // Calculate backspace delay
+                    let delay;
+                    if (CONFIG.testMode) {
+                        delay = 1; // Super fast backspacing in test mode
+                    } else {
+                        // Slow down as we approach the typo (start fast, end slow)
+                        const progress = backspaceCount / charsToBackspace; // 0 to 1
+                        const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
+                        const baseDelay = 15 + Math.random() * 25; // Original fast delay
+                        delay = baseDelay * speedMultiplier; // Apply slowdown
+                    }
                     
                     const timeoutId = setTimeout(backspace, delay);
                     typingTimeouts.push(timeoutId);
@@ -1224,7 +1320,8 @@
                     displayedText += char;
                     phraseOutput.textContent = displayedText;
                     retypeIndex++;
-                    const timeoutId = setTimeout(retype, 15 + Math.random() * 25); // Fast retyping
+                    const retypeDelay = CONFIG.testMode ? 1 : (15 + Math.random() * 25); // Super fast in test mode
+                    const timeoutId = setTimeout(retype, retypeDelay);
                     typingTimeouts.push(timeoutId);
                 } else {
                     // Word retyped correctly
@@ -1239,7 +1336,8 @@
                     hasActiveTypo = false;
                     
                     // Continue typing from where we left off in the original phrase
-                    const timeoutId = setTimeout(typeNextChar, 25 + Math.random() * 50); // Brief pause before continuing
+                    const continueDelay = CONFIG.testMode ? 1 : (25 + Math.random() * 50); // Super fast in test mode
+                    const timeoutId = setTimeout(typeNextChar, continueDelay);
                     typingTimeouts.push(timeoutId);
                 }
             };
@@ -1312,6 +1410,16 @@
       generateBtn.style.setProperty('--fill-width', '0%');
       updateButtonState('filling');
       
+      // Test mode: instantly complete the bar
+      if (CONFIG.testMode) {
+        currentFill = totalSteps;
+        generateBtn.style.setProperty('--fill-width', '100%');
+        updateButtonState('ready');
+        isComplete = true;
+        return;
+      }
+      
+      // Normal mode: gradual fill
       fillInterval = setInterval(() => {
         currentFill++;
         const fillPercentage = (currentFill / totalSteps) * 100;
