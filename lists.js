@@ -192,8 +192,7 @@ humpty dumpty
 chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
 [fucking] candy flip
-ding dong [ditch]
-sacagawea 
+ding dong [ditch] 
 54321 [54321]
 boing boing [yoga ball [blacked out no memories, *F*]]
 gamer gunk
@@ -343,7 +342,6 @@ oh nooo oh fuckkk sorry kareem i ate all the drywall I thought it was cottage ch
 we'll take the check
 translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/russian/spanish/swedish/turkish/vietnamese) 30 times
 for up to one year [in a shipping container, .8]
-dave & busters [dave & busters dave & busters, .15]
 and SCENE
 walk the plank [bitch, .4]
 RELEASE THE SNAKES
@@ -384,6 +382,7 @@ YOUNG
 SCRONGIEEEEE
 boobieeeeee
 weeeeeeeeeeeeee
+dave & busters [dave & busters dave & busters, .15]
 mmmmmmmmmmm
 SLIME MAN
 RICH MILLIONAIRE

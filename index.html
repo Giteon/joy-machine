@@ -124,7 +124,6 @@
       skipLetterChance: 0.003, // .3% chance to skip letters in words
       doubleLetterChance: 0.002, // .2% chance to double letters in words
       swapLettersChance: 0.005, // .5% chance to swap two letters in phrase
-      emojiChance: 0, // 0% chance to add emoji after words
       testMode: true, // Test mode - instant progress bar fill
       safeMode: false, // Safe mode state
       backgroundMusic: true, // Enable background music
@@ -138,10 +137,6 @@
         punctuation: { min: 23.33, max: 53.33 }
       }
     };
-
-    const emojiList = [
-      '💩', '🤡', '🤪', '😵‍💫', '🥴', '🤤', '😈', '👺', '👻', '💀', '🤮', '🥶', '😱', '🤯', '😭', '😂', '😹', '🗿', '🤠', '🥸', '🤬', '🖕', '👽', '🛸', '🦨', '🧨', '💣', '⚡', '🔥', '💥', '🚨', '🤌', '👌', '🫵', '👀', '🧠', '💯', '😍', '🥵', '😏', '😘', '😉', '😳', '🫦', '👅', '💋', '💦', '🍆', '🍑', '🍒', '🌭', '🌮', '🍩', '🍯', '🍼', '💄', '👠', '⛓️', '🔗', '💍', '❤️‍🔥', '💌', '🫶', '👉', '👈', '🙈', '🤤', '😮‍💨', '🥺', '🫨', '💅'
-    ];
 
     // QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
     const QWERTY_MAP = {
@@ -290,31 +285,6 @@
       chars[pos2] = temp;
       
       return chars.join('');
-    };
-
-    /**
-     * Applies emoji chaos to a phrase (adds random emojis after words)
-     */
-    const applyEmojiChaos = (phrase) => {
-      const words = phrase.split(' ');
-      const result = [];
-      
-      for (let i = 0; i < words.length; i++) {
-        result.push(words[i]);
-        
-        // Check if we should add an emoji after this word
-        if (Math.random() < CONFIG.emojiChance) {
-          const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
-          result.push(randomEmoji);
-        }
-        
-        // Add space back (except for last word)
-        if (i < words.length - 1) {
-          result.push(' ');
-        }
-      }
-      
-      return result.join('');
     };
 
     /**
@@ -766,44 +736,52 @@
         let hardStopWord = '';
         
         // Combined debug output (only show word types that were actually used)
+        // Create words object in the desired order: intro, beast, noun, candy, adjective, finale, tag
+        const wordsInOrder = {};
+        
+        // Add words in the specific order, only if they were used
+        if (needsIntro) {
+            let introDisplay = processedIntro;
+            if (wordTracking.intro?.hardStop) introDisplay += ', *F*';
+            if (wordTracking.intro?.beastStop) introDisplay += ', *B*';
+            wordsInOrder.intro = introDisplay;
+        }
+        if (needsBeast) {
+            let beastDisplay = finalBeast;
+            if (wordTracking.beast?.hardStop) beastDisplay += ', *F*';
+            if (wordTracking.beast?.beastStop) beastDisplay += ', *B*';
+            wordsInOrder.beast = beastDisplay;
+        }
+        if (needsNoun) {
+            let nounDisplay = finalNoun;
+            if (wordTracking.noun?.hardStop) nounDisplay += ', *F*';
+            if (wordTracking.noun?.beastStop) nounDisplay += ', *B*';
+            wordsInOrder.noun = nounDisplay;
+        }
+        if (needsCandy) {
+            let candyDisplay = finalCandy;
+            if (wordTracking.candy?.hardStop) candyDisplay += ', *F*';
+            if (wordTracking.candy?.beastStop) candyDisplay += ', *B*';
+            wordsInOrder.candy = candyDisplay;
+        }
+        if (needsAdjective) {
+            let adjectiveDisplay = processedAdjective;
+            if (wordTracking.adjective?.hardStop) adjectiveDisplay += ', *F*';
+            if (wordTracking.adjective?.beastStop) adjectiveDisplay += ', *B*';
+            wordsInOrder.adjective = adjectiveDisplay;
+        }
+        if (needsFinale) {
+            let finaleDisplay = processedFinale;
+            if (wordTracking.finale?.hardStop) finaleDisplay += ', *F*';
+            if (wordTracking.finale?.beastStop) finaleDisplay += ', *B*';
+            wordsInOrder.finale = finaleDisplay;
+        }
+        
         const debugOutput = {
             format: `${formatIndex + 1} (${formatString})`,
             fucksGiven: fucksGiven,
-            hardStops: {},
-            words: {}
+            words: wordsInOrder
         };
-        
-        // Only include word types that were actually processed
-        if (needsIntro) {
-            debugOutput.hardStops.intro = wordTracking.intro?.hardStop || false;
-            debugOutput.words.intro = processedIntro;
-        }
-        if (needsBeast) {
-            debugOutput.hardStops.beast = wordTracking.beast?.hardStop || false;
-            debugOutput.words.beast = finalBeast;
-        }
-        if (needsNoun) {
-            debugOutput.hardStops.noun = wordTracking.noun?.hardStop || false;
-            debugOutput.words.noun = finalNoun;
-        }
-        if (needsCandy) {
-            debugOutput.hardStops.candy = wordTracking.candy?.hardStop || false;
-            debugOutput.words.candy = finalCandy;
-        }
-        if (needsAdjective) {
-            debugOutput.hardStops.adjective = wordTracking.adjective?.hardStop || false;
-            debugOutput.words.adjective = processedAdjective;
-        }
-        if (needsFinale) {
-            debugOutput.hardStops.finale = wordTracking.finale?.hardStop || false;
-            debugOutput.words.finale = processedFinale;
-        }
-        if (tag) {
-            debugOutput.hardStops.tag = tagTracking?.hardStop || false;
-            debugOutput.words.tag = processedTag;
-        }
-        
-        console.log('🎪 Joy Machine Debug:', debugOutput);
         
         // Check each word type for hard stops (only the ones that were processed)
         if (needsIntro && wordTracking.intro?.hardStop) {
@@ -862,9 +840,6 @@
         // Apply letter swapping chaos (0.5% chance)
         phrase = applyLetterSwapping(phrase);
         
-        // Apply emoji chaos (0.8% chance to add emoji after words)
-        phrase = applyEmojiChaos(phrase);
-        
         // Check for tag addition (10% chance after finale or hard stop)
         // Tags appear after finales (normal completion) or hard stops
         const shouldAddTag = (needsFinale || hasHardStop) && Math.random() < CONFIG.tagChance;
@@ -899,8 +874,17 @@
                 
                 // Add the tag to the end of the phrase
                 phrase = `${phrase} ${processedTag}`;
+                
+                // Add tag to debug output
+                let tagDisplay = processedTag;
+                if (tagTracking?.hardStop) tagDisplay += ', *F*';
+                if (tagTracking?.beastStop) tagDisplay += ', *B*';
+                debugOutput.words.tag = tagDisplay;
             }
         }
+        
+        // Log debug output after all processing is complete
+        console.log('🎪 Joy Machine Debug:', debugOutput);
         
         // Add used items to timeout list to prevent repetition (only the ones that were actually used)
         if (needsIntro && intro) addItemToTimeout('intro', intro);
