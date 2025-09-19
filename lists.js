@@ -138,7 +138,7 @@ lobotomy
 slutty vegan
 above-ground (burial/grave)
 pussy taste test [jump up and down, .3, *F*]
-Rodolfo [trapped in floorboards, *F*]
+rodolfo [trapped in floorboards, *F*]
 primordial soup
 laura palmer [body bag, .25 [dream sequence, .25]]
 war movie monday
@@ -294,6 +294,7 @@ with the (fat naturals, .7/fatties, .3)
 shit cup runneth over [my balls, .3]
 THAT COULD BE A SHOW
 NUKE IN DA CLUB
+so THAT just happened
 oura ring indicates no pulse[,noooooo owner of oura ring is dead. FREE OURA RING!]
 switch it up like nintendo [REMEMBER US? I MISS US]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
@@ -302,7 +303,7 @@ so no cube? [ok so no cube?]
 i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
-Accidentally enlisted in army, sent to the front-lines to sniff out mines.
+accidentally enlisted in army, sent to the front-lines to sniff for mines [like a rat].
 [unnggghhh] fuckkkk id do anything for it
 consciousness uploaded to rat, rat dies, consciousness uploaded to new rat [etc until heat death of universe].
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
@@ -319,10 +320,10 @@ and subway take away everything you love [100% AGREE, .2]
 what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
-shot dead by alec baldwin [,alec baldwin pardoned [and given purple heart]]
+shot dead by alec baldwin[, alec baldwin pardoned (!/and given purple heart!!!)]
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
-car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until become a husk
+car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until become a husk]
 and let the [fucking] bunny eat the carrot
 your skin [ohhhh yeah] oh yeah your skin and bones turn iiiiin to something beautiful
 in good christian fun
@@ -337,7 +338,7 @@ in 5-7 business days
 using a complex system of pulleys and levers
 10 lashings goddess
 please make my day I would really love it if you made my day [miss]
-oh nooo oh fuckkk sorry kareem i ate all the drywall I thought it was cottage cheeseeee [oh noooooo [fuuuckkkkk]]
+oh nooo oh fuckkk sorry kareem i ate all the (drywall I thought it was cottage cheeseeee/floorboards I thought they were breadsticks/wires in the walls i thought it was delicious spaghetti/sinks and toilets i thought they were gumdrops and snickerdoodles) [oh noooooo [oh fuuuckkkkk]]
 [ok sorry goddess, .2] yes chef sorry chef
 we'll take the check
 translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/russian/spanish/swedish/turkish/vietnamese) 30 times
@@ -349,7 +350,7 @@ Siri "when is July" [oops unsend [haha. siri hold my calls]]
 NIGHTMARE [NIGHTMARE [NIGHTMARE]]
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT
-im going to take this back to my home lab
+[excuse me, .2] im going to take this back to my home lab
 anti-(hoes/happiness) technology
 girlfriend (who loves me [so much], .7/dating sim, .3)
 IN ENGLISH PLEASE
@@ -369,17 +370,19 @@ THE CITY IS MINE
 guantanamo bay forced to watch pole dancing video on work computer
 and buy yourself something nice kid
 10lbs soaking wet [no reciept]
-by way of demonstration to find most trusted advisor
+by way of demonstration to find most trusted advisor[, and whoever can fit the most RAT BONES in his jowels is SURELY your most trusted advisor!, .2]
 [and consider organizing a regular] ICE CHIPPING CHALLENGE
 put the fries in the bag bro
 
 TAG (T)
 xiaohongshu
-Capiesch?
+capiesch?
 ...OR SHE!
 type shit
 YOUNG
 SCRONGIEEEEE
+DING!
+unless??
 boobieeeeee
 weeeeeeeeeeeeee
 dave & busters [dave & busters dave & busters, .15]

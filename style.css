@@ -1,0 +1,172 @@
+body {
+  font-family: 'Crimson Text', serif;
+}
+
+/* Styles for the button fill-up mechanic */
+#generate-btn {
+  position: relative;
+  overflow: hidden;
+  /* Base background for the empty state */
+  background-color: #e5e7eb; /* gray-200 */
+  transition: background-color 0.3s ease;
+  cursor: default; /* Default cursor during loading */
+  border-radius: 9999px; /* Fully rounded corners */
+}
+
+#generate-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #cccccc; /* gray for filling state */
+  /* Use a CSS variable for the width, controlled by JS */
+  width: var(--fill-width, 0%);
+  transition: none; /* No transition by default */
+}
+
+#generate-btn.filling::before {
+  transition: width 0.2s ease-out; /* Only animate when filling */
+}
+
+#generate-btn .btn-text {
+    position: relative; /* Ensures text stays on top of the fill */
+    z-index: 1;
+}
+
+/* Button states */
+#generate-btn.filling {
+  background-color: #e5e7eb; /* gray-200 */
+}
+
+#generate-btn.filling .btn-text {
+  color: #9ca3af; /* light grey while filling */
+}
+
+#generate-btn.ready::before {
+  background-color: #3b82f6; /* blue-500 - make the fill blue when ready */
+}
+
+#generate-btn.ready .btn-text {
+  color: white; /* white when ready */
+}
+
+#generate-btn.ready {
+  cursor: pointer; /* Pointer cursor only when ready (showing "GO") */
+}
+
+/* Mute button styles */
+#mute-btn.muted #mute-icon {
+  opacity: 0.4; /* Light grey when muted */
+  filter: grayscale(100%);
+}
+
+/* Wiggle animation for when music is playing */
+@keyframes subtle-wiggle {
+  0%, 50% { transform: rotate(6deg); }
+  51%, 100% { transform: rotate(-6deg); }
+}
+
+#mute-btn.playing #mute-icon {
+  animation: subtle-wiggle .932s steps(2, end) infinite;
+}
+
+/* Copy button styles */
+#copy-btn:focus,
+#copy-btn:active {
+  background-color: transparent !important;
+  outline: none;
+}
+
+/* Dark mode styles */
+.dark {
+  background-color: #090e14 !important; /* gray-800 */
+  color: #f9fafb !important; /* gray-50 */
+}
+
+/* Disable transitions for instant dark mode switching, but allow progress bar animation */
+.dark .text-gray-900,
+.dark .text-black,
+.dark .text-gray-600,
+.dark .bg-gray-100,
+.dark .bg-gray-200,
+.dark .bg-gray-300,
+.dark .border-gray-300,
+.dark .text-gray-400,
+.dark .bg-blue-500,
+.dark .bg-blue-600,
+.dark #generate-btn,
+.dark #generate-btn::before,
+.dark #generate-btn.ready,
+.dark #generate-btn.ready::before {
+  transition: none !important;
+}
+
+/* Keep smooth transitions for progress bar and other animations */
+#generate-btn::before {
+  transition: width 0.2s ease-out !important; /* Smooth progress bar fill */
+}
+
+#generate-btn.filling::before {
+  transition: width 0.2s ease-out !important; /* Smooth progress bar fill */
+}
+
+/* Disable transitions during reset (when no classes are present) */
+#generate-btn:not(.filling):not(.ready)::before {
+  transition: none !important; /* No animation when resetting to empty */
+}
+
+.dark .text-gray-900,
+.dark .text-black {
+  color: #f9fafb !important; /* gray-50 */
+}
+
+.dark .text-gray-600 {
+  color: #d1d5db !important; /* gray-300 */
+}
+
+.dark .bg-gray-100 {
+  background-color: #1f2937 !important; /* gray-800 */
+}
+
+.dark .bg-gray-200 {
+  background-color: #374151 !important; /* gray-700 */
+}
+
+.dark .bg-gray-300 {
+  background-color: #4b5563 !important; /* gray-600 */
+}
+
+.dark .border-gray-300 {
+  border-color: #4b5563 !important; /* gray-600 */
+}
+
+.dark .text-gray-400 {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+.dark .bg-blue-500 {
+  background-color: #3b82f6 !important; /* Keep blue button in dark mode */
+}
+
+.dark .bg-blue-600 {
+  background-color: #2563eb !important; /* Keep darker blue for hover */
+}
+
+/* Dark mode progress bar - darker background, light grey fill */
+.dark #generate-btn {
+  background-color: #1f2937 !important; /* gray-800 - darker background */
+}
+
+.dark #generate-btn::before {
+  background-color: #d1d5db !important; /* gray-300 - light grey fill */
+}
+
+/* Keep GO button blue in dark mode when ready */
+.dark #generate-btn.ready {
+  background-color: #3b82f6 !important; /* blue-500 - keep blue when ready */
+}
+
+.dark #generate-btn.ready::before {
+  background-color: #3b82f6 !important; /* blue-500 - blue fill when ready */
+}

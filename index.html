@@ -4,64 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pure and Infinite Joy Machine</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Crimson Text', serif;
-    }
-    /* Styles for the button fill-up mechanic */
-    #generate-btn {
-      position: relative;
-      overflow: hidden;
-      /* Base background for the empty state */
-      background-color: #e5e7eb; /* gray-200 */
-      transition: background-color 0.3s ease;
-      cursor: default; /* Default cursor during loading */
-    }
-    #generate-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background-color: #cccccc; /* gray for filling state */
-      /* Use a CSS variable for the width, controlled by JS */
-      width: var(--fill-width, 0%);
-      transition: none; /* No transition by default */
-    }
-    #generate-btn.filling::before {
-      transition: width 0.2s ease-out; /* Only animate when filling */
-    }
-    #generate-btn .btn-text {
-        position: relative; /* Ensures text stays on top of the fill */
-        z-index: 1;
-    }
-    /* Button states */
-    #generate-btn.filling {
-      background-color: #e5e7eb; /* gray-200 */
-    }
-    #generate-btn.filling .btn-text {
-      color: #9ca3af; /* light grey while filling */
-    }
-    #generate-btn.ready::before {
-      background-color: #3b82f6; /* blue-500 - make the fill blue when ready */
-    }
-    #generate-btn.ready .btn-text {
-      color: white; /* white when ready */
-    }
-    #generate-btn.ready {
-      cursor: pointer; /* Pointer cursor only when ready (showing "GO") */
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-100 text-black min-h-screen p-4">
   <!-- Background Music -->
-  <audio id="background-music" loop preload="auto">
-    <source src="audio/Bossamania.mp3" type="audio/mpeg">
+  <audio id="background-music" preload="auto">
+    <!-- Sources will be dynamically added -->
     Your browser does not support the audio element.
   </audio>
   
@@ -75,9 +28,9 @@
     </button>
 
     <!-- Phrase Display Area -->
-    <div class="flex items-center justify-center w-full max-w-md gap-2">
+    <div class="flex flex-col sm:flex-row items-center justify-center w-full max-w-md gap-2">
       <p id="phrase-output" class="text-xl font-medium text-gray-900 text-center flex-1"></p>
-      <button id="copy-btn" class="opacity-0 transition-opacity duration-200 hover:bg-gray-200 p-2 rounded">
+      <button id="copy-btn" class="opacity-0 transition-opacity duration-200 hover:bg-gray-200 p-2 rounded sm:ml-2">
         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
         </svg>
@@ -85,12 +38,25 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="text-center text-gray-500 text-sm opacity-0 transition-opacity duration-100 pointer-events-none">
+    <div id="toast" class="text-center text-gray-500 text-lg opacity-0 transition-opacity duration-100 pointer-events-none">
       copied
     </div>
 
     <!-- Format Display -->
     <!-- <div id="format-display" class="text-center text-gray-400 text-xs mt-2"></div> -->
+  </div>
+
+  <!-- Control Buttons -->
+  <div class="fixed bottom-4 left-4 flex items-center space-x-2 z-10">
+    <!-- Mute Button -->
+    <button id="mute-btn" class="w-8 h-8 flex items-center justify-center">
+      <img id="mute-icon" src="images/volume.png" alt="Volume" class="w-6 h-6 transition-all duration-300">
+    </button>
+    
+    <!-- Dark Mode Button -->
+    <button id="dark-mode-btn" class="w-8 h-8 flex items-center justify-center">
+      <span id="dark-mode-icon" class="text-xl transition-all duration-300">🌙</span>
+    </button>
   </div>
 
   <!-- Safe Mode Toggle -->
@@ -111,30 +77,31 @@
     const CONFIG = {
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.05, // 2% of total steps when clicked
-      typoChance: 0.01, // 1% chance per letter
-      typoCorrectionChance: 0.95, // 95% chance to catch typo
+      advanceAmount: 0.05, // 5% of total steps when clicked
+      typoChance: 0.015, // 1.5% chance per letter
+      typoCorrectionChance: 0.99, // 99% chance to catch typo
       doubleBeastChance: 0.5, // 50% chance for two beasts
       tripleBeastChance: 0.3, // 30% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
       fuckingChance: 0.15, // 15% chance to add "fucking"
       thinkingPauseChance: 0.1, // 10% chance for thinking pause
       allCapsChance: 0.1, // 10% chance for all caps (except beast)
-      skipSpaceChance: 0.007, // .7% chance to skip spaces between words
-      skipLetterChance: 0.003, // .3% chance to skip letters in words
-      doubleLetterChance: 0.002, // .2% chance to double letters in words
-      swapLettersChance: 0.005, // .5% chance to swap two letters in phrase
+      skipSpaceChance: 0.003, // .3% chance to skip spaces between words
+      skipLetterChance: 0.001, // .1% chance to skip letters in words
+      doubleLetterChance: 0.001, // .1% chance to double letters in words
+      swapLettersChance: 0.01, // 1% chance to swap two letters in word
       testMode: false, // Test mode - instant progress bar fill
       safeMode: false, // Safe mode state
       backgroundMusic: true, // Enable background music
       musicVolume: 0.3, // Background music volume (0.0 to 1.0)
       tagChance: 0.1, // 10% chance for tag after finale/hard stop
+      darkMode: false, // Dark mode state
       typingSpeed: {
-        space: { min: 10, max: 26.67 },
-        vowel: { min: 13.33, max: 33.33 },
-        consonant: { min: 16.67, max: 40 },
-        number: { min: 20, max: 46.67 },
-        punctuation: { min: 23.33, max: 53.33 }
+        space: { min: 15, max: 35 },
+        vowel: { min: 20, max: 45 },
+        consonant: { min: 20, max: 48 },
+        number: { min: 40, max: 65 },
+        punctuation: { min: 32, max: 70 }
       }
     };
 
@@ -241,50 +208,65 @@
     };
 
     /**
-     * Applies letter swapping chaos to a phrase (respecting word boundaries)
+     * Applies letter swapping chaos to a phrase (per-word basis with length-based probability)
      */
     const applyLetterSwapping = (phrase) => {
-      if (Math.random() >= CONFIG.swapLettersChance) {
-        return phrase; // No swapping this time
-      }
-
-      // Convert phrase to array for easier manipulation
-      const chars = phrase.split('');
+      // Split phrase into words
+      const words = phrase.split(' ');
       
-      // Find all eligible positions (not first/last letters of words, not spaces)
-      const eligiblePositions = [];
-      
-      for (let i = 0; i < chars.length; i++) {
-        const char = chars[i];
-        if (char === ' ') continue; // Skip spaces
+      // Process each word individually
+      const processedWords = words.map(word => {
+        // Skip words that contain numbers (numbers are immune)
+        if (/\d/.test(word)) {
+          return word;
+        }
         
-        // Check if this is first or last letter of a word
-        const isFirstLetter = (i === 0 || chars[i - 1] === ' ');
-        const isLastLetter = (i === chars.length - 1 || chars[i + 1] === ' ');
+        // Need at least 3 characters to swap (first and last are immune)
+        if (word.length < 3) {
+          return word; // Not enough letters to swap
+        }
         
-        if (!isFirstLetter && !isLastLetter) {
+        // Calculate probability based on word length
+        // Base 1% for 2-4 letter words, +1% for each letter over 4
+        const baseChance = CONFIG.swapLettersChance; // 1%
+        const lengthBonus = Math.max(0, word.length - 4) * 0.01; // +1% per letter over 4
+        const finalChance = baseChance + lengthBonus;
+        
+        // Check if we should swap letters in this word
+        if (Math.random() >= finalChance) {
+          return word; // No swapping this word
+        }
+        
+        // Convert word to array for easier manipulation
+        const chars = word.split('');
+        
+        // Find all eligible positions (not first/last letters)
+        const eligiblePositions = [];
+        for (let i = 1; i < chars.length - 1; i++) {
           eligiblePositions.push(i);
         }
-      }
+        
+        // Need at least 2 eligible positions to swap
+        if (eligiblePositions.length < 2) {
+          return word; // Not enough letters to swap
+        }
+        
+        // Pick two random eligible positions within this word
+        const pos1 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
+        let pos2;
+        do {
+          pos2 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
+        } while (pos2 === pos1);
+        
+        // Swap the characters within this word
+        const temp = chars[pos1];
+        chars[pos1] = chars[pos2];
+        chars[pos2] = temp;
+        
+        return chars.join('');
+      });
       
-      // Need at least 2 eligible positions to swap
-      if (eligiblePositions.length < 2) {
-        return phrase; // Not enough letters to swap
-      }
-      
-      // Pick two random eligible positions
-      const pos1 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
-      let pos2;
-      do {
-        pos2 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
-      } while (pos2 === pos1);
-      
-      // Swap the characters
-      const temp = chars[pos1];
-      chars[pos1] = chars[pos2];
-      chars[pos2] = temp;
-      
-      return chars.join('');
+      return processedWords.join(' ');
     };
 
     /**
@@ -1486,6 +1468,72 @@
     // Safe mode toggle functionality
     safeModeToggle.addEventListener('click', toggleSafeMode);
     
+    // Mute button functionality
+    const muteBtn = document.getElementById('mute-btn');
+    const muteIcon = document.getElementById('mute-icon');
+    
+    muteBtn.addEventListener('click', () => {
+      if (backgroundMusic.muted) {
+        // Unmute
+        backgroundMusic.muted = false;
+        muteIcon.src = CONFIG.darkMode ? 'images/volume-dark.png' : 'images/volume.png';
+        muteIcon.alt = 'Volume';
+        muteBtn.classList.remove('muted');
+        updatePlayingState();
+      } else {
+        // Mute
+        backgroundMusic.muted = true;
+        muteIcon.src = CONFIG.darkMode ? 'images/mute-dark.png' : 'images/mute.png';
+        muteIcon.alt = 'Muted';
+        muteBtn.classList.add('muted');
+        muteBtn.classList.remove('playing');
+      }
+    });
+    
+    // Dark mode button functionality
+    const darkModeBtn = document.getElementById('dark-mode-btn');
+    const darkModeIcon = document.getElementById('dark-mode-icon');
+    const body = document.body;
+    
+    darkModeBtn.addEventListener('click', () => {
+      CONFIG.darkMode = !CONFIG.darkMode;
+      
+      if (CONFIG.darkMode) {
+        // Enable dark mode
+        body.classList.add('dark');
+        darkModeIcon.textContent = '☀️';
+        darkModeIcon.alt = 'Light Mode';
+        
+        // Switch to dark volume icons
+        if (backgroundMusic.muted) {
+          muteIcon.src = 'images/mute-dark.png';
+        } else {
+          muteIcon.src = 'images/volume-dark.png';
+        }
+      } else {
+        // Disable dark mode
+        body.classList.remove('dark');
+        darkModeIcon.textContent = '🌙';
+        darkModeIcon.alt = 'Dark Mode';
+        
+        // Switch to light volume icons
+        if (backgroundMusic.muted) {
+          muteIcon.src = 'images/mute.png';
+        } else {
+          muteIcon.src = 'images/volume.png';
+        }
+      }
+    });
+    
+    // Function to update playing state animation
+    function updatePlayingState() {
+      if (!backgroundMusic.paused && !backgroundMusic.muted) {
+        muteBtn.classList.add('playing');
+      } else {
+        muteBtn.classList.remove('playing');
+      }
+    }
+    
     // Function to advance progress bar
     const advanceProgress = () => {
       if (!isComplete) {
@@ -1515,12 +1563,18 @@
         generateNewPhrase();
         isComplete = false;
         
-        // Remove ready class first to disable transition
-        generateBtn.classList.remove('ready');
+        // Remove all classes and reset fill bar instantly (no transitions)
+        generateBtn.classList.remove('ready', 'filling');
+        
+        // Disable transitions temporarily for instant reset
+        generateBtn.style.transition = 'none';
         generateBtn.style.setProperty('--fill-width', '0%');
         
-        // Force a reflow
+        // Force a reflow to ensure immediate reset
         generateBtn.offsetHeight;
+        
+        // Re-enable transitions after reset
+        generateBtn.style.transition = '';
         
         startAutoFill();
       }
@@ -1538,19 +1592,67 @@
     // --- AUDIO FUNCTIONS ---
     const backgroundMusic = document.getElementById('background-music');
     
+    // Simple numbered playlist system
+    const totalSongs = 2; // Update this number when you add more songs
+    const playlist = [];
+    
+    // Generate playlist: 1.mp3, 2.mp3, 3.mp3, etc.
+    for (let i = 1; i <= totalSongs; i++) {
+      playlist.push(`audio/${i}.mp3`);
+    }
+    let currentSongIndex = 0;
+    
+    /**
+     * Loads and plays the current song
+     */
+    const loadAndPlayCurrentSong = () => {
+      const currentSong = playlist[currentSongIndex];
+      
+      // Clear existing sources
+      backgroundMusic.innerHTML = '';
+      
+      // Add new source
+      const source = document.createElement('source');
+      source.src = currentSong;
+      source.type = 'audio/mpeg';
+      backgroundMusic.appendChild(source);
+      
+      // Load and play
+      backgroundMusic.load();
+      return backgroundMusic.play().then(() => {
+        updatePlayingState();
+      }).catch(e => {
+        console.log('Failed to play song:', currentSong);
+        throw e; // Re-throw to allow caller to handle
+      });
+    };
+    
+    /**
+     * Plays the next song in the playlist
+     */
+    const playNextSong = () => {
+      currentSongIndex = (currentSongIndex + 1) % playlist.length;
+      loadAndPlayCurrentSong();
+    };
+    
+    // Listen for music play/pause events
+    backgroundMusic.addEventListener('play', updatePlayingState);
+    backgroundMusic.addEventListener('pause', updatePlayingState);
+    backgroundMusic.addEventListener('ended', playNextSong);
+    
     /**
      * Initializes background music
      */
     const initializeAudio = () => {
-      if (!CONFIG.backgroundMusic) return;
+      if (!CONFIG.backgroundMusic || playlist.length === 0) return;
       
       backgroundMusic.volume = CONFIG.musicVolume;
       
-      // Try to play music on first user interaction
+      // Start music on first user interaction
       const startMusic = () => {
         if (CONFIG.backgroundMusic) {
-          backgroundMusic.play().catch(e => {
-            console.log('Audio autoplay prevented by browser policy. Music will start on user interaction.');
+          loadAndPlayCurrentSong().catch(err => {
+            console.log('Audio failed to play after user interaction');
           });
         }
         // Remove the event listeners after first interaction
