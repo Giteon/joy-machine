@@ -59,6 +59,12 @@
   </style>
 </head>
 <body class="bg-gray-100 text-black min-h-screen p-4">
+  <!-- Background Music -->
+  <audio id="background-music" loop preload="auto">
+    <source src="audio/Bossamania.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
   <div class="flex flex-col items-center justify-start min-h-screen space-y-6 pt-16">
     <!-- Header -->
     <h1 class="text-2xl font-semibold text-gray-900">Pure and Infinite Joy Machine</h1>
@@ -114,14 +120,16 @@
       fuckingChance: 0.15, // 15% chance to add "fucking"
       thinkingPauseChance: 0.1, // 10% chance for thinking pause
       allCapsChance: 0.1, // 10% chance for all caps (except beast)
-      itemTimeoutDuration: 25, // Number of phrases before item can be used again
       skipSpaceChance: 0.007, // .7% chance to skip spaces between words
       skipLetterChance: 0.003, // .3% chance to skip letters in words
       doubleLetterChance: 0.002, // .2% chance to double letters in words
       swapLettersChance: 0.005, // .5% chance to swap two letters in phrase
-      emojiChance: 0.008, // 0.8% chance to add emoji after words
+      emojiChance: 0, // 0% chance to add emoji after words
       testMode: true, // Test mode - instant progress bar fill
       safeMode: false, // Safe mode state
+      backgroundMusic: true, // Enable background music
+      musicVolume: 0.3, // Background music volume (0.0 to 1.0)
+      tagChance: 0.1, // 10% chance for tag after finale/hard stop
       typingSpeed: {
         space: { min: 10, max: 26.67 },
         vowel: { min: 13.33, max: 33.33 },
@@ -131,13 +139,8 @@
       }
     };
 
-    // Emoji list for chaos mode
     const emojiList = [
-      // Original emojis from copypasta
-      '🚨', '🗞️', '⏰', '👏', '🇺🇸', '🤩', '🗣️', '‼️', '💥', '❗️', '🫡', '📆', '🏋️', '🆘', '😍', '👴🏻', '🔛', '🏳️‍🌈', '🍌', '💇‍♀️', '💆', '🍑', '🍒', '👨‍🎤', '🥩', '🥴', '🍆', '🫨', '👩‍❤️‍💋‍👩', '🦅', '💦', '🍩', '🌊', '🛌', '🧎', '😹', '☎️', '🍼', '🤤', '🩲', '😈', '📜', '🔥', '💪', '❕', '🎊', '🎉', '💩', '🫵🏻', '👠', '🗳️', '🚫', '🧮', '🙇', '🙇‍♀️', '♨️', '🙏', '🦏', '🤯', '🍾', '💀', '👺', '👻', '🦗', '😵‍💫', '😱', '💂', '💂‍♀️', '💅', '😮‍💨', '💨', '🛐', '👽', '🛸', '🐻', '😝', '🌽', '🔫', '🦨', '🕳️', '🥵', '💋', '❎', '👏🏽', '🏛️', '🙅‍♂️', '🛑', '😤', '🥜', '🫗', '🍯', '🍸', '🧠', '🌀', '🌭', '👎', '🥺', '👐🏽', '🚼', '❌', '🤐', '🔇', '🤫', '💪🏻', '🥇', '📢', '😩', '📐', '💌', '📫', '💢', '👀', '🪩', '🗽', '👯‍♀️', '🔙', '🈲', '🚩', '⛓️', '😜', '🥸', '😳', '🫦', '🪢', '👋', '➕', '🤠', '💍', '♋️', '⛓️‍💥', '⏳', '💯', '💣', '😏', '😫', '😘', '👁️', '🧖‍♂️', '👌', '😉', '🗓', '🤲', '🌳', '🙈', '🫶', '👉', '👈', '🛎', '❤️‍🔥', '⛽️', '🗿', '🪨', '🖊', '💄', '👅', '🤛🏻', '😰', '😨', '📸', '🎥', '🤳', '📤', '🍰', '🙀', '👊', '☑️', '✅', '💝', '👩‍🦽', '😎', '👬', '👨‍❤️‍💋‍👨', '👍', '💐', '💸', '🐸', '🌎', '🌈', '😛', '📟', '💁🏽', '🤧', '😂', '🎭', '🙊', '💧', '☺️', '🦣', '🎀', '👈', '🌹', '😭', '🐢', '📦', '👩', '😲', '🕶️', '😠', '🚥', '👯', '😴', '🎮', '🪡', '🏭', '😬', '🎁', '🎂', '🐝', '🧚🏽‍♀️', '🚀', '🥳', '🐨', '👫', '❓', '💃🏻', '🕗', '😃', '👧', '🎙️', '🖥️', '🥷🏿', '🧔🏽', '🏇', '🧞‍♂️', '🗡️', '🏐', '🥲', '🦵', '😯', '✨', '🙌', '🫲', '🖐️', '🖕', '💔', '🌪️', '🌬️', '🚵', '✌🏻', '✌🏽', '👾',
-      
-      // Additional chaos emojis
-      '🤡', '🥶', '🤮', '😵', '🤪', '🤬', '🤌', '🫰', '🤟', '🫵', '🤙', '⚡', '🔪', '⚰️', '🧨', '🪓', '🌮', '🍕', '🥓', '🧄', '🥒', '🍄', '🐍', '🦈', '🐙', '🦀', '🦇', '⭐', '💫', '🌟', '🔴', '⚫', '🟢'
+      '💩', '🤡', '🤪', '😵‍💫', '🥴', '🤤', '😈', '👺', '👻', '💀', '🤮', '🥶', '😱', '🤯', '😭', '😂', '😹', '🗿', '🤠', '🥸', '🤬', '🖕', '👽', '🛸', '🦨', '🧨', '💣', '⚡', '🔥', '💥', '🚨', '🤌', '👌', '🫵', '👀', '🧠', '💯', '😍', '🥵', '😏', '😘', '😉', '😳', '🫦', '👅', '💋', '💦', '🍆', '🍑', '🍒', '🌭', '🌮', '🍩', '🍯', '🍼', '💄', '👠', '⛓️', '🔗', '💍', '❤️‍🔥', '💌', '🫶', '👉', '👈', '🙈', '🤤', '😮‍💨', '🥺', '🫨', '💅'
     ];
 
     // QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
@@ -174,7 +177,8 @@
         noun: new Map(),
         candy: new Map(),
         adjective: new Map(),
-        finale: new Map()
+        finale: new Map(),
+        tag: new Map()
     };
 
     // --- FUNCTIONS ---
@@ -188,10 +192,20 @@
     };
 
     /**
-     * Adds an item to the timeout list
+     * Adds an item to the timeout list with dynamic cooldown based on list size
      */
     const addItemToTimeout = (listType, item) => {
-      itemTimeouts[listType].set(item, CONFIG.itemTimeoutDuration);
+      const listTypes = ['intro', 'beast', 'noun', 'candy', 'adjective', 'finale', 'tag'];
+      const listIndex = listTypes.indexOf(listType);
+      
+      if (listIndex !== -1 && window.wordLists && window.wordLists[listIndex]) {
+        // Cooldown = total items in list - 1 (so it cycles through all items before repeating)
+        const cooldownDuration = window.wordLists[listIndex].length - 1;
+        itemTimeouts[listType].set(item, cooldownDuration);
+      } else {
+        // Fallback to a default if something goes wrong
+        itemTimeouts[listType].set(item, 25);
+      }
     };
 
     /**
@@ -219,7 +233,7 @@
      * Gets available items from a list, excluding those on timeout
      */
     const getAvailableItems = (listIndex) => {
-      const listTypes = ['intro', 'beast', 'noun', 'candy', 'adjective', 'finale'];
+      const listTypes = ['intro', 'beast', 'noun', 'candy', 'adjective', 'finale', 'tag'];
       const listType = listTypes[listIndex];
       const allItems = window.wordLists[listIndex];
       const timeoutMap = itemTimeouts[listType];
@@ -598,6 +612,11 @@
         let processedAdjective = adjective ? processWordWithTracking(adjective, wordTracking.adjective) : '';
         let processedFinale = finale ? processWordWithTracking(finale, wordTracking.finale) : '';
         
+        // Initialize tag variables (will be set later if needed)
+        let tag = null;
+        let processedTag = '';
+        let tagTracking = null;
+        
         
         
         // Apply random duplications
@@ -779,6 +798,10 @@
             debugOutput.hardStops.finale = wordTracking.finale?.hardStop || false;
             debugOutput.words.finale = processedFinale;
         }
+        if (tag) {
+            debugOutput.hardStops.tag = tagTracking?.hardStop || false;
+            debugOutput.words.tag = processedTag;
+        }
         
         console.log('🎪 Joy Machine Debug:', debugOutput);
         
@@ -842,6 +865,43 @@
         // Apply emoji chaos (0.8% chance to add emoji after words)
         phrase = applyEmojiChaos(phrase);
         
+        // Check for tag addition (10% chance after finale or hard stop)
+        // Tags appear after finales (normal completion) or hard stops
+        const shouldAddTag = (needsFinale || hasHardStop) && Math.random() < CONFIG.tagChance;
+        
+        if (shouldAddTag) {
+            // Get a random tag from available tags
+            const availableTags = getAvailableItems(6); // Tags are at index 6
+            if (availableTags.length > 0) {
+                tag = availableTags[Math.floor(Math.random() * availableTags.length)];
+                tagTracking = createWordTracking(tag);
+                
+                // Process the tag word
+                const processWordWithTracking = (word, tracking) => {
+                    // Process alternates first
+                    const { result: afterAlternates, alternates } = processAlternates(word);
+                    
+                    // Process brackets
+                    const { result, addons, hasHardStop, hasBeastStop } = processBrackets(afterAlternates);
+                    
+                    // Update tracking
+                    tracking.final = result;
+                    tracking.addons = addons;
+                    tracking.alternates = alternates;
+                    tracking.hardStop = hasHardStop;
+                    tracking.beastStop = hasBeastStop;
+                    tracking.original = word;
+                    
+                    return result;
+                };
+                
+                processedTag = processWordWithTracking(tag, tagTracking);
+                
+                // Add the tag to the end of the phrase
+                phrase = `${phrase} ${processedTag}`;
+            }
+        }
+        
         // Add used items to timeout list to prevent repetition (only the ones that were actually used)
         if (needsIntro && intro) addItemToTimeout('intro', intro);
         if (needsBeast && beast) addItemToTimeout('beast', beast);
@@ -849,6 +909,7 @@
         if (needsCandy && candy) addItemToTimeout('candy', candy);
         if (needsAdjective && adjective) addItemToTimeout('adjective', adjective);
         if (needsFinale && finale) addItemToTimeout('finale', finale);
+        if (tag) addItemToTimeout('tag', tag);
         
         // Add additional beasts and candies that were used
         additionalItemsUsed.forEach(({type, item}) => {
@@ -1490,9 +1551,51 @@
       }
     });
 
+    // --- AUDIO FUNCTIONS ---
+    const backgroundMusic = document.getElementById('background-music');
+    
+    /**
+     * Initializes background music
+     */
+    const initializeAudio = () => {
+      if (!CONFIG.backgroundMusic) return;
+      
+      backgroundMusic.volume = CONFIG.musicVolume;
+      
+      // Try to play music on first user interaction
+      const startMusic = () => {
+        if (CONFIG.backgroundMusic) {
+          backgroundMusic.play().catch(e => {
+            console.log('Audio autoplay prevented by browser policy. Music will start on user interaction.');
+          });
+        }
+        // Remove the event listeners after first interaction
+        document.removeEventListener('click', startMusic);
+        document.removeEventListener('keydown', startMusic);
+      };
+      
+      // Add event listeners for first user interaction
+      document.addEventListener('click', startMusic);
+      document.addEventListener('keydown', startMusic);
+    };
+    
+    /**
+     * Toggles background music on/off
+     */
+    const toggleMusic = () => {
+      if (backgroundMusic.paused) {
+        backgroundMusic.play();
+      } else {
+        backgroundMusic.pause();
+      }
+    };
+
     // --- INITIALIZATION ---
     // Initialize safe mode toggle
     updateSafeModeToggle();
+    
+    // Initialize background music
+    initializeAudio();
     
     // Start the auto-fill animation when the page loads
     startAutoFill();

@@ -2,10 +2,12 @@
 const listsText = `INTRO (I)
 fucking
 fucking ultimate chicken
+fucking ultimate
 fucking chicken horse
-fucking horse chicken
+fucking horse chicken [noodle soup, .1, *B*]
 fucking horse ultimate chicken time
 fucking crazy chicken
+fucking chicken [run, .1]
 crazy
 crazy chicken
 crazy horse fucking chicken
@@ -13,9 +15,10 @@ crazy time horse
 crazy chicken ultimate
 ultimate
 ultimate fucking
+ultimate chicken [throop, .1]
 ultimate crazy chicken
 ultimate horse
-ultimate chicken
+ultimate chicken [boillion, .1]
 ultimate chicken time
 ultimate horse chicken
 ultimate fucking chicken horse
@@ -36,7 +39,7 @@ butterfly
 capybara
 cockroach
 [cocaine, *B*] dog
-crab
+crab [rangoon, *B*]
 crocodile [dundee, *B*]
 [jiminy, *B*] cricket
 [spotted australian, *B*] currasow
@@ -121,12 +124,13 @@ nutritional yeast [infection, .3]
 gents blend
 syndicated [television]
 shiva baby
-selena gomez [oreo mmmm tastes like fucking Mexico everything is in sepia now, *F*]
+selena gomez [oreo mmmm tastes like fucking mexico everything is in sepia now, *F*]
 dorito pilgrim [thanksgiving, .25]
 black mirror
 9/11 (simulator/livestream)
 sophie's choice
 spotify premium
+luigi mangione
 popcorn lung
 barmitzvah
 ted cruz [donde esta la biblioteca, *F*]
@@ -179,14 +183,17 @@ pink (ponk/pony club)
 perfect politics
 jamba juice [ecoli]
 buccal fat [tummy tuck]
+chunky monkey
 freaky friday
 tip-to-taint
 laffy taffy
 she-shed [wasp infestation]
+humpty dumpty
 chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
 [fucking] candy flip
 ding dong [ditch]
+sacagawea 
 54321 [54321]
 boing boing [yoga ball [blacked out no memories, *F*]]
 gamer gunk
@@ -237,6 +244,7 @@ authentic home-cooked
 animal style
 criterion collection
 type-3
+wagwan
 I-Spy
 180p
 clown
@@ -277,7 +285,6 @@ boy phone girl phone
 ahegao [mommy milker [sudoku eyes, 0.6, *F*]]
 
 FINALE (F)
-Capiesch?
 YOUNG [(Skylar Gisondo/Jenna Orteg/Coleman Domingo) YOUNG, .2]
 cat kitty cat cat kitty cat cat
 dot com [dot jizz [dot edu]]
@@ -286,9 +293,9 @@ total body enhancement [chamber [of commerce]]
 with the (fat naturals, .7/fatties, .3)
 3-trillion thread count
 shit cup runneth over [my balls, .3]
-SEND [UNSEND SEND [FUCK]]
 THAT COULD BE A SHOW
-NUKE IN DA CLUB [HA HA, .3]
+NUKE IN DA CLUB
+oura ring indicates no pulse[,noooooo owner of oura ring is dead. FREE OURA RING!]
 switch it up like nintendo [REMEMBER US? I MISS US]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
@@ -305,6 +312,7 @@ fucking turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [memories deleted from google drive [no storage remaining must delete all cherished memories]]]
 MAYO MOMENT
 hey google how many calories in 30 advil
+[stand in me] and you will be bathed in shekhaina glory
 LOL (LOTS OF LOVE)
 infertile if dog
 etc etc and so on in such a way
@@ -312,14 +320,11 @@ and subway take away everything you love [100% AGREE, .2]
 what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
-CANCELLED
 shot dead by alec baldwin [,alec baldwin pardoned [and given purple heart]]
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
 car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until become a husk
 and let the [fucking] bunny eat the carrot
-RICH MILLIONAIRE
-THE CITY IS MINE
 your skin [ohhhh yeah] oh yeah your skin and bones turn iiiiin to something beautiful
 in good christian fun
 emits poweful pheromone brain scrambled
@@ -327,7 +332,6 @@ within 1000 feet of a school
 take off glasses it is revealed she is actually beautiful[!]
 DANGER WILL ROBINSON [DANGER [DANGER]]
 100 concubines (NOT virgins, robust sexual references)
-🥺🥺🥺
 leave no trace search history wiped
 why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
@@ -339,44 +343,57 @@ oh nooo oh fuckkk sorry kareem i ate all the drywall I thought it was cottage ch
 we'll take the check
 translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/russian/spanish/swedish/turkish/vietnamese) 30 times
 for up to one year [in a shipping container, .8]
-weeeeeeeeeeeeee
 dave & busters [dave & busters dave & busters, .15]
 and SCENE
 walk the plank [bitch, .4]
 RELEASE THE SNAKES
-por favor
-no refunds
 Siri "when is July" [oops unsend [haha. siri hold my calls]]
-NIGHTMARE NIGHTMARE
+NIGHTMARE [NIGHTMARE [NIGHTMARE]]
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT
 im going to take this back to my home lab
-I guess
 anti-(hoes/happiness) technology
 girlfriend (who loves me [so much], .7/dating sim, .3)
 IN ENGLISH PLEASE
 ChatGPT 1 million almonds destroyed
-SCRONGIEEEEE
 plus tax and tip
 how can i be homophobic my bitch is gay
 round up to nearest billion yuan
 slumber party hang upsidedown and cut major arteries to drain blood as fast as possible
-xiaohongshu
+RETWEET 1000
+CANCELLED
 on my desk YESTERDAY
 green moose, guava juice large fries, chocolate shake
-type shit
 300hz binaural beats [mozart gray noise flow state] for study work migraine focus [cure vision]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏
-MAN I GOT IT MADE
+THE CITY IS MINE
 guantanamo bay forced to watch pole dancing video on work computer
-retweet 1000
 and buy yourself something nice kid
 10lbs soaking wet [no reciept]
 by way of demonstration to find most trusted advisor
 [and consider organizing a regular] ICE CHIPPING CHALLENGE
 put the fries in the bag bro
-SLIME MAN`;
+
+TAG (T)
+xiaohongshu
+Capiesch?
+...OR SHE!
+type shit
+YOUNG
+SCRONGIEEEEE
+boobieeeeee
+weeeeeeeeeeeeee
+mmmmmmmmmmm
+SLIME MAN
+RICH MILLIONAIRE
+por favor [mon cherie]
+🥺🥺🥺
+no refunds
+MAN I GOT IT MADE
+I guess
+SEND [UNSEND SEND [FUCK]]
+ha ha`;
 
 
 // Parse the text into arrays
@@ -427,11 +444,12 @@ const nsfwWords = [
   'cum', 'cum-colored', 'precum', 'dot jizz',
   'orgasm', 'orgasmatron',
   'sexual', 'gone sexual',
-  'sucked dry', 'suck the dust off the tip',
+  'sucked dry', 'and suck the dust off the tip',
   'nipple', 'nipple scene uncensored',
   'wet nurse', 'japanese sponge bath',
   'breastmilk',
   'penis', 'penis boy',
+  'dick', 'i put my dick in a bag of doritos',
   'balls', 'my balls',
   'ass', 'fuck-ass',
   'taint', 'tip-to-taint',
@@ -440,9 +458,12 @@ const nsfwWords = [
   'ahegao', 'mommy milker', 'sudoku eyes',
   'sabrina carpenter creaming jeans',
   'busts it down sexual style',
-  'touch-based non-sexual', 
+  'touch-based non-sexual',
+  'velma 4k stuck in washing machine 4k',
+  'pole dancing',
   'virgins',
-  '100 concubines (NOT virgins, robust sexual references)',
+  '100 concubines (NOT virgins, robust sexual references)', 
+  '10 lashings goddess',
   
   // Violence
   'blood', 'blood (drenched/soaked)',
@@ -450,10 +471,16 @@ const nsfwWords = [
   'kill', 'kill on site',
   'death', 'instant death', 'death by hypoxia', 'death immenent',
   'cut major arteries to drain blood as fast as possible',
-  'holocaust', 'imitation holocaust crab', 'schoolbus explosion', 'shot dead by alec baldwin', '9/11',
+  'holocaust', 'imitation holocaust crab', 
+  'schoolbus explosion', 
+  'shot dead by alec baldwin', 
+  '9/11',
   
   // Drugs
-  'cocaine', 'cocaine dog', 'nutritional yeast infection'
+  'cocaine', 'cocaine dog',
+
+  // Other
+  'wagwan',  'within 1000 feet of a school', 'nutritional yeast infection'
 ];
 
 // Create the word lists
