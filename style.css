@@ -72,6 +72,11 @@ body {
 }
 
 /* Copy button styles */
+#copy-btn {
+  background-color: transparent !important;
+}
+
+#copy-btn:hover,
 #copy-btn:focus,
 #copy-btn:active {
   background-color: transparent !important;

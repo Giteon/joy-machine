@@ -112,7 +112,8 @@ needle beach
 bound to wheelchair
 full-body (paralysis/orgasm)
 imitation holocaust crab
-sydney sweeney [bone orchid [immune from all disease, *F*]]
+sydney sweeney [jeans optimal DNA, .2, *F*]
+bone orchid [immune from all disease, .25, *F*]
 mozzarella stick
 hinge premium [diahhrea from tube]
 [45°, .2] cock shame
@@ -151,7 +152,7 @@ goblin mode
 breastmilk [on the cheap, .25]
 hungry tax [press button to feed nutrition cube, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
-QS watermelon
+QS (watermelon/wamertelon/watermolen)
 wet leg
 thumbalina
 wartime economy
