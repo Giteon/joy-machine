@@ -88,7 +88,8 @@ python
 pig
 rabbit
 raccoon
-rat [bones, *B*]
+RAT [bones, *B*]
+rat [who walked up to a castle, .1, *F*]
 rooster [head in dirt, *B*]
 sasquatch
 scorpion
@@ -103,12 +104,13 @@ turtle
 turkey
 walrus
 whale
-wolf
+[alpha , .2, *B*]wolf
+[ring, .2]worm
 zebra
 
 
 NOUN (N)
-needle beach
+[oh no babe pleaaase dont be mad i accidentally booked a vacation to, .2, *F*] needle beach
 bound to wheelchair
 full-body (paralysis/orgasm)
 imitation holocaust crab
@@ -120,14 +122,16 @@ hinge premium [diahhrea from tube]
 GROK
 propranolol [8000mg]
 coke zero [friends or family, *F*]
-pokemon go [fuck yourself, *F*]
+face-up tacks collection [get out of my house immediately, .2, *F*]
 nutritional yeast [infection, .3]
 gents blend
+[AYY] GARY ROYCE[ OHO! A-BING-A-BAM-A-BOOM, .1, *F*]
 syndicated [television]
 shiva baby
 selena gomez [oreo mmmm tastes like fucking mexico everything is in sepia now, *F*]
 dorito pilgrim [thanksgiving, .25]
 black mirror
+twin flame
 9/11 (simulator/livestream)
 sophie's choice
 spotify premium
@@ -135,6 +139,7 @@ luigi mangione
 popcorn lung
 barmitzvah
 ted cruz [donde esta la biblioteca, *F*]
+powerball
 lobotomy
 slutty vegan
 above-ground (burial/grave)
@@ -150,7 +155,7 @@ kim petras [coconut [perfect pitch, .2]]
 kurt vonnegut [um ok so this is officially my life!, .2, *F*]
 goblin mode
 breastmilk [on the cheap, .25]
-hungry tax [press button to feed nutrition cube, *F*]
+hungry tax [click to feed your advisor a motivational nutrition cube, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
 wet leg
@@ -158,7 +163,7 @@ thumbalina
 wartime economy
 head exploded [no pulse]
 with 9 billion child IQ
-intuit turbotax [hungry tax]
+water stain
 monster porn
 french red [frozen solid, .25]
 precum [premarket [postmarket]]
@@ -188,6 +193,7 @@ chunky monkey
 freaky friday
 tip-to-taint
 laffy taffy
+zendaya
 she-shed [wasp infestation]
 humpty dumpty
 chugga chugga [chopped cheese, .2]
@@ -198,6 +204,7 @@ ding dong [ditch]
 boing boing [yoga ball [blacked out no memories, *F*]]
 gamer gunk
 gutterball
+pinapple jiblet
 wet nurse [japanese sponge bath, *F*]
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
@@ -218,7 +225,7 @@ bing bong
 ZING
 ding [ding ding, *F*]
 pussy slay mama
-daily dingle
+daily dingle [dongle, .15]
 party popper
 willy wonka
 squink squonk
@@ -238,11 +245,15 @@ full-pen [summer[time sadness, *F*]]
 gone sexual [gone missing, .2]
 boston dynamics
 low libido (magic the gathering/penis boy)
-[sort of an, .2, *F*] ethnic twist
+[sort of an , .2, *F*]ethnic twist
 chained to radiator
+bricked up [fridge magnet, .1, *F*]
+ferragamo [signature scent]
+one two skip a few ninety nine a hundred
 authentic home-cooked
 animal style
 criterion collection
+kellogs [instant horny recipie, .2, *F*]
 type-3
 wagwan
 I-Spy
@@ -300,24 +311,31 @@ oura ring indicates no pulse[,noooooo owner of oura ring is dead. FREE OURA RING
 switch it up like nintendo [REMEMBER US? I MISS US]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
-so no cube? [ok so no cube?]
+DO A TRICK
+so no cube? [okayyy so no cube?]
 i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
 accidentally enlisted in army, sent to the front-lines to sniff for mines [like a rat].
 [unnggghhh] fuckkkk id do anything for it
-consciousness uploaded to rat, rat dies, consciousness uploaded to new rat [etc until heat death of universe].
+that one (egg is 40 eggs?/snake is 40 snakes?/dog is 40 dogs?/beer is 40 beers?/phone is 40 phones?/shirt is 40 shirts?/guy is 40 guys?/gun is 40 guns?)
+consciousness uploaded to rat, rat dies, consciousness uploaded to new rat[, new rat dies, consciousness uploaded to second new rat[, second new rat dies, consciousness uploaded to third new rat[, third new rat dies, consciousness uploaded to FINAL new rat[, FINAL new rat dies, consciousness uploaded to new FINAL new rat]]]]
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at?
+HEAT DEATH OF UNIVERSE
 fucking turn around bend over [lemme see the nutrition facts]
-trail gone cold [dog dead [memories deleted from google drive [no storage remaining must delete all cherished memories]]]
+trail gone cold [dog dead [no bone orchid no GF, .2]]
+memories deleted from google drive [no storage remaining must delete all cherished memories]]
 MAYO MOMENT
-hey google how many calories in 30 advil
+hey google how many calories in 60 advil?
 [stand in me] and you will be bathed in shekhaina glory
 LOL (LOTS OF LOVE)
+pokemon go (to the polls/fuck yourself)
 infertile if dog
-etc etc and so on in such a way
-and subway take away everything you love [100% AGREE, .2]
+etc [etc and so on [and so forth [in such a way [proceeding as thus as such]]]]
+and subway take away everything you love
+100% AGREE
+spin spin spin around in a circle [now place your hand on the hot stove [it cannot hurt you as it’s only part of the simulation.]]
 what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
@@ -353,11 +371,12 @@ fuck my fucking ass
 shirley temple microwave 45 minutes HOT
 [excuse me, .2] im going to take this back to my home lab
 anti-(hoes/happiness) technology
-girlfriend (who loves me [so much], .7/dating sim, .3)
+girlfriend (who loves me so much/with a printer dating sim)
 IN ENGLISH PLEASE
 ChatGPT 1 million almonds destroyed
 plus tax and tip
 how can i be homophobic my bitch is gay
+f those t's (baby/mama/big boy)
 round up to nearest billion yuan
 slumber party hang upsidedown and cut major arteries to drain blood as fast as possible
 RETWEET 1000
@@ -384,6 +403,7 @@ YOUNG
 SCRONGIEEEEE
 DING!
 unless??
+for the lady
 boobieeeeee
 weeeeeeeeeeeeee
 dave & busters [dave & busters dave & busters, .15]
@@ -447,6 +467,7 @@ const nsfwWords = [
   'cum', 'cum-colored', 'precum', 'dot jizz',
   'orgasm', 'orgasmatron',
   'sexual', 'gone sexual',
+  'bricked up',
   'sucked dry', 'and suck the dust off the tip',
   'nipple', 'nipple scene uncensored',
   'wet nurse', 'japanese sponge bath',
@@ -456,6 +477,7 @@ const nsfwWords = [
   'balls', 'my balls',
   'ass', 'fuck-ass',
   'taint', 'tip-to-taint',
+  'horny','instant horny recipie',
   'porn', 'monster porn', 'jerking',
   'breedable', 'submissive breedable',
   'ahegao', 'mommy milker', 'sudoku eyes',

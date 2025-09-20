@@ -96,6 +96,7 @@
       musicVolume: 0.3, // Background music volume (0.0 to 1.0)
       tagChance: 0.1, // 10% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
+      noConsole: false, // Disable all console logs when true
       typingSpeed: {
         space: { min: 15, max: 35 },
         vowel: { min: 20, max: 45 },
@@ -866,7 +867,9 @@
         }
         
         // Log debug output after all processing is complete
-        console.log('🎪 Joy Machine Debug:', debugOutput);
+        if (!CONFIG.noConsole) {
+          console.log('🎪 Joy Machine Debug:', debugOutput);
+        }
         
         // Add used items to timeout list to prevent repetition (only the ones that were actually used)
         if (needsIntro && intro) addItemToTimeout('intro', intro);
@@ -1278,12 +1281,14 @@
             }
             
             // Debug logging
-            console.log('Typo correction:', {
+            if (!CONFIG.noConsole) {
+              console.log('Typo correction:', {
                 displayedWord,
                 correctWord,
                 typoPosition,
                 wordStartIndex
             });
+            }
             
             // Calculate how many characters to backspace (from end of word to typo position, including the typo)
             const charsToBackspace = displayedWord.length - typoPosition + 1;
@@ -1593,7 +1598,7 @@
     const backgroundMusic = document.getElementById('background-music');
     
     // Simple numbered playlist system
-    const totalSongs = 2; // Update this number when you add more songs
+    const totalSongs = 5; // Update this number when you add more songs
     const playlist = [];
     
     // Generate playlist: 1.mp3, 2.mp3, 3.mp3, etc.
@@ -1620,9 +1625,14 @@
       // Load and play
       backgroundMusic.load();
       return backgroundMusic.play().then(() => {
+        if (!CONFIG.noConsole) {
+          console.log(`🎵 Now playing song ${currentSongIndex + 1}/${playlist.length}: ${currentSong}`);
+        }
         updatePlayingState();
       }).catch(e => {
-        console.log('Failed to play song:', currentSong);
+        if (!CONFIG.noConsole) {
+          console.log('Failed to play song:', currentSong);
+        }
         throw e; // Re-throw to allow caller to handle
       });
     };
@@ -1652,7 +1662,9 @@
       const startMusic = () => {
         if (CONFIG.backgroundMusic) {
           loadAndPlayCurrentSong().catch(err => {
-            console.log('Audio failed to play after user interaction');
+            if (!CONFIG.noConsole) {
+              console.log('Audio failed to play after user interaction');
+            }
           });
         }
         // Remove the event listeners after first interaction

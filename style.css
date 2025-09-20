@@ -83,9 +83,15 @@ body {
   outline: none;
 }
 
+@media (max-width: 639px) {
+  #toast {
+    margin-top: -.2rem; /* Move toast even higher on mobile */
+  }
+}
+
 /* Dark mode styles */
 .dark {
-  background-color: #090e14 !important; /* gray-800 */
+  background-color: #060b11 !important; /* gray-800 */
   color: #f9fafb !important; /* gray-50 */
 }
 
