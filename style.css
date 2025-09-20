@@ -55,6 +55,11 @@ body {
   cursor: pointer; /* Pointer cursor only when ready (showing "GO") */
 }
 
+/* Child's mode styling - pink when enabled */
+.childs-mode #generate-btn.ready::before {
+  background-color: #ec4899; /* pink-500 - make the fill pink when child's mode is on */
+}
+
 /* Mute button styles */
 #mute-btn.muted #mute-icon {
   opacity: 0.4; /* Light grey when muted */
@@ -180,4 +185,9 @@ body {
 
 .dark #generate-btn.ready::before {
   background-color: #3b82f6 !important; /* blue-500 - blue fill when ready */
+}
+
+/* Child's mode styling in dark mode - pink when enabled */
+.dark.childs-mode #generate-btn.ready::before {
+  background-color: #ec4899 !important; /* pink-500 - pink fill when child's mode is on */
 }

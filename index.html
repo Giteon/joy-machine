@@ -59,13 +59,13 @@
     </button>
   </div>
 
-  <!-- Safe Mode Toggle -->
+  <!-- child's mode Toggle -->
   <div class="fixed bottom-4 right-4 sm:bottom-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:right-auto flex items-center space-x-3 z-10">
-    <label for="safe-mode-toggle" class="text-sm text-gray-600 cursor-pointer">
-      Safe Mode
+    <label for="childs-mode-toggle" class="text-sm text-gray-600 cursor-pointer">
+      Child's Mode
     </label>
-    <button id="safe-mode-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 p-1">
-      <span id="safe-mode-slider" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+    <button id="childs-mode-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 p-1">
+      <span id="childs-mode-slider" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
     </button>
   </div>
 
@@ -78,31 +78,30 @@
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
       advanceAmount: 0.02, // 2% of total steps when clicked
-      typoChance: 0.015, // 1.5% chance per letter
-      typoCorrectionChance: 0.99, // 99% chance to catch typo
+      typoChance: 0.02, // 2% chance per letter
+      typoCorrectionChance: .8, // 80% chance to catch typo
       doubleBeastChance: 0.5, // 50% chance for two beasts
-      tripleBeastChance: 0.3, // 30% chance for three beasts (if already two)
+      tripleBeastChance: 0.35, // 35% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
       fuckingChance: 0.15, // 15% chance to add "fucking"
-      thinkingPauseChance: 0.1, // 10% chance for thinking pause
+      thinkingPauseChance: 0.15, // 15% chance for thinking pause
       allCapsChance: 0.1, // 10% chance for all caps (except beast)
-      skipSpaceChance: 0.003, // .3% chance to skip spaces between words
-      skipLetterChance: 0.001, // .1% chance to skip letters in words
-      doubleLetterChance: 0.001, // .1% chance to double letters in words
-      swapLettersChance: 0.005, // .5% chance to swap two letters in word
+      skipSpaceChance: 0.00, // 0% chance to skip spaces between words
+      swapLettersChance: 0.005, // .5% chance to swap two adjacent letters in word
       testMode: false, // Test mode - instant progress bar fill
-      safeMode: false, // Safe mode state
+      childsMode: false, // child's mode state
       backgroundMusic: true, // Enable background music
       musicVolume: 0.3, // Background music volume (0.0 to 1.0)
       tagChance: 0.1, // 10% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
-      noConsole: true, // Disable all console logs when true
-      typingSpeed: {
-        space: { min: 15, max: 35 },
-        vowel: { min: 20, max: 45 },
-        consonant: { min: 20, max: 48 },
-        number: { min: 40, max: 65 },
-        punctuation: { min: 32, max: 70 }
+      noConsole: false, // Disable all console logs when true
+      typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
+      typingSpeed: { //higher numbers = slower typing
+        space: { min: 25, max: 40 },
+        vowel: { min: 15, max: 35 },
+        consonant: { min: 16, max: 42 },
+        number: { min: 35, max: 55 },
+        punctuation: { min: 32, max: 60 }
       }
     };
 
@@ -124,8 +123,8 @@
     const phraseOutput = document.getElementById('phrase-output');
     const copyBtn = document.getElementById('copy-btn');
     const toast = document.getElementById('toast');
-    const safeModeToggle = document.getElementById('safe-mode-toggle');
-    const safeModeSlider = document.getElementById('safe-mode-slider');
+    const childsModeToggle = document.getElementById('childs-mode-toggle');
+    const childsModeSlider = document.getElementById('childs-mode-slider');
     let fillInterval;
     let currentFill = 0;
     const totalSteps = CONFIG.fillDuration / CONFIG.updateInterval; // Total number of steps
@@ -204,16 +203,18 @@
       // Filter out items that are on timeout
       const availableItems = allItems.filter(item => !timeoutMap.has(item));
       
-      // If all items are on timeout (shouldn't happen with 10 timeout and variety, but safety check)
+      // If all items are on timeout (shouldn't happen with 10 timeout and variety)
       return availableItems.length > 0 ? availableItems : allItems;
     };
 
     /**
      * Applies letter swapping chaos to a phrase (per-word basis with length-based probability)
+     * Returns both the processed phrase and a set of words that were letter-swapped
      */
     const applyLetterSwapping = (phrase) => {
       // Split phrase into words
       const words = phrase.split(' ');
+      const swappedWords = new Set(); // Track which words were letter-swapped
       
       // Process each word individually
       const processedWords = words.map(word => {
@@ -241,33 +242,37 @@
         // Convert word to array for easier manipulation
         const chars = word.split('');
         
-        // Find all eligible positions (not first/last letters)
-        const eligiblePositions = [];
-        for (let i = 1; i < chars.length - 1; i++) {
-          eligiblePositions.push(i);
+        // Find all eligible adjacent pairs (not involving first/last letters)
+        const eligiblePairs = [];
+        for (let i = 1; i < chars.length - 2; i++) {
+          eligiblePairs.push(i); // i and i+1 will be swapped
         }
         
-        // Need at least 2 eligible positions to swap
-        if (eligiblePositions.length < 2) {
+        // Need at least one eligible adjacent pair to swap
+        if (eligiblePairs.length === 0) {
           return word; // Not enough letters to swap
         }
         
-        // Pick two random eligible positions within this word
-        const pos1 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
-        let pos2;
-        do {
-          pos2 = eligiblePositions[Math.floor(Math.random() * eligiblePositions.length)];
-        } while (pos2 === pos1);
+        // Pick a random adjacent pair to swap
+        const pairIndex = eligiblePairs[Math.floor(Math.random() * eligiblePairs.length)];
+        const pos1 = pairIndex;
+        const pos2 = pairIndex + 1;
         
-        // Swap the characters within this word
+        // Swap the adjacent characters
         const temp = chars[pos1];
         chars[pos1] = chars[pos2];
         chars[pos2] = temp;
         
-        return chars.join('');
+        const swappedWord = chars.join('');
+        swappedWords.add(swappedWord); // Track this word as letter-swapped
+        
+        return swappedWord;
       });
       
-      return processedWords.join(' ');
+      return {
+        phrase: processedWords.join(' '),
+        swappedWords: swappedWords
+      };
     };
 
     /**
@@ -280,22 +285,31 @@
     };
 
     /**
-     * Replaces NSFW words with appropriate alternatives if safe mode is enabled
+     * Replaces NSFW words with appropriate alternatives if child's mode is enabled
      * @param {string} text The text to filter
      * @returns {string} The filtered text
      */
     const filterNSFW = (text) => {
-      if (!CONFIG.safeMode) return text;
+      if (!CONFIG.childsMode) return text;
       
       let filteredText = text;
       
-      // Replace 'fucking' specifically with 'freaking'
-      filteredText = filteredText.replace(/\bfucking\b/gi, 'freaking');
+      // First pass: Apply custom replacements to specific words
+      // Sort by length (longest first) to ensure compound words are processed before their components
+      const replacementWords = Object.keys(window.childsModeReplacements)
+        .sort((a, b) => b.length - a.length);
       
-      // Check other NSFW words and replace with weeeeee
+      replacementWords.forEach(originalWord => {
+        const replacement = window.childsModeReplacements[originalWord];
+        // Replace the original word with custom replacement
+        const regex = new RegExp(`\\b${originalWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+        filteredText = filteredText.replace(regex, replacement);
+      });
+      
+      // Second pass: Replace remaining NSFW words with weeeeee
       // Sort by length (longest first) to ensure compound words are processed before their components
       const sortedNsfwWords = window.nsfwWords
-        .filter(word => word.toLowerCase() !== 'fucking') // Skip 'fucking' since we handled it above
+        .filter(word => !window.childsModeReplacements.hasOwnProperty(word.toLowerCase())) // Skip words that have custom replacements
         .sort((a, b) => b.length - a.length);
       
       sortedNsfwWords.forEach(nsfwWord => {
@@ -486,11 +500,10 @@
         const formats = [
             (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
             (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${a}${c} ${f}`,
             (i, b, n, c, a, f) => `${i} ${a} ${b} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${a} ${f}`,
+            (i, b, n, c, a, f) => `${i} ${b} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${c} ${f}`,
             (i, b, n, c, a, f) => `${i} ${b} ${a} ${n} ${f}`,
@@ -817,11 +830,13 @@
         phrase = phrase.replace(/\*F\*/g, '');
         phrase = phrase.replace(/\*B\*/g, '');
         
-        // Apply safe mode filtering if enabled
+        // Apply child's mode filtering if enabled
         phrase = filterNSFW(phrase);
         
         // Apply letter swapping chaos (0.5% chance)
-        phrase = applyLetterSwapping(phrase);
+        const letterSwapResult = applyLetterSwapping(phrase);
+        phrase = letterSwapResult.phrase;
+        const swappedWords = letterSwapResult.swappedWords;
         
         // Check for tag addition (10% chance after finale or hard stop)
         // Tags appear after finales (normal completion) or hard stops
@@ -889,7 +904,7 @@
         decrementTimeouts();
         
         // Animate typing the phrase
-        typeOutPhrase(phrase);
+        typeOutPhrase(phrase, swappedWords);
         
         // Generate detailed format display
         // const formatDisplay = document.getElementById('format-display');
@@ -1018,35 +1033,102 @@
       if (state === 'filling') {
         btnText.textContent = '';
       } else if (state === 'ready') {
-        btnText.textContent = 'GO';
+          btnText.textContent = 'GO';
       }
     };
 
-    /**
-     * Updates safe mode toggle appearance
-     */
-    const updateSafeModeToggle = () => {
-      if (CONFIG.safeMode) {
-        safeModeToggle.classList.add('bg-blue-500');
-        safeModeToggle.classList.remove('bg-gray-200');
-        safeModeSlider.classList.add('translate-x-5');
-        safeModeSlider.classList.remove('translate-x-0');
-      } else {
-        safeModeToggle.classList.remove('bg-blue-500');
-        safeModeToggle.classList.add('bg-gray-200');
-        safeModeSlider.classList.remove('translate-x-5');
-        safeModeSlider.classList.add('translate-x-0');
-      }
-    };
+     /**
+      * Updates child's mode toggle appearance
+      */
+     const updatechildsModeToggle = () => {
+       if (CONFIG.childsMode) {
+         childsModeToggle.classList.add('bg-pink-500');
+         childsModeToggle.classList.remove('bg-gray-200');
+         childsModeSlider.classList.add('translate-x-5');
+         childsModeSlider.classList.remove('translate-x-0');
+       } else {
+         childsModeToggle.classList.remove('bg-pink-500');
+         childsModeToggle.classList.add('bg-gray-200');
+         childsModeSlider.classList.remove('translate-x-5');
+         childsModeSlider.classList.add('translate-x-0');
+       }
+     };
 
 
-    /**
-     * Toggles safe mode on/off
-     */
-    const toggleSafeMode = () => {
-      CONFIG.safeMode = !CONFIG.safeMode;
-      updateSafeModeToggle();
-    };
+     /**
+      * Toggles child's mode on/off
+      */
+     const togglechildsMode = () => {
+       CONFIG.childsMode = !CONFIG.childsMode;
+       updatechildsModeToggle();
+       
+       // Add/remove childs-mode class to body for CSS styling
+       if (CONFIG.childsMode) {
+         document.body.classList.add('childs-mode');
+       } else {
+         document.body.classList.remove('childs-mode');
+       }
+       
+       // Update GO button text if it's currently ready
+       if (generateBtn.classList.contains('ready')) {
+         const btnText = generateBtn.querySelector('.btn-text');
+           btnText.textContent = 'GO';
+       }
+     };
+
+     /**
+      * Toggles dark mode on/off
+      */
+     const toggleDarkMode = () => {
+       CONFIG.darkMode = !CONFIG.darkMode;
+       
+       if (CONFIG.darkMode) {
+         // Enable dark mode
+         document.body.classList.add('dark');
+         darkModeIcon.textContent = '☀️';
+         darkModeIcon.alt = 'Light Mode';
+         
+         // Switch to dark volume icons
+         if (backgroundMusic.muted) {
+           muteIcon.src = 'images/mute-dark.png';
+         } else {
+           muteIcon.src = 'images/volume-dark.png';
+         }
+       } else {
+         // Disable dark mode
+         document.body.classList.remove('dark');
+         darkModeIcon.textContent = '🌙';
+         darkModeIcon.alt = 'Dark Mode';
+         
+         // Switch to light volume icons
+         if (backgroundMusic.muted) {
+           muteIcon.src = 'images/mute.png';
+         } else {
+           muteIcon.src = 'images/volume.png';
+         }
+       }
+     };
+
+     /**
+      * Toggles background music on/off
+      */
+     const toggleMusic = () => {
+       if (backgroundMusic.muted) {
+         // Unmute
+         backgroundMusic.muted = false;
+         muteIcon.src = CONFIG.darkMode ? 'images/volume-dark.png' : 'images/volume.png';
+         muteIcon.alt = 'Volume';
+         muteBtn.classList.remove('muted');
+         updatePlayingState();
+       } else {
+         // Mute
+         backgroundMusic.muted = true;
+         muteIcon.src = CONFIG.darkMode ? 'images/mute-dark.png' : 'images/mute.png';
+         muteIcon.alt = 'Muted';
+         muteBtn.classList.add('muted');
+         muteBtn.classList.remove('playing');
+       }
+     };
     
     /**
      * Shows toast notification
@@ -1061,8 +1143,8 @@
     /**
      * Animate typing out a phrase with realistic human-like patterns including typo correction
      */
-    const typeOutPhrase = (phrase) => {
-        // Safety check - ensure phrase is defined
+    const typeOutPhrase = (phrase, swappedWords = new Set()) => {
+        // check to ensure phrase is defined
         if (!phrase || typeof phrase !== 'string') {
             console.error('typeOutPhrase called with invalid phrase:', phrase);
             return;
@@ -1091,12 +1173,14 @@
                 
                 // Check for various random effects
                 let actualChar = char;
-                let shouldSkip = false;
-                let shouldDouble = false;
                 
                 // 1% chance to skip spaces between words
                 if (char === ' ' && Math.random() < CONFIG.skipSpaceChance) {
-                    shouldSkip = true;
+                    // Skip this space - don't add to displayedText
+                    currentIndex++;
+                    const timeoutId = setTimeout(typeNextChar, Math.round(getBaseDelay(char, prevChar)));
+                    typingTimeouts.push(timeoutId);
+                    return;
                 }
                 
                 // Check if this is the first or last letter of a word (immune to skipping/doubling)
@@ -1111,18 +1195,27 @@
                     isLastLetterOfWord = (currentIndex === phrase.length - 1 || phrase[currentIndex + 1] === ' ');
                 }
                 
-                // .5% chance to skip letters in words (not spaces, not first/last letters)
-                if (char !== ' ' && !isFirstLetterOfWord && !isLastLetterOfWord && Math.random() < CONFIG.skipLetterChance) {
-                    shouldSkip = true;
+                
+                // Check if we should introduce a typo (1% chance per letter, but only if no active typo)
+                // Also check if current word was letter-swapped (immune to typos)
+                let currentWord = '';
+                if (char !== ' ') {
+                    // Find the current word being typed
+                    let wordStart = currentIndex;
+                    while (wordStart > 0 && phrase[wordStart - 1] !== ' ') {
+                        wordStart--;
+                    }
+                    let wordEnd = currentIndex;
+                    while (wordEnd < phrase.length && phrase[wordEnd] !== ' ') {
+                        wordEnd++;
+                    }
+                    currentWord = phrase.substring(wordStart, wordEnd);
                 }
                 
-                // .2% chance to double letters in words (not spaces, not first/last letters)
-                if (char !== ' ' && !isFirstLetterOfWord && !isLastLetterOfWord && Math.random() < CONFIG.doubleLetterChance) {
-                    shouldDouble = true;
-                }
-                
-                // Check if we should introduce a typo (1% chance per letter, but only if no active typo and not skipping)
-                let shouldMakeTypo = !shouldSkip && !hasActiveTypo && Math.random() < CONFIG.typoChance && char.match(/[a-zA-Z]/);
+                let shouldMakeTypo = !hasActiveTypo && 
+                                   Math.random() < CONFIG.typoChance && 
+                                   char.match(/[a-zA-Z]/) && 
+                                   !swappedWords.has(currentWord);
                 
                 if (shouldMakeTypo) {
                     // Make a typo based on QWERTY keyboard layout
@@ -1130,16 +1223,8 @@
                     hasActiveTypo = true; // Prevent more typos
                 }
                 
-                // Apply the effects
-                if (shouldSkip) {
-                    // Skip this character entirely - don't add to displayedText
-                } else if (shouldDouble) {
-                    // Add the character twice
-                    displayedText += actualChar + actualChar;
-                } else {
-                    // Add the character normally (could be original or typo)
-                    displayedText += actualChar;
-                }
+                // Add the character (could be original or typo)
+                displayedText += actualChar;
                 
                 phraseOutput.textContent = displayedText;
                 currentIndex++;
@@ -1152,23 +1237,29 @@
                     // Calculate correction chance based on typo position
                     let correctionChance = CONFIG.typoCorrectionChance; // Default 80%
                     
-                    // Find the start of the current word in the phrase
-                    let wordStartIndex = currentIndex - 1;
+                    // Find word boundaries more carefully
+                    // For the original phrase: find the word that just ended
+                    let wordEndIndex = char === ' ' ? currentIndex - 1 : currentIndex;
+                    let wordStartIndex = wordEndIndex - 1;
                     while (wordStartIndex > 0 && phrase[wordStartIndex - 1] !== ' ') {
                         wordStartIndex--;
                     }
                     
-                    // Find the start of the current word in displayed text
-                    let displayedWordStartIndex = displayedText.length - 1;
+                    // For displayed text: find the last complete word
+                    let displayedWordEnd = displayedText.length;
+                    if (displayedText[displayedText.length - 1] === ' ') {
+                        displayedWordEnd = displayedText.length - 1;
+                    }
+                    let displayedWordStartIndex = displayedWordEnd - 1;
                     while (displayedWordStartIndex > 0 && displayedText[displayedWordStartIndex - 1] !== ' ') {
                         displayedWordStartIndex--;
                     }
                     
                     // Get the displayed word (what we actually typed)
-                    const displayedWord = displayedText.substring(displayedWordStartIndex).trim();
+                    const displayedWord = displayedText.substring(displayedWordStartIndex, displayedWordEnd);
                     
                     // Get the correct word from the original phrase
-                    const correctWord = phrase.substring(wordStartIndex, currentIndex).trim();
+                    const correctWord = phrase.substring(wordStartIndex, wordEndIndex);
                     
                     // Find the first character that differs
                     let typoPosition = 0;
@@ -1180,10 +1271,11 @@
                     // Adjust correction chance based on typo position
                     if (typoPosition === 0) {
                         correctionChance = 1.0; // 100% chance for first letter
-                    } else if (typoPosition > 0 && typoPosition < displayedWord.length - 1) {
-                        correctionChance = 0.65; // 65% chance for middle letters
+                    } else if (typoPosition === displayedWord.length - 1) {
+                        correctionChance = 1.0; // 100% chance for last letter
+                    } else {
+                        correctionChance = CONFIG.typoCorrectionChance; // Use CONFIG value for middle letters only
                     }
-                    // Last letter keeps the default 80% chance
                     
                     if (Math.random() < correctionChance) {
                         // Compare and correct if different
@@ -1254,10 +1346,14 @@
                 const timeoutId = setTimeout(typeNextChar, Math.round(baseDelay));
                 typingTimeouts.push(timeoutId);
             } else {
-                // Typing complete - show copy button and mark typing as inactive
-                copyBtn.classList.remove('opacity-0');
-                isTyping = false;
-                typingTimeouts = []; // Clear the timeout array since we're done
+                // Typing complete - but only if no active typo correction
+                if (!hasActiveTypo) {
+                    // Show copy button and mark typing as inactive
+                    copyBtn.classList.remove('opacity-0');
+                    isTyping = false;
+                    typingTimeouts = []; // Clear the timeout array since we're done
+                }
+                // If there's an active typo, let the correction complete first
             }
         };
         
@@ -1280,16 +1376,6 @@
                 return;
             }
             
-            // Debug logging
-            if (!CONFIG.noConsole) {
-              console.log('Typo correction:', {
-                displayedWord,
-                correctWord,
-                typoPosition,
-                wordStartIndex
-            });
-            }
-            
             // Calculate how many characters to backspace (from end of word to typo position, including the typo)
             const charsToBackspace = displayedWord.length - typoPosition + 1;
             let backspaceCount = 0;
@@ -1309,7 +1395,7 @@
                         const progress = backspaceCount / charsToBackspace; // 0 to 1
                         const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
                         const baseDelay = 15 + Math.random() * 25; // Original fast delay
-                        delay = baseDelay * speedMultiplier; // Apply slowdown
+                        delay = baseDelay * speedMultiplier * (2 - CONFIG.typingSpeedMultiplier); // Apply slowdown and typing speed multiplier
                     }
                     
                     const timeoutId = setTimeout(backspace, delay);
@@ -1352,7 +1438,7 @@
                     displayedText += char;
                     phraseOutput.textContent = displayedText;
                     retypeIndex++;
-                    const retypeDelay = CONFIG.testMode ? 1 : (15 + Math.random() * 25); // Super fast in test mode
+                    const retypeDelay = CONFIG.testMode ? 1 : ((15 + Math.random() * 25) * (2 - CONFIG.typingSpeedMultiplier)); // Apply typing speed multiplier
                     const timeoutId = setTimeout(retype, retypeDelay);
                     typingTimeouts.push(timeoutId);
                 } else {
@@ -1368,7 +1454,7 @@
                     hasActiveTypo = false;
                     
                     // Continue typing from where we left off in the original phrase
-                    const continueDelay = CONFIG.testMode ? 1 : (25 + Math.random() * 50); // Super fast in test mode
+                    const continueDelay = CONFIG.testMode ? 1 : ((25 + Math.random() * 50) * (2 - CONFIG.typingSpeedMultiplier)); // Apply typing speed multiplier
                     const timeoutId = setTimeout(typeNextChar, continueDelay);
                     typingTimeouts.push(timeoutId);
                 }
@@ -1376,6 +1462,7 @@
             
             retype();
         };
+
         
         // Helper function to get a typo character based on QWERTY layout
         const getTypoChar = (char) => {
@@ -1390,20 +1477,26 @@
         
         // Helper function to get base delay for character types
         const getBaseDelay = (char, prevChar) => {
+            let baseDelay;
             if (char === ' ') {
-                return CONFIG.typingSpeed.space.min + Math.random() * (CONFIG.typingSpeed.space.max - CONFIG.typingSpeed.space.min);
+                baseDelay = CONFIG.typingSpeed.space.min + Math.random() * (CONFIG.typingSpeed.space.max - CONFIG.typingSpeed.space.min);
             } else if (char.match(/[a-zA-Z]/)) {
                 // Vowels are typically typed faster than consonants
                 if (char.match(/[aeiouAEIOU]/)) {
-                    return CONFIG.typingSpeed.vowel.min + Math.random() * (CONFIG.typingSpeed.vowel.max - CONFIG.typingSpeed.vowel.min);
+                    baseDelay = CONFIG.typingSpeed.vowel.min + Math.random() * (CONFIG.typingSpeed.vowel.max - CONFIG.typingSpeed.vowel.min);
                 } else {
-                    return CONFIG.typingSpeed.consonant.min + Math.random() * (CONFIG.typingSpeed.consonant.max - CONFIG.typingSpeed.consonant.min);
+                    baseDelay = CONFIG.typingSpeed.consonant.min + Math.random() * (CONFIG.typingSpeed.consonant.max - CONFIG.typingSpeed.consonant.min);
                 }
             } else if (char.match(/[0-9]/)) {
-                return CONFIG.typingSpeed.number.min + Math.random() * (CONFIG.typingSpeed.number.max - CONFIG.typingSpeed.number.min);
+                baseDelay = CONFIG.typingSpeed.number.min + Math.random() * (CONFIG.typingSpeed.number.max - CONFIG.typingSpeed.number.min);
             } else {
-                return CONFIG.typingSpeed.punctuation.min + Math.random() * (CONFIG.typingSpeed.punctuation.max - CONFIG.typingSpeed.punctuation.min);
+                baseDelay = CONFIG.typingSpeed.punctuation.min + Math.random() * (CONFIG.typingSpeed.punctuation.max - CONFIG.typingSpeed.punctuation.min);
             }
+            
+            // Apply typing speed multiplier
+            // Lower multiplier = faster typing (shorter delays)
+            // Higher multiplier = slower typing (longer delays)
+            return baseDelay * (2 - CONFIG.typingSpeedMultiplier);
         };
         
         // Start typing
@@ -1470,65 +1563,39 @@
     // Copy button functionality
     copyBtn.addEventListener('click', copyToClipboard);
     
-    // Safe mode toggle functionality
-    safeModeToggle.addEventListener('click', toggleSafeMode);
-    
-    // Mute button functionality
+     // child's mode toggle functionality
+     childsModeToggle.addEventListener('click', togglechildsMode);
+     
+     // Keyboard shortcuts
+     document.addEventListener('keydown', (event) => {
+       // Only trigger shortcuts if not typing in an input field
+       if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
+         switch(event.key.toLowerCase()) {
+           case 'm':
+             toggleMusic();
+             break;
+           case 'd':
+             toggleDarkMode();
+             break;
+           case 'c':
+             togglechildsMode();
+             break;
+         }
+       }
+     });
+     
+     // Mute button functionality
     const muteBtn = document.getElementById('mute-btn');
     const muteIcon = document.getElementById('mute-icon');
     
-    muteBtn.addEventListener('click', () => {
-      if (backgroundMusic.muted) {
-        // Unmute
-        backgroundMusic.muted = false;
-        muteIcon.src = CONFIG.darkMode ? 'images/volume-dark.png' : 'images/volume.png';
-        muteIcon.alt = 'Volume';
-        muteBtn.classList.remove('muted');
-        updatePlayingState();
-      } else {
-        // Mute
-        backgroundMusic.muted = true;
-        muteIcon.src = CONFIG.darkMode ? 'images/mute-dark.png' : 'images/mute.png';
-        muteIcon.alt = 'Muted';
-        muteBtn.classList.add('muted');
-        muteBtn.classList.remove('playing');
-      }
-    });
+    muteBtn.addEventListener('click', toggleMusic);
     
     // Dark mode button functionality
     const darkModeBtn = document.getElementById('dark-mode-btn');
     const darkModeIcon = document.getElementById('dark-mode-icon');
     const body = document.body;
     
-    darkModeBtn.addEventListener('click', () => {
-      CONFIG.darkMode = !CONFIG.darkMode;
-      
-      if (CONFIG.darkMode) {
-        // Enable dark mode
-        body.classList.add('dark');
-        darkModeIcon.textContent = '☀️';
-        darkModeIcon.alt = 'Light Mode';
-        
-        // Switch to dark volume icons
-        if (backgroundMusic.muted) {
-          muteIcon.src = 'images/mute-dark.png';
-        } else {
-          muteIcon.src = 'images/volume-dark.png';
-        }
-      } else {
-        // Disable dark mode
-        body.classList.remove('dark');
-        darkModeIcon.textContent = '🌙';
-        darkModeIcon.alt = 'Dark Mode';
-        
-        // Switch to light volume icons
-        if (backgroundMusic.muted) {
-          muteIcon.src = 'images/mute.png';
-        } else {
-          muteIcon.src = 'images/volume.png';
-        }
-      }
-    });
+    darkModeBtn.addEventListener('click', toggleDarkMode);
     
     // Function to update playing state animation
     function updatePlayingState() {
@@ -1677,20 +1744,17 @@
       document.addEventListener('keydown', startMusic);
     };
     
-    /**
-     * Toggles background music on/off
-     */
-    const toggleMusic = () => {
-      if (backgroundMusic.paused) {
-        backgroundMusic.play();
-      } else {
-        backgroundMusic.pause();
-      }
-    };
 
-    // --- INITIALIZATION ---
-    // Initialize safe mode toggle
-    updateSafeModeToggle();
+     // --- INITIALIZATION ---
+     // Initialize child's mode toggle
+     updatechildsModeToggle();
+     
+     // Set initial childs-mode class on body
+     if (CONFIG.childsMode) {
+       document.body.classList.add('childs-mode');
+     } else {
+       document.body.classList.remove('childs-mode');
+     }
     
     // Initialize background music
     initializeAudio();

@@ -49,7 +49,7 @@ deer [in headlights, *B*]
 dodo
 dog
 dolphin
-donkey [kong [jerking off face down, *F*]]
+donkey [kong [jerking off face down, *B*]]
 duck
 elephant
 ferret
@@ -103,8 +103,9 @@ tiger
 turtle
 turkey
 walrus
+wombat
 whale
-[alpha , .2, *B*]wolf
+wolf
 [ring, .2]worm
 zebra
 
@@ -122,7 +123,7 @@ hinge premium [diahhrea from tube]
 GROK
 propranolol [8000mg]
 coke zero [friends or family, *F*]
-face-up tacks collection [get out of my house immediately, .2, *F*]
+face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
 [AYY] GARY ROYCE[ OHO! A-BING-A-BAM-A-BOOM, .1, *F*]
@@ -134,6 +135,7 @@ black mirror
 twin flame
 9/11 (simulator/livestream)
 sophie's choice
+leprechaun
 spotify premium
 luigi mangione
 popcorn lung
@@ -200,7 +202,8 @@ chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
 [fucking] candy flip
 ding dong [ditch] 
-54321 [54321]
+54321 [54321 [54321 [54321 [54321 [54321]]]]]
+cha-cha slide
 boing boing [yoga ball [blacked out no memories, *F*]]
 gamer gunk
 gutterball
@@ -213,6 +216,7 @@ bunson burner [bitch, .2, *F*]
 hellen keller [jerking off ALL over town, *F*]
 shakira [shakira [ooh baby when you talk like that you make a woman go mad, .2, *F*]]
 magic mike [wazowski, .2]
+bazinga
 scooby doo [velma 4k stuck in washing machine 4k, .2, *F*]
 tiny desk
 chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip, .1, *F*]
@@ -251,11 +255,13 @@ bricked up [fridge magnet, .1, *F*]
 ferragamo [signature scent]
 one two skip a few ninety nine a hundred
 authentic home-cooked
+tabernacle
 animal style
 criterion collection
-kellogs [instant horny recipie, .2, *F*]
+kellogs [brand cereal instant horny recipie, .2, *F*]
 type-3
 wagwan
+bowl cut
 I-Spy
 180p
 clown
@@ -267,6 +273,7 @@ egg-laden [female]
 clown [party, .3]
 knee-high [swampwater]
 for her pleasure
+italian
 lifetime subscription
 sucked dry
 bottled from the source
@@ -282,7 +289,7 @@ hong-kong style
 9 trillion dead
 and a-one and a-two and-a
 color blind
-super-auto [fucking]
+super-auto
 touch-based non-sexual [non-(poly/monog) partnership, *F*]
 ontologically (evil/sexy/bad person)
 submissive [breedable, .2]
@@ -356,17 +363,16 @@ why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
 using a complex system of pulleys and levers
 10 lashings goddess
-please make my day I would really love it if you made my day [miss]
 oh nooo oh fuckkk sorry kareem i ate all the (drywall I thought it was cottage cheeseeee/floorboards I thought they were breadsticks/wires in the walls i thought it was delicious spaghetti/sinks and toilets i thought they were gumdrops and snickerdoodles) [oh noooooo [oh fuuuckkkkk]]
 [ok sorry goddess, .2] yes chef sorry chef
 we'll take the check
 translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/russian/spanish/swedish/turkish/vietnamese) 30 times
-for up to one year [in a shipping container, .8]
+[tortured, .8] for up to one year (in a shipping container/in an ikea display room/in a replica of the rothschild family mansion/on a wicker chair)
 and SCENE
 walk the plank [bitch, .4]
 RELEASE THE SNAKES
 Siri "when is July" [oops unsend [haha. siri hold my calls]]
-NIGHTMARE [NIGHTMARE [NIGHTMARE]]
+NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE]]]]]]]]]
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT
 [excuse me, .2] im going to take this back to my home lab
@@ -389,7 +395,7 @@ jarvis jerk it a little 😏
 THE CITY IS MINE
 guantanamo bay forced to watch pole dancing video on work computer
 and buy yourself something nice kid
-10lbs soaking wet [no reciept]
+10lbs soaking wet [no reciept, .25]
 by way of demonstration to find most trusted advisor[, and whoever can fit the most RAT BONES in his jowels is SURELY your most trusted advisor!, .2]
 [and consider organizing a regular] ICE CHIPPING CHALLENGE
 put the fries in the bag bro
@@ -406,7 +412,7 @@ unless??
 for the lady
 boobieeeeee
 weeeeeeeeeeeeee
-dave & busters [dave & busters dave & busters, .15]
+dave & busters [dave & busters, .2 [dave & busters, .2]]
 mmmmmmmmmmm
 SLIME MAN
 RICH MILLIONAIRE
@@ -451,14 +457,17 @@ const parseLists = (text) => {
   return lists;
 };
 
-// NSFW words list for safe mode filtering (only words that actually appear in the lists and are truly offensive)
+// NSFW words list for childs mode filtering (only words that actually appear in the lists and are truly offensive)
 const nsfwWords = [
   // Profanity
   'fucking', 'fuck', 'fuckkkk', 'fuck-ass', 'fuck my fucking ass',
-  'bitch', 'bitch-ass', 'yuppy bitch',
+  'fuckkkk id do anything for it',
   'slut', 'whore', 'cunt', 'slutty vegan',
   'shit', 'type shit', 'shit cup runneth over', 'shit cup runneth over my balls',
-  'fuck yourself',
+  'fuck yourself', 'pokemon go fuck yourself',
+  'anti-hoes technology',
+  'how can i be homophobic my bitch is gay',
+  'f those t\'s',
   
   // Sexual
   'pussy', 'pussy taste test', 'pussy popping', 'pussy slay mama',
@@ -485,31 +494,58 @@ const nsfwWords = [
   'busts it down sexual style',
   'touch-based non-sexual',
   'velma 4k stuck in washing machine 4k',
-  'pole dancing',
   'virgins',
+  'gamer gunk',
   '100 concubines (NOT virgins, robust sexual references)', 
   '10 lashings goddess',
+  'with the fat naturals', 'with the fatties',
+  'stuck in washing machine 4k',
+  'stroking my shit', 'face down stroking my shit',
+  'fucking turn around bend over', 'lemme see the nutrition facts',
+  'fuck my fucking ass',
+  'forced to watch pole dancing video on work computer',
+  'jarvis jerk it a little',
+  'dating sim',
   
   // Violence
   'blood', 'blood (drenched/soaked)',
-  'torture', 'torture dungeon', 'japanese water torture',
+  'torture dungeon', 'japanese water torture',
   'kill', 'kill on site',
   'death', 'instant death', 'death by hypoxia', 'death immenent',
   'cut major arteries to drain blood as fast as possible',
   'holocaust', 'imitation holocaust crab', 
   'schoolbus explosion', 
-  'shot dead by alec baldwin', 
+  'guantanamo bay',
   '9/11',
   
   // Drugs
   'cocaine', 'cocaine dog',
 
   // Other
-  'wagwan',  'within 1000 feet of a school', 'nutritional yeast infection'
+  'wagwan', 'YOUNG','within 1000 feet of a school', 'nutritional yeast infection',
 ];
+
+// child's mode word replacements mapping
+const childsModeReplacements = {
+  // Word replacements for child's mode (original word: replacement word)
+  'fucking': 'freaking',
+  'dead': 'passed away',
+  'shot dead': 'unalived',
+  'death': 'passed away',
+  'bitch': 'friend',
+  'kill': 'unalive',
+  'fuckkkk': 'snurt',
+  'blood': 'life force',
+  'torture': 'punishment',
+  'tortured': 'reprimanded',
+  'shit': 'situation'
+};
 
 // Create the word lists
 window.wordLists = parseLists(listsText);
 
-// Expose NSFW words for safe mode filtering
+// Expose NSFW words for child's mode filtering
 window.nsfwWords = nsfwWords;
+
+// Expose child's mode replacements
+window.childsModeReplacements = childsModeReplacements;
