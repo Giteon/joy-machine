@@ -77,13 +77,13 @@
     const CONFIG = {
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.02, // 2% of total steps when clicked
+      advanceAmount: 0.2, // 20% of total steps when clicked
       typoChance: 0.02, // 2% chance per letter
-      typoCorrectionChance: .8, // 80% chance to catch typo
-      doubleBeastChance: 0.5, // 50% chance for two beasts
-      tripleBeastChance: 0.35, // 35% chance for three beasts (if already two)
+      typoCorrectionChance: .95, // 95% chance to catch typo
+      doubleBeastChance: 0.45, // 45% chance for two beasts
+      tripleBeastChance: 0.30, // 30% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
-      fuckingChance: 0.15, // 15% chance to add "fucking"
+      fuckingChance: 0.10, // 10% chance to add "fucking"
       thinkingPauseChance: 0.15, // 15% chance for thinking pause
       allCapsChance: 0.1, // 10% chance for all caps (except beast)
       skipSpaceChance: 0.00, // 0% chance to skip spaces between words
@@ -497,18 +497,21 @@
         clearTypingTimeouts();
         
         // Define the possible formats (now using intro + word order)
+        // Helper function to join non-empty words with spaces
+        const joinWords = (...words) => words.filter(word => word && word.trim() !== '').join(' ');
+        
         const formats = [
-            (i, b, n, c, a, f) => `${i} ${b} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${n} ${c} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${a}${c} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${a} ${b} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${c} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${c} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${a} ${n} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${b} ${a} ${c} ${f}`,
-            (i, b, n, c, a, f) => `${i} ${n} ${a} ${c} ${f}`
+            (i, b, n, c, a, f) => joinWords(i, b, n, f),
+            (i, b, n, c, a, f) => joinWords(i, n, c, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, b, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, c, f),
+            (i, b, n, c, a, f) => joinWords(i, n, a, c, f)
         ];
         
         // Pick a random format
@@ -1174,8 +1177,8 @@
                 // Check for various random effects
                 let actualChar = char;
                 
-                // 1% chance to skip spaces between words
-                if (char === ' ' && Math.random() < CONFIG.skipSpaceChance) {
+                // Skip spaces between words (if enabled)
+                if (char === ' ' && CONFIG.skipSpaceChance > 0 && Math.random() < CONFIG.skipSpaceChance) {
                     // Skip this space - don't add to displayedText
                     currentIndex++;
                     const timeoutId = setTimeout(typeNextChar, Math.round(getBaseDelay(char, prevChar)));

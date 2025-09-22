@@ -89,7 +89,7 @@ pig
 rabbit
 raccoon
 RAT [bones, *B*]
-rat [who walked up to a castle, .1, *F*]
+rat [who walked up to a castle, .1, *F*, *B*]
 rooster [head in dirt, *B*]
 sasquatch
 scorpion
@@ -146,6 +146,7 @@ lobotomy
 slutty vegan
 above-ground (burial/grave)
 pussy taste test [jump up and down, .3, *F*]
+onlyfans
 rodolfo [trapped in floorboards, *F*]
 primordial soup
 laura palmer [body bag, .25 [dream sequence, .25]]
@@ -157,12 +158,13 @@ kim petras [coconut [perfect pitch, .2]]
 kurt vonnegut [um ok so this is officially my life!, .2, *F*]
 goblin mode
 breastmilk [on the cheap, .25]
-hungry tax [click to feed your advisor a motivational nutrition cube, *F*]
+hungry tax [click here to feed your advisor a motivational nutrition cube, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
 wet leg
 thumbalina
 wartime economy
+monster mash
 head exploded [no pulse]
 with 9 billion child IQ
 water stain
@@ -238,7 +240,6 @@ baba yaga
 wawa
 slop job
 jungle juice
-bazonga
 
 ADJECTIVE (A)
 blood (drenched/soaked)
@@ -255,13 +256,18 @@ bricked up [fridge magnet, .1, *F*]
 ferragamo [signature scent]
 one two skip a few ninety nine a hundred
 authentic home-cooked
+full-frontal
 tabernacle
-animal style
+ambivert
+animal-style
 criterion collection
+firm-but-fair
 kellogs [brand cereal instant horny recipie, .2, *F*]
 type-3
 wagwan
 bowl cut
+INFP [strippers, .2]
+ENTJ
 I-Spy
 180p
 clown
@@ -278,7 +284,7 @@ lifetime subscription
 sucked dry
 bottled from the source
 eldritch [shed demon, .1]
-farm to table [tip to taint, .3]
+farm-to-table [tip-to-taint, .3 [bottled at the source, .3]]
 victory royale
 cum-colored
 zero swag [detected]
@@ -314,16 +320,16 @@ shit cup runneth over [my balls, .3]
 THAT COULD BE A SHOW
 NUKE IN DA CLUB
 so THAT just happened
-oura ring indicates no pulse[,noooooo owner of oura ring is dead. FREE OURA RING!]
+oura ring indicates no pulse[, noooooo owner of oura ring is dead. FREE OURA RING!]
 switch it up like nintendo [REMEMBER US? I MISS US]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
 DO A TRICK
-so no cube? [okayyy so no cube?]
+so no cube? [okay so no cube?]
 i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
-accidentally enlisted in army, sent to the front-lines to sniff for mines [like a rat].
+accidentally enlisted in army, sent to the front-lines to sniff for mines like a rat
 [unnggghhh] fuckkkk id do anything for it
 that one (egg is 40 eggs?/snake is 40 snakes?/dog is 40 dogs?/beer is 40 beers?/phone is 40 phones?/shirt is 40 shirts?/guy is 40 guys?/gun is 40 guns?)
 consciousness uploaded to rat, rat dies, consciousness uploaded to new rat[, new rat dies, consciousness uploaded to second new rat[, second new rat dies, consciousness uploaded to third new rat[, third new rat dies, consciousness uploaded to FINAL new rat[, FINAL new rat dies, consciousness uploaded to new FINAL new rat]]]]
@@ -363,7 +369,7 @@ why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
 using a complex system of pulleys and levers
 10 lashings goddess
-oh nooo oh fuckkk sorry kareem i ate all the (drywall I thought it was cottage cheeseeee/floorboards I thought they were breadsticks/wires in the walls i thought it was delicious spaghetti/sinks and toilets i thought they were gumdrops and snickerdoodles) [oh noooooo [oh fuuuckkkkk]]
+oh nooo oh fuckkkk sorry kareem i ate all the (drywall I thought it was cottage cheeseeee/floorboards I thought they were breadsticks/wires in the walls i thought it was delicious spaghetti/toilets and sinks i thought they were gumdrops and snickerdoodles) [oh noooooo [oh fuuuckkkkk]]
 [ok sorry goddess, .2] yes chef sorry chef
 we'll take the check
 translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/russian/spanish/swedish/turkish/vietnamese) 30 times
@@ -384,11 +390,11 @@ plus tax and tip
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)
 round up to nearest billion yuan
-slumber party hang upsidedown and cut major arteries to drain blood as fast as possible
+slumber party hang upside down and cut major arteries to drain blood as fast as possible
 RETWEET 1000
 CANCELLED
 on my desk YESTERDAY
-green moose, guava juice large fries, chocolate shake
+green moose guava juice large fries chocolate shake
 300hz binaural beats [mozart gray noise flow state] for study work migraine focus [cure vision]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏
@@ -401,7 +407,7 @@ by way of demonstration to find most trusted advisor[, and whoever can fit the m
 put the fries in the bag bro
 
 TAG (T)
-xiaohongshu
+XIAOHONGSHU
 capiesch?
 ...OR SHE!
 type shit
@@ -460,85 +466,120 @@ const parseLists = (text) => {
 // NSFW words list for childs mode filtering (only words that actually appear in the lists and are truly offensive)
 const nsfwWords = [
   // Profanity
-  'fucking', 'fuck', 'fuckkkk', 'fuck-ass', 'fuck my fucking ass',
-  'fuckkkk id do anything for it',
-  'slut', 'whore', 'cunt', 'slutty vegan',
-  'shit', 'type shit', 'shit cup runneth over', 'shit cup runneth over my balls',
-  'fuck yourself', 'pokemon go fuck yourself',
-  'anti-hoes technology',
-  'how can i be homophobic my bitch is gay',
-  'f those t\'s',
-  
-  // Sexual
-  'pussy', 'pussy taste test', 'pussy popping', 'pussy slay mama',
-  'cock', 'cock shame',
-  'jerking off', 'jerking off face down', 'jerking off all over town',
-  'cum', 'cum-colored', 'precum', 'dot jizz',
-  'orgasm', 'orgasmatron',
-  'sexual', 'gone sexual',
-  'bricked up',
-  'sucked dry', 'and suck the dust off the tip',
-  'nipple', 'nipple scene uncensored',
-  'wet nurse', 'japanese sponge bath',
-  'breastmilk',
-  'penis', 'penis boy',
-  'dick', 'i put my dick in a bag of doritos',
-  'balls', 'my balls',
-  'ass', 'fuck-ass',
-  'taint', 'tip-to-taint',
-  'horny','instant horny recipie',
-  'porn', 'monster porn', 'jerking',
-  'breedable', 'submissive breedable',
-  'ahegao', 'mommy milker', 'sudoku eyes',
-  'sabrina carpenter creaming jeans',
-  'busts it down sexual style',
-  'touch-based non-sexual',
-  'velma 4k stuck in washing machine 4k',
-  'virgins',
-  'gamer gunk',
-  '100 concubines (NOT virgins, robust sexual references)', 
-  '10 lashings goddess',
-  'with the fat naturals', 'with the fatties',
-  'stuck in washing machine 4k',
-  'stroking my shit', 'face down stroking my shit',
-  'fucking turn around bend over', 'lemme see the nutrition facts',
-  'fuck my fucking ass',
-  'forced to watch pole dancing video on work computer',
-  'jarvis jerk it a little',
-  'dating sim',
-  
-  // Violence
-  'blood', 'blood (drenched/soaked)',
-  'torture dungeon', 'japanese water torture',
-  'kill', 'kill on site',
-  'death', 'instant death', 'death by hypoxia', 'death immenent',
-  'cut major arteries to drain blood as fast as possible',
-  'holocaust', 'imitation holocaust crab', 
-  'schoolbus explosion', 
-  'guantanamo bay',
-  '9/11',
-  
-  // Drugs
-  'cocaine', 'cocaine dog',
-
-  // Other
-  'wagwan', 'YOUNG','within 1000 feet of a school', 'nutritional yeast infection',
+  'how can i be homophobic my bitch is gay', 'wagwan', 'within 1000 feet of a school', 'nutritional yeast infection', 'bombaclat'
 ];
 
 // child's mode word replacements mapping
 const childsModeReplacements = {
   // Word replacements for child's mode (original word: replacement word)
   'fucking': 'freaking',
+  'fuck-ass': 'gosh darn',
+  'fuck': 'frick',
+  'fuck my fucking ass': 'butter my biscuit',
   'dead': 'passed away',
   'shot dead': 'unalived',
+  'slut': 'friend',
+  'whore': 'aquaintance',
+  'cunt': 'coworker',
+  'slutty vegan': 'vegan',
+  'sexual style': 'silly style',
+  'shit cup runneth over my balls': 'coffee cup poureth over my lap', 
+  'shit cup runneth over': 'coffee cup poureth over',  
+  'pokemon go fuck yourself': 'pokemon go to the polls',
+  'non-sexual': 'platonic',
+  'robust sexual references': 'interesting conversations',
   'death': 'passed away',
-  'bitch': 'friend',
+  'death immenent': 'nap imminent',
+  'walk the plank bitch': 'walk the plank, pal',
+  'death by hypoxia': 'shortness of breath',
+  'f those t\'s': 'try an innovative new hairstyle',
+  'pussy taste test': 'slubmer party',
+  'pussy popping': 'party popper',
+  'pussy slay mama': 'okay slay mama',
+  'ahegao': 'happy face',
+  'mommy milker': 'nourishing mother',
+  'sudoku eyes': 'smiley face',
   'kill': 'unalive',
-  'fuckkkk': 'snurt',
+  'killed': 'unalived',
+  'candy flip': 'candy cane',
+  'kill on site': 'unalive on site',
+  'cock shame': 'deep insecurity',
+  'gamer gunk': 'nutritious smoothie',
+  '10 lashings goddess': '10 lessons learned', 
+  'turn around bend over': 'turn around and face the other way',
+  'horny': 'happiness',
+  'monster porn': 'monster movie',
+  'cum': 'cream',
+  'breedable': 'accommodating',
+  'submissive breedable': 'friendly accommodating',
+  'cum-colored': 'cream-colored',
+  'precum': 'premarket',
+  'diahhrea from tube': 'mystery tube',
+  'bricked up': 'well-rested',
+  'sucked dry': 'dehydrated',
+  'and suck the dust off the tip': 'and taste the dust',
+  'tip-to-taint': 'top-to-bottom',
+  'nipple scene uncensored': 'honeymoon suite',
+  'wet nurse': 'in-home elder care', 
+  'japanese sponge bath': 'relaxing bath',
+  'fuck-ass': 'stinky smelly',
+  'sabrina carpenter creaming jeans': 'sabrina carpenter invites you on a date',
+  'velma 4k stuck in washing machine 4k': 'velma solves a mystery',
+  'bitch': 'boy',
+  'bitch-ass': 'rapscallion',
+  'penis boy': 'handsome boy',
+  'forced to watch pole dancing video on work computer': 'enjoying an entertaining dance performance online',
+  'jarvis jerk it a little': 'jarvis give me a high five',
+  'dating sim': 'romantic adventure',
+  'onlyfans': 'social media',
+  'laura palmer body bag': 'laura palmer',
+  'bubble butt': 'athletic build',
+  'blood drenched': 'stained',
+  'blood soaked': 'soiled',
+  'full-frontal': 'full-bodied',
+  'full-pen': 'fun in the sun',
+  'i put my dick in a bag of doritos': 'i put my hand in a bag of doritos',
+  'orgasm': 'pleasant afternoon',
+  'orgasmatron 3000': 'happiness machine 3000',
+  'dot jizz': 'dot fun',
+  'concubines': 'friends',
+  'NOT virgins': 'introverts',
+  'bisexual boyfriend': 'best friend',
+  'explosion': 'adventure',
+  'breastmilk': 'fresh goatsmilk',
+  'slop job': 'huge mess',
+  'anti-hoes technology': 'anti-happiness technology',
+  'fat naturals': 'great personalities',
+  'fatties': 'perfect politics',
+  'low libido': 'non-curious mind',
+  'zero survivors' : 'late for school',
+  'fuckkkk': 'snurtttt',
+  'cut major arteries to drain blood as fast as possible': 'enjoy a long life of limited mobility',
   'blood': 'life force',
+  'japanese water torture': 'relaxing bath',
+  'torture dungeon': 'straight to the principal\'s office',
   'torture': 'punishment',
-  'tortured': 'reprimanded',
-  'shit': 'situation'
+  'tortured': 'grounded for a week',
+  'stroking my shit': 'stroking my chin',
+  'face down stroking my shit': 'sitting down stroking my chin',
+  'jerking off': 'doing mobility stretches',
+  'bazonga': 'bing bong',
+  'shit': 'situation',
+  'sexy': 'beautiful',
+  'head exploded': 'migraine',
+  'ran over by car': 'nearly hit by car',
+  'dies': 'passes away',
+  'holocaust': 'terrible situation', 
+  'imitation holocaust crab': 'friendly crab', 
+  'guantanamo bay': 'family vacation',
+  'bullet holes': 'hot dogs',
+  '9/11': 'plane crash', 
+  '9/11 simulator': 'flight simulator', 
+  '9/11 livestream': 'gamer livestream',
+  'cocaine': 'pixie stick', 
+  'cocaine dog': 'peppermint dog',
+  'wagwan': 'friend', 
+  'YOUNG': 'BEST OF'
 };
 
 // Create the word lists
