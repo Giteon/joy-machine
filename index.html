@@ -77,10 +77,10 @@
     const CONFIG = {
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.2, // 20% of total steps when clicked
+      advanceAmount: 0.03, // 3% of total steps when clicked
       typoChance: 0.02, // 2% chance per letter
       typoCorrectionChance: .95, // 95% chance to catch typo
-      doubleBeastChance: 0.45, // 45% chance for two beasts
+      doubleBeastChance: 0.50, // 50% chance for two beasts
       tripleBeastChance: 0.30, // 30% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
       fuckingChance: 0.10, // 10% chance to add "fucking"
@@ -91,8 +91,8 @@
       testMode: false, // Test mode - instant progress bar fill
       childsMode: false, // child's mode state
       backgroundMusic: true, // Enable background music
-      musicVolume: 0.3, // Background music volume (0.0 to 1.0)
-      tagChance: 0.1, // 10% chance for tag after finale/hard stop
+      musicVolume: 0.2, // Background music volume (0.0 to 1.0)
+      tagChance: 0.15, // 15% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
       noConsole: false, // Disable all console logs when true
       typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
@@ -218,8 +218,8 @@
       
       // Process each word individually
       const processedWords = words.map(word => {
-        // Skip words that contain numbers (numbers are immune)
-        if (/\d/.test(word)) {
+        // Skip words that contain numbers or non-letter characters (only a-z eligible)
+        if (/\d/.test(word) || /[^a-zA-Z]/.test(word)) {
           return word;
         }
         
@@ -487,6 +487,29 @@
 
 
     /**
+     * Cleans up phrase formatting by removing unwanted start/end words
+     */
+    const cleanPhrase = (phrase) => {
+        // Words that shouldn't start a phrase (case insensitive)
+        const badStartWords = ['and', 'or', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
+        
+        // Check if phrase starts with any of the bad words
+        for (const badWord of badStartWords) {
+            const regex = new RegExp(`^${badWord}\\s+`, 'i');
+            phrase = phrase.replace(regex, '');
+        }
+        
+        // Remove 'fucking' from the end (case insensitive)
+        const endFuckingRegex = /\s+fucking$/i;
+        phrase = phrase.replace(endFuckingRegex, '');
+        
+        // Clean up any extra spaces
+        phrase = phrase.replace(/^\s+/, '').replace(/\s+$/, '').replace(/\s+/g, ' ');
+        
+        return phrase;
+    };
+
+    /**
      * Generates a new phrase and displays it.
      */
     const generateNewPhrase = () => {
@@ -501,18 +524,57 @@
         const joinWords = (...words) => words.filter(word => word && word.trim() !== '').join(' ');
         
         const formats = [
-            (i, b, n, c, a, f) => joinWords(i, b, n, f),
-            (i, b, n, c, a, f) => joinWords(i, n, c, f),
-            (i, b, n, c, a, f) => joinWords(i, b, a, c, f),
-            (i, b, n, c, a, f) => joinWords(i, a, b, n, f),
-            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
+
+            (i, b, n, c, a, f) => joinWords(i), (i, b, n, c, a, f) => joinWords(i),
+            (i, b, n, c, a, f) => joinWords(b), (i, b, n, c, a, f) => joinWords(b),
+            (i, b, n, c, a, f) => joinWords(n), (i, b, n, c, a, f) => joinWords(n),
+            (i, b, n, c, a, f) => joinWords(c), (i, b, n, c, a, f) => joinWords(c),
+            (i, b, n, c, a, f) => joinWords(f), (i, b, n, c, a, f) => joinWords(f),
+            
+
+            (i, b, n, c, a, f) => joinWords(i, f),
+            (i, b, n, c, a, f) => joinWords(a, n),
+            (i, b, n, c, a, f) => joinWords(a, n), (i, b, n, c, a, f) => joinWords(c, n),
+            (i, b, n, c, a, f) => joinWords(n, f),
+
             (i, b, n, c, a, f) => joinWords(i, b, f),
-            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, c, f),
+            (i, b, n, c, a, f) => joinWords(i, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, n), (i, b, n, c, a, f) => joinWords(i, a, n),
+            (i, b, n, c, a, f) => joinWords(b, n, f),
+            (i, b, n, c, a, f) => joinWords(b, c, f),
+            (i, b, n, c, a, f) => joinWords(b, a, n),
+            (i, b, n, c, a, f) => joinWords(a, n, f),
+            (i, b, n, c, a, f) => joinWords(c, a, n),
+        
+            (i, b, n, c, a, f) => joinWords(i, n, c, f),
+            (i, b, n, c, a, f) => joinWords(i, c, b, f),
+            (i, b, n, c, a, f) => joinWords(i, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, n, f),
             (i, b, n, c, a, f) => joinWords(i, b, c, f),
-            (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, n),
+            (i, b, n, c, a, f) => joinWords(b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(b, a, c, f),
+
             (i, b, n, c, a, f) => joinWords(i, b, a, c, f),
-            (i, b, n, c, a, f) => joinWords(i, n, a, c, f)
-        ];
+            (i, b, n, c, a, f) => joinWords(i, c, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, n, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, n, a, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, b, c, f),
+            (i, b, n, c, a, f) => joinWords(b, c, n, f, i)
+
+            ];
+            
+            // (i, b, n, c, a, f) => joinWords(i, b, c, a, n, f),
+            // (i, b, n, c, a, f) => joinWords(i, b, a, n, c, f),
+            // (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f),
+            // (i, b, n, c, a, f) => joinWords(i, a, b, c, n, f),
+            // (i, b, n, c, a, f) => joinWords(i, a, c, b, n, f),
+            // (i, b, n, c, a, f) => joinWords(c, a, n, f, i, b),
         
         // Pick a random format
         const randomFormat = formats[Math.floor(Math.random() * formats.length)];
@@ -521,8 +583,7 @@
         // Create a readable format string for logging
         const getFormatString = (format) => {
             const testResult = format('I', 'B', 'N', 'C', 'A', 'F');
-            return testResult.replace(/I/g, 'I').replace(/B/g, 'B').replace(/N/g, 'N')
-                            .replace(/C/g, 'C').replace(/A/g, 'A').replace(/F/g, 'F');
+            return testResult;
         };
         const formatString = getFormatString(randomFormat);
         
@@ -806,20 +867,55 @@
         // Generate phrase using the selected format with modified words
         let phrase;
         if (hasHardStop) {
-            // If there's a hard stop, generate the phrase up to that point
-            // We need to determine which word type triggered the hard stop and build the phrase accordingly
-            if (needsIntro && wordTracking.intro?.hardStop) {
+            // If there's a hard stop, determine which word triggered it and stop there
+            // We need to respect the actual format that was selected
+            let stopAfterIntro = needsIntro && wordTracking.intro?.hardStop;
+            let stopAfterBeast = needsBeast && wordTracking.beast?.hardStop;
+            let stopAfterNoun = needsNoun && wordTracking.noun?.hardStop;
+            let stopAfterCandy = needsCandy && wordTracking.candy?.hardStop;
+            let stopAfterAdjective = needsAdjective && wordTracking.adjective?.hardStop;
+            let stopAfterFinale = needsFinale && wordTracking.finale?.hardStop;
+            
+            // Build phrase up to the hard stop point using the selected format
+            if (stopAfterIntro) {
                 phrase = processedIntro;
-            } else if (needsBeast && wordTracking.beast?.hardStop) {
-                phrase = randomFormat(processedIntro, finalBeast, '', '', '', '');
-            } else if (needsNoun && wordTracking.noun?.hardStop) {
-                phrase = randomFormat(processedIntro, finalBeast, finalNoun, '', '', '');
-            } else if (needsCandy && wordTracking.candy?.hardStop) {
-                phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, '', '');
-            } else if (needsAdjective && wordTracking.adjective?.hardStop) {
-                phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, '');
-            } else if (needsFinale && wordTracking.finale?.hardStop) {
-                phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, processedFinale);
+            } else {
+                // For other hard stops, we need to determine which words to include based on the format
+                // and stop at the appropriate point
+                let includeIntro = needsIntro;
+                let includeBeast = needsBeast;
+                let includeNoun = needsNoun;
+                let includeCandy = needsCandy;
+                let includeAdjective = needsAdjective;
+                let includeFinale = needsFinale;
+                
+                // Determine the stopping point and only include words up to that point
+                if (stopAfterBeast) {
+                    includeNoun = false;
+                    includeCandy = false;
+                    includeAdjective = false;
+                    includeFinale = false;
+                } else if (stopAfterNoun) {
+                    includeCandy = false;
+                    includeAdjective = false;
+                    includeFinale = false;
+                } else if (stopAfterCandy) {
+                    includeAdjective = false;
+                    includeFinale = false;
+                } else if (stopAfterAdjective) {
+                    includeNoun = false;
+                    includeFinale = false;
+                }
+                
+                // Build the phrase with only the words that should be included
+                phrase = randomFormat(
+                    includeIntro ? processedIntro : '',
+                    includeBeast ? finalBeast : '',
+                    includeNoun ? finalNoun : '',
+                    includeCandy ? finalCandy : '',
+                    includeAdjective ? processedAdjective : '',
+                    includeFinale ? processedFinale : ''
+                );
             }
         } else {
             // Normal phrase generation
@@ -832,6 +928,9 @@
         // Remove hard stop markers (*F*) and beast stop markers (*B*) from final phrase
         phrase = phrase.replace(/\*F\*/g, '');
         phrase = phrase.replace(/\*B\*/g, '');
+        
+        // Clean up phrase formatting
+        phrase = cleanPhrase(phrase);
         
         // Apply child's mode filtering if enabled
         phrase = filterNSFW(phrase);
@@ -853,25 +952,43 @@
                 tagTracking = createWordTracking(tag);
                 
                 // Process the tag word
-                const processWordWithTracking = (word, tracking) => {
-                    // Process alternates first
-                    const { result: afterAlternates, alternates } = processAlternates(word);
-                    
-                    // Process brackets
-                    const { result, addons, hasHardStop, hasBeastStop } = processBrackets(afterAlternates);
-                    
-                    // Update tracking
-                    tracking.final = result;
-                    tracking.addons = addons;
-                    tracking.alternates = alternates;
-                    tracking.hardStop = hasHardStop;
-                    tracking.beastStop = hasBeastStop;
-                    tracking.original = word;
-                    
-                    return result;
-                };
-                
                 processedTag = processWordWithTracking(tag, tagTracking);
+                
+                // Check if the previous word type was made all-caps and inherit it
+                let lastWordTypeWasAllCaps = false;
+                
+                if (hasHardStop) {
+                    // Determine which word type triggered the hard stop (that's our last word)
+                    if (needsIntro && wordTracking.intro?.hardStop) {
+                        lastWordTypeWasAllCaps = wordTracking.intro?.modifications?.includes('all-caps') || false;
+                    } else if (needsBeast && wordTracking.beast?.hardStop) {
+                        lastWordTypeWasAllCaps = wordTracking.beast?.modifications?.includes('all-caps') || false;
+                    } else if (needsNoun && wordTracking.noun?.hardStop) {
+                        lastWordTypeWasAllCaps = wordTracking.noun?.modifications?.includes('all-caps') || false;
+                    } else if (needsCandy && wordTracking.candy?.hardStop) {
+                        lastWordTypeWasAllCaps = wordTracking.candy?.modifications?.includes('all-caps') || false;
+                    } else if (needsAdjective && wordTracking.adjective?.hardStop) {
+                        lastWordTypeWasAllCaps = wordTracking.adjective?.modifications?.includes('all-caps') || false;
+                    } else if (needsFinale && wordTracking.finale?.hardStop) {
+                        lastWordTypeWasAllCaps = wordTracking.finale?.modifications?.includes('all-caps') || false;
+                    }
+                } else {
+                    // Normal completion - check if finale was made all-caps
+                    if (needsFinale) {
+                        lastWordTypeWasAllCaps = wordTracking.finale?.modifications?.includes('all-caps') || false;
+                    }
+                }
+                
+                // Apply all-caps to tag if previous word was all-caps
+                if (lastWordTypeWasAllCaps) {
+                    processedTag = processedTag.toUpperCase();
+                    tagTracking.final = processedTag;
+                    tagTracking.modifications.push('all-caps-inherited');
+                }
+                
+                // Add to timeout system
+                addItemToTimeout('tag', tag); // Add the tag item to the tag list
+                additionalItemsUsed.push({type: 'tag', item: tag});
                 
                 // Add the tag to the end of the phrase
                 phrase = `${phrase} ${processedTag}`;
@@ -1036,11 +1153,11 @@
       if (state === 'filling') {
         btnText.textContent = '';
       } else if (state === 'ready') {
-          btnText.textContent = 'GO';
+        btnText.textContent = 'GO';
       }
     };
 
-     /**
+    /**
       * Updates child's mode toggle appearance
       */
      const updatechildsModeToggle = () => {
@@ -1049,7 +1166,7 @@
          childsModeToggle.classList.remove('bg-gray-200');
          childsModeSlider.classList.add('translate-x-5');
          childsModeSlider.classList.remove('translate-x-0');
-       } else {
+      } else {
          childsModeToggle.classList.remove('bg-pink-500');
          childsModeToggle.classList.add('bg-gray-200');
          childsModeSlider.classList.remove('translate-x-5');
@@ -1131,7 +1248,7 @@
          muteBtn.classList.add('muted');
          muteBtn.classList.remove('playing');
        }
-     };
+    };
     
     /**
      * Shows toast notification
@@ -1215,10 +1332,16 @@
                     currentWord = phrase.substring(wordStart, wordEnd);
                 }
                 
+                // Check if we're at the last word (immune from typos)
+                const remainingPhrase = phrase.substring(currentIndex + 1).trim();
+                const wordsLeft = remainingPhrase.split(' ').filter(word => word.length > 0);
+                const isLastWord = wordsLeft.length <= 1;
+                
                 let shouldMakeTypo = !hasActiveTypo && 
                                    Math.random() < CONFIG.typoChance && 
                                    char.match(/[a-zA-Z]/) && 
-                                   !swappedWords.has(currentWord);
+                                   !swappedWords.has(currentWord) &&
+                                   !isLastWord; // Last word is immune from typos
                 
                 if (shouldMakeTypo) {
                     // Make a typo based on QWERTY keyboard layout
@@ -1229,33 +1352,98 @@
                 // Add the character (could be original or typo)
                 displayedText += actualChar;
                 
+                // Play typewriter sound for letters and spaces
+                if (actualChar.match(/[a-zA-Z ]/)) {
+                    if (actualChar === ' ') {
+                        // Space bar: 25% med, 35% soft, 40% very-soft
+                        if (typewriterSounds.length > 0) {
+                            let sound;
+                            const random = Math.random();
+                            if (random < 0.25) {
+                                // 25% chance for med-hit (30% quieter)
+                                sound = typewriterSounds[2]; // med-hit (index 2)
+                                sound.volume = typewriterVolume * 0.7; // 30% quieter
+                            } else if (random < 0.60) { // 0.25 + 0.35 = 0.60
+                                // 35% chance for soft hits
+                                const softSounds = [0, 1]; // soft-hit-2 (index 0), soft-hit-3 (index 1)
+                                const soundIndex = softSounds[Math.floor(Math.random() * softSounds.length)];
+                                sound = typewriterSounds[soundIndex];
+                                sound.volume = typewriterVolume; // Normal volume
+                            } else {
+                                // 40% chance for very-soft hits
+                                const verySoftSounds = [4, 5, 6]; // very-soft-hit (index 4), very-soft-hit-2 (index 5), very-soft-hit-3 (index 6)
+                                const soundIndex = verySoftSounds[Math.floor(Math.random() * verySoftSounds.length)];
+                                sound = typewriterSounds[soundIndex];
+                                sound.volume = typewriterVolume; // Normal volume
+                            }
+                            sound.currentTime = 0;
+                            sound.play().catch(err => {});
+                        }
+                    } else {
+                        // Letters use very-soft-hit sounds
+                        playTypewriterSound(actualChar);
+                    }
+                }
+                
                 phraseOutput.textContent = displayedText;
                 currentIndex++;
                 
                 // Check if we're at the end of a word (space or end of phrase)
                 const isEndOfWord = char === ' ' || currentIndex >= phrase.length;
                 
+                // Check word timing for carriage sound
+                if (char === ' ' && currentIndex < phrase.length) {
+                    // We just typed a space, check what's left
+                    const remainingPhrase = phrase.substring(currentIndex).trim();
+                    const wordsLeft = remainingPhrase.split(' ').filter(word => word.length > 0);
+                    
+                    if (wordsLeft.length === 1) {
+                        // This is the last word - play carriage sound
+                        playCarriageSound();
+                    }
+                }
+                
                 if (isEndOfWord && hasActiveTypo) {
                     // We've finished typing a word that had a typo - check if we should correct it
                     // Calculate correction chance based on typo position
                     let correctionChance = CONFIG.typoCorrectionChance; // Default 80%
                     
-                    // Find word boundaries more carefully
-                    // For the original phrase: find the word that just ended
-                    let wordEndIndex = char === ' ' ? currentIndex - 1 : currentIndex;
-                    let wordStartIndex = wordEndIndex - 1;
-                    while (wordStartIndex > 0 && phrase[wordStartIndex - 1] !== ' ') {
-                        wordStartIndex--;
-                    }
+                    // Check if this is the last word in the phrase
+                    const isLastWord = currentIndex >= phrase.length;
                     
-                    // For displayed text: find the last complete word
-                    let displayedWordEnd = displayedText.length;
-                    if (displayedText[displayedText.length - 1] === ' ') {
-                        displayedWordEnd = displayedText.length - 1;
-                    }
-                    let displayedWordStartIndex = displayedWordEnd - 1;
-                    while (displayedWordStartIndex > 0 && displayedText[displayedWordStartIndex - 1] !== ' ') {
-                        displayedWordStartIndex--;
+                    let wordEndIndex, wordStartIndex, displayedWordEnd, displayedWordStartIndex;
+                    
+                    if (isLastWord) {
+                        // Special handling for the last word - use phrase length as boundary
+                        wordEndIndex = phrase.length;
+                        wordStartIndex = wordEndIndex - 1;
+                        while (wordStartIndex > 0 && phrase[wordStartIndex - 1] !== ' ') {
+                            wordStartIndex--;
+                        }
+                        
+                        // For displayed text: use full length as boundary
+                        displayedWordEnd = displayedText.length;
+                        displayedWordStartIndex = displayedWordEnd - 1;
+                        while (displayedWordStartIndex > 0 && displayedText[displayedWordStartIndex - 1] !== ' ') {
+                            displayedWordStartIndex--;
+                        }
+                    } else {
+                        // Normal handling for non-last words
+                        wordEndIndex = char === ' ' ? currentIndex - 1 : currentIndex;
+                        wordStartIndex = wordEndIndex - 1;
+                        while (wordStartIndex > 0 && phrase[wordStartIndex - 1] !== ' ') {
+                            wordStartIndex--;
+                        }
+                        
+                        // For displayed text: find the last complete word
+                        displayedWordEnd = displayedText.length;
+                        if (displayedText[displayedText.length - 1] === ' ') {
+                            displayedWordEnd = displayedText.length - 1;
+                        }
+                        displayedWordStartIndex = displayedWordEnd - 1;
+                        while (displayedWordStartIndex > 0 && displayedText[displayedWordStartIndex - 1] !== ' ') {
+                            displayedWordStartIndex--;
+                        }
                     }
                     
                     // Get the displayed word (what we actually typed)
@@ -1301,45 +1489,45 @@
                 } else {
                     // Normal mode: realistic human typing
                     baseDelay = getBaseDelay(actualChar, prevChar);
-                    
-                    // Apply dynamic speed variation (human rhythm changes)
-                    typingSpeed += (Math.random() - 0.5) * 0.1; // Gradual speed changes
-                    typingSpeed = Math.max(0.3, Math.min(1.8, typingSpeed)); // Clamp between 0.3x and 1.8x
-                    baseDelay *= typingSpeed;
-                    
-                    // Add natural rhythm variations
-                    const rhythmVariation = 0.5 + Math.random() * 1.0; // 0.5x to 1.5x variation
-                    baseDelay *= rhythmVariation;
+                
+                // Apply dynamic speed variation (human rhythm changes)
+                typingSpeed += (Math.random() - 0.5) * 0.1; // Gradual speed changes
+                typingSpeed = Math.max(0.3, Math.min(1.8, typingSpeed)); // Clamp between 0.3x and 1.8x
+                baseDelay *= typingSpeed;
+                
+                // Add natural rhythm variations
+                const rhythmVariation = 0.5 + Math.random() * 1.0; // 0.5x to 1.5x variation
+                baseDelay *= rhythmVariation;
                 }
                 
                 if (!CONFIG.testMode) {
                     // Normal mode: apply all the realistic human typing effects
-                    
-                    // Simulate typing bursts (fast sequences followed by pauses)
-                    const timeSinceLastChar = Date.now() - lastCharTime;
-                    if (timeSinceLastChar > 200) { // After a pause, start with slower typing
-                        baseDelay *= 1.5;
-                    }
-                    
-                    // Natural pauses after punctuation
-                    if (prevChar.match(/[.!?]/)) {
-                        baseDelay += 33.33 + Math.random() * 66.67; // Extra pause after sentences (3/4ths slower)
-                    } else if (prevChar.match(/[,;:]/)) {
-                        baseDelay += 13.33 + Math.random() * 33.33; // Shorter pause after commas (3/4ths slower)
-                    }
-                    
-                    // Occasional longer thinking pauses (more frequent than before)
-                    if (Math.random() < CONFIG.thinkingPauseChance) { // 8% chance
-                        baseDelay += 66.67 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
-                    }
-                    
-                    // Simulate finger fatigue (gradually slower over time)
-                    const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.05; // Up to 5% slower
-                    baseDelay *= fatigueFactor;
-                    
-                    // Word boundaries get slight pauses
-                    if (char === ' ') {
-                        baseDelay += 6.67 + Math.random() * 13.33; // 3/4ths slower
+                
+                // Simulate typing bursts (fast sequences followed by pauses)
+                const timeSinceLastChar = Date.now() - lastCharTime;
+                if (timeSinceLastChar > 200) { // After a pause, start with slower typing
+                    baseDelay *= 1.5;
+                }
+                
+                // Natural pauses after punctuation
+                if (prevChar.match(/[.!?]/)) {
+                    baseDelay += 33.33 + Math.random() * 66.67; // Extra pause after sentences (3/4ths slower)
+                } else if (prevChar.match(/[,;:]/)) {
+                    baseDelay += 13.33 + Math.random() * 33.33; // Shorter pause after commas (3/4ths slower)
+                }
+                
+                // Occasional longer thinking pauses (more frequent than before)
+                if (Math.random() < CONFIG.thinkingPauseChance) { // 8% chance
+                    baseDelay += 66.67 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
+                }
+                
+                // Simulate finger fatigue (gradually slower over time)
+                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.05; // Up to 5% slower
+                baseDelay *= fatigueFactor;
+                
+                // Word boundaries get slight pauses
+                if (char === ' ') {
+                    baseDelay += 6.67 + Math.random() * 13.33; // 3/4ths slower
                     }
                 }
                 
@@ -1351,8 +1539,11 @@
             } else {
                 // Typing complete - but only if no active typo correction
                 if (!hasActiveTypo) {
+                    // Play bell sound when phrase is complete
+                    playBellSound();
+                    
                     // Show copy button and mark typing as inactive
-                    copyBtn.classList.remove('opacity-0');
+                copyBtn.classList.remove('opacity-0');
                     isTyping = false;
                     typingTimeouts = []; // Clear the timeout array since we're done
                 }
@@ -1389,15 +1580,36 @@
                     phraseOutput.textContent = displayedText;
                     backspaceCount++;
                     
+                    // Play realistic backspace sound (hard hits first, soft hits as you approach)
+                    if (typewriterSounds.length > 0) {
+                        const totalBackspaces = charsToBackspace;
+                        const softHitCount = Math.floor(totalBackspaces / 2); // Last half, rounded down
+                        const hardHitCount = totalBackspaces - softHitCount;
+                        
+                        let sound;
+                        if (backspaceCount <= hardHitCount) {
+                            // First part: use hard-hit
+                            sound = typewriterSounds[3]; // hard-hit (index 3)
+                        } else {
+                            // Last part: use soft hits
+                            const softSounds = [0, 1]; // soft-hit-2 (index 0), soft-hit-3 (index 1)
+                            const soundIndex = softSounds[Math.floor(Math.random() * softSounds.length)];
+                            sound = typewriterSounds[soundIndex];
+                        }
+                        
+                        sound.currentTime = 0;
+                        sound.play().catch(err => {});
+                    }
+                    
                     // Calculate backspace delay
                     let delay;
                     if (CONFIG.testMode) {
                         delay = 1; // Super fast backspacing in test mode
                     } else {
-                        // Slow down as we approach the typo (start fast, end slow)
-                        const progress = backspaceCount / charsToBackspace; // 0 to 1
-                        const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
-                        const baseDelay = 15 + Math.random() * 25; // Original fast delay
+                    // Slow down as we approach the typo (start fast, end slow)
+                    const progress = backspaceCount / charsToBackspace; // 0 to 1
+                    const speedMultiplier = 1 + (progress * 3); // 1x to 4x slower
+                    const baseDelay = 15 + Math.random() * 25; // Original fast delay
                         delay = baseDelay * speedMultiplier * (2 - CONFIG.typingSpeedMultiplier); // Apply slowdown and typing speed multiplier
                     }
                     
@@ -1405,7 +1617,15 @@
                     typingTimeouts.push(timeoutId);
                 } else {
                     // Now continue typing from the typo position
-                    continueTypingFromWordTypo(wordStartIndex + typoPosition);
+                    let continuePosition = wordStartIndex + typoPosition;
+                    
+                    // Special fix for last word: start one position earlier
+                    // const isLastWord = currentIndex >= phrase.length;
+                    // if (isLastWord && typoPosition > 0) {
+                    //     continuePosition = wordStartIndex + typoPosition - 1;
+                    // }
+                    
+                    continueTypingFromWordTypo(continuePosition);
                 }
             };
             
@@ -1563,8 +1783,15 @@
     };
 
     // --- EVENT LISTENERS ---
-    // Copy button functionality
-    copyBtn.addEventListener('click', copyToClipboard);
+    // Copy button functionality - only works when visible
+    copyBtn.addEventListener('click', (event) => {
+      // Only copy if button is visible (not opacity-0)
+      const isVisible = !copyBtn.classList.contains('opacity-0');
+      if (isVisible) {
+        copyToClipboard();
+      }
+      // If not visible, just let the click bubble up to advance progress bar
+    });
     
      // child's mode toggle functionality
      childsModeToggle.addEventListener('click', togglechildsMode);
@@ -1667,14 +1894,103 @@
     // --- AUDIO FUNCTIONS ---
     const backgroundMusic = document.getElementById('background-music');
     
+    // Typewriter sound effects
+    let typewriterSounds = [];
+    let currentTypewriterSoundIndex = 0;
+    const typewriterVolume = 0.3; // Volume for typewriter sounds
+    
     // Simple numbered playlist system
     const totalSongs = 5; // Update this number when you add more songs
     const playlist = [];
     
     // Generate playlist: 1.mp3, 2.mp3, 3.mp3, etc.
     for (let i = 1; i <= totalSongs; i++) {
-      playlist.push(`audio/${i}.mp3`);
+      playlist.push(`audio/music/${i}.mp3`);
     }
+    
+    /**
+     * Initializes typewriter sound effects
+     */
+    const initializeTypewriterSounds = () => {
+      // Load typewriter sounds from the typewriter folder
+      const typewriterSoundFiles = [
+        'soft-hit-2.wav', 
+        'soft-hit-3.wav',
+        'med-hit.wav',
+        'hard-hit.wav',
+        'very-soft-hit.wav',
+        'very-soft-hit-2.wav',
+        'very-soft-hit-3.mp3'
+      ];
+      
+      // Load carriage return and bell sounds separately (50% volume)
+      const carriageSound = new Audio('audio/typewriter/carriage-return.wav');
+      carriageSound.volume = typewriterVolume * 0.5; // 50% of normal volume
+      carriageSound.preload = 'auto';
+      window.carriageSound = carriageSound;
+      
+      const bellSound = new Audio('audio/typewriter/bell.wav');
+      bellSound.volume = typewriterVolume * 0.5; // 50% of normal volume
+      bellSound.preload = 'auto';
+      window.bellSound = bellSound;
+      
+      typewriterSounds = [];
+      
+      typewriterSoundFiles.forEach(filename => {
+        const audio = new Audio(`audio/typewriter/${filename}`);
+        audio.volume = typewriterVolume;
+        audio.preload = 'auto';
+        typewriterSounds.push(audio);
+      });
+    };
+    
+    /**
+     * Plays a typewriter sound effect with realistic variation
+     */
+    const playTypewriterSound = (char) => {
+      if (typewriterSounds.length === 0) return;
+      
+      let soundIndex;
+      
+      // Use only very-soft-hit sounds for all typing
+      const verySoftSounds = [4, 5, 6]; // very-soft-hit (index 4), very-soft-hit-2 (index 5), very-soft-hit-3 (index 6)
+      soundIndex = verySoftSounds[Math.floor(Math.random() * verySoftSounds.length)];
+      
+      const sound = typewriterSounds[soundIndex];
+      
+      // Play the sound (with error handling)
+      sound.currentTime = 0; // Reset to beginning
+      sound.play().catch(err => {
+        // Ignore audio play errors (browser restrictions, etc.)
+      });
+    };
+    
+    /**
+     * Plays the carriage return sound
+     */
+    const playCarriageSound = () => {
+      if (!window.carriageSound) return;
+      
+      // Play the carriage return sound (with error handling)
+      window.carriageSound.currentTime = 0; // Reset to beginning
+      window.carriageSound.play().catch(err => {
+        // Ignore audio play errors (browser restrictions, etc.)
+      });
+    };
+    
+    /**
+     * Plays the bell sound
+     */
+    const playBellSound = () => {
+      if (!window.bellSound) return;
+      
+      // Play the bell sound (with error handling)
+      window.bellSound.currentTime = 0; // Reset to beginning
+      window.bellSound.play().catch(err => {
+        // Ignore audio play errors (browser restrictions, etc.)
+      });
+    };
+    
     let currentSongIndex = 0;
     
     /**
@@ -1748,7 +2064,7 @@
     };
     
 
-     // --- INITIALIZATION ---
+    // --- INITIALIZATION ---
      // Initialize child's mode toggle
      updatechildsModeToggle();
      
@@ -1761,6 +2077,9 @@
     
     // Initialize background music
     initializeAudio();
+    
+    // Initialize typewriter sounds
+    initializeTypewriterSounds();
     
     // Start the auto-fill animation when the page loads
     startAutoFill();

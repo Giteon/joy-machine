@@ -48,7 +48,7 @@ cow
 deer [in headlights, *B*]
 dodo
 dog
-dolphin
+dolphin [grey 2006 MX-5 miata 4-door, .2, *B*]
 donkey [kong [jerking off face down, *B*]]
 duck
 elephant
@@ -113,34 +113,39 @@ zebra
 NOUN (N)
 [oh no babe pleaaase dont be mad i accidentally booked a vacation to, .2, *F*] needle beach
 bound to wheelchair
-full-body (paralysis/orgasm)
+full-body (paralysis/hands-free orgasm)
 imitation holocaust crab
 sydney sweeney [jeans optimal DNA, .2, *F*]
 bone orchid [immune from all disease, .25, *F*]
 mozzarella stick
 hinge premium [diahhrea from tube]
 [45°, .2] cock shame
+wikihow
 GROK
 propranolol [8000mg]
 coke zero [friends or family, *F*]
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
-[AYY] GARY ROYCE[ OHO! A-BING-A-BAM-A-BOOM, .1, *F*]
-syndicated [television]
+AYY GARY ROYCE! [OHO! A-BING-A-BAM-A-BOOM, .1, *F*]
 shiva baby
 selena gomez [oreo mmmm tastes like fucking mexico everything is in sepia now, *F*]
-dorito pilgrim [thanksgiving, .25]
+dorito pilgrim
 black mirror
 twin flame
 9/11 (simulator/livestream)
 sophie's choice
+temu
+pastrami sandwich
 leprechaun
+cocktail napkin
 spotify premium
 luigi mangione
 popcorn lung
+compilation
 barmitzvah
 ted cruz [donde esta la biblioteca, *F*]
+license and registration
 powerball
 lobotomy
 slutty vegan
@@ -149,34 +154,42 @@ pussy taste test [jump up and down, .3, *F*]
 onlyfans
 rodolfo [trapped in floorboards, *F*]
 primordial soup
-laura palmer [body bag, .25 [dream sequence, .25]]
+laura palmer[? I thought you said ARNOLD palmer, .15, *F*]
 war movie monday
 u sure? 😏😏😏
 saggitarius [rising]
 citronela ring pop
 kim petras [coconut [perfect pitch, .2]]
-kurt vonnegut [um ok so this is officially my life!, .2, *F*]
+kurt vonnegut [ummm ok so this is officially my life? *F*]
 goblin mode
 breastmilk [on the cheap, .25]
 hungry tax [click here to feed your advisor a motivational nutrition cube, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
+armenian conveyor belt
 wet leg
 thumbalina
+herbert von kinkshame
+international waters
 wartime economy
+wagwan
 monster mash
 head exploded [no pulse]
 with 9 billion child IQ
 water stain
+citizen's arrest
+vinegar corner
+capital one cafe
+shen yun [5000 YEARS OF CIVILIZATION REBORN, *F*]
+tide on-the-go
 monster porn
 french red [frozen solid, .25]
 precum [premarket [postmarket]]
-spike the punch
+spike the punch [BITCH, .2, *F*]
 instant death
 iranian steakhouse
 cardio mezzanine [death by hypoxia [no response to thoughtful email, *F*]]
 thimble of milk
-syndicated television
 bisexual boyfriend [(trough/simulator)]
 orgasmatron 3000
 topamax sprinkle [300,000mg [lethal dose, *F*]]
@@ -196,23 +209,33 @@ buccal fat [tummy tuck]
 chunky monkey
 freaky friday
 tip-to-taint
+jacuzzi
 laffy taffy
 zendaya
 she-shed [wasp infestation]
 humpty dumpty
 chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
+prest-o change-o
+circadian somersault
 [fucking] candy flip
-ding dong [ditch] 
+taskrabbit
+ding dong [ditch]
+petracore
+syzygy
 54321 [54321 [54321 [54321 [54321 [54321]]]]]
 cha-cha slide
+poindexter
 boing boing [yoga ball [blacked out no memories, *F*]]
 gamer gunk
 gutterball
 pinapple jiblet
 wet nurse [japanese sponge bath, *F*]
+bundle and save
+hub and spoke
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
+leelo dallas multipass
 [pussy popping, *F*] polly pocket
 bunson burner [bitch, .2, *F*]
 hellen keller [jerking off ALL over town, *F*]
@@ -224,12 +247,13 @@ tiny desk
 chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip, .1, *F*]
 dunkin donut[s]
 zoboomafoo
+rigamarole
 beach blanket babylon
 baby bonnet
 labubu [lafufu]
 bing bong
 ZING
-ding [ding ding, *F*]
+ding ding [ding, *F*]
 pussy slay mama
 daily dingle [dongle, .15]
 party popper
@@ -237,6 +261,7 @@ willy wonka
 squink squonk
 yuppy bitch
 baba yaga
+baby yoda
 wawa
 slop job
 jungle juice
@@ -254,19 +279,32 @@ low libido (magic the gathering/penis boy)
 chained to radiator
 bricked up [fridge magnet, .1, *F*]
 ferragamo [signature scent]
+syndicated [television]
 one two skip a few ninety nine a hundred
 authentic home-cooked
+diegetic
 full-frontal
+stolen valor
+microplastic
+periphrastic
+slice of life
+recession-proof
+sweet cinnamon
 tabernacle
+executive
 ambivert
 animal-style
 criterion collection
 firm-but-fair
-kellogs [brand cereal instant horny recipie, .2, *F*]
+carbon neutral
+french tuck
+kellogs [cereal instant horny recipie, .2, *F*]
 type-3
-wagwan
+him and hers
+Dr.
 bowl cut
 INFP [strippers, .2]
+select all the squares containing a
 ENTJ
 I-Spy
 180p
@@ -274,20 +312,19 @@ clown
 quirked up [white boy with a little bit of swagger busts it down sexual style, *F*]
 benegesserit [voice glitch discovered for free and infinite loose cigarettes, *F*]
 bitch[-ass, .2]
-funtivity [by hermis [is ear seeding the solution to cortisol face?, .15, *F*]]
+funtivity [by hermis, .15, *F*]
 egg-laden [female]
 clown [party, .3]
 knee-high [swampwater]
-for her pleasure
 italian
 lifetime subscription
 sucked dry
-bottled from the source
+bottled at the source
 eldritch [shed demon, .1]
 farm-to-table [tip-to-taint, .3 [bottled at the source, .3]]
 victory royale
 cum-colored
-zero swag [detected]
+zero swag [detected, .2, *F*]
 hath risen [on the third day, .2, *F*]
 family plan
 kill on site
@@ -305,7 +342,7 @@ open-concept [torture dungeon]
 slut [whore [bitch [cunt]]]
 paradigm shift
 green bubble 
-boy phone girl phone
+boy phone girl phone [they them phone]
 ahegao [mommy milker [sudoku eyes, 0.6, *F*]]
 
 FINALE (F)
@@ -313,7 +350,6 @@ YOUNG [(Skylar Gisondo/Jenna Orteg/Coleman Domingo) YOUNG, .2]
 cat kitty cat cat kitty cat cat
 dot com [dot jizz [dot edu]]
 total body enhancement [chamber [of commerce]]
-(reliable, expensive, dangerous)
 with the (fat naturals, .7/fatties, .3)
 3-trillion thread count
 shit cup runneth over [my balls, .3]
@@ -335,33 +371,42 @@ that one (egg is 40 eggs?/snake is 40 snakes?/dog is 40 dogs?/beer is 40 beers?/
 consciousness uploaded to rat, rat dies, consciousness uploaded to new rat[, new rat dies, consciousness uploaded to second new rat[, second new rat dies, consciousness uploaded to third new rat[, third new rat dies, consciousness uploaded to FINAL new rat[, FINAL new rat dies, consciousness uploaded to new FINAL new rat]]]]
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at?
+COLD STONE SOBER
+freak accident on the job, confined to bed charlie and the chocolate factory style
 HEAT DEATH OF UNIVERSE
+back in highschool I rolled blunts on the scantron
 fucking turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
-memories deleted from google drive [no storage remaining must delete all cherished memories]]
+memories deleted from google drive [no storage remaining must delete all cherished memories]
 MAYO MOMENT
+does anyone smell toast
 hey google how many calories in 60 advil?
-[stand in me] and you will be bathed in shekhaina glory
+hey girl [you're looking beautiful tonight] whats your favorite AI?
+[stand in me] and you will be bathed in shekhaina glory XIAOHONGSHU
 LOL (LOTS OF LOVE)
+where's the heft?
 pokemon go (to the polls/fuck yourself)
 infertile if dog
 etc [etc and so on [and so forth [in such a way [proceeding as thus as such]]]]
 and subway take away everything you love
 100% AGREE
-spin spin spin around in a circle [now place your hand on the hot stove [it cannot hurt you as it’s only part of the simulation.]]
+now sit right down im gonna spin you around like a basketball
+spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
 shot dead by alec baldwin[, alec baldwin pardoned (!/and given purple heart!!!)]
 mmmmmmm mmmmm let me imagine it
 where did these bullet holes come from
-car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until become a husk]
+car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until have turned into a husk]
 and let the [fucking] bunny eat the carrot
 your skin [ohhhh yeah] oh yeah your skin and bones turn iiiiin to something beautiful
 in good christian fun
 emits poweful pheromone brain scrambled
 within 1000 feet of a school
+suggested donation life savings
 take off glasses it is revealed she is actually beautiful[!]
+FREE CREDIT SCORE
 DANGER WILL ROBINSON [DANGER [DANGER]]
 100 concubines (NOT virgins, robust sexual references)
 leave no trace search history wiped
@@ -386,18 +431,22 @@ anti-(hoes/happiness) technology
 girlfriend (who loves me so much/with a printer dating sim)
 IN ENGLISH PLEASE
 ChatGPT 1 million almonds destroyed
+stand here so i can crop you out later
+for her pleasure
 plus tax and tip
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)
+we'll add it in post
 round up to nearest billion yuan
 slumber party hang upside down and cut major arteries to drain blood as fast as possible
-RETWEET 1000
-CANCELLED
+RATIO[. CANCELLED]
 on my desk YESTERDAY
 green moose guava juice large fries chocolate shake
 300hz binaural beats [mozart gray noise flow state] for study work migraine focus [cure vision]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏
+70/30 split
+(reliable, expensive, dangerous)
 THE CITY IS MINE
 guantanamo bay forced to watch pole dancing video on work computer
 and buy yourself something nice kid
@@ -411,22 +460,29 @@ XIAOHONGSHU
 capiesch?
 ...OR SHE!
 type shit
+type shit
 YOUNG
 SCRONGIEEEEE
-DING!
+FUCK
+. DING!
 unless??
 for the lady
-boobieeeeee
+RETWEET 1000
+. OH BEHAVE!
 weeeeeeeeeeeeee
 dave & busters [dave & busters, .2 [dave & busters, .2]]
 mmmmmmmmmmm
-SLIME MAN
-RICH MILLIONAIRE
+. SLIME MAN
+. RICH MILLIONAIRE
+GONE WRONG
 por favor [mon cherie]
 🥺🥺🥺
+do i make myself clear?
 no refunds
+4K
 MAN I GOT IT MADE
-I guess
+I guess!
+(got his ass/on god fr)
 SEND [UNSEND SEND [FUCK]]
 ha ha`;
 
@@ -466,7 +522,11 @@ const parseLists = (text) => {
 // NSFW words list for childs mode filtering (only words that actually appear in the lists and are truly offensive)
 const nsfwWords = [
   // Profanity
-  'how can i be homophobic my bitch is gay', 'wagwan', 'within 1000 feet of a school', 'nutritional yeast infection', 'bombaclat'
+  'how can i be homophobic my bitch is gay', 'wagwan', 'within 1000 feet of a school', 'nutritional yeast infection', 'bombaclat',
+  'wet nurse', 'whore', 'slut', 'pussy taste test', 'pussy popping', 'japanese sponge bath', 'penis boy', 'bubble butt', 'blood drenched', 'blood soaked', 'slop job',
+  'bricked up', 'sucked dry', 'holocaust', 'imitation holocaust crab', 'guantanamo bay', '9/11', '9/11 simulator', '9/11 livestream',
+  'japanese water torture', 'breedable', 'ahegao', 'mommy milker', 'onlyfans', 'and suck the dust off the tip', 'orgasm', 'hands-free orgasm', 'chained to radiator',
+  'death by hypoxia'
 ];
 
 // child's mode word replacements mapping
@@ -478,26 +538,22 @@ const childsModeReplacements = {
   'fuck my fucking ass': 'butter my biscuit',
   'dead': 'passed away',
   'shot dead': 'unalived',
-  'slut': 'friend',
-  'whore': 'aquaintance',
-  'cunt': 'coworker',
+  'cunt': 'silly goose',
   'slutty vegan': 'vegan',
   'sexual style': 'silly style',
-  'shit cup runneth over my balls': 'coffee cup poureth over my lap', 
+  'shit cup runneth over my balls': 'coffee cup poureth over my hand', 
   'shit cup runneth over': 'coffee cup poureth over',  
   'pokemon go fuck yourself': 'pokemon go to the polls',
   'non-sexual': 'platonic',
   'robust sexual references': 'interesting conversations',
   'death': 'passed away',
-  'death immenent': 'nap imminent',
+  'dies': 'passes away',
+  'death immenent': 'permanent nap imminent',
   'walk the plank bitch': 'walk the plank, pal',
-  'death by hypoxia': 'shortness of breath',
-  'f those t\'s': 'try an innovative new hairstyle',
-  'pussy taste test': 'slubmer party',
-  'pussy popping': 'party popper',
+  'FUCK': 'SNURT',
+  'bitch': 'baby',
+  'f those t\'s': 'I\'m going to try an innovative new hairstyle',
   'pussy slay mama': 'okay slay mama',
-  'ahegao': 'happy face',
-  'mommy milker': 'nourishing mother',
   'sudoku eyes': 'smiley face',
   'kill': 'unalive',
   'killed': 'unalived',
@@ -510,53 +566,39 @@ const childsModeReplacements = {
   'horny': 'happiness',
   'monster porn': 'monster movie',
   'cum': 'cream',
-  'breedable': 'accommodating',
+  'schoolbus explosion': 'schoolbus tires slashed',
+  'zero survivors': 'late for school',
   'submissive breedable': 'friendly accommodating',
   'cum-colored': 'cream-colored',
   'precum': 'premarket',
   'diahhrea from tube': 'mystery tube',
-  'bricked up': 'well-rested',
-  'sucked dry': 'dehydrated',
-  'and suck the dust off the tip': 'and taste the dust',
-  'tip-to-taint': 'top-to-bottom',
+  'tip-to-taint': 'head shoulders knees and toes',
   'nipple scene uncensored': 'honeymoon suite',
-  'wet nurse': 'in-home elder care', 
-  'japanese sponge bath': 'relaxing bath',
   'fuck-ass': 'stinky smelly',
   'sabrina carpenter creaming jeans': 'sabrina carpenter invites you on a date',
   'velma 4k stuck in washing machine 4k': 'velma solves a mystery',
-  'bitch': 'boy',
+  'yuppy bitch': 'yuppy',
   'bitch-ass': 'rapscallion',
-  'penis boy': 'handsome boy',
   'forced to watch pole dancing video on work computer': 'enjoying an entertaining dance performance online',
   'jarvis jerk it a little': 'jarvis give me a high five',
   'dating sim': 'romantic adventure',
-  'onlyfans': 'social media',
   'laura palmer body bag': 'laura palmer',
-  'bubble butt': 'athletic build',
-  'blood drenched': 'stained',
-  'blood soaked': 'soiled',
   'full-frontal': 'full-bodied',
   'full-pen': 'fun in the sun',
   'i put my dick in a bag of doritos': 'i put my hand in a bag of doritos',
-  'orgasm': 'pleasant afternoon',
   'orgasmatron 3000': 'happiness machine 3000',
   'dot jizz': 'dot fun',
   'concubines': 'friends',
   'NOT virgins': 'introverts',
   'bisexual boyfriend': 'best friend',
-  'explosion': 'adventure',
   'breastmilk': 'fresh goatsmilk',
-  'slop job': 'huge mess',
   'anti-hoes technology': 'anti-happiness technology',
   'fat naturals': 'great personalities',
   'fatties': 'perfect politics',
   'low libido': 'non-curious mind',
-  'zero survivors' : 'late for school',
   'fuckkkk': 'snurtttt',
   'cut major arteries to drain blood as fast as possible': 'enjoy a long life of limited mobility',
   'blood': 'life force',
-  'japanese water torture': 'relaxing bath',
   'torture dungeon': 'straight to the principal\'s office',
   'torture': 'punishment',
   'tortured': 'grounded for a week',
@@ -564,21 +606,14 @@ const childsModeReplacements = {
   'face down stroking my shit': 'sitting down stroking my chin',
   'jerking off': 'doing mobility stretches',
   'bazonga': 'bing bong',
+  'type shit': 'type situation',
   'shit': 'situation',
   'sexy': 'beautiful',
   'head exploded': 'migraine',
   'ran over by car': 'nearly hit by car',
-  'dies': 'passes away',
-  'holocaust': 'terrible situation', 
-  'imitation holocaust crab': 'friendly crab', 
-  'guantanamo bay': 'family vacation',
   'bullet holes': 'hot dogs',
-  '9/11': 'plane crash', 
-  '9/11 simulator': 'flight simulator', 
-  '9/11 livestream': 'gamer livestream',
   'cocaine': 'pixie stick', 
-  'cocaine dog': 'peppermint dog',
-  'wagwan': 'friend', 
+  'cocaine dog': 'dog',
   'YOUNG': 'BEST OF'
 };
 
