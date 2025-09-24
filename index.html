@@ -28,9 +28,9 @@
     </button>
 
     <!-- Phrase Display Area -->
-    <div class="flex flex-col sm:flex-row items-center justify-center w-full max-w-md gap-2">
-      <p id="phrase-output" class="text-xl font-medium text-gray-900 text-center flex-1"></p>
-      <button id="copy-btn" class="opacity-0 transition-opacity duration-200 p-2 rounded sm:ml-2">
+    <div class="flex flex-col sm:flex-row items-center justify-center w-full max-w-md relative">
+      <p id="phrase-output" class="text-xl font-medium text-gray-900 text-center"></p>
+      <button id="copy-btn" class="opacity-0 transition-opacity duration-200 p-2 rounded sm:absolute sm:-right-10 mt-2">
         <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
         </svg>
@@ -60,7 +60,7 @@
   </div>
 
   <!-- child's mode Toggle -->
-  <div class="fixed bottom-4 right-4 sm:bottom-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:right-auto flex items-center space-x-3 z-10">
+  <div class="fixed bottom-4 right-4 flex items-center space-x-3 z-10">
     <label for="childs-mode-toggle" class="text-sm text-gray-600 cursor-pointer">
       Child's Mode
     </label>
@@ -78,34 +78,34 @@
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
       advanceAmount: 0.03, // 3% of total steps when clicked
-      typoChance: 0.02, // 2% chance per letter
-      typoCorrectionChance: .95, // 95% chance to catch typo
+      typoChance: 0.015, // 1.5% chance per letter
+      typoCorrectionChance: .92, // 92% chance to catch typo
       doubleBeastChance: 0.50, // 50% chance for two beasts
       tripleBeastChance: 0.30, // 30% chance for three beasts (if already two)
       doubleCandyChance: 0.05, // 5% chance for two candies
       fuckingChance: 0.10, // 10% chance to add "fucking"
       thinkingPauseChance: 0.15, // 15% chance for thinking pause
-      allCapsChance: 0.1, // 10% chance for all caps (except beast)
+      allCapsChance: 0.15, // 15% chance for all caps (except beast)
       skipSpaceChance: 0.00, // 0% chance to skip spaces between words
-      swapLettersChance: 0.005, // .5% chance to swap two adjacent letters in word
+      swapLettersChance: 0.008, // .8% chance to swap two adjacent letters in word
       testMode: false, // Test mode - instant progress bar fill
       childsMode: false, // child's mode state
       backgroundMusic: true, // Enable background music
-      musicVolume: 0.2, // Background music volume (0.0 to 1.0)
+      musicVolume: 0.15, // Background music volume (0.0 to 1.0)
       tagChance: 0.15, // 15% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
       noConsole: false, // Disable all console logs when true
       typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
       typingSpeed: { //higher numbers = slower typing
-        space: { min: 25, max: 40 },
-        vowel: { min: 15, max: 35 },
-        consonant: { min: 16, max: 42 },
-        number: { min: 35, max: 55 },
-        punctuation: { min: 32, max: 60 }
+        space: { min: 22, max: 36 },
+        vowel: { min: 8, max: 22 },
+        consonant: { min: 10, max: 26 },
+        number: { min: 45, max: 80 },
+        punctuation: { min: 32, max: 70 }
       }
     };
 
-    // QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
+    // Pre-computed QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
     const QWERTY_MAP = {
         'q': ['w'], 'w': ['q', 'e'], 'e': ['w', 'r'],
         'r': ['e', 't'], 't': ['r', 'y'], 'y': ['t', 'u'],
@@ -116,6 +116,25 @@
         'l': ['k'], 'z': ['x'], 'x': ['z', 'c'],
         'c': ['x', 'v'], 'v': ['c', 'b'], 'b': ['v', 'n'],
         'n': ['b', 'm'], 'm': ['n']
+    };
+    
+    // Pre-computed typo lookup for faster access
+    const TYPO_CACHE = new Map();
+    const getTypoChar = (char) => {
+        if (TYPO_CACHE.has(char)) {
+            return TYPO_CACHE.get(char);
+        }
+        
+        const adjacent = QWERTY_MAP[char.toLowerCase()];
+        if (!adjacent || adjacent.length === 0) {
+            TYPO_CACHE.set(char, char);
+            return char;
+        }
+        
+        const randomTypo = adjacent[Math.floor(Math.random() * adjacent.length)];
+        const result = char === char.toUpperCase() ? randomTypo.toUpperCase() : randomTypo;
+        TYPO_CACHE.set(char, result);
+        return result;
     };
 
     // --- DOM ELEMENTS & STATE ---
@@ -129,6 +148,7 @@
     let currentFill = 0;
     const totalSteps = CONFIG.fillDuration / CONFIG.updateInterval; // Total number of steps
     let isComplete = false;
+    let pageTurnPlayed = false;
     let typingTimeouts = []; // Track active typing timeouts to prevent conflicts
     let isTyping = false; // Track if typing animation is currently active
     
@@ -491,7 +511,7 @@
      */
     const cleanPhrase = (phrase) => {
         // Words that shouldn't start a phrase (case insensitive)
-        const badStartWords = ['and', 'or', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
+        const badStartWords = ['and', 'or', 'with', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
         
         // Check if phrase starts with any of the bad words
         for (const badWord of badStartWords) {
@@ -526,15 +546,14 @@
         const formats = [
 
             (i, b, n, c, a, f) => joinWords(i), (i, b, n, c, a, f) => joinWords(i),
-            (i, b, n, c, a, f) => joinWords(b), (i, b, n, c, a, f) => joinWords(b),
             (i, b, n, c, a, f) => joinWords(n), (i, b, n, c, a, f) => joinWords(n),
             (i, b, n, c, a, f) => joinWords(c), (i, b, n, c, a, f) => joinWords(c),
             (i, b, n, c, a, f) => joinWords(f), (i, b, n, c, a, f) => joinWords(f),
             
 
             (i, b, n, c, a, f) => joinWords(i, f),
-            (i, b, n, c, a, f) => joinWords(a, n),
-            (i, b, n, c, a, f) => joinWords(a, n), (i, b, n, c, a, f) => joinWords(c, n),
+            (i, b, n, c, a, f) => joinWords(a, n), (i, b, n, c, a, f) => joinWords(a, n), 
+            (i, b, n, c, a, f) => joinWords(c, n),
             (i, b, n, c, a, f) => joinWords(n, f),
 
             (i, b, n, c, a, f) => joinWords(i, b, f),
@@ -564,8 +583,7 @@
             (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
             (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
             (i, b, n, c, a, f) => joinWords(i, n, a, c, f),
-            (i, b, n, c, a, f) => joinWords(i, a, b, c, f),
-            (i, b, n, c, a, f) => joinWords(b, c, n, f, i)
+            (i, b, n, c, a, f) => joinWords(i, a, b, c, f)
 
             ];
             
@@ -922,12 +940,10 @@
             phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, processedFinale);
         }
         
-        // Clean up any double "fucking" in a row
-        phrase = phrase.replace(/\bfucking\s+fucking\b/g, 'fucking');
-        
-        // Remove hard stop markers (*F*) and beast stop markers (*B*) from final phrase
-        phrase = phrase.replace(/\*F\*/g, '');
-        phrase = phrase.replace(/\*B\*/g, '');
+        // Clean up any double "fucking" in a row and remove markers (optimized)
+        phrase = phrase.replace(/\bfucking\s+fucking\b|\*[FB]\*/g, (match) => {
+            return match.includes('fucking') ? 'fucking' : '';
+        });
         
         // Clean up phrase formatting
         phrase = cleanPhrase(phrase);
@@ -1003,7 +1019,7 @@
         
         // Log debug output after all processing is complete
         if (!CONFIG.noConsole) {
-          console.log('🎪 Joy Machine Debug:', debugOutput);
+          console.log('🎪', debugOutput);
         }
         
         // Add used items to timeout list to prevent repetition (only the ones that were actually used)
@@ -1282,10 +1298,21 @@
         let currentIndex = 0;
         let typingSpeed = 1.0; // Dynamic speed multiplier
         let lastCharTime = 0;
+        let soundCounter = 0; // Counter for playing sounds on every other letter
         let pendingCorrections = []; // Track typos that need correction
         let displayedText = ''; // Track what's actually displayed
         let hasActiveTypo = false; // Prevent multiple typos
         
+        // Optimized timing using requestAnimationFrame for smoother performance
+        let rafId = null;
+        const scheduleNextChar = (delay) => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                const timeoutId = setTimeout(typeNextChar, delay);
+                typingTimeouts.push(timeoutId);
+            });
+        };
+
         const typeNextChar = () => {
             if (currentIndex < phrase.length) {
                 const char = phrase[currentIndex];
@@ -1298,8 +1325,7 @@
                 if (char === ' ' && CONFIG.skipSpaceChance > 0 && Math.random() < CONFIG.skipSpaceChance) {
                     // Skip this space - don't add to displayedText
                     currentIndex++;
-                    const timeoutId = setTimeout(typeNextChar, Math.round(getBaseDelay(char, prevChar)));
-                    typingTimeouts.push(timeoutId);
+                    scheduleNextChar(Math.round(getBaseDelay(char, prevChar)));
                     return;
                 }
                 
@@ -1355,33 +1381,46 @@
                 // Play typewriter sound for letters and spaces
                 if (actualChar.match(/[a-zA-Z ]/)) {
                     if (actualChar === ' ') {
-                        // Space bar: 25% med, 35% soft, 40% very-soft
-                        if (typewriterSounds.length > 0) {
-                            let sound;
-                            const random = Math.random();
-                            if (random < 0.25) {
-                                // 25% chance for med-hit (30% quieter)
-                                sound = typewriterSounds[2]; // med-hit (index 2)
-                                sound.volume = typewriterVolume * 0.7; // 30% quieter
-                            } else if (random < 0.60) { // 0.25 + 0.35 = 0.60
-                                // 35% chance for soft hits
-                                const softSounds = [0, 1]; // soft-hit-2 (index 0), soft-hit-3 (index 1)
-                                const soundIndex = softSounds[Math.floor(Math.random() * softSounds.length)];
-                                sound = typewriterSounds[soundIndex];
-                                sound.volume = typewriterVolume; // Normal volume
-                            } else {
-                                // 40% chance for very-soft hits
-                                const verySoftSounds = [4, 5, 6]; // very-soft-hit (index 4), very-soft-hit-2 (index 5), very-soft-hit-3 (index 6)
-                                const soundIndex = verySoftSounds[Math.floor(Math.random() * verySoftSounds.length)];
-                                sound = typewriterSounds[soundIndex];
-                                sound.volume = typewriterVolume; // Normal volume
+                        // Space bar: Use random sound (30% louder)
+                        if (window.typewriterSounds && window.typewriterSounds.length > 0) {
+                            const sound = window.typewriterSounds[Math.floor(Math.random() * window.typewriterSounds.length)];
+                            if (sound.currentTime > 0.1) {
+                                sound.currentTime = 0;
                             }
-                            sound.currentTime = 0;
-                            sound.play().catch(err => {});
+                            
+                            // 30% louder for spacebar
+                            const originalVolume = sound.volume;
+                            sound.volume = Math.min(originalVolume * 1.3, 1.0);
+                            sound.play().catch(() => {});
+                            sound.volume = originalVolume; // Reset volume
                         }
                     } else {
-                        // Letters use very-soft-hit sounds
-                        playTypewriterSound(actualChar);
+                        // Letters use very-soft-hit sounds (variable frequency)
+                        soundCounter++;
+                        if (soundCounter % 3 === 0) {
+                            // Check if this is a capital letter
+                            if (actualChar === actualChar.toUpperCase() && actualChar.match(/[A-Z]/)) {
+                                // Capital letters are 50% louder
+                                if (window.typewriterSounds && window.typewriterSounds.length > 0) {
+                                    const sound = window.typewriterSounds[Math.floor(Math.random() * window.typewriterSounds.length)];
+                                    if (sound.currentTime > 0.1) {
+                                        sound.currentTime = 0;
+                                    }
+                                    
+                                    const originalVolume = sound.volume;
+                                    sound.volume = Math.min(originalVolume * 1.5, 1.0);
+                                    sound.play().catch(() => {});
+                                    sound.volume = originalVolume; // Reset volume
+                                }
+                            } else {
+                                playTypewriterSound(actualChar);
+                            }
+                            
+                            // 50% chance to skip ahead, creating mix of every 2-3 letters
+                            if (Math.random() < 0.5) {
+                                soundCounter++;
+                            }
+                        }
                     }
                 }
                 
@@ -1533,9 +1572,8 @@
                 
                 lastCharTime = Date.now();
                 
-                // Schedule next character
-                const timeoutId = setTimeout(typeNextChar, Math.round(baseDelay));
-                typingTimeouts.push(timeoutId);
+                // Schedule next character using optimized timing
+                scheduleNextChar(Math.round(baseDelay));
             } else {
                 // Typing complete - but only if no active typo correction
                 if (!hasActiveTypo) {
@@ -1580,25 +1618,9 @@
                     phraseOutput.textContent = displayedText;
                     backspaceCount++;
                     
-                    // Play realistic backspace sound (hard hits first, soft hits as you approach)
-                    if (typewriterSounds.length > 0) {
-                        const totalBackspaces = charsToBackspace;
-                        const softHitCount = Math.floor(totalBackspaces / 2); // Last half, rounded down
-                        const hardHitCount = totalBackspaces - softHitCount;
-                        
-                        let sound;
-                        if (backspaceCount <= hardHitCount) {
-                            // First part: use hard-hit
-                            sound = typewriterSounds[3]; // hard-hit (index 3)
-                        } else {
-                            // Last part: use soft hits
-                            const softSounds = [0, 1]; // soft-hit-2 (index 0), soft-hit-3 (index 1)
-                            const soundIndex = softSounds[Math.floor(Math.random() * softSounds.length)];
-                            sound = typewriterSounds[soundIndex];
-                        }
-                        
-                        sound.currentTime = 0;
-                        sound.play().catch(err => {});
+                    // Play very-soft-hit sound for backspace (every other character)
+                    if (backspaceCount % 2 === 0) {
+                        playBackspaceSound(backspaceCount, charsToBackspace);
                     }
                     
                     // Calculate backspace delay
@@ -1613,8 +1635,12 @@
                         delay = baseDelay * speedMultiplier * (2 - CONFIG.typingSpeedMultiplier); // Apply slowdown and typing speed multiplier
                     }
                     
-                    const timeoutId = setTimeout(backspace, delay);
-                    typingTimeouts.push(timeoutId);
+                    // Use optimized timing for backspace
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        const timeoutId = setTimeout(backspace, delay);
+                        typingTimeouts.push(timeoutId);
+                    });
                 } else {
                     // Now continue typing from the typo position
                     let continuePosition = wordStartIndex + typoPosition;
@@ -1662,8 +1688,12 @@
                     phraseOutput.textContent = displayedText;
                     retypeIndex++;
                     const retypeDelay = CONFIG.testMode ? 1 : ((15 + Math.random() * 25) * (2 - CONFIG.typingSpeedMultiplier)); // Apply typing speed multiplier
-                    const timeoutId = setTimeout(retype, retypeDelay);
-                    typingTimeouts.push(timeoutId);
+                    // Use optimized timing for retype
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        const timeoutId = setTimeout(retype, retypeDelay);
+                        typingTimeouts.push(timeoutId);
+                    });
                 } else {
                     // Word retyped correctly
                     
@@ -1678,8 +1708,7 @@
                     
                     // Continue typing from where we left off in the original phrase
                     const continueDelay = CONFIG.testMode ? 1 : ((25 + Math.random() * 50) * (2 - CONFIG.typingSpeedMultiplier)); // Apply typing speed multiplier
-                    const timeoutId = setTimeout(typeNextChar, continueDelay);
-                    typingTimeouts.push(timeoutId);
+                    scheduleNextChar(continueDelay);
                 }
             };
             
@@ -1687,16 +1716,7 @@
         };
 
         
-        // Helper function to get a typo character based on QWERTY layout
-        const getTypoChar = (char) => {
-            const lowerChar = char.toLowerCase();
-            if (QWERTY_MAP[lowerChar]) {
-                const typoOptions = QWERTY_MAP[lowerChar];
-                const selectedTypo = typoOptions[Math.floor(Math.random() * typoOptions.length)];
-                return char === char.toUpperCase() ? selectedTypo.toUpperCase() : selectedTypo;
-            }
-            return char; // No typo possible, return original
-        };
+        // Use the optimized getTypoChar function defined globally
         
         // Helper function to get base delay for character types
         const getBaseDelay = (char, prevChar) => {
@@ -1773,11 +1793,17 @@
         const fillPercentage = (currentFill / totalSteps) * 100;
         generateBtn.style.setProperty('--fill-width', `${fillPercentage}%`);
         
+        // Play page-turn sound when progress hits 95% (only once)
+        if (fillPercentage >= 95 && fillPercentage < 96 && !pageTurnPlayed) {
+          playPageTurn();
+          pageTurnPlayed = true;
+        }
+        
         // When the button is full, mark as ready (no phrase generation yet)
         if (currentFill >= totalSteps) {
           clearInterval(fillInterval);
           updateButtonState('ready');
-            isComplete = true;
+          isComplete = true;
         }
       }, CONFIG.updateInterval);
     };
@@ -1839,12 +1865,18 @@
     // Function to advance progress bar
     const advanceProgress = () => {
       if (!isComplete) {
-        // Advance the fill by 1%
-        const advanceAmount = totalSteps * CONFIG.advanceAmount; // 1% of total steps
+        // Advance the fill by configured amount
+        const advanceAmount = totalSteps * CONFIG.advanceAmount;
         currentFill = Math.min(currentFill + advanceAmount, totalSteps);
         
         const fillPercentage = (currentFill / totalSteps) * 100;
         generateBtn.style.setProperty('--fill-width', `${fillPercentage}%`);
+        
+        // Play page-turn sound when progress hits 95% (only once)
+        if (fillPercentage >= 98 && !pageTurnPlayed) {
+          playPageTurn();
+          pageTurnPlayed = true;
+        }
         
         // Check if we've reached completion
         if (currentFill >= totalSteps) {
@@ -1862,8 +1894,10 @@
         advanceProgress();
       } else {
         // Button is ready - generate new phrase and restart
+        playMedHit(); // Play med-hit sound when user clicks GO
         generateNewPhrase();
         isComplete = false;
+        pageTurnPlayed = false; // Reset page-turn flag for next cycle
         
         // Remove all classes and reset fill bar instantly (no transitions)
         generateBtn.classList.remove('ready', 'filling');
@@ -1879,6 +1913,37 @@
         generateBtn.style.transition = '';
         
         startAutoFill();
+      }
+    });
+    
+    // Add keyboard functionality (desktop only)
+    document.addEventListener('keydown', (event) => {
+      if (window.innerWidth > 768) {
+        if (event.code === 'Space') {
+          event.preventDefault(); // Prevent page scroll
+          
+          if (!isComplete) {
+            // Spacebar only advances progress when filling
+            advanceProgress();
+          }
+        } else if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+          if (isComplete) {
+            // Enter key triggers GO button when ready
+            playMedHit();
+            generateNewPhrase();
+            isComplete = false;
+            pageTurnPlayed = false; // Reset page-turn flag for next cycle
+            
+            generateBtn.classList.remove('ready', 'filling');
+            generateBtn.style.transition = 'none';
+            generateBtn.style.setProperty('--fill-width', '0%');
+            
+            generateBtn.offsetHeight; // Force reflow
+            generateBtn.style.transition = '';
+            
+            startAutoFill();
+          }
+        }
       }
     });
 
@@ -1898,7 +1963,7 @@
     let typewriterSounds = [];
     let currentTypewriterSoundIndex = 0;
     const typewriterVolume = 0.3; // Volume for typewriter sounds
-    
+ 
     // Simple numbered playlist system
     const totalSongs = 5; // Update this number when you add more songs
     const playlist = [];
@@ -1909,60 +1974,110 @@
     }
     
     /**
-     * Initializes typewriter sound effects
+     * Initialize page sounds
      */
+    const initializePageSounds = () => {
+      // Load page-turn sounds for when GO button becomes active
+      const pageTurnSound1 = new Audio('audio/typewriter/page-turn.mp3');
+      pageTurnSound1.volume = 1;
+      pageTurnSound1.preload = 'auto';
+      
+      const pageTurnSound2 = new Audio('audio/typewriter/page-turn-2.mp3');
+      pageTurnSound2.volume = 1;
+      pageTurnSound2.preload = 'auto';
+      
+      window.pageTurnSounds = [pageTurnSound1, pageTurnSound2];
+      
+      // Load med-hit sound for when user clicks GO
+      const medHitSound = new Audio('audio/typewriter/med-hit.mp3');
+      medHitSound.volume = 0.2;
+      medHitSound.preload = 'auto';
+      window.medHitSound = medHitSound;
+      
+    };
+    
+    /**
+     * Play random page-turn sound for GO button
+     */
+    const playPageTurn = () => {
+      if (window.pageTurnSounds && window.pageTurnSounds.length > 0) {
+        const randomIndex = Math.floor(Math.random() * window.pageTurnSounds.length);
+        const sound = window.pageTurnSounds[randomIndex];
+        if (sound.currentTime > 0.1) {
+          sound.currentTime = 0;
+        }
+        sound.play().catch(err => {});
+      }
+    };
+    
+    /**
+     * Play med-hit sound when user clicks GO
+     */
+    const playMedHit = () => {
+      if (window.medHitSound) {
+        if (window.medHitSound.currentTime > 0.1) {
+          window.medHitSound.currentTime = 0;
+        }
+        window.medHitSound.play().catch(err => {});
+      }
+    };
+    
+    /**
+     * Play sound for backspace (30% louder, no volume calculations)
+     */
+    const playBackspaceSound = (backspaceCount, totalBackspaces) => {
+      if (!window.typewriterSounds || window.typewriterSounds.length === 0) return;
+      
+      const sound = window.typewriterSounds[Math.floor(Math.random() * window.typewriterSounds.length)];
+      
+      if (sound.currentTime > 0.1) {
+        sound.currentTime = 0;
+      }
+      
+      // 30% louder for backspace
+      const originalVolume = sound.volume;
+      sound.volume = Math.min(originalVolume * 1.3, 1.0);
+      sound.play().catch(() => {});
+      sound.volume = originalVolume; // Reset volume
+    };
+    
+    
     const initializeTypewriterSounds = () => {
-      // Load typewriter sounds from the typewriter folder
-      const typewriterSoundFiles = [
-        'soft-hit-2.wav', 
-        'soft-hit-3.wav',
-        'med-hit.wav',
-        'hard-hit.wav',
-        'very-soft-hit.wav',
-        'very-soft-hit-2.wav',
-        'very-soft-hit-3.mp3'
+      // Load all three very-soft sounds for variety
+      window.typewriterSounds = [
+        new Audio('audio/typewriter/very-soft-hit.mp3'),
+        new Audio('audio/typewriter/very-soft-hit-2.mp3'),
+        new Audio('audio/typewriter/very-soft-hit-3.mp3')
       ];
       
-      // Load carriage return and bell sounds separately (50% volume)
-      const carriageSound = new Audio('audio/typewriter/carriage-return.wav');
-      carriageSound.volume = typewriterVolume * 0.5; // 50% of normal volume
-      carriageSound.preload = 'auto';
-      window.carriageSound = carriageSound;
-      
-      const bellSound = new Audio('audio/typewriter/bell.wav');
-      bellSound.volume = typewriterVolume * 0.5; // 50% of normal volume
-      bellSound.preload = 'auto';
-      window.bellSound = bellSound;
-      
-      typewriterSounds = [];
-      
-      typewriterSoundFiles.forEach(filename => {
-        const audio = new Audio(`audio/typewriter/${filename}`);
-        audio.volume = typewriterVolume;
-        audio.preload = 'auto';
-        typewriterSounds.push(audio);
+      // Set volumes
+      window.typewriterSounds.forEach(sound => {
+        sound.volume = typewriterVolume;
+        sound.preload = 'auto';
       });
+      
+      // Load carriage return and bell sounds separately
+      window.carriageSound = new Audio('audio/typewriter/carriage-return.mp3');
+      window.carriageSound.volume = typewriterVolume * 0.5;
+      window.carriageSound.preload = 'auto';
+      
+      window.bellSound = new Audio('audio/typewriter/bell.mp3');
+      window.bellSound.volume = typewriterVolume * 0.7;
+      window.bellSound.preload = 'auto';
     };
     
     /**
      * Plays a typewriter sound effect with realistic variation
      */
     const playTypewriterSound = (char) => {
-      if (typewriterSounds.length === 0) return;
+      if (!window.typewriterSounds || window.typewriterSounds.length === 0) return;
       
-      let soundIndex;
+      const sound = window.typewriterSounds[Math.floor(Math.random() * window.typewriterSounds.length)];
       
-      // Use only very-soft-hit sounds for all typing
-      const verySoftSounds = [4, 5, 6]; // very-soft-hit (index 4), very-soft-hit-2 (index 5), very-soft-hit-3 (index 6)
-      soundIndex = verySoftSounds[Math.floor(Math.random() * verySoftSounds.length)];
-      
-      const sound = typewriterSounds[soundIndex];
-      
-      // Play the sound (with error handling)
-      sound.currentTime = 0; // Reset to beginning
-      sound.play().catch(err => {
-        // Ignore audio play errors (browser restrictions, etc.)
-      });
+      if (sound.currentTime > 0.1) {
+        sound.currentTime = 0;
+      }
+      sound.play().catch(() => {});
     };
     
     /**
@@ -1972,7 +2087,9 @@
       if (!window.carriageSound) return;
       
       // Play the carriage return sound (with error handling)
-      window.carriageSound.currentTime = 0; // Reset to beginning
+      if (window.carriageSound.currentTime > 0.1) {
+        window.carriageSound.currentTime = 0;
+      }
       window.carriageSound.play().catch(err => {
         // Ignore audio play errors (browser restrictions, etc.)
       });
@@ -1985,7 +2102,9 @@
       if (!window.bellSound) return;
       
       // Play the bell sound (with error handling)
-      window.bellSound.currentTime = 0; // Reset to beginning
+      if (window.bellSound.currentTime > 0.1) {
+        window.bellSound.currentTime = 0;
+      }
       window.bellSound.play().catch(err => {
         // Ignore audio play errors (browser restrictions, etc.)
       });
@@ -2080,6 +2199,7 @@
     
     // Initialize typewriter sounds
     initializeTypewriterSounds();
+    initializePageSounds();
     
     // Start the auto-fill animation when the page loads
     startAutoFill();

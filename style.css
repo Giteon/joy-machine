@@ -12,14 +12,10 @@ html {
 /* Ensure mobile viewport doesn't allow scrolling */
 @media (max-width: 768px) {
   body, html {
-    overflow-x: hidden;
-    position: relative;
-  }
-  
-  /* Ensure content doesn't exceed viewport width */
-  * {
-    max-width: 100vw;
-    box-sizing: border-box;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -74,7 +70,34 @@ html {
 
 #generate-btn.ready {
   cursor: pointer; /* Pointer cursor only when ready (showing "GO") */
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #E9E9E9; /* Light mode: light gray border */
 }
+
+/* Dark mode button border */
+.dark #generate-btn.ready {
+  border: 4px solid #303030; /* Dark mode: gray border */
+}
+
+/* Shimmer effect for ready button */
+#generate-btn.ready::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 120%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -120%; }
+  20% { left: 120%; }
+  100% { left: 120%; }
+}
+
 
 /* Child's mode styling - pink when enabled */
 .childs-mode #generate-btn.ready::before {
@@ -123,6 +146,11 @@ html {
 .dark {
   background-color: #060b11 !important; /* gray-800 */
   color: #f9fafb !important; /* gray-50 */
+  transition: none !important;
+}
+
+.dark * {
+  transition: none !important;
 }
 
 /* Disable transitions for instant dark mode switching, but allow progress bar animation */

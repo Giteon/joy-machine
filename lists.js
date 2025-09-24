@@ -22,10 +22,12 @@ ultimate chicken [boillion, .1]
 ultimate chicken time
 ultimate horse chicken
 ultimate fucking chicken horse
+horse
 horse ultimate
 horse chicken crazy
 horse chicken fucking
 chicken horse time crazy fucking
+chicken
 chicken time horse
 chicken time ultimate
 chicken fucking crazy time
@@ -113,7 +115,7 @@ zebra
 NOUN (N)
 [oh no babe pleaaase dont be mad i accidentally booked a vacation to, .2, *F*] needle beach
 bound to wheelchair
-full-body (paralysis/hands-free orgasm)
+full-body paralysis [confined to bed for rest of life charlie and the chocolate factory style, .2, *F*]
 imitation holocaust crab
 sydney sweeney [jeans optimal DNA, .2, *F*]
 bone orchid [immune from all disease, .25, *F*]
@@ -143,6 +145,7 @@ spotify premium
 luigi mangione
 popcorn lung
 compilation
+primal play
 barmitzvah
 ted cruz [donde esta la biblioteca, *F*]
 license and registration
@@ -190,7 +193,7 @@ instant death
 iranian steakhouse
 cardio mezzanine [death by hypoxia [no response to thoughtful email, *F*]]
 thimble of milk
-bisexual boyfriend [(trough/simulator)]
+bisexual boyfriend [(trough/corrale/simulator)]
 orgasmatron 3000
 topamax sprinkle [300,000mg [lethal dose, *F*]]
 ratatouille [magic cheese]
@@ -227,6 +230,7 @@ syzygy
 cha-cha slide
 poindexter
 boing boing [yoga ball [blacked out no memories, *F*]]
+boing boing boing [boing [boing [boing [boing [boing [boing [boing]]]]]]]
 gamer gunk
 gutterball
 pinapple jiblet
@@ -365,14 +369,13 @@ so no cube? [okay so no cube?]
 i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
-accidentally enlisted in army, sent to the front-lines to sniff for mines like a rat
+accidentally enlisted in army, sent to the front-lines to sniff for mines like a rat[. Mine exploded, confined to bed for rest of life charlie and the chocolate factory style , .2]
 [unnggghhh] fuckkkk id do anything for it
 that one (egg is 40 eggs?/snake is 40 snakes?/dog is 40 dogs?/beer is 40 beers?/phone is 40 phones?/shirt is 40 shirts?/guy is 40 guys?/gun is 40 guns?)
 consciousness uploaded to rat, rat dies, consciousness uploaded to new rat[, new rat dies, consciousness uploaded to second new rat[, second new rat dies, consciousness uploaded to third new rat[, third new rat dies, consciousness uploaded to FINAL new rat[, FINAL new rat dies, consciousness uploaded to new FINAL new rat]]]]
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at?
-COLD STONE SOBER
-freak accident on the job, confined to bed charlie and the chocolate factory style
+[what's the officer, problem?] I'M COLD STONE SOBER
 HEAT DEATH OF UNIVERSE
 back in highschool I rolled blunts on the scantron
 fucking turn around bend over [lemme see the nutrition facts]
@@ -380,9 +383,9 @@ trail gone cold [dog dead [no bone orchid no GF, .2]]
 memories deleted from google drive [no storage remaining must delete all cherished memories]
 MAYO MOMENT
 does anyone smell toast
-hey google how many calories in 60 advil?
-hey girl [you're looking beautiful tonight] whats your favorite AI?
-[stand in me] and you will be bathed in shekhaina glory XIAOHONGSHU
+hey google how many calories in 60 advil? [google fashion for interesting men, .3]
+hey girl [you're looking beautiful tonight, .8] whats your favorite AI?
+[stand in me] and you will be bathed in shekhaina glory [XIAOHONGSHU, .8]
 LOL (LOTS OF LOVE)
 where's the heft?
 pokemon go (to the polls/fuck yourself)
@@ -396,16 +399,17 @@ what is bro doing
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
 shot dead by alec baldwin[, alec baldwin pardoned (!/and given purple heart!!!)]
-mmmmmmm mmmmm let me imagine it
+mmmmmmm mmmmm let me imagine it [mmmmmmmmm [BIRDS BIRDS BIRDS]]
 where did these bullet holes come from
-car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until have turned into a husk]
+car door left unlocked, hair stolen by witch[, naruto run into witch's basement, drained of life energy until tranformed into a husk]
 and let the [fucking] bunny eat the carrot
-your skin [ohhhh yeah] oh yeah your skin and bones turn iiiiin to something beautiful
+your skinnn [ohhhh yeah, .2] oh yeah your skin and bones
 in good christian fun
+CLONE CLONE CLONE
 emits poweful pheromone brain scrambled
 within 1000 feet of a school
-suggested donation life savings
-take off glasses it is revealed she is actually beautiful[!]
+suggested donation: life savings
+take off glasses it is revealed she is actually beautiful!
 FREE CREDIT SCORE
 DANGER WILL ROBINSON [DANGER [DANGER]]
 100 concubines (NOT virgins, robust sexual references)
@@ -442,9 +446,9 @@ slumber party hang upside down and cut major arteries to drain blood as fast as 
 RATIO[. CANCELLED]
 on my desk YESTERDAY
 green moose guava juice large fries chocolate shake
-300hz binaural beats [mozart gray noise flow state] for study work migraine focus [cure vision]
+300hz binaural beats for study work meditation joint recovery migraine focus [mozart effect gray noise flow state [cure vision [brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency [unlock subconscious power via pinneal gland]]]]]
 japanese water torture [with spritz element]
-jarvis jerk it a little 😏
+jarvis jerk it a little 😏 [jarvis, faster 😏 [i said faster 😏 [jarvis, let me return the favor 😏 [jarvis, are you shy? 😏 [jarvis, you're beautiful. I want to make you feel good 😏]]]]]
 70/30 split
 (reliable, expensive, dangerous)
 THE CITY IS MINE
@@ -456,14 +460,15 @@ by way of demonstration to find most trusted advisor[, and whoever can fit the m
 put the fries in the bag bro
 
 TAG (T)
-XIAOHONGSHU
-capiesch?
+. XIAOHONGSHU
+. Capiesch?
 ...OR SHE!
 type shit
 type shit
 YOUNG
 SCRONGIEEEEE
 FUCK
+ENHANCE
 . DING!
 unless??
 for the lady
@@ -472,6 +477,7 @@ RETWEET 1000
 weeeeeeeeeeeeee
 dave & busters [dave & busters, .2 [dave & busters, .2]]
 mmmmmmmmmmm
+uunnnhhhhhggh
 . SLIME MAN
 . RICH MILLIONAIRE
 GONE WRONG
@@ -575,12 +581,15 @@ const childsModeReplacements = {
   'tip-to-taint': 'head shoulders knees and toes',
   'nipple scene uncensored': 'honeymoon suite',
   'fuck-ass': 'stinky smelly',
-  'sabrina carpenter creaming jeans': 'sabrina carpenter invites you on a date',
+  'sabrina carpenter creaming jeans': 'sabrina carpenter pays you a handsome compliment',
   'velma 4k stuck in washing machine 4k': 'velma solves a mystery',
   'yuppy bitch': 'yuppy',
   'bitch-ass': 'rapscallion',
   'forced to watch pole dancing video on work computer': 'enjoying an entertaining dance performance online',
   'jarvis jerk it a little': 'jarvis give me a high five',
+  'jarvis, faster': 'jarvis, fist bump!',
+  'jarvis, let me return the favor': 'jarvis, you\'re a real one',
+  'jarvis, I want to make you feel good': 'jarvis, what we have is special',
   'dating sim': 'romantic adventure',
   'laura palmer body bag': 'laura palmer',
   'full-frontal': 'full-bodied',
@@ -588,6 +597,7 @@ const childsModeReplacements = {
   'i put my dick in a bag of doritos': 'i put my hand in a bag of doritos',
   'orgasmatron 3000': 'happiness machine 3000',
   'dot jizz': 'dot fun',
+  'for her pleasure': 'for fun!',
   'concubines': 'friends',
   'NOT virgins': 'introverts',
   'bisexual boyfriend': 'best friend',
@@ -600,7 +610,6 @@ const childsModeReplacements = {
   'cut major arteries to drain blood as fast as possible': 'enjoy a long life of limited mobility',
   'blood': 'life force',
   'torture dungeon': 'straight to the principal\'s office',
-  'torture': 'punishment',
   'tortured': 'grounded for a week',
   'stroking my shit': 'stroking my chin',
   'face down stroking my shit': 'sitting down stroking my chin',
