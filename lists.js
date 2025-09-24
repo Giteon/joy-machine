@@ -532,7 +532,7 @@ const nsfwWords = [
   'wet nurse', 'whore', 'slut', 'pussy taste test', 'pussy popping', 'japanese sponge bath', 'penis boy', 'bubble butt', 'blood drenched', 'blood soaked', 'slop job',
   'bricked up', 'sucked dry', 'holocaust', 'imitation holocaust crab', 'guantanamo bay', '9/11', '9/11 simulator', '9/11 livestream',
   'japanese water torture', 'breedable', 'ahegao', 'mommy milker', 'onlyfans', 'and suck the dust off the tip', 'orgasm', 'hands-free orgasm', 'chained to radiator',
-  'death by hypoxia'
+  'death by hypoxia', 'turn me on with your electric eel'
 ];
 
 // child's mode word replacements mapping
@@ -544,6 +544,7 @@ const childsModeReplacements = {
   'fuck my fucking ass': 'butter my biscuit',
   'dead': 'passed away',
   'shot dead': 'unalived',
+  'gone sexual': 'gone silly mode',
   'cunt': 'silly goose',
   'slutty vegan': 'vegan',
   'sexual style': 'silly style',
