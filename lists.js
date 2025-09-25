@@ -199,7 +199,7 @@ topamax sprinkle [300,000mg [lethal dose, *F*]]
 ratatouille [magic cheese]
 [cleopatra] past life regression [ran over by car [500 times] *F*]
 ikea chair [sabrina carpenter creaming jeans, *F*]
-walter goggins [aimee lou wood [nipple scene uncensored, *F*]]
+walter goggins [aimee lou wood [nipple scene uncensored, *F*]
 show of force
 
 CANDY(C)
@@ -271,6 +271,7 @@ slop job
 jungle juice
 
 ADJECTIVE (A)
+pure and infinite [joy, .2, *F*]
 blood (drenched/soaked)
 poisonous [riddled with (disease/needles), *F*]
 fuck-ass
@@ -390,7 +391,7 @@ LOL (LOTS OF LOVE)
 where's the heft?
 pokemon go (to the polls/fuck yourself)
 infertile if dog
-etc [etc and so on [and so forth [in such a way [proceeding as thus as such]]]]
+etc [etc [and so on and so forth [in such a way proceeding as thus as such]]]
 and subway take away everything you love
 100% AGREE
 now sit right down im gonna spin you around like a basketball
@@ -438,12 +439,14 @@ ChatGPT 1 million almonds destroyed
 stand here so i can crop you out later
 for her pleasure
 plus tax and tip
+ces't la vie
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)
 we'll add it in post
 round up to nearest billion yuan
 slumber party hang upside down and cut major arteries to drain blood as fast as possible
 RATIO[. CANCELLED]
+GONE WRONG
 on my desk YESTERDAY
 green moose guava juice large fries chocolate shake
 300hz binaural beats for study work meditation joint recovery migraine focus [mozart effect gray noise flow state [cure vision [brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency [unlock subconscious power via pinneal gland]]]]]
@@ -468,27 +471,32 @@ type shit
 YOUNG
 SCRONGIEEEEE
 FUCK
-ENHANCE
+. ENHANCE
 . DING!
 unless??
+sent from iphone
 for the lady
 RETWEET 1000
 . OH BEHAVE!
+ultimate chicken time
+fucking horse time
 weeeeeeeeeeeeee
 dave & busters [dave & busters, .2 [dave & busters, .2]]
 mmmmmmmmmmm
 uunnnhhhhhggh
 . SLIME MAN
 . RICH MILLIONAIRE
-GONE WRONG
+thats ok [that's ok [that's okay [thats ok [thats okay [thats ok [thats okay]]]]]
 por favor [mon cherie]
 🥺🥺🥺
 do i make myself clear?
 no refunds
+or else
+ANY QUESTIONS?
 4K
 MAN I GOT IT MADE
 I guess!
-(got his ass/on god fr)
+on god fr
 SEND [UNSEND SEND [FUCK]]
 ha ha`;
 

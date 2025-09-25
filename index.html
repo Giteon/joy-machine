@@ -92,7 +92,7 @@
       childsMode: false, // child's mode state
       backgroundMusic: true, // Enable background music
       musicVolume: 0.15, // Background music volume (0.0 to 1.0)
-      tagChance: 0.15, // 15% chance for tag after finale/hard stop
+      tagChance: 0.2, // 20% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
       noConsole: false, // Disable all console logs when true
       typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
@@ -553,7 +553,7 @@
 
             (i, b, n, c, a, f) => joinWords(i, f),
             (i, b, n, c, a, f) => joinWords(a, n), (i, b, n, c, a, f) => joinWords(a, n), 
-            (i, b, n, c, a, f) => joinWords(c, n),
+            (i, b, n, c, a, f) => joinWords(c, n), (i, b, n, c, a, f) => joinWords(c, n),
             (i, b, n, c, a, f) => joinWords(n, f),
 
             (i, b, n, c, a, f) => joinWords(i, b, f),
@@ -583,11 +583,17 @@
             (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
             (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
             (i, b, n, c, a, f) => joinWords(i, n, a, c, f),
-            (i, b, n, c, a, f) => joinWords(i, a, b, c, f)
+            (i, b, n, c, a, f) => joinWords(i, a, b, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, b, n, f),
+
+            (i, b, n, c, a, f) => joinWords(i, b, c, a, n, f),
+            (i, b, n, c, a, f) => joinWords(b, i, c, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, c, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f)
 
             ];
             
-            // (i, b, n, c, a, f) => joinWords(i, b, c, a, n, f),
             // (i, b, n, c, a, f) => joinWords(i, b, a, n, c, f),
             // (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f),
             // (i, b, n, c, a, f) => joinWords(i, a, b, c, n, f),
