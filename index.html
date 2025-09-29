@@ -77,22 +77,22 @@
     const CONFIG = {
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.02, // 2% of total steps when clicked
+      advanceAmount: 0.03, // 3% of total steps when clicked
       typoChance: 0.015, // 1.5% chance per letter
-      typoCorrectionChance: .92, // 92% chance to catch typo
-      doubleBeastChance: 0.50, // 50% chance for two beasts
-      tripleBeastChance: 0.30, // 30% chance for three beasts (if already two)
-      doubleCandyChance: 0.05, // 5% chance for two candies
-      fuckingChance: 0.10, // 10% chance to add "fucking"
+      typoCorrectionChance: .90, // 90% chance to catch typo
+      doubleBeastChance: 0.85, // 85% chance for two beasts
+      tripleBeastChance: 0.60, // 60% chance for three beasts (if already two)
+      doubleCandyChance: .5, // 50% chance for two candies
+      fuckingChance: 0.12, // 12% chance to add "fucking"
       thinkingPauseChance: 0.15, // 15% chance for thinking pause
-      allCapsChance: 0.15, // 15% chance for all caps (except beast)
+      allCapsChance: 0.10, // 10% chance for all caps (except beast)
       skipSpaceChance: 0.00, // 0% chance to skip spaces between words
       swapLettersChance: 0.008, // .8% chance to swap two adjacent letters in word
-      testMode: false, // Test mode - instant progress bar fill
+      testMode: true, // Test mode - instant progress bar fill
       childsMode: false, // child's mode state
       backgroundMusic: true, // Enable background music
-      musicVolume: 0.15, // Background music volume (0.0 to 1.0)
-      tagChance: 0.2, // 20% chance for tag after finale/hard stop
+      musicVolume: 0.10, // Background music volume (0.0 to 1.0)
+      tagChance: 0.3, // 30% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
       noConsole: false, // Disable all console logs when true
       typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
@@ -104,6 +104,72 @@
         punctuation: { min: 32, max: 70 }
       }
     };
+
+    // --- FORMATS ---
+    // Define the possible formats (now using intro + word order)
+    // Helper function to join non-empty words with spaces
+    const joinWords = (...words) => words.filter(word => word && word.trim() !== '').join(' ');
+    
+    const formats = [
+
+            (i, b, n, c, a, f) => joinWords(i), 
+            (i, b, n, c, a, f) => joinWords(n),
+            (i, b, n, c, a, f) => joinWords(c), (i, b, n, c, a, f) => joinWords(c),
+            // (i, b, n, c, a, f) => joinWords(f),
+            
+            // (i, b, n, c, a, f) => joinWords(i, f),
+            (i, b, n, c, a, f) => joinWords(a, n), 
+            // (i, b, n, c, a, f) => joinWords(a, n), 
+            (i, b, n, c, a, f) => joinWords(c, n), 
+            // (i, b, n, c, a, f) => joinWords(c, n),
+            (i, b, n, c, a, f) => joinWords(n, f),
+
+            (i, b, n, c, a, f) => joinWords(i, b, f),
+            // (i, b, n, c, a, f) => joinWords(i, c, f),
+            (i, b, n, c, a, f) => joinWords(i, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, n), 
+            // (i, b, n, c, a, f) => joinWords(i, a, n),
+            // (i, b, n, c, a, f) => joinWords(b, n, f),
+            // (i, b, n, c, a, f) => joinWords(b, c, f),
+            // (i, b, n, c, a, f) => joinWords(b, a, n),
+            (i, b, n, c, a, f) => joinWords(a, n, f),
+            // (i, b, n, c, a, f) => joinWords(c, a, n),
+        
+            (i, b, n, c, a, f) => joinWords(i, n, c, f),
+            // (i, b, n, c, a, f) => joinWords(i, c, b, f),
+            (i, b, n, c, a, f) => joinWords(i, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, n),
+            // (i, b, n, c, a, f) => joinWords(b, a, n, f),
+            // (i, b, n, c, a, f) => joinWords(b, c, n, f),
+            // (i, b, n, c, a, f) => joinWords(b, a, c, f),
+
+            (i, b, n, c, a, f) => joinWords(i, b, a, c, f),
+            (i, b, n, c, a, f) => joinWords(b, a, c, f, i),
+            (i, b, n, c, a, f) => joinWords(i, c, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, a, n, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(b, c, a, n, i),
+            // (i, b, n, c, a, f) => joinWords(i, n, a, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, b, c, f),
+            (i, b, n, c, a, f) => joinWords(i, a, b, n, f),
+            // (i, b, n, c, a, f) => joinWords(c, i, b, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, c, a, n, f),
+            (i, b, n, c, a, f) => joinWords(c, i, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, n, c, f),
+            (i, b, n, c, a, f) => joinWords(b, i, c, a, n, f),
+            (i, b, n, c, a, f) => joinWords(b, a, n, c, f, i),
+            (i, b, n, c, a, f) => joinWords(i, c, b, a, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f),
+            (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f)
+
+
+            ];
+        
+    
 
     // Pre-computed QWERTY keyboard layout for typo generation (only horizontally adjacent keys)
     const QWERTY_MAP = {
@@ -445,6 +511,7 @@
             if (bracketMatch) {
                 const bracketContent = bracketMatch[1];
                 
+                
                 // Check for custom probability
                 const probabilityMatch = bracketContent.match(/^(.+),\s*(\d*\.?\d+)(?:,\s*\*F\*|\*B\*)?$/);
                 let probability = 0.5;
@@ -472,6 +539,16 @@
                     // Clean the content before adding it to the result
                     let cleanContent = contentToProcess;
                     
+                    // Check for hard stop (*F*) before removing it
+                    if (bracketContent.includes('*F*')) {
+                        hasHardStop = true;
+                    }
+                    
+                    // Check for beast stop (*B*) before removing it
+                    if (bracketContent.includes('*B*')) {
+                        hasBeastStop = true;
+                    }
+                    
                     // Remove hard stop marker (*F*) from the content
                     cleanContent = cleanContent.replace(/\*F\*/g, '');
                     
@@ -481,20 +558,12 @@
                     
                     result = result.replace(bracketMatch[0], cleanContent);
                     
+                    
                     // Track the full bracket content including probability for display
                     addons.push(bracketContent);
-                    
-                    // Check for hard stop (*F*)
-                    if (bracketContent.includes('*F*')) {
-                        hasHardStop = true;
-                    }
-                    
-                    // Check for beast stop (*B*)
-                    if (bracketContent.includes('*B*')) {
-                        hasBeastStop = true;
-                    }
                 } else {
                     result = result.replace(bracketMatch[0], '');
+                    
                 }
                 
                 changed = true;
@@ -511,7 +580,10 @@
      */
     const cleanPhrase = (phrase) => {
         // Words that shouldn't start a phrase (case insensitive)
-        const badStartWords = ['and', 'or', 'with', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
+        const badStartWords = ['and', 'or', 'for', 'with', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
+        
+        // Words that shouldn't end a phrase (case insensitive)
+        const badEndWords = ['fucking', 'crazy'];
         
         // Check if phrase starts with any of the bad words
         for (const badWord of badStartWords) {
@@ -519,14 +591,28 @@
             phrase = phrase.replace(regex, '');
         }
         
-        // Remove 'fucking' from the end (case insensitive)
-        const endFuckingRegex = /\s+fucking$/i;
-        phrase = phrase.replace(endFuckingRegex, '');
+        // Check if phrase ends with any of the bad words
+        for (const badWord of badEndWords) {
+            const regex = new RegExp(`\\s+${badWord}$`, 'i');
+            phrase = phrase.replace(regex, '');
+        }
         
         // Clean up any extra spaces
         phrase = phrase.replace(/^\s+/, '').replace(/\s+$/, '').replace(/\s+/g, ' ');
         
         return phrase;
+    };
+
+    /**
+     * Adds a tag to a phrase, handling special spacing for tags that start with periods
+     */
+    const addTagToPhrase = (phrase, tag) => {
+        // If tag starts with a period, remove the space before it
+        if (tag.startsWith('.')) {
+            return `${phrase.trim()}${tag}`;
+        }
+        // Otherwise, add with normal spacing
+        return `${phrase} ${tag}`;
     };
 
     /**
@@ -543,62 +629,8 @@
         // Helper function to join non-empty words with spaces
         const joinWords = (...words) => words.filter(word => word && word.trim() !== '').join(' ');
         
-        const formats = [
-
-            (i, b, n, c, a, f) => joinWords(i), (i, b, n, c, a, f) => joinWords(i),
-            (i, b, n, c, a, f) => joinWords(n), (i, b, n, c, a, f) => joinWords(n),
-            (i, b, n, c, a, f) => joinWords(c), (i, b, n, c, a, f) => joinWords(c),
-            (i, b, n, c, a, f) => joinWords(f), (i, b, n, c, a, f) => joinWords(f),
-            
-
-            (i, b, n, c, a, f) => joinWords(i, f),
-            (i, b, n, c, a, f) => joinWords(a, n), (i, b, n, c, a, f) => joinWords(a, n), 
-            (i, b, n, c, a, f) => joinWords(c, n), (i, b, n, c, a, f) => joinWords(c, n),
-            (i, b, n, c, a, f) => joinWords(n, f),
-
-            (i, b, n, c, a, f) => joinWords(i, b, f),
-            (i, b, n, c, a, f) => joinWords(i, c, f),
-            (i, b, n, c, a, f) => joinWords(i, n, f),
-            (i, b, n, c, a, f) => joinWords(i, a, n), (i, b, n, c, a, f) => joinWords(i, a, n),
-            (i, b, n, c, a, f) => joinWords(b, n, f),
-            (i, b, n, c, a, f) => joinWords(b, c, f),
-            (i, b, n, c, a, f) => joinWords(b, a, n),
-            (i, b, n, c, a, f) => joinWords(a, n, f),
-            (i, b, n, c, a, f) => joinWords(c, a, n),
         
-            (i, b, n, c, a, f) => joinWords(i, n, c, f),
-            (i, b, n, c, a, f) => joinWords(i, c, b, f),
-            (i, b, n, c, a, f) => joinWords(i, c, n, f),
-            (i, b, n, c, a, f) => joinWords(i, a, n, f),
-            (i, b, n, c, a, f) => joinWords(i, b, c, f),
-            (i, b, n, c, a, f) => joinWords(i, b, a, n),
-            (i, b, n, c, a, f) => joinWords(b, a, n, f),
-            (i, b, n, c, a, f) => joinWords(b, c, n, f),
-            (i, b, n, c, a, f) => joinWords(b, a, c, f),
-
-            (i, b, n, c, a, f) => joinWords(i, b, a, c, f),
-            (i, b, n, c, a, f) => joinWords(i, c, a, n, f),
-            (i, b, n, c, a, f) => joinWords(i, a, n, c, f),
-            (i, b, n, c, a, f) => joinWords(i, a, c, n, f),
-            (i, b, n, c, a, f) => joinWords(i, b, c, n, f),
-            (i, b, n, c, a, f) => joinWords(i, b, a, n, f),
-            (i, b, n, c, a, f) => joinWords(i, n, a, c, f),
-            (i, b, n, c, a, f) => joinWords(i, a, b, c, f),
-            (i, b, n, c, a, f) => joinWords(i, a, b, n, f),
-
-            (i, b, n, c, a, f) => joinWords(i, b, c, a, n, f),
-            (i, b, n, c, a, f) => joinWords(b, i, c, a, n, f),
-            (i, b, n, c, a, f) => joinWords(i, c, b, a, n, f),
-            (i, b, n, c, a, f) => joinWords(i, a, b, c, n, f),
-            (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f)
-
-            ];
-            
-            // (i, b, n, c, a, f) => joinWords(i, b, a, n, c, f),
-            // (i, b, n, c, a, f) => joinWords(i, b, a, c, n, f),
-            // (i, b, n, c, a, f) => joinWords(i, a, b, c, n, f),
-            // (i, b, n, c, a, f) => joinWords(i, a, c, b, n, f),
-            // (i, b, n, c, a, f) => joinWords(c, a, n, f, i, b),
+    
         
         // Pick a random format
         const randomFormat = formats[Math.floor(Math.random() * formats.length)];
@@ -688,7 +720,7 @@
         if (needsBeast && wordTracking.beast?.beastStop) {
             // Beast stop triggered by first beast - skip beast duplications
             // Continue with normal processing (noun, candy, adjective, finale)
-        } else if (needsBeast && Math.random() < CONFIG.doubleBeastChance) {
+        } else if (needsBeast && !wordTracking.beast?.hardStop && Math.random() < CONFIG.doubleBeastChance) {
             // Get a different beast (avoid duplicates and items on timeout)
             let availableSecondBeasts = getAvailableItems(1).filter(item => item !== beast);
             // If no available beasts (shouldn't happen), fall back to all beasts except the current one
@@ -710,7 +742,7 @@
             // Check for beast stop after second beast
             if (wordTracking.beast.beastStop || secondBeastTracking.beastStop) {
                 // Beast stop triggered by first or second beast - skip third beast
-            } else if (Math.random() < CONFIG.tripleBeastChance) {
+            } else if (!wordTracking.beast?.hardStop && !secondBeastTracking?.hardStop && Math.random() < CONFIG.tripleBeastChance) {
                 // Get a different third beast (avoid duplicates with first two and items on timeout)
                 let availableThirdBeasts = getAvailableItems(1).filter(item => item !== beast && item !== secondBeast);
                 // If no available beasts (shouldn't happen), fall back to all beasts except the current ones
@@ -731,8 +763,8 @@
             }
         }
 
-        // 5% chance to add a second candy (only if candy is used)
-        if (needsCandy && Math.random() < CONFIG.doubleCandyChance) {
+        // 50% chance to add a second candy (only if candy is used)
+        if (needsCandy && !wordTracking.candy?.hardStop && Math.random() < CONFIG.doubleCandyChance) {
             // Get a different candy (avoid duplicates and items on timeout)
             let availableSecondCandies = getAvailableItems(3).filter(item => item !== candy);
             // If no available candies (shouldn't happen), fall back to all candies except the current one
@@ -900,47 +932,53 @@
             let stopAfterAdjective = needsAdjective && wordTracking.adjective?.hardStop;
             let stopAfterFinale = needsFinale && wordTracking.finale?.hardStop;
             
-            // Build phrase up to the hard stop point using the selected format
-            if (stopAfterIntro) {
-                phrase = processedIntro;
-            } else {
-                // For other hard stops, we need to determine which words to include based on the format
-                // and stop at the appropriate point
-                let includeIntro = needsIntro;
-                let includeBeast = needsBeast;
-                let includeNoun = needsNoun;
-                let includeCandy = needsCandy;
-                let includeAdjective = needsAdjective;
-                let includeFinale = needsFinale;
-                
-                // Determine the stopping point and only include words up to that point
-                if (stopAfterBeast) {
-                    includeNoun = false;
-                    includeCandy = false;
-                    includeAdjective = false;
-                    includeFinale = false;
-                } else if (stopAfterNoun) {
-                    includeCandy = false;
-                    includeAdjective = false;
-                    includeFinale = false;
-                } else if (stopAfterCandy) {
-                    includeAdjective = false;
-                    includeFinale = false;
-                } else if (stopAfterAdjective) {
-                    includeNoun = false;
-                    includeFinale = false;
+            // If there's a hard stop, we need to respect the actual format order
+            // Determine which word type triggered the hard stop
+            let hardStopType = null;
+            if (stopAfterIntro) hardStopType = 'intro';
+            else if (stopAfterBeast) hardStopType = 'beast';
+            else if (stopAfterNoun) hardStopType = 'noun';
+            else if (stopAfterCandy) hardStopType = 'candy';
+            else if (stopAfterAdjective) hardStopType = 'adjective';
+            else if (stopAfterFinale) hardStopType = 'finale';
+            
+            // Parse the format string to determine the actual order
+            const formatOrder = [];
+            // Split by spaces and map to word types
+            const formatParts = formatString.split(' ');
+            formatParts.forEach(part => {
+                switch(part) {
+                    case 'I': formatOrder.push('intro'); break;
+                    case 'B': formatOrder.push('beast'); break;
+                    case 'N': formatOrder.push('noun'); break;
+                    case 'C': formatOrder.push('candy'); break;
+                    case 'A': formatOrder.push('adjective'); break;
+                    case 'F': formatOrder.push('finale'); break;
                 }
-                
-                // Build the phrase with only the words that should be included
-                phrase = randomFormat(
-                    includeIntro ? processedIntro : '',
-                    includeBeast ? finalBeast : '',
-                    includeNoun ? finalNoun : '',
-                    includeCandy ? finalCandy : '',
-                    includeAdjective ? processedAdjective : '',
-                    includeFinale ? processedFinale : ''
-                );
-            }
+            });
+            
+            // Find the position of the hard stop word in the format order
+            const stopIndex = formatOrder.indexOf(hardStopType);
+            
+            
+            // Determine which words to include (up to and including the hard stop word, then stop)
+            let includeIntro = needsIntro && (stopIndex === -1 || formatOrder.indexOf('intro') <= stopIndex);
+            let includeBeast = needsBeast && (stopIndex === -1 || formatOrder.indexOf('beast') <= stopIndex);
+            let includeNoun = needsNoun && (stopIndex === -1 || formatOrder.indexOf('noun') <= stopIndex);
+            let includeCandy = needsCandy && (stopIndex === -1 || formatOrder.indexOf('candy') <= stopIndex);
+            let includeAdjective = needsAdjective && (stopIndex === -1 || formatOrder.indexOf('adjective') <= stopIndex);
+            let includeFinale = needsFinale && (stopIndex === -1 || formatOrder.indexOf('finale') <= stopIndex);
+            
+            
+            // Build the phrase with only the words that should be included
+            phrase = randomFormat(
+                includeIntro ? processedIntro : '',
+                includeBeast ? finalBeast : '',
+                includeNoun ? finalNoun : '',
+                includeCandy ? finalCandy : '',
+                includeAdjective ? processedAdjective : '',
+                includeFinale ? processedFinale : ''
+            );
         } else {
             // Normal phrase generation
             phrase = randomFormat(processedIntro, finalBeast, finalNoun, finalCandy, processedAdjective, processedFinale);
@@ -1013,7 +1051,7 @@
                 additionalItemsUsed.push({type: 'tag', item: tag});
                 
                 // Add the tag to the end of the phrase
-                phrase = `${phrase} ${processedTag}`;
+                phrase = addTagToPhrase(phrase, processedTag);
                 
                 // Add tag to debug output
                 let tagDisplay = processedTag;
@@ -1204,6 +1242,39 @@
        CONFIG.childsMode = !CONFIG.childsMode;
        updatechildsModeToggle();
        
+       // Handle music switching
+       if (CONFIG.backgroundMusic) {
+         if (CONFIG.childsMode) {
+           // Switch to child's mode music
+           if (!backgroundMusic.paused) {
+             mainMusicPosition = backgroundMusic.currentTime;
+             backgroundMusic.pause();
+           }
+           childsModeMusic.volume = CONFIG.musicVolume;
+           childsModeMusic.currentTime = childsMusicPosition;
+           childsModeMusic.loop = true;
+           childsModeMusic.play().catch(err => {
+             if (!CONFIG.noConsole) {
+               console.log('Child\'s mode music failed to play');
+             }
+           });
+         } else {
+           // Switch back to main music
+           if (!childsModeMusic.paused) {
+             childsMusicPosition = childsModeMusic.currentTime;
+             childsModeMusic.pause();
+           }
+           backgroundMusic.currentTime = mainMusicPosition;
+           if (backgroundMusic.paused) {
+             backgroundMusic.play().catch(err => {
+               if (!CONFIG.noConsole) {
+                 console.log('Main music failed to resume');
+               }
+             });
+           }
+         }
+       }
+       
        // Add/remove childs-mode class to body for CSS styling
        if (CONFIG.childsMode) {
          document.body.classList.add('childs-mode');
@@ -1258,6 +1329,7 @@
        if (backgroundMusic.muted) {
          // Unmute
          backgroundMusic.muted = false;
+         childsModeMusic.muted = false;
          muteIcon.src = CONFIG.darkMode ? 'images/volume-dark.png' : 'images/volume.png';
          muteIcon.alt = 'Volume';
          muteBtn.classList.remove('muted');
@@ -1265,6 +1337,7 @@
        } else {
          // Mute
          backgroundMusic.muted = true;
+         childsModeMusic.muted = true;
          muteIcon.src = CONFIG.darkMode ? 'images/mute-dark.png' : 'images/mute.png';
          muteIcon.alt = 'Muted';
          muteBtn.classList.add('muted');
@@ -1567,12 +1640,12 @@
                 }
                 
                 // Simulate finger fatigue (gradually slower over time)
-                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.05; // Up to 5% slower
+                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.08; // Up to 8% slower
                 baseDelay *= fatigueFactor;
                 
                 // Word boundaries get slight pauses
                 if (char === ' ') {
-                    baseDelay += 6.67 + Math.random() * 13.33; // 3/4ths slower
+                    baseDelay += 8 + Math.random() * 13.33; // 3/4ths slower
                     }
                 }
                 
@@ -1861,7 +1934,10 @@
     
     // Function to update playing state animation
     function updatePlayingState() {
-      if (!backgroundMusic.paused && !backgroundMusic.muted) {
+      const mainMusicPlaying = !backgroundMusic.paused && !backgroundMusic.muted;
+      const childsMusicPlaying = !childsModeMusic.paused && !childsModeMusic.muted;
+      
+      if (mainMusicPlaying || childsMusicPlaying) {
         muteBtn.classList.add('playing');
       } else {
         muteBtn.classList.remove('playing');
@@ -1959,6 +2035,9 @@
 
     // --- AUDIO FUNCTIONS ---
     const backgroundMusic = document.getElementById('background-music');
+    const childsModeMusic = new Audio('audio/music/swoon.mp3');
+    let mainMusicPosition = 0; // Track position of main music when paused
+    let childsMusicPosition = 0; // Track position of child's mode music when paused
     
     // Typewriter sound effects
     let typewriterSounds = [];
@@ -2154,6 +2233,8 @@
     // Listen for music play/pause events
     backgroundMusic.addEventListener('play', updatePlayingState);
     backgroundMusic.addEventListener('pause', updatePlayingState);
+    childsModeMusic.addEventListener('play', updatePlayingState);
+    childsModeMusic.addEventListener('pause', updatePlayingState);
     backgroundMusic.addEventListener('ended', playNextSong);
     
     /**
