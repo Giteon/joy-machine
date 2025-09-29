@@ -54,6 +54,7 @@ html {
 /* Button states */
 #generate-btn.filling {
   background-color: #e5e7eb; /* gray-200 */
+  margin-bottom: 1.75rem; /* 12px - difference between GO button height (with 4px border) and filling bar height */
 }
 
 #generate-btn.filling .btn-text {

@@ -87,7 +87,7 @@ platypus
 pterodactl
 python
 pig
-rabbit
+[task, .2, *B*]rabbit
 raccoon
 RAT [bones, *B*]
 rat [who walked up to a castle, .1, *F*, *B*]
@@ -128,6 +128,7 @@ midnight snack
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
+chakras aligned [virginity restored, .2, *F*]
 omega(verse/3 fatty acids)
 GARY ROYCE! [OHO! A-BING-A-BAM-A-BOOM, .2, *F*]
 shiva baby
@@ -161,7 +162,7 @@ batchelor in paradise
 above-ground (burial/grave)
 pussy taste test [jump up and down, .3, *F*]
 onlyfans
-rodolfo [trapped in floorboards, *F*]
+rodolfo [trapped in floorboards, unpaid summer internship on hold, *F*]
 primordial soup
 laura palmer[? I thought you said ARNOLD palmer, .15, *F*]
 war movie monday
@@ -234,7 +235,6 @@ prest-o change-o
 circadian somersault
 [fucking] candy flip
 go go gadget [(depression/restraining order), .2]
-taskrabbit
 ding dong [ditch]
 54321 [54321 [54321 [54321 [54321 [54321]]]]]
 cha-cha slide
@@ -269,7 +269,7 @@ ZING
 ding ding [ding, *F*]
 pussy slay mama
 daily dingle [dongle, .15]
-party popper
+party popper [petri dish, .2]
 willy wonka
 squink squonk
 yuppy bitch
@@ -509,13 +509,16 @@ FUCK
 unless??
 sent from iphone
 SENT FROM IPHONE
+sent from tamagotchi
 BITCH
 for the lady
 (read in italian accent)
 (read in transatlantic accent)
 (read in borat voice)
+(read in kermit voice)
 RETWEET 1000
 . OH BEHAVE!
+because of WOKE!?
 . That's just what I like!
 weeeeeeeeeeeeee
 dave & busters [dave & busters, .15 [dave & busters, .15]]
@@ -582,7 +585,7 @@ const nsfwWords = [
   'wet nurse', 'whore', 'slut', 'pussy taste test', 'pussy popping', 'japanese sponge bath', 'penis boy', 'bubble butt', 'blood drenched', 'blood soaked', 'slop job',
   'bricked up', 'sucked dry', 'holocaust', 'imitation holocaust crab', 'guantanamo bay', '9/11', '9/11 simulator', '9/11 livestream',
   'japanese water torture', 'breedable', 'ahegao', 'mommy milker', 'onlyfans', 'and suck the dust off the tip', 'orgasm', 'hands-free orgasm', 'chained to radiator',
-  'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay'
+  'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay', 'because of WOKE!?'
 ];
 
 
