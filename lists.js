@@ -30,6 +30,7 @@ chicken time horse time
 chicken fucking crazy time
 POV:
 and a-one and a-two and-a
+ok google,
 
 BEAST (B)
 [secret, *B*] aardvark
@@ -128,14 +129,18 @@ price match
 propranolol [8000mg]
 coke zero [friends or family, *F*]
 stagg night
+(1st/2nd/3rd/4th/5th/6th) base
+hit n' run
+(1/7/12)-figure salary [bones sorted by color shape size texture and smell [BUT NEVER BY TASTE], .2, *F*]
 sleeper build
 midnight snack
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
+webster's dictionary
 chakras aligned [virginity restored, .2, *F*]
 baseball animal
-omega(verse/3 fatty acids)
+omegaverse [omega 3 fatty acids]
 GARY ROYCE! [OHO! A-BING-A-BAM-A-BOOM, .2, *F*]
 shiva baby
 selena gomez [oreo mmmm tastes like fucking mexico everything is in sepia now, *F*]
@@ -169,9 +174,10 @@ batchelor in paradise
 above-ground (burial/grave)
 pussy taste test [jump up and down, .3, *F*]
 onlyfans
+avatar state
 rodolfo [trapped in floorboards, unpaid summer internship on hold, *F*]
 primordial soup
-laura palmer[? I thought you said ARNOLD palmer, .15, *F*]
+laura palmer[? I thought you said ARNOLD palmer, .2, *F*]
 war movie monday
 u sure? 😏😏😏
 saggitarius [rising]
@@ -184,14 +190,15 @@ hungry tax [click here to feed your advisor a motivational nutrition cube, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
 armenian conveyor belt
-year-long coma
+(year-long/medically induced) coma
 wet leg
 thumbalina
-international waters
+bridge to terabithia[? I hardly know her!, .1, *F*]
+international waters [all crimes are legal, .15, *F*]
 wartime economy
 wagwan
 monster mash
-head exploded [no pulse]
+head exploded [no pulse [don't worry my wife as an essential oil for that, .2, *F*]]
 with 9 billion child IQ
 water stain
 citizen's arrest
@@ -202,6 +209,7 @@ tide on-the-go
 monster porn
 french red [frozen solid, .25]
 precum [premarket [postmarket]]
+premarket[. Postmarket. Middle market. Middleman. Middle wo-man. They talk about glass ceilings but the market’s a wall. Miss me with those stones, money man, I’ll stick your stocks where the sun goes dark. Sun down, stocks down, world on fire. The glass melts, and the stones of Wall Street turn to sand., .2, *F*]
 spike the punch [BITCH, .2, *F*]
 instant death
 iranian steakhouse
@@ -228,21 +236,27 @@ chunky monkey
 mary poppins
 freaky friday
 tip-to-taint
+booze cruise
 jacuzzi [man drowned by request, .2]
 laffy taffy [willy wonka, .15]
-zendaya
+zendaya[? I hardly know her!, .1, *F*]
 silly putty
 she-shed [wasp infestation]
 tit-for-tat
 ipso facto [prest-o change-o, .15]
-ticktopia
-post hoc [ergo propter hoc [TUAH]]
+tick-topia
+post hoc [ergo propter hoc [TUAH, *F*]]
+chutes and ladders [russian roulette, .15]
+middle manager
+snap crackle
 humpty dumpty
 chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
+breakfast in bed
 prest-o change-o
 circadian somersault
 [fucking] candy flip
+9 to 5 [dolly parton, .2 [my french, .2]]
 go go gadget [(depression/restraining order), .2]
 ding dong [ditch]
 54321 [54321 [54321 [54321 [54321 [54321]]]]]
@@ -259,6 +273,7 @@ hub and spoke
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
+jiffy lube
 bunson burner [bitch, .2, *F*]
 hellen keller [jerking off ALL over town, *F*]
 shakira [shakira [ooh baby when you talk like that you make a woman go mad, .2, *F*]]
@@ -268,6 +283,7 @@ scooby doo [velma 4k stuck in washing machine 4k, .2, *F*]
 tiny desk
 chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip, .1, *F*]
 dunkin donut[s]
+mystery meat
 zoboomafoo
 rigamarole
 beach blanket babylon
@@ -302,6 +318,8 @@ boston dynamics
 low libido (magic the gathering/penis boy)
 [sort of an , .2, *F*]ethnic twist
 chained to radiator [until daytime, .1]
+barely alive
+brimming with [piss, .1]
 bricked up [fridge magnet, .1, *F*]
 ferragamo [signature scent]
 herbert von [kinkshame,.2, *F*]
@@ -310,6 +328,7 @@ one two skip a few ninety nine a hundred
 authentic home-cooked [wartime, .2]
 diegetic
 5G
+gentleman's
 full-frontal
 big n' greedy
 stolen valor
@@ -396,6 +415,7 @@ DO A TRICK
 i'm not in trouble AT ALL
 smells like fallon in here
 what teh heck?
+hit em with the ol' over under
 i’m well within my rights to KILL you right now
 . you should know, your wife kissed me on the cheek when I got here. Now look at ya, all alone. Everybody’s going to party at my house.
 LEMME THINK ABOUT IT FOR A MINUTE
@@ -414,6 +434,7 @@ currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at? [ha ha. where is it at? can't have gone far. ha ha, .2]
 [what's the officer, problem?] I'M COLD STONE SOBER
 HEAT DEATH OF UNIVERSE
+legs ripped CLEAN off [(I'm talking about a CLEAN break/but don't worry my wife as an essential oil for that), .2]
 back in highschool I rolled blunts on the scantron
 fucking turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
@@ -438,6 +459,7 @@ now sit right down im gonna spin you around like a basketball
 spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
 babe our song
+i should text her
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
 shot dead by alec baldwin[, alec baldwin pardoned (!/and given purple heart!!!)]
@@ -447,18 +469,18 @@ car door left unlocked, hair stolen by witch[, naruto run into witch's basement,
 and let the [fucking] bunny eat the carrot
 your skin [ohhhh yeah, .2] oh yeah your skin and bones
 in good christian fun
+[ummmmm, .2] did I just say that out loud?
 CLONE CLONE CLONE
 emits poweful pheromone brain scrambled
 within 1000 feet of a school
 suggested donation: life savings
-? I hardly know her!
 take off glasses it is revealed she is actually beautiful!
 FREE CREDIT SCORE
 DANGER WILL ROBINSON [DANGER, .15]
 100 concubines (NOT virgins, robust sexual references)
 TFW knee surgery in 4 days
 leave no trace search history wiped
-how tf they build the pyramids without teams calls pitch decks or AI-powered workflow optimization programs???
+how tf they build the pyramids without teams calls or AI-powered workflow optimization programs???
 why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
 polish it off
@@ -471,7 +493,7 @@ translated to (chinese/german/icelandic/hungarian/japanese/korean/portuguese/rus
 [tortured, .8] for up to one year (in a shipping container/in an ikea display room/in a replica of the rothschild family mansion/on a wicker chair)
 and SCENE
 go brrrrrrr
-walk the plank [bitch, .4]
+walk the plank [BITCH, .4]
 RELEASE THE SNAKES
 Siri, "when is July" [oops unsend [haha. siri hold my calls [siri jerk it a little 😏]]]
 NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE]]]]]]]]]
@@ -480,15 +502,18 @@ shirley temple microwave 45 minutes HOT
 [EXCUSE me, .2] im going to take this back to my home lab
 anti-(hoes/happiness) technology
 girlfriend (who loves me so much/with a printer dating sim)
-IN ENGLISH PLEASE
+IN ENGLISH PLEASE?
 fuck my shit up
 ChatGPT 1 million almonds destroyed
 for the plot
 stand here so i can crop you out later
+texture's JUNK[. ok now we're talking. yeah, this one rules, .1]
 for her pleasure
 plus tax and tip
 SWEET CINNAMON!
+consider it done
 ces't la vie
+ooooh i just wanna wear my shorts
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)
 do you want some more
@@ -502,12 +527,12 @@ SPOILER ALERT
 everything reminds me of her
 on my desk YESTERDAY
 green moose guava juice large fries chocolate shake
-300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [mozart effect gray noise flow state [cure vision brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
+300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [mozart effect gray noise flow state 15 SPF baseline without sunscreen [cure vision brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏 [jarvis, faster 😏 [i said faster 😏 [jarvis, let me return the favor 😏 [jarvis, are you shy? 😏 [jarvis, you're beautiful. I want to make you feel good 😏]]]]]
 70/30 split
 (reliable, expensive, dangerous)
-THE CITY IS MINE
+THE CITY IS MINE 🗣️🗣️🗣️
 guantanamo bay forced to watch pole dancing video on work computer
 and buy yourself something nice kid
 (10/100/1000/10000/100000)lbs soaking wet [no reciept, .25]
@@ -541,11 +566,11 @@ for the lady
 (read in kermit voice)
 RETWEET 1000
 . OH BEHAVE!
-TEXTURE'S JUNK
 because of WOKE!?
+...in THIS economy?
 . That's just what I like!
 weeeeeeeeeeeeee
-dave & busters [dave & busters [dave & busters]
+dave & busters [dave & busters [dave & busters]]
 mmmmmmmmmmm
 uunnnhhhhhggh
 WRITE THAT DOWN

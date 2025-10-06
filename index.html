@@ -77,43 +77,46 @@
     const CONFIG = {
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.03, // 3% of total steps when clicked
+      advanceAmount: 0.04, // 4% of total steps when clicked
       typoChance: 0.018, // 1.8% chance per letter
       typoCorrectionChance: .90, // 90% chance to catch typo
       doubleBeastChance: 0.85, // 85% chance for two beasts
       tripleBeastChance: 0.60, // 60% chance for three beasts (if already two)
       doubleCandyChance: .5, // 50% chance for two candies
       fuckingChance: 0.12, // 12% chance to add "fucking"
-      thinkingPauseChance: 0.15, // 15% chance for thinking pause
+      thinkingPauseChance: 0.20, // 20% chance for thinking pause
       allCapsChance: 0.10, // 10% chance for all caps (except beast)
       skipSpaceChance: 0.00, // 0% chance to skip spaces between words
       swapLettersChance: 0.008, // .8% chance to swap two adjacent letters in word
       testMode: false, // Test mode - instant progress bar fill
       childsMode: false, // child's mode state
       backgroundMusic: true, // Enable background music
-      musicVolume: 0.10, // Background music volume (0.0 to 1.0)
+      musicVolume: 0.08, // Background music volume (0.0 to 1.0)
       tagChance: 0.3, // 30% chance for tag after finale/hard stop
       darkMode: false, // Dark mode state
       noConsole: false, // Disable all console logs when true
       typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
       typingSpeed: { //higher numbers = slower typing
-        space: { min: 22, max: 36 },
-        vowel: { min: 8, max: 22 },
-        consonant: { min: 10, max: 26 },
-        number: { min: 45, max: 80 },
-        punctuation: { min: 32, max: 70 }
+        space: { min: 5, max: 25 },
+        vowel: { min: 10, max: 38 },
+        consonant: { min: 12, max: 42 },
+        number: { min: 50, max: 65 },
+        punctuation: { min: 42, max: 80 }
       }
     };
 
     // --- FORMATS ---
     // Define the possible formats (now using intro + word order)
-    // Helper function to join non-empty words with spaces
-    const joinWords = (...words) => words.filter(word => word && word.trim() !== '').join(' ');
+    // Helper function to join non-empty words with spaces and pause markers between item types
+    const joinWords = (...words) => {
+        const nonEmptyWords = words.filter(word => word && word.trim() !== '');
+        return nonEmptyWords.join(' | '); // | is our pause marker
+    };
     
     const formats = [
 
             (i, b, n, c, a, f) => joinWords(i), 
-            (i, b, n, c, a, f) => joinWords(n),
+            // (i, b, n, c, a, f) => joinWords(n),
             (i, b, n, c, a, f) => joinWords(c), (i, b, n, c, a, f) => joinWords(c),
             // (i, b, n, c, a, f) => joinWords(f),
             
@@ -1445,6 +1448,17 @@
                     hasActiveTypo = true; // Prevent more typos
                 }
                 
+                // Check for pause marker - if it's |, add delay and skip displaying
+                if (actualChar === '|') {
+                    // Add random pause between 0-300ms
+                    const pauseDelay = Math.random() * 300;
+                    currentIndex++; // Increment index to move past the |
+                    setTimeout(() => {
+                        typeNextChar();
+                    }, pauseDelay);
+                    return; // Skip displaying the | character
+                }
+                
                 // Add the character (could be original or typo)
                 displayedText += actualChar;
                 
@@ -1458,9 +1472,9 @@
                                 sound.currentTime = 0;
                             }
                             
-                            // 30% louder for spacebar
+                            // 60% louder for spacebar
                             const originalVolume = sound.volume;
-                            const boosted = Math.min(originalVolume * 1.3, 1.0);
+                            const boosted = Math.min(originalVolume * 1.6, 1.0);
                             if (boosted !== originalVolume) {
                                 sound.volume = boosted;
                                 sound.play().catch(() => {});
@@ -1472,10 +1486,10 @@
                     } else {
                         // Letters use very-soft-hit sounds (variable frequency)
                         soundCounter++;
-                        if (soundCounter % 4 === 0) {
+                        if (soundCounter % 3 === 0) {
                             // Check if this is a capital letter
                             if (actualChar === actualChar.toUpperCase() && actualChar.match(/[A-Z]/)) {
-                                // Capital letters are 50% louder
+                                // Capital letters are 100% louder
                                 if (window.typewriterSounds && window.typewriterSounds.length > 0) {
                                     const sound = window.typewriterSounds[Math.floor(Math.random() * window.typewriterSounds.length)];
                                     if (sound.currentTime > 0.1) {
@@ -1483,7 +1497,7 @@
                                     }
                                     
                                     const originalVolume = sound.volume;
-                                    const boosted = Math.min(originalVolume * 1.5, 1.0);
+                                    const boosted = Math.min(originalVolume * 2, 1.0);
                                     if (boosted !== originalVolume) {
                                         sound.volume = boosted;
                                         sound.play().catch(() => {});
@@ -1637,11 +1651,11 @@
                 
                 // Occasional longer thinking pauses (more frequent than before)
                 if (Math.random() < CONFIG.thinkingPauseChance) { // 8% chance
-                    baseDelay += 66.67 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
+                    baseDelay += 100 + Math.random() * 133.33; // Longer thinking pause (3/4ths slower)
                 }
                 
                 // Simulate finger fatigue (gradually slower over time)
-                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.08; // Up to 8% slower
+                const fatigueFactor = 1 + (currentIndex / phrase.length) * 0.04; // Up to 4% slower
                 baseDelay *= fatigueFactor;
                 
                 // Word boundaries get slight pauses
