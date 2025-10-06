@@ -578,23 +578,21 @@
     /**
      * Cleans up phrase formatting by removing unwanted start/end words
      */
+    // Precompiled regexes for phrase cleanup
+    const BAD_START_WORDS = ['and', 'or', 'for', 'with', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
+    const BAD_END_WORDS = ['fucking', 'crazy'];
+    const BAD_START_REGEXES = BAD_START_WORDS.map(w => new RegExp(`^${w}\\s+`, 'i'));
+    const BAD_END_REGEXES = BAD_END_WORDS.map(w => new RegExp(`\\s+${w}$`, 'i'));
+
     const cleanPhrase = (phrase) => {
-        // Words that shouldn't start a phrase (case insensitive)
-        const badStartWords = ['and', 'or', 'for', 'with', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
-        
-        // Words that shouldn't end a phrase (case insensitive)
-        const badEndWords = ['fucking', 'crazy'];
-        
-        // Check if phrase starts with any of the bad words
-        for (const badWord of badStartWords) {
-            const regex = new RegExp(`^${badWord}\\s+`, 'i');
-            phrase = phrase.replace(regex, '');
+        // Remove unwanted start words
+        for (const rx of BAD_START_REGEXES) {
+            phrase = phrase.replace(rx, '');
         }
         
-        // Check if phrase ends with any of the bad words
-        for (const badWord of badEndWords) {
-            const regex = new RegExp(`\\s+${badWord}$`, 'i');
-            phrase = phrase.replace(regex, '');
+        // Remove unwanted end words
+        for (const rx of BAD_END_REGEXES) {
+            phrase = phrase.replace(rx, '');
         }
         
         // Clean up any extra spaces
@@ -1050,6 +1048,9 @@
                 addItemToTimeout('tag', tag); // Add the tag item to the tag list
                 additionalItemsUsed.push({type: 'tag', item: tag});
                 
+                // Apply child's mode filter to the tag as well
+                processedTag = filterNSFW(processedTag);
+                
                 // Add the tag to the end of the phrase
                 phrase = addTagToPhrase(phrase, processedTag);
                 
@@ -1221,17 +1222,11 @@
       * Updates child's mode toggle appearance
       */
      const updatechildsModeToggle = () => {
-       if (CONFIG.childsMode) {
-         childsModeToggle.classList.add('bg-pink-500');
-         childsModeToggle.classList.remove('bg-gray-200');
-         childsModeSlider.classList.add('translate-x-5');
-         childsModeSlider.classList.remove('translate-x-0');
-      } else {
-         childsModeToggle.classList.remove('bg-pink-500');
-         childsModeToggle.classList.add('bg-gray-200');
-         childsModeSlider.classList.remove('translate-x-5');
-         childsModeSlider.classList.add('translate-x-0');
-       }
+       const on = CONFIG.childsMode;
+       childsModeToggle.classList.toggle('bg-pink-500', on);
+       childsModeToggle.classList.toggle('bg-gray-200', !on);
+       childsModeSlider.classList.toggle('translate-x-5', on);
+       childsModeSlider.classList.toggle('translate-x-0', !on);
      };
 
 
@@ -1276,11 +1271,7 @@
        }
        
        // Add/remove childs-mode class to body for CSS styling
-       if (CONFIG.childsMode) {
-         document.body.classList.add('childs-mode');
-       } else {
-         document.body.classList.remove('childs-mode');
-       }
+       document.body.classList.toggle('childs-mode', CONFIG.childsMode);
        
        // Update GO button text if it's currently ready
        if (generateBtn.classList.contains('ready')) {
@@ -1469,14 +1460,19 @@
                             
                             // 30% louder for spacebar
                             const originalVolume = sound.volume;
-                            sound.volume = Math.min(originalVolume * 1.3, 1.0);
-                            sound.play().catch(() => {});
-                            sound.volume = originalVolume; // Reset volume
+                            const boosted = Math.min(originalVolume * 1.3, 1.0);
+                            if (boosted !== originalVolume) {
+                                sound.volume = boosted;
+                                sound.play().catch(() => {});
+                                sound.volume = originalVolume; // Reset volume
+                            } else {
+                                sound.play().catch(() => {});
+                            }
                         }
                     } else {
                         // Letters use very-soft-hit sounds (variable frequency)
                         soundCounter++;
-                        if (soundCounter % 3 === 0) {
+                        if (soundCounter % 4 === 0) {
                             // Check if this is a capital letter
                             if (actualChar === actualChar.toUpperCase() && actualChar.match(/[A-Z]/)) {
                                 // Capital letters are 50% louder
@@ -1487,9 +1483,14 @@
                                     }
                                     
                                     const originalVolume = sound.volume;
-                                    sound.volume = Math.min(originalVolume * 1.5, 1.0);
-                                    sound.play().catch(() => {});
-                                    sound.volume = originalVolume; // Reset volume
+                                    const boosted = Math.min(originalVolume * 1.5, 1.0);
+                                    if (boosted !== originalVolume) {
+                                        sound.volume = boosted;
+                                        sound.play().catch(() => {});
+                                        sound.volume = originalVolume; // Reset volume
+                                    } else {
+                                        sound.play().catch(() => {});
+                                    }
                                 }
                             } else {
                                 playTypewriterSound(actualChar);
@@ -1849,18 +1850,33 @@
     /**
      * Starts the auto-fill animation
      */
+    // Cached progress percentage to avoid redundant style writes while keeping smoothness
+    let lastFillPercent = -1;
+    const setFillWidthPercent = (percent) => {
+      // Keep fractional precision; only skip writes if change is imperceptible (< 0.1%)
+      if (Math.abs(percent - lastFillPercent) >= 0.1) {
+        generateBtn.style.setProperty('--fill-width', `${percent}%`);
+        lastFillPercent = percent;
+      }
+    };
+
     const startAutoFill = () => {
       if (isComplete) return; // Don't restart if already complete
+      // Ensure no previous interval is running
+      if (fillInterval) {
+        clearInterval(fillInterval);
+        fillInterval = null;
+      }
       
       currentFill = 0;
       // Temporarily disable transition for instant reset
-      generateBtn.style.setProperty('--fill-width', '0%');
+      setFillWidthPercent(0);
       updateButtonState('filling');
       
       // Test mode: instantly complete the bar
       if (CONFIG.testMode) {
         currentFill = totalSteps;
-        generateBtn.style.setProperty('--fill-width', '100%');
+        setFillWidthPercent(100);
         updateButtonState('ready');
         isComplete = true;
         return;
@@ -1870,7 +1886,7 @@
       fillInterval = setInterval(() => {
         currentFill++;
         const fillPercentage = (currentFill / totalSteps) * 100;
-        generateBtn.style.setProperty('--fill-width', `${fillPercentage}%`);
+        setFillWidthPercent(fillPercentage);
         
         // Play page-turn sound when progress hits 95% (only once)
         if (fillPercentage >= 95 && fillPercentage < 96 && !pageTurnPlayed) {
@@ -1952,7 +1968,7 @@
         currentFill = Math.min(currentFill + advanceAmount, totalSteps);
         
         const fillPercentage = (currentFill / totalSteps) * 100;
-        generateBtn.style.setProperty('--fill-width', `${fillPercentage}%`);
+        setFillWidthPercent(fillPercentage);
         
         // Play page-turn sound when progress hits 95% (only once)
         if (fillPercentage >= 98 && !pageTurnPlayed) {
@@ -1986,7 +2002,7 @@
         
         // Disable transitions temporarily for instant reset
         generateBtn.style.transition = 'none';
-        generateBtn.style.setProperty('--fill-width', '0%');
+        setFillWidthPercent(0);
         
         // Force a reflow to ensure immediate reset
         generateBtn.offsetHeight;
@@ -2013,7 +2029,7 @@
             
             generateBtn.classList.remove('ready', 'filling');
             generateBtn.style.transition = 'none';
-            generateBtn.style.setProperty('--fill-width', '0%');
+            setFillWidthPercent(0);
             
             generateBtn.offsetHeight; // Force reflow
             generateBtn.style.transition = '';
@@ -2116,9 +2132,14 @@
       
       // 30% louder for backspace
       const originalVolume = sound.volume;
-      sound.volume = Math.min(originalVolume * 1.3, 1.0);
-      sound.play().catch(() => {});
-      sound.volume = originalVolume; // Reset volume
+      const boosted = Math.min(originalVolume * 1.3, 1.0);
+      if (boosted !== originalVolume) {
+        sound.volume = boosted;
+        sound.play().catch(() => {});
+        sound.volume = originalVolume; // Reset volume
+      } else {
+        sound.play().catch(() => {});
+      }
     };
     
     
@@ -2195,17 +2216,18 @@
     /**
      * Loads and plays the current song
      */
+    // Persistent source element for background music to avoid DOM churn
+    let backgroundMusicSource = null;
     const loadAndPlayCurrentSong = () => {
       const currentSong = playlist[currentSongIndex];
       
-      // Clear existing sources
-      backgroundMusic.innerHTML = '';
-      
-      // Add new source
-      const source = document.createElement('source');
-      source.src = currentSong;
-      source.type = 'audio/mpeg';
-      backgroundMusic.appendChild(source);
+      // Ensure we have a single persistent <source>
+      if (!backgroundMusicSource) {
+        backgroundMusicSource = document.createElement('source');
+        backgroundMusicSource.type = 'audio/mpeg';
+        backgroundMusic.appendChild(backgroundMusicSource);
+      }
+      backgroundMusicSource.src = currentSong;
       
       // Load and play
       backgroundMusic.load();

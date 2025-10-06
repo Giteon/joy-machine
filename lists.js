@@ -63,11 +63,12 @@ giraffe
 goat
 goldfish
 goose
-gorilla
+gorilla [(glue/grip), .2, *B*]
 hamster
 hedgehog
 hippo
 horse
+hyena
 jellyfish
 kangaroo
 koala
@@ -99,6 +100,7 @@ skunk
 snake
 spider
 squirrel
+squid [game, .2, *B*]
 tiger
 turtle
 turkey
@@ -121,14 +123,18 @@ hinge premium [diahhrea from tube]
 [45°, .2] cock shame
 wikihow
 GROK
+big league chew
+price match
 propranolol [8000mg]
 coke zero [friends or family, *F*]
+stagg night
 sleeper build
 midnight snack
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
 chakras aligned [virginity restored, .2, *F*]
+baseball animal
 omega(verse/3 fatty acids)
 GARY ROYCE! [OHO! A-BING-A-BAM-A-BOOM, .2, *F*]
 shiva baby
@@ -152,9 +158,10 @@ compilation
 primal play
 barmitzvah
 ted cruz [donde esta la biblioteca, *F*]
+tinder for presidents
 license and registration
-powerball
-lobotomy
+powerball [cock and ball torture, .15]
+[DIY, .15] lobotomy
 slutty vegan
 chipotle
 wet t-shirt contest
@@ -218,11 +225,13 @@ perfect politics
 jamba juice [green goddess ecoli razzmatazz, .2]
 buccal fat [tummy tuck]
 chunky monkey
+mary poppins
 freaky friday
 tip-to-taint
 jacuzzi [man drowned by request, .2]
 laffy taffy [willy wonka, .15]
 zendaya
+silly putty
 she-shed [wasp infestation]
 tit-for-tat
 ipso facto [prest-o change-o, .15]
@@ -269,6 +278,7 @@ ZING
 ding ding [ding, *F*]
 pussy slay mama
 daily dingle [dongle, .15]
+trust your turkeys
 party popper [petri dish, .2]
 willy wonka
 squink squonk
@@ -303,6 +313,7 @@ diegetic
 full-frontal
 big n' greedy
 stolen valor
+heterosexual
 taxidermy [husband turned into skin lamp, .15, *F*]
 biblically accurate
 microplastic
@@ -349,11 +360,12 @@ hath risen [on the third day, .2, *F*]
 family plan
 kill on site
 hong-kong style
-9 trillion dead
+9 trillion dead [500 trillion injured, .1]
+funko pop[s in freezer, .15]
 color blind
 super-auto
 touch-based non-sexual [non-(poly/monog) partnership, *F*]
-ontologically (evil/sexy/poor)
+ontologically (evil/sexy)
 submissive [breedable, .2]
 command position
 michael buble [compilation [no clothes, *F*]]
@@ -366,13 +378,14 @@ ahegao [mommy milker [sudoku eyes, 0.6, *F*]]
 
 FINALE (F)
 YOUNG [(Skylar Gisondo/Jenna Orteg/Coleman Domingo) YOUNG, .2]
-cat kitty cat cat kitty cat cat
+[si saco las uñas te puedo arrañar, .15] cat kitty cat cat kitty cat cat
 dot com [dot jizz [dot edu]]
 total body enhancement [chamber [of commerce]]
 with the (fat naturals, .7/fatties, .3)
 3-trillion thread count
 shit cup runneth over [my balls, .3]
 THAT COULD BE A SHOW
+damn girl u look color blind i can fix u
 NUKE IN DA CLUB
 so THAT just happened
 oura ring indicates no pulse[, noooooo owner of oura ring is dead. FREE OURA RING!]
@@ -381,11 +394,14 @@ face down stroking my shit [wrist fractured [8 month recovery no GF, delay proce
 ten times tintinuous
 DO A TRICK
 i'm not in trouble AT ALL
+smells like fallon in here
+what teh heck?
 i’m well within my rights to KILL you right now
-You should know, your wife kissed me on the cheek when I got here. Now look at ya, all alone. Everybody’s going to party at my house.
+. you should know, your wife kissed me on the cheek when I got here. Now look at ya, all alone. Everybody’s going to party at my house.
 LEMME THINK ABOUT IT FOR A MINUTE
 where be your nutcracker?
 but i've barely been sleeping ever since my wife got flipped upside down by a swing dancer at a wedding
+[penis described in incredible detail, ]penis recreated perfectly in CAD software (100% accuracy)
 so no cube? [okay so no cube?]
 i said oo girl shock me like an electric eel [turn me on with your electric eel]
 handed 15 cellphones pushed into pool when least expected
@@ -401,7 +417,7 @@ HEAT DEATH OF UNIVERSE
 back in highschool I rolled blunts on the scantron
 fucking turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
-memories deleted from google drive [no storage remaining must delete all cherished memories]
+(cherished memories burned as fuel to power nvidia server farm/no storage remaining must delete all cherished memories from google drive)
 MAYO MOMENT
 does anyone smell toast
 hey google how many calories in 60 advil? [google fashion for interesting men, .3]
@@ -409,8 +425,10 @@ hey girl [you're looking beautiful tonight, .8] whats your favorite AI?
 [stand in me] and you will be bathed in shekhaina glory [XIAOHONGSHU, .8]
 LOL (LOTS OF LOVE)
 leading to indefinite house arrest
+woke up ON THE MOUND
 where's the heft?
 and a blunt
+que paso en la selva negra
 pokemon go (to the polls/fuck yourself)
 infertile if dog
 etc [etc [and so on and so forth [in such a way proceeding as thus as such]]]
@@ -419,6 +437,7 @@ and subway take away everything you love
 now sit right down im gonna spin you around like a basketball
 spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
+babe our song
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
 shot dead by alec baldwin[, alec baldwin pardoned (!/and given purple heart!!!)]
@@ -439,8 +458,10 @@ DANGER WILL ROBINSON [DANGER, .15]
 100 concubines (NOT virgins, robust sexual references)
 TFW knee surgery in 4 days
 leave no trace search history wiped
+how tf they build the pyramids without teams calls pitch decks or AI-powered workflow optimization programs???
 why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
+polish it off
 using a complex system of pulleys and levers
 10 lashings goddess
 oh nooo oh fuckkkk sorry kareem i ate all the (drywall I thought it was cottage cheeseeee/floorboards I thought they were breadsticks/wires in the walls i thought it was delicious spaghetti/toilets and sinks i thought they were gumdrops and snickerdoodles) [oh noooooo [oh fuuuckkkkk]]
@@ -456,7 +477,7 @@ Siri, "when is July" [oops unsend [haha. siri hold my calls [siri jerk it a litt
 NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE]]]]]]]]]
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT
-[excuse me, .2] im going to take this back to my home lab
+[EXCUSE me, .2] im going to take this back to my home lab
 anti-(hoes/happiness) technology
 girlfriend (who loves me so much/with a printer dating sim)
 IN ENGLISH PLEASE
@@ -470,16 +491,18 @@ SWEET CINNAMON!
 ces't la vie
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)
+do you want some more
 you're in her DMs, I'm under her house stealing copper wire, we are not the same
 we'll add it in post
 round up to nearest billion yuan
 slumber party hang upside down and cut major arteries to drain blood as fast as possible
 RATIO!
 GONE WRONG
+SPOILER ALERT
 everything reminds me of her
 on my desk YESTERDAY
 green moose guava juice large fries chocolate shake
-300hz binaural beats for study work meditation joint recovery migraine focus [mozart effect gray noise flow state [cure vision [brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency [unlock subconscious power via pinneal gland]]]]]
+300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [mozart effect gray noise flow state [cure vision brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏 [jarvis, faster 😏 [i said faster 😏 [jarvis, let me return the favor 😏 [jarvis, are you shy? 😏 [jarvis, you're beautiful. I want to make you feel good 😏]]]]]
 70/30 split
@@ -518,10 +541,11 @@ for the lady
 (read in kermit voice)
 RETWEET 1000
 . OH BEHAVE!
+TEXTURE'S JUNK
 because of WOKE!?
 . That's just what I like!
 weeeeeeeeeeeeee
-dave & busters [dave & busters, .15 [dave & busters, .15]]
+dave & busters [dave & busters [dave & busters]
 mmmmmmmmmmm
 uunnnhhhhhggh
 WRITE THAT DOWN
@@ -585,7 +609,7 @@ const nsfwWords = [
   'wet nurse', 'whore', 'slut', 'pussy taste test', 'pussy popping', 'japanese sponge bath', 'penis boy', 'bubble butt', 'blood drenched', 'blood soaked', 'slop job',
   'bricked up', 'sucked dry', 'holocaust', 'imitation holocaust crab', 'guantanamo bay', '9/11', '9/11 simulator', '9/11 livestream',
   'japanese water torture', 'breedable', 'ahegao', 'mommy milker', 'onlyfans', 'and suck the dust off the tip', 'orgasm', 'hands-free orgasm', 'chained to radiator',
-  'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay', 'because of WOKE!?'
+  'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay', 'because of WOKE!?', 'man drowned by request', 'cock and ball torture', 'heterosexual'
 ];
 
 
@@ -616,6 +640,8 @@ const childsModeReplacements = {
   'FUCK': 'SNURT',
   'bitch': 'baby',
   'BITCH': 'BABY',
+  'now place your hand on the hot stove': 'now sit criss cross applesauce',
+  'it can\'t hurt you as it\'s only part of the simulation': 'and get ready for a little bit of fun',
   'f those t\'s': 'I\'m going to try an innovative new hairstyle',
   'pussy slay mama': 'okay slay mama',
   'sudoku eyes': 'smiley face',
@@ -645,6 +671,7 @@ const childsModeReplacements = {
   'velma 4k stuck in washing machine 4k': 'velma solves a mystery',
   'yuppy bitch': 'yuppy',
   'bitch-ass': 'rapscallion',
+  'gorilla grip': 'gorilla glue',
   'forced to watch pole dancing video on work computer': 'enjoying an entertaining dance performance online',
   'jerk it a little': 'give me a high five',
   'jarvis, faster': 'jarvis, fist bump!',
