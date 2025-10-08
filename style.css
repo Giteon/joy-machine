@@ -1,12 +1,129 @@
+@font-face {
+  font-family: 'Ruigslay';
+  src: url('./fonts/Ruigslay.ttf') format('truetype'),
+       url('./fonts/Ruigslay.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ethereal Havena';
+  src: url('./fonts/Ethereal Havena DEMO.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: 'Crimson Text', serif;
   overflow-x: hidden; /* Prevent horizontal scrolling */
-  overflow-y: auto; /* Allow vertical scrolling if needed */
+  overflow-y: hidden; /* Prevent vertical scrolling*/
 }
 
-/* Prevent horizontal scrolling on all elements */
+/* Title styling with Ruigslay font */
+h1 {
+  font-family: 'Ruigslay', 'Crimson Text', serif;
+  text-align: center;
+  font-size: 1.75rem !important;
+  line-height: 1.2 !important;
+  color: #1f2732 !important; /* Dark gray*/
+}
+
+/* Desktop sizing - 50% bigger and vertically centered */
+@media (min-width: 769px) {
+  h1 {
+    font-size: 2.625rem !important; /* 1.75rem * 1.5 */
+  }
+  
+  #generate-btn {
+    width: 150px; /* 100px * 1.5 */
+    height: 150px; /* 100px * 1.5 */
+    min-width: 150px;
+  }
+  
+  #generate-btn .btn-text {
+    font-size: 1.6rem !important; /* 1.2rem * 1.5 */
+  }
+  
+  label[for="childs-mode-toggle"] {
+    font-size: 1.8rem !important; /* 1.2rem * 1.5 */
+  }
+  
+  #phrase-output {
+    font-size: 1.5rem !important; /* Base size * 1.5 */
+    line-height: 1.4 !important;
+  }
+  
+  /* Push content down slightly on desktop */
+  .flex.flex-col.items-center.justify-start {
+    padding-top: 8rem !important; /* More padding than mobile's 4rem (pt-16) */
+  }
+}
+
+/* Mobile adjustments for title */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.3rem !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* Button text styling with Ruigslay font */
+#generate-btn .btn-text {
+  font-size: 1.2rem !important;
+  font-family: 'Ruigslay', 'Crimson Text', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-top: 2px;
+  line-height: 1.2 !important;
+}
+
+/* Ethereal Havena font for specific elements */
+label[for="childs-mode-toggle"] {
+  font-size: 1.2rem !important;
+  padding-top: 2px;
+  font-family: 'Ethereal Havena', 'Crimson Text', serif;
+  transition: color 0.3s ease;
+}
+
+/* Pink text when child's mode is active */
+.childs-mode label[for="childs-mode-toggle"] {
+  color: #ec4899 !important; /* pink-500 */
+}
+
+/* GO button text with Ethereal Havena when ready */
+#generate-btn.ready .btn-text {
+  font-family: 'Ethereal Havena', 'Crimson Text', serif;
+}
+
+/* Mobile button text size and child's mode text */
+@media (max-width: 768px) {
+  #generate-btn .btn-text {
+    font-size: 1.6rem !important;
+  }
+  
+  label[for="childs-mode-toggle"] {
+    font-size: 1.3rem !important;
+  }
+  
+  #phrase-output {
+    font-size: 1.5rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* #generate-btn {
+    width: 140px;
+    height: 100px;
+    min-width: 140px; */
+  }
+}
+
+/* Prevent all scrolling on all elements */
 html {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* Ensure mobile viewport doesn't allow scrolling */
@@ -23,27 +140,33 @@ html {
 #generate-btn {
   position: relative;
   overflow: hidden;
-  /* Base background for the empty state */
-  background-color: #e5e7eb; /* gray-200 */
+  /* Base background transparent */
+  background-color: transparent;
   transition: background-color 0.3s ease;
   cursor: default; /* Default cursor during loading */
-  border-radius: 9999px; /* Fully rounded corners */
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; /* Organic blob shape */
+  width: 100px;
+  height: 100px;
+  min-width: 100px; /* Override any width constraints */
+  animation: wiggle 8s ease-in-out infinite;
+  will-change: border-radius; /* Hint to browser for optimization */
 }
 
 #generate-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(var(--fill-scale, 0));
+  width: 100%;
   height: 100%;
-  background-color: #cccccc; /* gray for filling state */
-  /* Use a CSS variable for the width, controlled by JS */
-  width: var(--fill-width, 0%);
+  background-color: #1f2732; /* Same as title color */
+  border-radius: inherit; /* Match the button's organic shape */
   transition: none; /* No transition by default */
 }
 
 #generate-btn.filling::before {
-  transition: width 0.2s ease-out; /* Only animate when filling */
+  transition: transform 0.3s ease-out; /* Smooth animation when filling */
 }
 
 #generate-btn .btn-text {
@@ -53,8 +176,8 @@ html {
 
 /* Button states */
 #generate-btn.filling {
-  background-color: #e5e7eb; /* gray-200 */
-  margin-bottom: 1.75rem; /* 12px - difference between GO button height (with 4px border) and filling bar height */
+  background-color: transparent; /* No background while filling */
+  border: none; /* No border while filling */
 }
 
 #generate-btn.filling .btn-text {
@@ -62,7 +185,7 @@ html {
 }
 
 #generate-btn.ready::before {
-  background-color: #374151; /* gray-700 - make the fill dark grey when ready */
+  background-color: #1f2732; /* Same as title color */
 }
 
 #generate-btn.ready .btn-text {
@@ -74,6 +197,7 @@ html {
   position: relative;
   overflow: hidden;
   border: 4px solid #E9E9E9; /* Light mode: light gray border */
+  transform: scale(1.08); /* Slightly bigger when ready */
 }
 
 /* Dark mode button border */
@@ -89,14 +213,35 @@ html {
   left: -100%;
   width: 120%;
   height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  animation: shimmer 5s infinite;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 4s infinite;
+}
+
+/* Dark mode shimmer - darker color for visibility on white button */
+.dark #generate-btn::after {
+  background: linear-gradient(45deg, transparent, rgba(0, 0, 0, 0.05), transparent);
 }
 
 @keyframes shimmer {
   0% { left: -120%; }
   20% { left: 120%; }
   100% { left: 120%; }
+}
+
+/* Organic wiggle animation */
+@keyframes wiggle {
+  0%, 100% { 
+    border-radius: 58% 42% 56% 44% / 52% 48% 50% 48%;
+  }
+  25% { 
+    border-radius: 45% 55% 60% 40% / 48% 52% 46% 54%;
+  }
+  50% { 
+    border-radius: 55% 45% 42% 58% / 54% 46% 52% 48%;
+  }
+  75% { 
+    border-radius: 42% 58% 48% 52% / 46% 54% 48% 52%;
+  }
 }
 
 
@@ -109,9 +254,19 @@ html {
   color: white !important; /* white text in child's mode (both light and dark) */
 }
 
+/* Child's mode filling bubble - pink while loading */
+.childs-mode #generate-btn::before {
+  background-color: #ec4899 !important; /* pink-500 - same as ready button in child's mode */
+}
+
+/* Child's mode filling bubble in dark mode - also pink */
+.dark.childs-mode #generate-btn::before {
+  background-color: #ec4899 !important; /* pink-500 - override dark mode white with pink */
+}
+
 /* Mute button styles */
 #mute-btn.muted #mute-icon {
-  opacity: 0.4; /* Light grey when muted */
+  opacity: 0.25; /*faded when muted */
   filter: grayscale(100%);
 }
 
@@ -166,19 +321,22 @@ html {
 .dark .bg-blue-500,
 .dark .bg-blue-600,
 .dark #generate-btn,
-.dark #generate-btn::before,
-.dark #generate-btn.ready,
-.dark #generate-btn.ready::before {
+.dark #generate-btn.ready {
   transition: none !important;
 }
 
 /* Keep smooth transitions for progress bar and other animations */
 #generate-btn::before {
-  transition: width 0.2s ease-out !important; /* Smooth progress bar fill */
+  transition: transform 0.3s ease-out !important; /* Smooth progress bar fill */
 }
 
 #generate-btn.filling::before {
-  transition: width 0.2s ease-out !important; /* Smooth progress bar fill */
+  transition: transform 0.3s ease-out !important; /* Smooth progress bar fill */
+}
+
+/* Ensure filling animation works in dark mode too */
+.dark #generate-btn.filling::before {
+  transition: transform 0.3s ease-out !important; /* Override dark mode transition disable */
 }
 
 /* Disable transitions during reset (when no classes are present) */
@@ -223,16 +381,16 @@ html {
   background-color: #2563eb !important; /* Keep darker blue for hover */
 }
 
-/* Dark mode progress bar - darker background, light grey fill */
+/* Dark mode progress bar - transparent background, light grey fill */
 .dark #generate-btn {
-  background-color: #1f2937 !important; /* gray-800 - darker background */
+  background-color: transparent !important; /* transparent background */
 }
 
 .dark #generate-btn::before {
-  background-color: #d1d5db !important; /* gray-300 - light grey fill */
+  background-color: #ffffff !important; /* white - same as ready button in dark mode */
 }
 
-/* GO button white with black text in dark mode when ready */
+/* GO button white with dark gray text in dark mode when ready */
 .dark #generate-btn.ready {
   background-color: #ffffff !important; /* white background when ready */
 }
@@ -242,7 +400,7 @@ html {
 }
 
 .dark #generate-btn.ready .btn-text {
-  color: #000000 !important; /* black text when ready */
+  color: #374151 !important; /* black text when ready */
 }
 
 /* Child's mode styling in dark mode - pink when enabled */

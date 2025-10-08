@@ -35,17 +35,21 @@ ok google,
 BEAST (B)
 [secret, *B*] aardvark
 aligator [lounge, *B*]
+armadillo
 bear
+beaver
 bumblebee
 butterfly
 capybara
+caterpillar
+chipmunk
 cockroach
 [cocaine, *B*] dog
 crab [rangoon, *B*]
 crocodile [dundee, *B*]
-[jiminy, *B*] cricket
+cricket
 [spotted australian, *B*] currasow
-cow
+[cash, .15, *B*] cow
 [disco, *B*] snail
 deer [in headlights, *B*]
 dinosaur
@@ -53,11 +57,12 @@ dodo
 dog
 dolphin [grey 2006 MX-5 miata 4-door, .2, *B*]
 donkey [kong [jerking off face down, *B*]]
-duck
+duck[(s in a row/tales), .1, *B*]
 elephant
 ferret
 fish [neck, *B*]
 fox
+flamingo
 [crazy, *B*] frog
 gerbil
 giraffe
@@ -73,19 +78,25 @@ hyena
 jellyfish
 kangaroo
 koala
+[kitty , .2]cat
 ladybug
 lemur
 llama
 lobster [joaquin phoenix, .2, *B*]
 meerkat
-monkey [pox, *B*]
+monkey [(pox/business), *B*]
 moth
+moose [tracks, .1, *B*]
 nintendog
 octopus
+ostrich
+oyster
+[emotional support, .2, *B*] peacock
 pigeon
 parrot
-penguin
+penguin[s of madagascar, .1, *B*]
 platypus
+porcupine
 pterodactl
 python
 pig
@@ -94,7 +105,6 @@ raccoon
 RAT [bones, *B*]
 rat [who walked up to a castle, .1, *F*, *B*]
 rooster [head in dirt, *B*]
-sasquatch
 scorpion
 sheep
 skunk
@@ -102,13 +112,16 @@ snake
 spider
 squirrel
 squid [game, .2, *B*]
-tiger
+starfish
+tiger [king, .15, *B*]
+[frog and, .2, *B*] toad
 turtle
-turkey
+turkey [meatball, .2, *B*]
 walrus
-wombat
-whale
-wolf
+wasp [infestation, .1, *B*]
+wombat [cube of shit, .2, *B*]
+whale [carcass, .2, *B*]
+wolf [blitzer, .15, *B*]
 [ring, .2]worm
 zebra
 
@@ -125,27 +138,45 @@ hinge premium [diahhrea from tube]
 wikihow
 GROK
 big league chew
+onion hips
+husband pillow
+(youtube premium/PREEMER)
 price match
 propranolol [8000mg]
+facebook marketplace
+jeff goldblum
+gentleman caller
+extended warranty
+medical bankruptcy
+homonculus
+hurricane gender reveal
 coke zero [friends or family, *F*]
+florida man
+MLM
+water cooler [poisoned flint michigan style, .15, *F*]
+HR nightmare
 stagg night
+winston churchill
 (1st/2nd/3rd/4th/5th/6th) base
 hit n' run
 (1/7/12)-figure salary [bones sorted by color shape size texture and smell [BUT NEVER BY TASTE], .2, *F*]
 sleeper build
+spotify wrapped
 midnight snack
+blockchain
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
 webster's dictionary
 chakras aligned [virginity restored, .2, *F*]
 baseball animal
-omegaverse [omega 3 fatty acids]
-GARY ROYCE! [OHO! A-BING-A-BAM-A-BOOM, .2, *F*]
+omegaverse [omega three fatty acids]
+land acknowledgement
+GARY ROYCE[! A-BING-A-BAM-A-BOOM! OH!, .2, *F*]
 shiva baby
-selena gomez [oreo mmmm tastes like fucking mexico everything is in sepia now, *F*]
+selena gomez [oreo mmmm tastes like fucking mexico [everything is in sepia now], *F*]
 dorito pilgrim
-black mirror
+black mirror[? I hardly know her!, .1, *F*]
 twin flame
 9/11 (simulator/livestream)
 sophie's choice
@@ -161,6 +192,7 @@ vitamin deficiency
 popcorn lung
 compilation
 primal play
+peach for dunbar
 barmitzvah
 ted cruz [donde esta la biblioteca, *F*]
 tinder for presidents
@@ -169,8 +201,9 @@ powerball [cock and ball torture, .15]
 [DIY, .15] lobotomy
 slutty vegan
 chipotle
-wet t-shirt contest
-batchelor in paradise
+wet t-shirt [contest]
+batchelor in paradise [punch lemonade, .1]
+cloth mother wire mother
 above-ground (burial/grave)
 pussy taste test [jump up and down, .3, *F*]
 onlyfans
@@ -180,7 +213,7 @@ primordial soup
 laura palmer[? I thought you said ARNOLD palmer, .2, *F*]
 war movie monday
 u sure? 😏😏😏
-saggitarius [rising]
+(capricorn/saggitarius/gemini/aquarius) [rising]
 citronela ring pop
 kim petras [coconut [perfect pitch, .2]]
 kurt vonnegut [🤓☝️ ummm ok so this is officially my life? *F*]
@@ -189,9 +222,11 @@ breastmilk [on the cheap, .25]
 hungry tax [click here to feed your advisor a motivational nutrition cube, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
+angel of death
 armenian conveyor belt
 (year-long/medically induced) coma
 wet leg
+unlimited 1.5% cash back
 thumbalina
 bridge to terabithia[? I hardly know her!, .1, *F*]
 international waters [all crimes are legal, .15, *F*]
@@ -203,7 +238,7 @@ with 9 billion child IQ
 water stain
 citizen's arrest
 vinegar corner
-capital one cafe
+capital one (cafe/neck tattoo)
 shen yun [5000 YEARS OF CIVILIZATION REBORN, *F*]
 tide on-the-go
 monster porn
@@ -226,17 +261,19 @@ show of force
 [Meet me at the darian gap at 0-300. wear this dress, it will just barely fit. find enclosed: one (1) bottle of ferragamo intense leather cologne. administer one (1) spritz at each of the seven (7) chakra points. Next, (1) vial of dog pheromone. 9pm. hotel bar. order a shirley temple, all rum, microwaved 45 min, HOT. pretend you don’t know me. hand me this brass wristwatch. count 15 seconds until my pacemaker explodes. act casual. slip this note in the bartenders shirt pocket. he will give you a dart shell. swallow it. pull fire alarm. take next flight to darian gap. purchase a sprite zero. the contact will hold a chartreuse parasol. spray dog pheromone to distract guard dogs. aquire tranquilizer from contact. assemble tranquilizer dart and launch through pepsi straw. Await further instruction., 1.0, *F*]
 
 CANDY(C)
-scrub a dub dub
+scrub a dub dub[step [btdubstep, .15, *F*]]
 bombaclat [ultimate selector [WITH THE CHAMPION SOUND, *F*]]
 pink (ponk/pony club)
 perfect politics
 jamba juice [green goddess ecoli razzmatazz, .2]
 buccal fat [tummy tuck]
 chunky monkey
+dole dipper
 mary poppins
 freaky friday
 tip-to-taint
 booze cruise
+dollars to donuts
 jacuzzi [man drowned by request, .2]
 laffy taffy [willy wonka, .15]
 zendaya[? I hardly know her!, .1, *F*]
@@ -246,21 +283,38 @@ tit-for-tat
 ipso facto [prest-o change-o, .15]
 tick-topia
 post hoc [ergo propter hoc [TUAH, *F*]]
+privacy policy
 chutes and ladders [russian roulette, .15]
+razzle dazzle
+beanie baby
 middle manager
-snap crackle
+cottage core
+snap crackle [popcorn lung, .2]
+shamoo
+money shot
 humpty dumpty
 chugga chugga [chopped cheese, .2]
+fart smella
 bubble butt [bazonga]
+cotton candy
+cocomelon
+full monty
 breakfast in bed
 prest-o change-o
 circadian somersault
 [fucking] candy flip
 9 to 5 [dolly parton, .2 [my french, .2]]
 go go gadget [(depression/restraining order), .2]
-ding dong [ditch]
+mamacita
+ding dong [ditch, .2]
 54321 [54321 [54321 [54321 [54321 [54321]]]]]
+10 9 8 7 6 5 4 3 2 1
+donner and blitzen
+corner the market
 cha-cha slide
+twisted tea
+spirulina
+(squenis/squssy)
 poindexter
 boing boing [yoga ball [blacked out no memories, *F*]]
 boing boing boing [boing [boing [boing [boing [boing [boing [boing]]]]]]]
@@ -270,9 +324,15 @@ pinapple jiblet
 wet nurse [japanese sponge bath, *F*]
 bundle and save
 hub and spoke
+hubba bubba
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
+doja cat
+weeeeeeeeeee[eeeeeeeeeee[eeeeeeeeeeee[eeeeeeeeeeee[eeeeeeeeeeee]]]]
+aaaaaaaaa[aaaaaaaaa[aaaaaaa[aaaaaaaa]]]
+haha[hahahaha[hahahahahahaha]]
+baba[baba[baba[baba[baba]]]]
 jiffy lube
 bunson burner [bitch, .2, *F*]
 hellen keller [jerking off ALL over town, *F*]
@@ -289,12 +349,12 @@ rigamarole
 beach blanket babylon
 baby bonnet
 labubu [lafufu]
+whosamawhatsit
 bing bong
 ZING
 ding ding [ding, *F*]
 pussy slay mama
 daily dingle [dongle, .15]
-trust your turkeys
 party popper [petri dish, .2]
 willy wonka
 squink squonk
@@ -316,19 +376,35 @@ full-pen [summer[time sadness, *F*]]
 gone sexual [gone missing, .2]
 boston dynamics
 low libido (magic the gathering/penis boy)
+microwave safe
+emotionally unavailable
+password protected
+protien-plus
+(socially liberal fiscally conservative/fiscally liberal socially conservative)
+cream o the crop[circle, .1, *F*]
 [sort of an , .2, *F*]ethnic twist
 chained to radiator [until daytime, .1]
 barely alive
-brimming with [piss, .1]
+brimming with [(piss/cum), .1]
 bricked up [fridge magnet, .1, *F*]
+fockin minging [that is, .2, *F*]
+intermittent [fasting, .2]
 ferragamo [signature scent]
+meat and potatoes
 herbert von [kinkshame,.2, *F*]
 syndicated [television]
-one two skip a few ninety nine a hundred
+100% fatality rate
+one two skip a few [ninety nine a hundred, .2]
 authentic home-cooked [wartime, .2]
 diegetic
+enterprise grade
+fuckin uhhhhhhh
+coquette
+lala[la[la[la[la[la[la[la[la[la[la[la[la[la]]]]]]]]]]]]]
+nahhh slime
 5G
 gentleman's
+...chat...
 full-frontal
 big n' greedy
 stolen valor
@@ -337,13 +413,15 @@ taxidermy [husband turned into skin lamp, .15, *F*]
 biblically accurate
 microplastic
 periphrastic
-slice of life
+lazy susan
+slice (of life/o heaven)
 recession-proof
 New York Times [best seller, .3]
 tabernacle [german boys intercollegiate choir narnia soundtrack CD-ROM full volume stuck in hot car 12 hours, .15, *F*]
 boneless
 executive
 ambivert
+twitter verified
 animal-style
 criterion collection
 firm-but-fair
@@ -351,6 +429,7 @@ carbon neutral
 french tuck
 kellogs [cereal instant horny recipie, .2, *F*]
 type-3
+same day shipping
 him and hers
 bowl cut
 INFP [strippers, .2]
@@ -358,15 +437,13 @@ select all the squares containing a
 ENTJ
 I-Spy
 180p
-clown
 quirked up [white boy with a little bit of swagger busts it down sexual style, *F*]
 benegesserit [voice glitch discovered for free and infinite loose cigarettes, *F*]
-bitch[-ass, .15]
 funtivity [by hermis, .15, *F*]
 egg-laden [female]
-clown [party, .3]
+clown [(town/party), .2]
 knee-high [swampwater]
-italian
+16 inch[er]
 lifetime subscription
 sucked dry
 bottled at the source
@@ -375,6 +452,7 @@ farm-to-table [tip-to-taint, .3 [bottled at the source, .3]]
 victory royale
 cum-colored
 zero swag [detected, .2, *F*]
+card on file
 hath risen [on the third day, .2, *F*]
 family plan
 kill on site
@@ -412,8 +490,13 @@ switch it up like nintendo [REMEMBER US? [I MISS US]]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
 DO A TRICK
+goes down like a steak dinner
+child not embraced by villiage will burn it down to feel its warmth
 i'm not in trouble AT ALL
+let's have it then [bruv, .2]
 smells like fallon in here
+game set match [BITCH, .2]
+once bitten twice shy
 what teh heck?
 hit em with the ol' over under
 i’m well within my rights to KILL you right now
@@ -423,7 +506,7 @@ where be your nutcracker?
 but i've barely been sleeping ever since my wife got flipped upside down by a swing dancer at a wedding
 [penis described in incredible detail, ]penis recreated perfectly in CAD software (100% accuracy)
 so no cube? [okay so no cube?]
-i said oo girl shock me like an electric eel [turn me on with your electric eel]
+i said oo girl shock me like an electric eel [turn me on with your electric eel, .3]
 handed 15 cellphones pushed into pool when least expected
 SPRING BREAK VACATION IN DARIAN GAP
 accidentally enlisted in army, sent to the front-lines to sniff for mines like a rat[. Mine exploded, confined to bed for rest of life charlie and the chocolate factory style , .2]
@@ -433,6 +516,7 @@ consciousness uploaded to rat, rat dies, consciousness uploaded to new rat[, new
 currasow waiting outside room [death immenent [stuck in room 16 hours]]
 where my hug at? [ha ha. where is it at? can't have gone far. ha ha, .2]
 [what's the officer, problem?] I'M COLD STONE SOBER
+luck be a lady
 HEAT DEATH OF UNIVERSE
 legs ripped CLEAN off [(I'm talking about a CLEAN break/but don't worry my wife as an essential oil for that), .2]
 back in highschool I rolled blunts on the scantron
@@ -440,12 +524,15 @@ fucking turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
 (cherished memories burned as fuel to power nvidia server farm/no storage remaining must delete all cherished memories from google drive)
 MAYO MOMENT
-does anyone smell toast
-hey google how many calories in 60 advil? [google fashion for interesting men, .3]
+I'm off the stuff
+doth ye merry gentlemen on high
+does anyone smell toast [:-)]
+hey google how many calories in (60 advil/a large yoga ball/2,000 propranolol)? [google fashion for interesting men, .3]
 hey girl [you're looking beautiful tonight, .8] whats your favorite AI?
 [stand in me] and you will be bathed in shekhaina glory [XIAOHONGSHU, .8]
 LOL (LOTS OF LOVE)
 leading to indefinite house arrest
+come to papa
 woke up ON THE MOUND
 where's the heft?
 and a blunt
@@ -455,10 +542,14 @@ infertile if dog
 etc [etc [and so on and so forth [in such a way proceeding as thus as such]]]
 and subway take away everything you love
 100% AGREE
+i lo[ooooo]ve it when you call me señorita 
 now sit right down im gonna spin you around like a basketball
 spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
 babe our song
+with no fees or minimums and no overdraft fees, is it even a decision? capital one, bitch, what's in your wallet?
+when I go out, I cash in. capital one, what's in your wallet?
+that's banking, reimagined. capital one, what's in your wallet?
 i should text her
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light the menorah [bitch, .2]
@@ -471,6 +562,8 @@ your skin [ohhhh yeah, .2] oh yeah your skin and bones
 in good christian fun
 [ummmmm, .2] did I just say that out loud?
 CLONE CLONE CLONE
+lets take this offline
+squeaky wheel (gets greased/greased to the nines) 4k
 emits poweful pheromone brain scrambled
 within 1000 feet of a school
 suggested donation: life savings
@@ -483,6 +576,7 @@ leave no trace search history wiped
 how tf they build the pyramids without teams calls or AI-powered workflow optimization programs???
 why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
+i'm JONESING for it
 polish it off
 using a complex system of pulleys and levers
 10 lashings goddess
@@ -498,7 +592,7 @@ RELEASE THE SNAKES
 Siri, "when is July" [oops unsend [haha. siri hold my calls [siri jerk it a little 😏]]]
 NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE]]]]]]]]]
 fuck my fucking ass
-shirley temple microwave 45 minutes HOT
+shirley temple microwave 45 minutes HOT[. And don't call me shirley!, .2]
 [EXCUSE me, .2] im going to take this back to my home lab
 anti-(hoes/happiness) technology
 girlfriend (who loves me so much/with a printer dating sim)
@@ -507,7 +601,9 @@ fuck my shit up
 ChatGPT 1 million almonds destroyed
 for the plot
 stand here so i can crop you out later
-texture's JUNK[. ok now we're talking. yeah, this one rules, .1]
+texture's JUNK[. ok yeah this one rules, .1]
+trust your turkeys
+wild wild horses couldn't drag me away
 for her pleasure
 plus tax and tip
 SWEET CINNAMON!
@@ -516,18 +612,30 @@ ces't la vie
 ooooh i just wanna wear my shorts
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)
-do you want some more
 you're in her DMs, I'm under her house stealing copper wire, we are not the same
 we'll add it in post
 round up to nearest billion yuan
 slumber party hang upside down and cut major arteries to drain blood as fast as possible
 RATIO!
 GONE WRONG
+don't worry about it AT ALL
+just don't call me late for dinner!
 SPOILER ALERT
+approach the bench?
+money talks wealth whispers.
+that's all im allowed to say
+the tree remembers, the axe forgets. 
+pay the piper call the tune
+my dogs are barkin[g]
+TAKE ME TO THE RIVER
+every palace is a backdoor
 everything reminds me of her
+Now YOU have a friend in the diamond business
 on my desk YESTERDAY
+CCTV footage unedited
 green moose guava juice large fries chocolate shake
-300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [mozart effect gray noise flow state 15 SPF baseline without sunscreen [cure vision brown noise 800hz GOD FREQUENCY [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
+300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [cure vision brown noise GOD FREQUENCY [mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
+800mhz god frequency mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland [binaural beats for study work meditation joint recovery migraine focus hands-free orgasm]]]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏 [jarvis, faster 😏 [i said faster 😏 [jarvis, let me return the favor 😏 [jarvis, are you shy? 😏 [jarvis, you're beautiful. I want to make you feel good 😏]]]]]
 70/30 split
@@ -545,37 +653,46 @@ TAG (T)
 . Capiesch?
 ...OR SHE!
 type shit
-type shit
+type shit[!,.1]
 YOUNG
-YOUNG
-SCRONGIEEEEE
+YOUNG[!,.1]
+SCRONGIEEE[EEE[EEE]]
 (FOR MEN)
 FUCK
-FUCK
-(ENHANCE)
+FUCK[!,.1]
+ENHANCE[. ENHANCE[. ENHANCE[. ENHANCE[. ENHANCE[. ENHANCE]]]]]
 . DING!
 unless??
+OFF THE RECORD
 sent from iphone
 SENT FROM IPHONE
+sent from my iphone
 sent from tamagotchi
 BITCH
+:-)
 for the lady
 (read in italian accent)
 (read in transatlantic accent)
 (read in borat voice)
 (read in kermit voice)
 RETWEET 1000
+actually delete that
 . OH BEHAVE!
-because of WOKE!?
+because of WOKE??
 ...in THIS economy?
+. I JEST!
+. MY STARS!
+HUZZAH
 . That's just what I like!
 weeeeeeeeeeeeee
 dave & busters [dave & busters [dave & busters]]
 mmmmmmmmmmm
 uunnnhhhhhggh
+CHA CHING!
 WRITE THAT DOWN
 . SLIME MAN
 . RICH MILLIONAIRE
+do you want some more
 that's ok [that's ok [that's okay [that's ok]]]
 por favor [mon cherie]
 🥺🥺🥺
@@ -592,7 +709,9 @@ I guess!
 on god fr
 SEND [UNSEND SEND FUCK]
 SEND
-ha ha`;
+SEND [screenshot of this to me and i'll venmo you $1, .05]
+ha ha
+ha ha [ha, .1]`;
 
 
 // Parse the text into arrays
@@ -634,7 +753,8 @@ const nsfwWords = [
   'wet nurse', 'whore', 'slut', 'pussy taste test', 'pussy popping', 'japanese sponge bath', 'penis boy', 'bubble butt', 'blood drenched', 'blood soaked', 'slop job',
   'bricked up', 'sucked dry', 'holocaust', 'imitation holocaust crab', 'guantanamo bay', '9/11', '9/11 simulator', '9/11 livestream',
   'japanese water torture', 'breedable', 'ahegao', 'mommy milker', 'onlyfans', 'and suck the dust off the tip', 'orgasm', 'hands-free orgasm', 'chained to radiator',
-  'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay', 'because of WOKE!?', 'man drowned by request', 'cock and ball torture', 'heterosexual'
+  'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay', 'because of WOKE!?', 'man drowned by request', 'cock and ball torture', 'heterosexual', 
+  'cube of shit', '16 inch', '16 incher', 'PREEMER', 'squenis', 'squssy', 'fockin minging'
 ];
 
 
@@ -642,6 +762,7 @@ const nsfwWords = [
 const childsModeReplacements = {
   // Word replacements for child's mode (original word: replacement word)
   'fucking': 'freaking',
+  'fuckin': 'freakin',
   'fuck-ass': 'gosh darn',
   'fuck': 'frick',
   'fuck my fucking ass': 'butter my biscuit',
@@ -683,6 +804,7 @@ const childsModeReplacements = {
   'horny': 'happiness',
   'monster porn': 'monster movie',
   'cum': 'cream',
+  'piss': 'lemonade',
   'schoolbus explosion': 'schoolbus tires slashed',
   'zero survivors': 'late for school',
   'submissive breedable': 'friendly accommodating',

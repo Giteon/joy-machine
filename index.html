@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pure and Infinite Joy Machine</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -55,7 +55,7 @@
     
     <!-- Dark Mode Button -->
     <button id="dark-mode-btn" class="w-8 h-8 flex items-center justify-center">
-      <span id="dark-mode-icon" class="text-xl transition-all duration-300">🌙</span>
+      <img id="dark-mode-icon" src="images/moon.png" alt="Dark Mode" class="w-6 h-6 transition-all duration-300">
     </button>
   </div>
 
@@ -77,12 +77,12 @@
     const CONFIG = {
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.04, // 4% of total steps when clicked
+      advanceAmount: 0.02, // 2% of total steps when clicked
       typoChance: 0.018, // 1.8% chance per letter
       typoCorrectionChance: .90, // 90% chance to catch typo
       doubleBeastChance: 0.85, // 85% chance for two beasts
       tripleBeastChance: 0.60, // 60% chance for three beasts (if already two)
-      doubleCandyChance: .5, // 50% chance for two candies
+      doubleCandyChance: .6, // 60% chance for two candies
       fuckingChance: 0.12, // 12% chance to add "fucking"
       thinkingPauseChance: 0.20, // 20% chance for thinking pause
       allCapsChance: 0.10, // 10% chance for all caps (except beast)
@@ -121,8 +121,7 @@
             // (i, b, n, c, a, f) => joinWords(f),
             
             // (i, b, n, c, a, f) => joinWords(i, f),
-            (i, b, n, c, a, f) => joinWords(a, n), 
-            // (i, b, n, c, a, f) => joinWords(a, n), 
+            (i, b, n, c, a, f) => joinWords(a, n), (i, b, n, c, a, f) => joinWords(a, n),
             (i, b, n, c, a, f) => joinWords(c, n), 
             // (i, b, n, c, a, f) => joinWords(c, n),
             // (i, b, n, c, a, f) => joinWords(n, f),
@@ -583,7 +582,7 @@
      */
     // Precompiled regexes for phrase cleanup
     const BAD_START_WORDS = ['and', 'or', 'for', 'with', 'in', 'by way of', 'using', 'ok', 'plus', 'compilation','emits'];
-    const BAD_END_WORDS = ['fucking', 'crazy'];
+    const BAD_END_WORDS = ['fucking', 'crazy', 'and', 'POV:', ','];
     const BAD_START_REGEXES = BAD_START_WORDS.map(w => new RegExp(`^${w}\\s+`, 'i'));
     const BAD_END_REGEXES = BAD_END_WORDS.map(w => new RegExp(`\\s+${w}$`, 'i'));
 
@@ -1292,7 +1291,7 @@
        if (CONFIG.darkMode) {
          // Enable dark mode
          document.body.classList.add('dark');
-         darkModeIcon.textContent = '☀️';
+         darkModeIcon.src = 'images/sun.png';
          darkModeIcon.alt = 'Light Mode';
          
          // Switch to dark volume icons
@@ -1304,7 +1303,7 @@
        } else {
          // Disable dark mode
          document.body.classList.remove('dark');
-         darkModeIcon.textContent = '🌙';
+         darkModeIcon.src = 'images/moon.png';
          darkModeIcon.alt = 'Dark Mode';
          
          // Switch to light volume icons
@@ -1866,10 +1865,11 @@
      */
     // Cached progress percentage to avoid redundant style writes while keeping smoothness
     let lastFillPercent = -1;
-    const setFillWidthPercent = (percent) => {
+    const setFillScalePercent = (percent) => {
       // Keep fractional precision; only skip writes if change is imperceptible (< 0.1%)
       if (Math.abs(percent - lastFillPercent) >= 0.1) {
-        generateBtn.style.setProperty('--fill-width', `${percent}%`);
+        const scale = percent / 100; // Convert percentage to scale (0 to 1)
+        generateBtn.style.setProperty('--fill-scale', scale);
         lastFillPercent = percent;
       }
     };
@@ -1884,13 +1884,13 @@
       
       currentFill = 0;
       // Temporarily disable transition for instant reset
-      setFillWidthPercent(0);
+      setFillScalePercent(0);
       updateButtonState('filling');
       
       // Test mode: instantly complete the bar
       if (CONFIG.testMode) {
         currentFill = totalSteps;
-        setFillWidthPercent(100);
+        setFillScalePercent(100);
         updateButtonState('ready');
         isComplete = true;
         return;
@@ -1900,7 +1900,7 @@
       fillInterval = setInterval(() => {
         currentFill++;
         const fillPercentage = (currentFill / totalSteps) * 100;
-        setFillWidthPercent(fillPercentage);
+        setFillScalePercent(fillPercentage);
         
         // Play page-turn sound when progress hits 95% (only once)
         if (fillPercentage >= 95 && fillPercentage < 96 && !pageTurnPlayed) {
@@ -1982,7 +1982,7 @@
         currentFill = Math.min(currentFill + advanceAmount, totalSteps);
         
         const fillPercentage = (currentFill / totalSteps) * 100;
-        setFillWidthPercent(fillPercentage);
+        setFillScalePercent(fillPercentage);
         
         // Play page-turn sound when progress hits 95% (only once)
         if (fillPercentage >= 98 && !pageTurnPlayed) {
@@ -2016,7 +2016,7 @@
         
         // Disable transitions temporarily for instant reset
         generateBtn.style.transition = 'none';
-        setFillWidthPercent(0);
+        setFillScalePercent(0);
         
         // Force a reflow to ensure immediate reset
         generateBtn.offsetHeight;
@@ -2043,7 +2043,7 @@
             
             generateBtn.classList.remove('ready', 'filling');
             generateBtn.style.transition = 'none';
-            setFillWidthPercent(0);
+            setFillScalePercent(0);
             
             generateBtn.offsetHeight; // Force reflow
             generateBtn.style.transition = '';
