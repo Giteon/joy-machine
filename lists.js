@@ -23,14 +23,12 @@ ultimate chicken time
 ultimate horse chicken
 ultimate fucking chicken horse
 horse time
+horse time chicken time
 horse chicken crazy fucking
 chicken horse time crazy fucking
 chicken time fucking
 chicken time horse time
 chicken fucking crazy time
-POV:
-and a-one and a-two and-a
-ok google,
 
 BEAST (B)
 [secret, *B*] aardvark
@@ -39,22 +37,21 @@ armadillo
 bear
 beaver
 bumblebee
-butterfly
+butterfly [effect[ive immediately, .1], .2, *B*]
 capybara
-caterpillar
-chipmunk
+[[little fucking] hungry fucking] caterpillar
+[alvin and the, .1 *B*] chipmunk
 cockroach
-[cocaine, *B*] dog
 crab [rangoon, *B*]
 crocodile [dundee, *B*]
 cricket
 [spotted australian, *B*] currasow
 [cash, .15, *B*] cow
-[disco, *B*] snail
+[disco, *B*] snail [mail, *B*]
 deer [in headlights, *B*]
 dinosaur
 dodo
-dog
+[cocaine, *B*] dog
 dolphin [grey 2006 MX-5 miata 4-door, .2, *B*]
 donkey [kong [jerking off face down, *B*]]
 duck[(s in a row/tales), .1, *B*]
@@ -79,6 +76,7 @@ jellyfish
 kangaroo
 koala
 [kitty , .2]cat
+lanternfly
 ladybug
 lemur
 llama
@@ -87,7 +85,7 @@ meerkat
 monkey [(pox/business), *B*]
 moth
 moose [tracks, .1, *B*]
-nintendog
+nintendog [pictochat, .1, *B*]
 octopus
 ostrich
 oyster
@@ -110,7 +108,7 @@ sheep
 skunk
 snake
 spider
-squirrel
+squirrel [squenis, .2, *B*]
 squid [game, .2, *B*]
 starfish
 tiger [king, .15, *B*]
@@ -140,28 +138,26 @@ GROK
 big league chew
 onion hips
 husband pillow
-(youtube premium/PREEMER)
+(PREEM/PREEMER)
 price match
 propranolol [8000mg]
 facebook marketplace
 jeff goldblum
 gentleman caller
 extended warranty
-medical bankruptcy
 homonculus
 hurricane gender reveal
 coke zero [friends or family, *F*]
 florida man
+female led relationship
 MLM
-water cooler [poisoned flint michigan style, .15, *F*]
 HR nightmare
 stagg night
 winston churchill
 (1st/2nd/3rd/4th/5th/6th) base
-hit n' run
-(1/7/12)-figure salary [bones sorted by color shape size texture and smell [BUT NEVER BY TASTE], .2, *F*]
+hit n' run [don't worry my wife has an essential oil for that, .1, *F*]
+(0/1/21)-figure salary [bones sorted by color shape size texture and smell [BUT NEVER BY TASTE], .2, *F*]
 sleeper build
-spotify wrapped
 midnight snack
 blockchain
 face-up tack collection [please get out of my house immediately, .15, *F*]
@@ -183,24 +179,23 @@ sophie's choice
 temu [BITCH, .2]
 panera lemonade [instant cardiac arrest no funeral, .3, *F*]
 pastrami sandwich
-spirit airlines
+spirit airlines [economy class pilot has learner's permit, .15, *F*]
 leprechaun
 cocktail napkin
-spotify premium
 luigi mangione
-vitamin deficiency
-popcorn lung
+vitamin deficiency[, IBS and no life insurance, .1, *F*]
+popcorn lung [(flavicol/nutritional yeast) inahaled (equivalent to smoking 500 cigarettes), *F*]
 compilation
-primal play
+primal play [dark n grab, .3]
+dark n grab [primal play, .3]
 peach for dunbar
 barmitzvah
-ted cruz [donde esta la biblioteca, *F*]
-tinder for presidents
+ted cruz [donde esta la biblioteca, .3, *F*]
+[i got catfished by (jimmy carter/dwight d. eisenhower/william howard taft) on, .2, *F*]tinder for presidents
 license and registration
 powerball [cock and ball torture, .15]
 [DIY, .15] lobotomy
 slutty vegan
-chipotle
 wet t-shirt [contest]
 batchelor in paradise [punch lemonade, .1]
 cloth mother wire mother
@@ -218,25 +213,25 @@ citronela ring pop
 kim petras [coconut [perfect pitch, .2]]
 kurt vonnegut [🤓☝️ ummm ok so this is officially my life? *F*]
 goblin mode
-breastmilk [on the cheap, .25]
-hungry tax [click here to feed your advisor a motivational nutrition cube, *F*]
+breastmilk [(pump up the jam [pump it up pump it real good], .2/on the cheap, .8), .25]
+hungry tax [CLICK HERE to feed your advisor a motivational nutrition cube, .3, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
 angel of death
 armenian conveyor belt
 (year-long/medically induced) coma
-wet leg
+wet leg [chaise lounge, .15]
 unlimited 1.5% cash back
 thumbalina
 bridge to terabithia[? I hardly know her!, .1, *F*]
 international waters [all crimes are legal, .15, *F*]
-wartime economy
-wagwan
-monster mash
-head exploded [no pulse [don't worry my wife as an essential oil for that, .2, *F*]]
+[permanent] war[time] economy
+wagwan [my yute, .3]
+monster mash [must be played or DJs life is threatened, .1, *F*]
+head exploded [no pulse [don't worry my wife has an essential oil for that, .15, *F*]]
 with 9 billion child IQ
 water stain
-citizen's arrest
+citizen's arrest [life sentence no bail no parole no trial no appeal [no habeas corpus no motion to suppress no jury no judge no justice no right to counsel, *F*]]
 vinegar corner
 capital one (cafe/neck tattoo)
 shen yun [5000 YEARS OF CIVILIZATION REBORN, *F*]
@@ -265,21 +260,22 @@ scrub a dub dub[step [btdubstep, .15, *F*]]
 bombaclat [ultimate selector [WITH THE CHAMPION SOUND, *F*]]
 pink (ponk/pony club)
 perfect politics
-jamba juice [green goddess ecoli razzmatazz, .2]
+jamba juice [green goddess ecoli razzmatazz, .3]
 buccal fat [tummy tuck]
-chunky monkey
+chunky monkey [ben and jerrys, .15]
 dole dipper
 mary poppins
 freaky friday
 tip-to-taint
 booze cruise
-dollars to donuts
+[dime a dozen, .2] dollars to donuts
 jacuzzi [man drowned by request, .2]
 laffy taffy [willy wonka, .15]
 zendaya[? I hardly know her!, .1, *F*]
 silly putty
 she-shed [wasp infestation]
 tit-for-tat
+peppa pig
 ipso facto [prest-o change-o, .15]
 tick-topia
 post hoc [ergo propter hoc [TUAH, *F*]]
@@ -287,18 +283,14 @@ privacy policy
 chutes and ladders [russian roulette, .15]
 razzle dazzle
 beanie baby
-middle manager
+pictochat
 cottage core
-snap crackle [popcorn lung, .2]
-shamoo
-money shot
+snap crackle [pop[corn lung, .2]]
 humpty dumpty
 chugga chugga [chopped cheese, .2]
-fart smella
 bubble butt [bazonga]
 cotton candy
 cocomelon
-full monty
 breakfast in bed
 prest-o change-o
 circadian somersault
@@ -310,11 +302,9 @@ ding dong [ditch, .2]
 54321 [54321 [54321 [54321 [54321 [54321]]]]]
 10 9 8 7 6 5 4 3 2 1
 donner and blitzen
-corner the market
 cha-cha slide
 twisted tea
 spirulina
-(squenis/squssy)
 poindexter
 boing boing [yoga ball [blacked out no memories, *F*]]
 boing boing boing [boing [boing [boing [boing [boing [boing [boing]]]]]]]
@@ -329,10 +319,10 @@ ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
 doja cat
-weeeeeeeeeee[eeeeeeeeeee[eeeeeeeeeeee[eeeeeeeeeeee[eeeeeeeeeeee]]]]
-aaaaaaaaa[aaaaaaaaa[aaaaaaa[aaaaaaaa]]]
-haha[hahahaha[hahahahahahaha]]
-baba[baba[baba[baba[baba]]]]
+weeeee[eeeee[eeee[eeeeee]]]
+aaaaaaa[aaaaaa[aaaaaa]]
+haha[hahaha]
+copa cabana [his name was RICO he wore a DIAMOND, .05, *F*]
 jiffy lube
 bunson burner [bitch, .2, *F*]
 hellen keller [jerking off ALL over town, *F*]
@@ -349,7 +339,6 @@ rigamarole
 beach blanket babylon
 baby bonnet
 labubu [lafufu]
-whosamawhatsit
 bing bong
 ZING
 ding ding [ding, *F*]
@@ -366,6 +355,7 @@ slop job
 jungle juice
 
 ADJECTIVE (A)
+and a-one and a-two and-a
 of pure and infinite [joy, .2, *F*]
 blood (drenched/soaked)
 extremely rare extremelypoisonous
@@ -375,6 +365,7 @@ le epic [pwn, .2]
 full-pen [summer[time sadness, *F*]]
 gone sexual [gone missing, .2]
 boston dynamics
+POV:
 low libido (magic the gathering/penis boy)
 microwave safe
 emotionally unavailable
@@ -400,11 +391,9 @@ diegetic
 enterprise grade
 fuckin uhhhhhhh
 coquette
-lala[la[la[la[la[la[la[la[la[la[la[la[la[la]]]]]]]]]]]]]
-nahhh slime
+lalala[la[la[la[la[la[la[la[la[la[la[la[la[la]]]]]]]]]]]]]
 5G
 gentleman's
-...chat...
 full-frontal
 big n' greedy
 stolen valor
@@ -435,7 +424,7 @@ bowl cut
 INFP [strippers, .2]
 select all the squares containing a
 ENTJ
-I-Spy
+I-Spy [a]
 180p
 quirked up [white boy with a little bit of swagger busts it down sexual style, *F*]
 benegesserit [voice glitch discovered for free and infinite loose cigarettes, *F*]
@@ -447,7 +436,7 @@ knee-high [swampwater]
 lifetime subscription
 sucked dry
 bottled at the source
-eldritch [shed demon, .1]
+eldritch [horror, .2]
 farm-to-table [tip-to-taint, .3 [bottled at the source, .3]]
 victory royale
 cum-colored
@@ -495,7 +484,7 @@ child not embraced by villiage will burn it down to feel its warmth
 i'm not in trouble AT ALL
 let's have it then [bruv, .2]
 smells like fallon in here
-game set match [BITCH, .2]
+game set match [[set point [BITCH, .2]]
 once bitten twice shy
 what teh heck?
 hit em with the ol' over under
@@ -518,7 +507,7 @@ where my hug at? [ha ha. where is it at? can't have gone far. ha ha, .2]
 [what's the officer, problem?] I'M COLD STONE SOBER
 luck be a lady
 HEAT DEATH OF UNIVERSE
-legs ripped CLEAN off [(I'm talking about a CLEAN break/but don't worry my wife as an essential oil for that), .2]
+legs ripped CLEAN off [(I'm talking about a CLEAN break/but don't worry my wife has an essential oil for that), .2]
 back in highschool I rolled blunts on the scantron
 fucking turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
@@ -546,13 +535,13 @@ i lo[ooooo]ve it when you call me señorita
 now sit right down im gonna spin you around like a basketball
 spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
-babe our song
-with no fees or minimums and no overdraft fees, is it even a decision? capital one, bitch, what's in your wallet?
-when I go out, I cash in. capital one, what's in your wallet?
-that's banking, reimagined. capital one, what's in your wallet?
+babe our song[gg]
+with no fees or minimums and no overdraft fees, is it even a decision?
+when I go out, I cash in.
+that's banking, reimagined.
 i should text her
 mmmm ice cold water mmmmm[mmmmmmm]
-hannukah oh hannukah let's light the menorah [bitch, .2]
+hannukah oh hannukah let's light (the menorah bitch/this blunt slime)
 shot dead by alec baldwin[, alec baldwin pardoned (!/and given purple heart!!!)]
 mmmmmmm mmmmm let me imagine it [mmmmmmmmm [BIRDS BIRDS BIRDS]]
 where did these bullet holes come from
@@ -569,11 +558,11 @@ within 1000 feet of a school
 suggested donation: life savings
 take off glasses it is revealed she is actually beautiful!
 FREE CREDIT SCORE
+got any games on your phone?
 DANGER WILL ROBINSON [DANGER, .15]
 100 concubines (NOT virgins, robust sexual references)
 TFW knee surgery in 4 days
 leave no trace search history wiped
-how tf they build the pyramids without teams calls or AI-powered workflow optimization programs???
 why buy the cow when you can have the milk for free [am i right ladiesss]
 in 5-7 business days
 i'm JONESING for it
@@ -590,7 +579,7 @@ go brrrrrrr
 walk the plank [BITCH, .4]
 RELEASE THE SNAKES
 Siri, "when is July" [oops unsend [haha. siri hold my calls [siri jerk it a little 😏]]]
-NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE]]]]]]]]]
+NIGHTMARE NIGHTMARE NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE]]]]]]]
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT[. And don't call me shirley!, .2]
 [EXCUSE me, .2] im going to take this back to my home lab
@@ -605,6 +594,7 @@ texture's JUNK[. ok yeah this one rules, .1]
 trust your turkeys
 wild wild horses couldn't drag me away
 for her pleasure
+make it liquid
 plus tax and tip
 SWEET CINNAMON!
 consider it done
@@ -634,12 +624,11 @@ Now YOU have a friend in the diamond business
 on my desk YESTERDAY
 CCTV footage unedited
 green moose guava juice large fries chocolate shake
-300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [cure vision brown noise GOD FREQUENCY [mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
-800mhz god frequency mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland [binaural beats for study work meditation joint recovery migraine focus hands-free orgasm]]]
+300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [brown noise GOD FREQUENCY cure vision [mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
+800mhz god frequency mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland [binaural beats for study work meditation joint recovery migraine focus hands-free orgasm]]
 japanese water torture [with spritz element]
 jarvis jerk it a little 😏 [jarvis, faster 😏 [i said faster 😏 [jarvis, let me return the favor 😏 [jarvis, are you shy? 😏 [jarvis, you're beautiful. I want to make you feel good 😏]]]]]
 70/30 split
-(reliable, expensive, dangerous)
 THE CITY IS MINE 🗣️🗣️🗣️
 guantanamo bay forced to watch pole dancing video on work computer
 and buy yourself something nice kid
@@ -669,6 +658,7 @@ SENT FROM IPHONE
 sent from my iphone
 sent from tamagotchi
 BITCH
+(reliable, expensive, dangerous)
 :-)
 for the lady
 (read in italian accent)
@@ -693,12 +683,13 @@ WRITE THAT DOWN
 . SLIME MAN
 . RICH MILLIONAIRE
 do you want some more
-that's ok [that's ok [that's okay [that's ok]]]
+that's ok [and that's ok [and that's just okay [that's yeah that is ok]]]
 por favor [mon cherie]
 🥺🥺🥺
 do i make myself clear?
 no refunds
 . NOBODY HIT ME UP
+nahhh slime
 OR ELSE
 ANY QUESTIONS?
 SOAKING WET
@@ -709,7 +700,7 @@ I guess!
 on god fr
 SEND [UNSEND SEND FUCK]
 SEND
-SEND [screenshot of this to me and i'll venmo you $1, .05]
+SEND [screenshot of this to me and i'll venmo you $1, .02]
 ha ha
 ha ha [ha, .1]`;
 
