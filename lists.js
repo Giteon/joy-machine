@@ -15,7 +15,7 @@ crazy horse fucking chicken
 crazy time horse
 crazy chicken ultimate
 ultimate fucking chicken
-ultimate chicken [throop, .1]
+ultimate chicken [(throop/noodle soup), .2]
 ultimate crazy chicken
 ultimate horse
 ultimate chicken [boillion, .1]
@@ -34,6 +34,7 @@ BEAST (B)
 [secret, *B*] aardvark
 aligator [lounge, *B*]
 armadillo
+baseball animal, *B*
 bear
 beaver
 bumblebee
@@ -98,6 +99,7 @@ porcupine
 pterodactl
 python
 pig
+pikachu
 [task, .2, *B*]rabbit
 raccoon
 RAT [bones, *B*]
@@ -105,7 +107,7 @@ rat [who walked up to a castle, .1, *F*, *B*]
 rooster [head in dirt, *B*]
 scorpion
 sheep
-skunk
+skunk [gunk, .15, *B*]
 snake
 spider
 squirrel [squenis, .2, *B*]
@@ -135,7 +137,7 @@ hinge premium [diahhrea from tube]
 [45°, .2] cock shame
 wikihow
 GROK
-big league chew
+big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
 onion hips
 husband pillow
 (PREEM/PREEMER)
@@ -144,7 +146,6 @@ propranolol [8000mg]
 facebook marketplace
 jeff goldblum
 gentleman caller
-extended warranty
 homonculus
 hurricane gender reveal
 coke zero [friends or family, *F*]
@@ -159,13 +160,13 @@ hit n' run [don't worry my wife has an essential oil for that, .1, *F*]
 (0/1/21)-figure salary [bones sorted by color shape size texture and smell [BUT NEVER BY TASTE], .2, *F*]
 sleeper build
 midnight snack
-blockchain
+blockchain[ed to radiator [until sunrise to prevent transformation, .2, *F*]]
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
 webster's dictionary
 chakras aligned [virginity restored, .2, *F*]
-baseball animal
+conk crete [jungle where dreams are made of, .1, *F*]
 omegaverse [omega three fatty acids]
 land acknowledgement
 GARY ROYCE[! A-BING-A-BAM-A-BOOM! OH!, .2, *F*]
@@ -191,12 +192,12 @@ dark n grab [primal play, .3]
 peach for dunbar
 barmitzvah
 ted cruz [donde esta la biblioteca, .3, *F*]
-[i got catfished by (jimmy carter/dwight d. eisenhower/william howard taft) on, .2, *F*]tinder for presidents
+[and my day is ruined i just got catfished by (jimmy carter/dwight d. eisenhower/william howard taft/grover cleveland/john quincy adams/) on, .2, *F*]tinder for presidents
 license and registration
 powerball [cock and ball torture, .15]
 [DIY, .15] lobotomy
 slutty vegan
-wet t-shirt [contest]
+wet t-shirt contest
 batchelor in paradise [punch lemonade, .1]
 cloth mother wire mother
 above-ground (burial/grave)
@@ -256,7 +257,7 @@ show of force
 [Meet me at the darian gap at 0-300. wear this dress, it will just barely fit. find enclosed: one (1) bottle of ferragamo intense leather cologne. administer one (1) spritz at each of the seven (7) chakra points. Next, (1) vial of dog pheromone. 9pm. hotel bar. order a shirley temple, all rum, microwaved 45 min, HOT. pretend you don’t know me. hand me this brass wristwatch. count 15 seconds until my pacemaker explodes. act casual. slip this note in the bartenders shirt pocket. he will give you a dart shell. swallow it. pull fire alarm. take next flight to darian gap. purchase a sprite zero. the contact will hold a chartreuse parasol. spray dog pheromone to distract guard dogs. aquire tranquilizer from contact. assemble tranquilizer dart and launch through pepsi straw. Await further instruction., 1.0, *F*]
 
 CANDY(C)
-scrub a dub dub[step [btdubstep, .15, *F*]]
+scrub a dub dub[step [btdubstep, .1]]
 bombaclat [ultimate selector [WITH THE CHAMPION SOUND, *F*]]
 pink (ponk/pony club)
 perfect politics
@@ -278,7 +279,7 @@ tit-for-tat
 peppa pig
 ipso facto [prest-o change-o, .15]
 tick-topia
-post hoc [ergo propter hoc [TUAH, *F*]]
+post hoc [ergo propter hoc TUAH, *F*]
 privacy policy
 chutes and ladders [russian roulette, .15]
 razzle dazzle
@@ -311,7 +312,7 @@ boing boing boing [boing [boing [boing [boing [boing [boing [boing]]]]]]]
 gamer gunk
 gutterball
 pinapple jiblet
-wet nurse [japanese sponge bath, *F*]
+wet nurse [japanese sponge bath [(euthanasia likely)], *F*]
 bundle and save
 hub and spoke
 hubba bubba
@@ -338,7 +339,7 @@ zoboomafoo
 rigamarole
 beach blanket babylon
 baby bonnet
-labubu [lafufu]
+labubu [lafufu [lamumu [lagugu]]]
 bing bong
 ZING
 ding ding [ding, *F*]
@@ -374,7 +375,6 @@ protien-plus
 (socially liberal fiscally conservative/fiscally liberal socially conservative)
 cream o the crop[circle, .1, *F*]
 [sort of an , .2, *F*]ethnic twist
-chained to radiator [until daytime, .1]
 barely alive
 brimming with [(piss/cum), .1]
 bricked up [fridge magnet, .1, *F*]
@@ -388,12 +388,12 @@ syndicated [television]
 one two skip a few [ninety nine a hundred, .2]
 authentic home-cooked [wartime, .2]
 diegetic
-enterprise grade
+enterprise-grade
 fuckin uhhhhhhh
 coquette
 lalala[la[la[la[la[la[la[la[la[la[la[la[la[la]]]]]]]]]]]]]
 5G
-gentleman's
+gentleman's [blend, .2]
 full-frontal
 big n' greedy
 stolen valor
@@ -475,7 +475,7 @@ damn girl u look color blind i can fix u
 NUKE IN DA CLUB
 so THAT just happened
 oura ring indicates no pulse[, noooooo owner of oura ring is dead. FREE OURA RING!]
-switch it up like nintendo [REMEMBER US? [I MISS US]]
+switch it up like nintendo [REMEMBER US? [I MISS US, .25]]
 face down stroking my shit [wrist fractured [8 month recovery no GF, delay procedure until find GF]]
 ten times tintinuous
 DO A TRICK
@@ -583,7 +583,6 @@ NIGHTMARE NIGHTMARE NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHTMARE [NIGHT
 fuck my fucking ass
 shirley temple microwave 45 minutes HOT[. And don't call me shirley!, .2]
 [EXCUSE me, .2] im going to take this back to my home lab
-anti-(hoes/happiness) technology
 girlfriend (who loves me so much/with a printer dating sim)
 IN ENGLISH PLEASE?
 fuck my shit up
@@ -615,7 +614,9 @@ approach the bench?
 money talks wealth whispers.
 that's all im allowed to say
 the tree remembers, the axe forgets. 
+god got me
 pay the piper call the tune
+-100[0[0[0]]] points
 my dogs are barkin[g]
 TAKE ME TO THE RIVER
 every palace is a backdoor
@@ -689,6 +690,7 @@ por favor [mon cherie]
 do i make myself clear?
 no refunds
 . NOBODY HIT ME UP
+yummm
 nahhh slime
 OR ELSE
 ANY QUESTIONS?
@@ -793,7 +795,7 @@ const childsModeReplacements = {
   '10 lashings goddess': '10 lessons learned', 
   'turn around bend over': 'turn around and face the other way',
   'horny': 'happiness',
-  'monster porn': 'monster movie',
+  'monster porn': 'monster mash',
   'cum': 'cream',
   'piss': 'lemonade',
   'schoolbus explosion': 'schoolbus tires slashed',
@@ -816,7 +818,6 @@ const childsModeReplacements = {
   'jarvis, let me return the favor': 'jarvis, you\'re a real one',
   'jarvis, I want to make you feel good': 'jarvis, what we have is special',
   'dating sim': 'romantic adventure',
-  'laura palmer body bag': 'laura palmer',
   'full-frontal': 'full-bodied',
   'full-pen': 'fun in the sun',
   'i put my dick in a bag of doritos': 'i put my hand in a bag of doritos',
