@@ -19,6 +19,7 @@ body {
   font-family: 'Crimson Text', serif;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   overflow-y: hidden; /* Prevent vertical scrolling*/
+  background-color: #EEEEEE; /* Light gray background in light mode */
 }
 
 /* Title styling with Ruigslay font */

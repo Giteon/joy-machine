@@ -139,6 +139,7 @@ wikihow
 GROK
 big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
 onion hips
+ripstick
 husband pillow
 (PREEM/PREEMER)
 price match
@@ -230,7 +231,7 @@ international waters [all crimes are legal, .15, *F*]
 wagwan [my yute, .3]
 monster mash [must be played or DJs life is threatened, .1, *F*]
 head exploded [no pulse [don't worry my wife has an essential oil for that, .15, *F*]]
-with 9 billion child IQ
+[with, .25] 9 billion child IQ
 water stain
 citizen's arrest [life sentence no bail no parole no trial no appeal [no habeas corpus no motion to suppress no jury no judge no justice no right to counsel, *F*]]
 vinegar corner
@@ -247,14 +248,14 @@ iranian steakhouse
 cardio mezzanine [death by hypoxia [no response to thoughtful email, *F*]]
 thimble of milk
 bisexual boyfriend [(trough/corrale/simulator)]
-orgasmatron 3000
-topamax sprinkle [300,000mg [lethal dose, *F*]]
+orgasmatron (3/5/7/9)000
+topamax sprinkle [(3/5/7/9)00,000mg [lethal dose, *F*]]
 ratatouille [magic cheese]
 [cleopatra] past life regression [ran over by car [500 times] *F*]
 ikea chair [sabrina carpenter creaming jeans, *F*]
 walter goggins [aimee lou wood nipple scene uncensored, *F*]
 show of force
-[Meet me at the darian gap at 0-300. wear this dress, it will just barely fit. find enclosed: one (1) bottle of ferragamo intense leather cologne. administer one (1) spritz at each of the seven (7) chakra points. Next, (1) vial of dog pheromone. 9pm. hotel bar. order a shirley temple, all rum, microwaved 45 min, HOT. pretend you don’t know me. hand me this brass wristwatch. count 15 seconds until my pacemaker explodes. act casual. slip this note in the bartenders shirt pocket. he will give you a dart shell. swallow it. pull fire alarm. take next flight to darian gap. purchase a sprite zero. the contact will hold a chartreuse parasol. spray dog pheromone to distract guard dogs. aquire tranquilizer from contact. assemble tranquilizer dart and launch through pepsi straw. Await further instruction., 1.0, *F*]
+[meet me at the darian gap at 0-300. wear this dress, it will just barely fit. find enclosed: one (1) bottle of ferragamo intense leather cologne. administer one (1) spritz at each of the seven (7) chakra points. Next, (1) vial of dog pheromone. 9pm. hotel bar. order a shirley temple, all rum, microwaved 45 min, HOT. pretend you don’t know me. hand me this brass wristwatch. count 15 seconds until my pacemaker explodes. act casual. slip this note in the bartenders shirt pocket. he will give you a dart shell. swallow it. pull fire alarm. take next flight to darian gap. purchase a sprite zero. the contact will hold a chartreuse parasol. spray dog pheromone to distract guard dogs. aquire tranquilizer from contact. assemble tranquilizer dart and launch through pepsi straw. Await further instruction., 1.0, *F*]
 
 CANDY(C)
 scrub a dub dub[step [btdubstep, .1]]
@@ -466,10 +467,10 @@ FINALE (F)
 YOUNG [(Skylar Gisondo/Jenna Orteg/Coleman Domingo) YOUNG, .2]
 [si saco las uñas te puedo arrañar, .15] cat kitty cat cat kitty cat cat
 dot com [dot jizz [dot edu]]
-total body enhancement [chamber [of commerce]]
+total body enhancement [chamber of commerce, .6]
 with the (fat naturals, .7/fatties, .3)
 3-trillion thread count
-shit cup runneth over [my balls, .3]
+shit cup runneth over [my balls, .4]
 THAT COULD BE A SHOW
 damn girl u look color blind i can fix u
 NUKE IN DA CLUB
@@ -509,7 +510,7 @@ luck be a lady
 HEAT DEATH OF UNIVERSE
 legs ripped CLEAN off [(I'm talking about a CLEAN break/but don't worry my wife has an essential oil for that), .2]
 back in highschool I rolled blunts on the scantron
-fucking turn around bend over [lemme see the nutrition facts]
+turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
 (cherished memories burned as fuel to power nvidia server farm/no storage remaining must delete all cherished memories from google drive)
 MAYO MOMENT
@@ -537,8 +538,7 @@ spin spin spin around in a circle darling [now place your hand on the hot stove 
 what is bro doing
 babe our song[gg]
 with no fees or minimums and no overdraft fees, is it even a decision?
-when I go out, I cash in.
-that's banking, reimagined.
+(when I go out, I cash in, .3/that's banking, reimagined, .7)
 i should text her
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light (the menorah bitch/this blunt slime)
@@ -597,7 +597,7 @@ make it liquid
 plus tax and tip
 SWEET CINNAMON!
 consider it done
-ces't la vie
+ces't la vie [ZUT ALORS!, .25]
 ooooh i just wanna wear my shorts
 how can i be homophobic my bitch is gay
 f those t's (baby/mama/big boy)

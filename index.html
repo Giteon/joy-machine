@@ -75,12 +75,12 @@
   <script>
     // --- CONFIGURATION ---
     const CONFIG = {
-      testMode: false, // Test mode - instant progress bar fill
+      testMode: true, // Test mode - instant progress bar fill
       fillDuration: 50000, // 50 seconds in milliseconds
       updateInterval: 50, // Update every 50ms for smooth animation
-      advanceAmount: 0.02, // 2% of total steps when clicked
-      typoChance: 0.018, // 1.8% chance per letter
-      typoCorrectionChance: .95, // 95% chance to catch typo
+      advanceAmount: 0.3, // 3% of total steps when clicked
+      typoChance: 0.025, // 2.5% chance per letter
+      typoCorrectionChance: .96, // 96% chance to catch typo
       doubleBeastChance: 0.85, // 85% chance for two beasts
       tripleBeastChance: 0.60, // 60% chance for three beasts (if already two)
       doubleCandyChance: .5, // 50% chance for two candies
@@ -97,9 +97,9 @@
       noConsole: false, // Disable all console logs when true
       typingSpeedMultiplier: .8, // Typing speed multiplier (1.0 = double speed, 0.5 = normal, 0.0 = half speed)
       typingSpeed: { //higher numbers = slower typing
-        space: { min: 5, max: 25 },
-        vowel: { min: 10, max: 38 },
-        consonant: { min: 12, max: 42 },
+        space: { min: 13, max: 38 },
+        vowel: { min: 18, max: 51 },
+        consonant: { min: 20, max: 55 },
         number: { min: 50, max: 65 },
         punctuation: { min: 42, max: 80 }
       }
@@ -160,7 +160,7 @@
             (i, b, n, c, a, f) => joinWords(i, a, b, n, f),
             // (i, b, n, c, a, f) => joinWords(c, i, b, n, f),
             (i, b, n, c, a, f) => joinWords(i, b, c, a, n, f),
-            (i, b, n, c, a, f) => joinWords(c, i, b, a, n, f),
+            // (i, b, n, c, a, f) => joinWords(c, i, b, a, n, f),
             (i, b, n, c, a, f) => joinWords(i, b, a, n, c, f),
             // (i, b, n, c, a, f) => joinWords(b, i, c, a, n, f),
             (i, b, n, c, a, f) => joinWords(b, a, n, c, f, i),
@@ -624,6 +624,10 @@
         
         // Clear any existing typing animations to prevent conflicts
         clearTypingTimeouts();
+        
+        // Stop any existing audio
+        stopWordAudio();
+        stopDeleteAudio();
         
         // Define the possible formats (now using intro + word order)
         // Helper function to join non-empty words with spaces
@@ -1363,6 +1367,19 @@
         // Clear the phrase output first
         phraseOutput.textContent = '';
         
+        // Reset font size to default
+        phraseOutput.style.fontSize = '';
+
+        // Check if this is the special small text item
+        const isSpecialSmallText = phrase.includes('meet me at the darian gap at 0-300');
+        
+        // Set small font size for the special item
+        if (isSpecialSmallText) {
+            phraseOutput.style.setProperty('font-size', '20px', 'important');
+            console.log('Special small text detected - setting to 20px');
+            console.log('Computed font size:', window.getComputedStyle(phraseOutput).fontSize);
+        }
+
         // Mark typing as active
         isTyping = true;
         
@@ -1410,6 +1427,21 @@
                     
                     // Check if next char is space or end of phrase (last letter of word)
                     isLastLetterOfWord = (currentIndex === phrase.length - 1 || phrase[currentIndex + 1] === ' ');
+                    
+                    // Play word-length-based typing sound when starting a new word
+                    if (isFirstLetterOfWord) {
+                        // Find the complete word length and check for capitals
+                        let wordEnd = currentIndex;
+                        while (wordEnd < phrase.length && phrase[wordEnd] !== ' ') {
+                            wordEnd++;
+                        }
+                        const wordLength = wordEnd - currentIndex;
+                        const word = phrase.substring(currentIndex, wordEnd);
+                        const hasCapitals = /[A-Z]/.test(word);
+                        playWordTypingSound(wordLength, hasCapitals);
+                        
+                        // Font size is already set for special text at the beginning
+                    }
                 }
                 
                 
@@ -1460,7 +1492,11 @@
                 // Add the character (could be original or typo)
                 displayedText += actualChar;
                 
+                // Word-based typing audio will be handled at word level
+                
                 // Play typewriter sound for letters and spaces
+                // COMMENTED OUT - TRYING NEW TYPING AUDIO
+                /*
                 if (actualChar.match(/[a-zA-Z ]/)) {
                     if (actualChar === ' ') {
                         // Space bar: Use random sound (30% louder)
@@ -1515,6 +1551,7 @@
                         }
                     }
                 }
+                */
                 
                 phraseOutput.textContent = displayedText;
                 currentIndex++;
@@ -1669,6 +1706,10 @@
             } else {
                 // Typing complete - but only if no active typo correction
                 if (!hasActiveTypo) {
+                    // Stop any current audio when phrase is complete
+                    stopWordAudio();
+                    stopDeleteAudio();
+                    
                     // Play bell sound when phrase is complete
                     playBellSound();
                     
@@ -1704,6 +1745,9 @@
             const charsToBackspace = displayedWord.length - typoPosition + 1;
             let backspaceCount = 0;
             
+            // Play delete sound based on number of characters being deleted
+            playDeleteSound(charsToBackspace);
+            
             const backspace = () => {
                 if (backspaceCount < charsToBackspace) {
                     displayedText = displayedText.substring(0, displayedText.length - 1);
@@ -1711,9 +1755,12 @@
                     backspaceCount++;
                     
                     // Play very-soft-hit sound for backspace (every other character)
+                    // COMMENTED OUT - TRYING NEW TYPING AUDIO
+                    /*
                     if (backspaceCount % 2 === 0) {
                         playBackspaceSound(backspaceCount, charsToBackspace);
                     }
+                    */
                     
                     // Calculate backspace delay
                     let delay;
@@ -1752,6 +1799,22 @@
         
         // Function to continue typing from a word typo position
         const continueTypingFromWordTypo = (phrasePosition) => {
+            // Calculate how many letters need to be retyped from this position to end of current word
+            let wordEnd = phrasePosition;
+            while (wordEnd < phrase.length && phrase[wordEnd] !== ' ') {
+                wordEnd++;
+            }
+            const lettersToRetype = wordEnd - phrasePosition;
+            
+            // Check if the word has capitals for volume boost
+            const word = phrase.substring(phrasePosition, wordEnd);
+            const hasCapitals = /[A-Z]/.test(word);
+            
+            // Play sound based on how many letters need to be retyped
+            if (lettersToRetype > 0) {
+                playWordTypingSound(lettersToRetype, hasCapitals);
+            }
+            
             // Update currentIndex to match where we are in the original phrase
             currentIndex = phrasePosition;
             
@@ -2068,6 +2131,143 @@
     let mainMusicPosition = 0; // Track position of main music when paused
     let childsMusicPosition = 0; // Track position of child's mode music when paused
     
+    // New word-length-based typing audio system
+    const typingAudioCache = new Map(); // Cache for audio files
+    let currentWordAudio = null;
+    let currentDeleteAudio = null;
+    const soundAlternateState = new Map(); // Track which version to play next for sounds 0-8
+    
+    // Preload typing sounds (0-25 key presses)
+    const preloadTypingSounds = () => {
+      const soundFiles = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 20, 25];
+      soundFiles.forEach(num => {
+        // Load regular version
+        const audio = new Audio(`audio/typenum/${num}.mp3`);
+        audio.volume = 0.8;
+        audio.preload = 'auto';
+        typingAudioCache.set(num, audio);
+        
+        // Load alternate version for sounds 0-8
+        if (num <= 8) {
+          const audioAlt = new Audio(`audio/typenum/${num}.1.mp3`);
+          audioAlt.volume = 0.8;
+          audioAlt.preload = 'auto';
+          typingAudioCache.set(`${num}.1`, audioAlt);
+          
+          // Initialize alternation state (start with regular version)
+          soundAlternateState.set(num, false);
+        }
+      });
+      
+      // Preload delete sounds
+      const deleteSounds = ['delete', 'delete2', 'delete3'];
+      deleteSounds.forEach(name => {
+        const audio = new Audio(`audio/typenum/${name}.mp3`);
+        audio.volume = 0.8;
+        audio.preload = 'auto';
+        typingAudioCache.set(name, audio);
+      });
+    };
+    
+    // Get the appropriate sound file number based on word length (shifted down by 1)
+    const getSoundForWordLength = (wordLength) => {
+      if (wordLength === 1) return 0; // 1 letter uses 0.mp3 (very quiet hit)
+      if (wordLength <= 16) return wordLength - 1; // 2-16 letters use sounds 1-15
+      if (wordLength <= 20) return 18; // 17-20 letters use 18.mp3
+      if (wordLength <= 25) return 20; // 21-25 letters use 20.mp3
+      return 25; // 26+ letters use 25.mp3
+    };
+    
+    // Play typing sound for a word
+    const playWordTypingSound = (wordLength, hasCapitals = false) => {
+      // Stop any currently playing word audio
+      stopWordAudio();
+      
+      const soundNum = getSoundForWordLength(wordLength);
+      let audioKey = soundNum;
+      
+      // Handle alternation for sounds 0-8
+      if (soundNum <= 8) {
+        const useAlternate = soundAlternateState.get(soundNum);
+        if (useAlternate) {
+          audioKey = `${soundNum}.1`;
+        }
+        // Toggle for next time
+        soundAlternateState.set(soundNum, !useAlternate);
+      }
+      
+      const audio = typingAudioCache.get(audioKey);
+      if (audio) {
+        if (audio.currentTime > 0.1) {
+          audio.currentTime = 0;
+        }
+        
+        // Boost volume 2x for words with capital letters
+        const originalVolume = audio.volume;
+        if (hasCapitals) {
+          audio.volume = Math.min(originalVolume * 2, 1.0);
+        }
+        
+        currentWordAudio = audio;
+        audio.play().catch(() => {});
+        
+        // Reset volume after playing
+        if (hasCapitals) {
+          audio.volume = originalVolume;
+        }
+      }
+    };
+    
+    // Stop current word audio
+    const stopWordAudio = () => {
+      if (currentWordAudio) {
+        currentWordAudio.pause();
+        currentWordAudio.currentTime = 0;
+        currentWordAudio = null;
+      }
+    };
+    
+    // Get the appropriate delete sound based on number of characters being deleted
+    const getDeleteSoundForLength = (deleteLength) => {
+      if (deleteLength <= 3) return 'delete';
+      if (deleteLength <= 6) return 'delete2';
+      return 'delete3'; // 7+ characters
+    };
+    
+    // Play delete sound for backspacing
+    const playDeleteSound = (deleteLength) => {
+      // Stop any currently playing audio
+      stopWordAudio();
+      stopDeleteAudio();
+      
+      const soundName = getDeleteSoundForLength(deleteLength);
+      const audio = typingAudioCache.get(soundName);
+      if (audio) {
+        if (audio.currentTime > 0.1) {
+          audio.currentTime = 0;
+        }
+        
+        // Play delete sounds at double volume
+        const originalVolume = audio.volume;
+        audio.volume = Math.min(originalVolume * 2, 1.0);
+        
+        currentDeleteAudio = audio;
+        audio.play().catch(() => {});
+        
+        // Reset volume after playing
+        audio.volume = originalVolume;
+      }
+    };
+    
+    // Stop current delete audio
+    const stopDeleteAudio = () => {
+      if (currentDeleteAudio) {
+        currentDeleteAudio.pause();
+        currentDeleteAudio.currentTime = 0;
+        currentDeleteAudio = null;
+      }
+    };
+    
     // Typewriter sound effects
     let typewriterSounds = [];
     let currentTypewriterSoundIndex = 0;
@@ -2317,6 +2517,7 @@
     // Initialize typewriter sounds
     initializeTypewriterSounds();
     initializePageSounds();
+    preloadTypingSounds();
     
     // Add spacebar keyup listener for progress advancement (desktop only)
     document.addEventListener('keyup', (event) => {
