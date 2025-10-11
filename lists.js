@@ -340,7 +340,7 @@ zoboomafoo
 rigamarole
 beach blanket babylon
 baby bonnet
-labubu [lafufu [lamumu [lagugu]]]
+labubu [lafufu [lamumu]]
 bing bong
 ZING
 ding ding [ding, *F*]
@@ -537,8 +537,7 @@ now sit right down im gonna spin you around like a basketball
 spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
 babe our song[gg]
-with no fees or minimums and no overdraft fees, is it even a decision?
-(when I go out, I cash in, .3/that's banking, reimagined, .7)
+(with no fees or minimums and no overdraft fees, is it even a decision?/when I go out, I cash in/that's banking, reimagined)
 i should text her
 mmmm ice cold water mmmmm[mmmmmmm]
 hannukah oh hannukah let's light (the menorah bitch/this blunt slime)
