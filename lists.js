@@ -141,6 +141,7 @@ big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
 onion hips
 ripstick
 husband pillow
+pillow princess [and the pauper, .3]
 (PREEM/PREEMER)
 price match
 propranolol [8000mg]
@@ -149,9 +150,12 @@ jeff goldblum
 gentleman caller
 homonculus
 hurricane gender reveal
+alpha centauri [beta male [gamma delta epsilon]]
+stray bullet boulevard 
 coke zero [friends or family, *F*]
 florida man
 female led relationship
+catherine zeta jo
 MLM
 HR nightmare
 stagg night
@@ -205,7 +209,7 @@ above-ground (burial/grave)
 pussy taste test [jump up and down, .3, *F*]
 onlyfans
 avatar state
-rodolfo [trapped in floorboards, unpaid summer internship on hold, *F*]
+rodolfo [trapped in floorboards, unpaid summer internship on hold pending performance review, *F*]
 primordial soup
 laura palmer[? I thought you said ARNOLD palmer, .2, *F*]
 war movie monday
@@ -266,9 +270,10 @@ jamba juice [green goddess ecoli razzmatazz, .3]
 buccal fat [tummy tuck]
 chunky monkey [ben and jerrys, .15]
 dole dipper
+pro bono
 mary poppins
 freaky friday
-tip-to-taint
+tip-to-taint [farm-to-table, .2]
 booze cruise
 [dime a dozen, .2] dollars to donuts
 jacuzzi [man drowned by request, .2]
@@ -370,6 +375,7 @@ boston dynamics
 POV:
 low libido (magic the gathering/penis boy)
 microwave safe
+wish.com
 emotionally unavailable
 password protected
 protien-plus
@@ -392,7 +398,7 @@ diegetic
 enterprise-grade
 fuckin uhhhhhhh
 coquette
-lalala[la[la[la[la[la[la[la[la[la[la[la[la[la]]]]]]]]]]]]]
+lalala[la[la[la[la[la[la[la[la[la[la]]]]]]]]]
 5G
 gentleman's [blend, .2]
 full-frontal
@@ -415,7 +421,7 @@ twitter verified
 animal-style
 criterion collection
 firm-but-fair
-carbon neutral
+carbon neutral [carbon credit, .15]
 french tuck
 kellogs [cereal instant horny recipie, .2, *F*]
 type-3
@@ -522,6 +528,7 @@ hey girl [you're looking beautiful tonight, .8] whats your favorite AI?
 [stand in me] and you will be bathed in shekhaina glory [XIAOHONGSHU, .8]
 LOL (LOTS OF LOVE)
 leading to indefinite house arrest
+permanent facial paralysis after putting too much narcan in stir fry
 come to papa
 woke up ON THE MOUND
 where's the heft?
@@ -532,7 +539,7 @@ infertile if dog
 etc [etc [and so on and so forth [in such a way proceeding as thus as such]]]
 and subway take away everything you love
 100% AGREE
-i lo[ooooo]ve it when you call me señorita 
+i lo[ooooo]ve it when you call me señorita
 now sit right down im gonna spin you around like a basketball
 spin spin spin around in a circle darling [now place your hand on the hot stove [it can't hurt you as it’s only part of the simulation.]]
 what is bro doing
@@ -612,7 +619,7 @@ SPOILER ALERT
 approach the bench?
 money talks wealth whispers.
 that's all im allowed to say
-the tree remembers, the axe forgets. 
+the tree remembers, the axe forgets.
 god got me
 pay the piper call the tune
 -100[0[0[0]]] points
