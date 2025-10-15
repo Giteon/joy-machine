@@ -621,12 +621,13 @@ money talks wealth whispers.
 that's all im allowed to say
 the tree remembers, the axe forgets.
 god got me
-pay the piper call the tune
+pay the piper call the tune [type shit]
 -100[0[0[0]]] points
 my dogs are barkin[g]
 TAKE ME TO THE RIVER
 every palace is a backdoor
 everything reminds me of her
+i wake up i drink water la la la
 Now YOU have a friend in the diamond business
 on my desk YESTERDAY
 CCTV footage unedited
@@ -711,6 +712,7 @@ SEND [UNSEND SEND FUCK]
 SEND
 SEND [screenshot of this to me and i'll venmo you $1, .02]
 ha ha
+lol
 ha ha [ha, .1]`;
 
 
