@@ -41,7 +41,7 @@ bumblebee
 butterfly [effect[ive immediately, .1], .2, *B*]
 capybara
 [[little fucking] hungry fucking] caterpillar
-[alvin and the, .1 *B*] chipmunk
+[alvin and the, .1, *B*] chipmunk
 cockroach
 crab [rangoon, *B*]
 crocodile [dundee, *B*]
@@ -338,13 +338,13 @@ magic mike [wazowski, .2]
 bazinga
 scooby doo [velma 4k stuck in washing machine 4k, .2, *F*]
 tiny desk
-chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip, .1, *F*]
+chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip, .15, *F*]
 dunkin donut[s]
 mystery meat
 zoboomafoo
 rigamarole
-beach blanket babylon
-baby bonnet
+beach blanket babylon [baby bonnet, .2]
+baby bonnet [beach blanket babylon, .2]
 labubu [lafufu [lamumu]]
 bing bong
 ZING
@@ -748,7 +748,7 @@ const parseLists = (text) => {
   return lists;
 };
 
-// NSFW words list for childs mode filtering (only words that actually appear in the lists and are truly offensive)
+// NSFW words list for childs mode filtering
 const nsfwWords = [
   // Profanity
   'how can i be homophobic my bitch is gay', 'wagwan', 'within 1000 feet of a school', 'nutritional yeast infection', 'bombaclat',
@@ -762,7 +762,6 @@ const nsfwWords = [
 
 // child's mode word replacements mapping
 const childsModeReplacements = {
-  // Word replacements for child's mode (original word: replacement word)
   'fucking': 'freaking',
   'fuckin': 'freakin',
   'fuck-ass': 'gosh darn',
