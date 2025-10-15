@@ -220,7 +220,7 @@ kim petras [coconut [perfect pitch, .2]]
 kurt vonnegut [🤓☝️ ummm ok so this is officially my life? *F*]
 goblin mode
 breastmilk [(pump up the jam [pump it up pump it real good], .2/on the cheap, .8), .25]
-hungry tax [CLICK HERE to feed your advisor a motivational nutrition cube, .3, *F*]
+hungry tax [click to feed your advisor a motivational nutrition cube, .3, *F*]
 schoolbus explosion [zero surviviors [4k, *F*]]
 QS (watermelon/wamertelon/watermolen)
 angel of death

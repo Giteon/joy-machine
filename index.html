@@ -1483,6 +1483,12 @@
                     // Add random pause between 0-300ms
                     const pauseDelay = Math.random() * 300;
                     currentIndex++; // Increment index to move past the |
+                    
+                    // Skip any trailing space after the | to prevent double spaces
+                    if (currentIndex < phrase.length && phrase[currentIndex] === ' ') {
+                        currentIndex++;
+                    }
+                    
                     setTimeout(() => {
                         typeNextChar();
                     }, pauseDelay);
