@@ -171,6 +171,7 @@ blockchain[ed to radiator [until sunrise to prevent transformation, .2, *F*]]
 face-up tack collection [please get out of my house immediately, .15, *F*]
 nutritional yeast [infection, .3]
 gents blend
+tickle monster
 webster's dictionary
 chakras aligned [virginity restored, .2, *F*]
 conk crete [jungle where dreams are made of, .1, *F*]
@@ -315,6 +316,7 @@ donner and blitzen
 cha-cha slide
 twisted tea
 spirulina
+purple people eater
 poindexter
 boing boing [yoga ball [blacked out no memories, *F*]]
 boing boing boing [boing [boing [boing [boing [boing [boing [boing]]]]]]]
@@ -435,6 +437,7 @@ him and hers
 bowl cut
 INFP [strippers, .2]
 select all the squares containing a
+early-onset dementia [pudding, .2]
 ENTJ
 I-Spy [a]
 180p
@@ -466,6 +469,7 @@ touch-based non-sexual [non-(poly/monog) partnership, *F*]
 ontologically (evil/sexy)
 submissive [breedable, .2]
 command position
+buck wild
 michael buble [compilation [no clothes, *F*]]
 open-concept [torture dungeon]
 slut [whore [bitch [cunt]]]
