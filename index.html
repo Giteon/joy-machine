@@ -84,7 +84,7 @@
       swapLettersChance: 0.008,
       childsMode: false,
       backgroundMusic: true,
-      musicVolume: 0.05,
+      musicVolume: 0.08,
       tagChance: 0.3,
       darkMode: false,
       noConsole: false,
@@ -2472,6 +2472,14 @@
       
       // load & play DUH
       backgroundMusic.load();
+      
+      // BOOST my boy jobim
+      if (currentSong.includes('6.mp3')) {
+        backgroundMusic.volume = CONFIG.musicVolume * 2.5;
+      } else {
+        backgroundMusic.volume = CONFIG.musicVolume;
+      }
+      
       return backgroundMusic.play().then(() => {
         // if (!CONFIG.noConsole) {
           // console.log(`🎵 Now playing song ${currentSongIndex + 1}/${playlist.length}: ${currentSong}`);
