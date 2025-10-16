@@ -70,7 +70,7 @@ goose
 gorilla [(glue/grip), .2, *B*]
 hamster
 hedgehog
-hippo
+hippo [compliant, .25, *B*]
 horse
 hyena
 jellyfish
@@ -144,6 +144,7 @@ husband pillow
 pillow princess [and the pauper, .3]
 (PREEM/PREEMER)
 price match
+upside down cake
 propranolol [8000mg]
 facebook marketplace
 jeff goldblum
@@ -156,6 +157,7 @@ coke zero [friends or family, *F*]
 florida man
 female led relationship
 catherine zeta jo
+rumspringa
 MLM
 HR nightmare
 stagg night
@@ -284,6 +286,7 @@ she-shed [wasp infestation]
 tit-for-tat
 peppa pig
 ipso facto [prest-o change-o, .15]
+bees knees
 tick-topia
 post hoc [ergo propter hoc TUAH, *F*]
 privacy policy
@@ -325,6 +328,7 @@ hubba bubba
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
+princess peach [tom hardy lips, .3]
 doja cat
 weeeee[eeeee[eeee[eeeeee]]]
 aaaaaaa[aaaaaa[aaaaaa]]
@@ -389,6 +393,7 @@ fockin minging [that is, .2, *F*]
 intermittent [fasting, .2]
 ferragamo [signature scent]
 meat and potatoes
+dumb-as-dirt
 herbert von [kinkshame,.2, *F*]
 syndicated [television]
 100% fatality rate
@@ -398,7 +403,7 @@ diegetic
 enterprise-grade
 fuckin uhhhhhhh
 coquette
-lalala[la[la[la[la[la[la[la[la[la[la]]]]]]]]]
+lalala[lala[lala[lala]]]
 5G
 gentleman's [blend, .2]
 full-frontal
@@ -410,7 +415,7 @@ biblically accurate
 microplastic
 periphrastic
 lazy susan
-slice (of life/o heaven)
+[new york, .25] slice (of life/o heaven)
 recession-proof
 New York Times [best seller, .3]
 tabernacle [german boys intercollegiate choir narnia soundtrack CD-ROM full volume stuck in hot car 12 hours, .15, *F*]
@@ -491,7 +496,7 @@ child not embraced by villiage will burn it down to feel its warmth
 i'm not in trouble AT ALL
 let's have it then [bruv, .2]
 smells like fallon in here
-game set match [[set point [BITCH, .2]]
+game set match [set point [BITCH, .2]]
 once bitten twice shy
 what teh heck?
 hit em with the ol' over under
@@ -619,17 +624,22 @@ SPOILER ALERT
 approach the bench?
 money talks wealth whispers.
 that's all im allowed to say
+[fucking, .3] spin the bottle until you get the result you want
 the tree remembers, the axe forgets.
 god got me
 pay the piper call the tune [type shit]
--100[0[0[0]]] points
+(-, .8/+, .2)100[0[0[0]]] points
 my dogs are barkin[g]
 TAKE ME TO THE RIVER
 every palace is a backdoor
+(light/medium) ice (0%/30%/70%/100%) sweetness
 everything reminds me of her
 i wake up i drink water la la la
+notice how he got the huzz after getting himself a labubu?
 Now YOU have a friend in the diamond business
+NAME OF THE MOVIE [NAME OF THE MOVIE, .15]
 on my desk YESTERDAY
+AWOOGA
 CCTV footage unedited
 green moose guava juice large fries chocolate shake
 300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [brown noise GOD FREQUENCY cure vision [mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
@@ -709,8 +719,8 @@ MAN I GOT IT MADE
 I guess!
 on god fr
 SEND [UNSEND SEND FUCK]
-SEND
-SEND [screenshot of this to me and i'll venmo you $1, .02]
+SEND [me a screenshot of this and i'll give you... A MYSERY GIFT, .05]
+SEND [me a screenshot of this and i'll venmo you... ($1!, .8/$10!, .18/$100!, .02), .05]
 ha ha
 lol
 ha ha [ha, .1]`;

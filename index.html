@@ -69,8 +69,8 @@
   
   <script>
     const CONFIG = {
-      fillDuration: 50000, 
-      updateInterval: 50, 
+      fillDuration: 50000,
+      updateInterval: 50,
       advanceAmount: 0.012,
       typoChance: 0.025,
       typoCorrectionChance: .96,
@@ -78,15 +78,15 @@
       tripleBeastChance: 0.60,
       doubleCandyChance: .5,
       fuckingChance: 0.13,
-      thinkingPauseChance: 0.20, 
+      thinkingPauseChance: 0.2,
       allCapsChance: 0.07,
       skipSpaceChance: 0.00,
       swapLettersChance: 0.008,
       childsMode: false,
       backgroundMusic: true,
-      musicVolume: 0.08,
-      tagChance: 0.3, 
-      darkMode: false, 
+      musicVolume: 0.05,
+      tagChance: 0.3,
+      darkMode: false,
       noConsole: false,
       testMode: false,
       typingSpeedMultiplier: .8,
@@ -210,8 +210,8 @@
     const totalSteps = CONFIG.fillDuration / CONFIG.updateInterval; // Total number of steps
     let isComplete = false;
     let pageTurnPlayed = false;
-    let typingTimeouts = []; // Track active typing timeouts to prevent conflicts
-    let isTyping = false; // Track if typing animation is currently active
+    let typingTimeouts = []; // Track active typing timeouts to prevent conflicts uwu
+    let isTyping = false;
     
     // timeout system prevents repeats DUH
     let itemTimeouts = {
@@ -226,7 +226,7 @@
 
     // functions DUH
     /**
-     * Clear all active typing timeouts to prevent conflicts my guy
+     * awww yeah clear all active typing timeouts to prevent conflicts my guy
      */
     const clearTypingTimeouts = () => {
       typingTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
@@ -357,8 +357,7 @@
     };
 
     /**
-     * Generates a random "weeeeee" with 4-10 'e's weeeeee
-     * @returns {string} A random weeeeee string weeeeeeee
+     * For ze childs mode, generates a random "weeeeee" with 4-10 'e's weeeeeeeee
      */
     const generateWeeeeee = () => {
       const eCount = Math.floor(Math.random() * 7) + 4; // 4-10 'e's
@@ -366,7 +365,6 @@
     };
 
     /**
-     * Replaces NSFW words with alts if child's mode enabled
      * @param {string} text The text to filter
      * @returns {string} The filtered text
      */
@@ -1368,9 +1366,7 @@
         
         // Set size for shirley temple DUH
         if (isSpecialSmallText) {
-            phraseOutput.style.setProperty('font-size', '20px', 'important');
-            console.log('Special small text detected - setting to 20px');
-            console.log('Computed font size:', window.getComputedStyle(phraseOutput).fontSize);
+            phraseOutput.style.setProperty('font-size', '18px', 'important');
         }
 
         // Mark typing as active DUH
@@ -1708,7 +1704,12 @@
                     stopDeleteAudio();
                     
                     // play bell when phrase complete DUH
-                    playBellSound();
+                    // check if phrase has SEND me a screenshot for kaching sound DUH
+                    if (phrase.includes('SEND me a screenshot')) {
+                        playKachingSound();
+                    } else {
+                        playBellSound();
+                    }
                     
                     // show copy btn & mark inactive DUH
                 copyBtn.classList.remove('opacity-0');
@@ -2271,13 +2272,26 @@
     const typewriterVolume = 0.3; // vol for typewriter sounds DUH
  
     // simple numbered playlist system DUH
-    const totalSongs = 5; // update when adding more songs DUH
-    const playlist = [];
+    const totalSongs = 6; // update when adding more songs DUH
+    const baseSongs = [];
     
-    // generate playlist: 1-5.mp3 etc DUH
+    // generate base song list: 1-5.mp3 etc DUH
     for (let i = 1; i <= totalSongs; i++) {
-      playlist.push(`audio/music/${i}.mp3`);
+      baseSongs.push(`audio/music/${i}.mp3`);
     }
+    
+    // shuffle songs DUH
+    const shuffleArray = (array) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+    
+    let playlist = shuffleArray(baseSongs);
+    let playlistIndex = 0;
     
     /**
      * Init page sounds
@@ -2375,6 +2389,10 @@
       window.bellSound = new Audio('audio/typewriter/bell.mp3');
       window.bellSound.volume = typewriterVolume * 0.7;
       window.bellSound.preload = 'auto';
+      
+      window.kachingSound = new Audio('audio/typewriter/cha-ching.mp3');
+      window.kachingSound.volume = typewriterVolume;
+      window.kachingSound.preload = 'auto';
     };
     
     /**
@@ -2421,7 +2439,20 @@
       });
     };
     
-    let currentSongIndex = 0;
+    /**
+     * Plays the kaching sound
+     */
+    const playKachingSound = () => {
+      if (!window.kachingSound) return;
+      
+      // play kaching sound DUH
+      if (window.kachingSound.currentTime > 0.1) {
+        window.kachingSound.currentTime = 0;
+      }
+      window.kachingSound.play().catch(err => {
+        // ignore audio play errors DUH
+      });
+    };
     
     /**
      * Loads n plays the current song
@@ -2429,7 +2460,7 @@
     // persistent src elem for bg music DUH
     let backgroundMusicSource = null;
     const loadAndPlayCurrentSong = () => {
-      const currentSong = playlist[currentSongIndex];
+      const currentSong = playlist[playlistIndex];
       
       // make sure single persistent <source> DUH
       if (!backgroundMusicSource) {
@@ -2458,7 +2489,7 @@
      * Plays the next song
      */
     const playNextSong = () => {
-      currentSongIndex = (currentSongIndex + 1) % playlist.length;
+      playlistIndex = (playlistIndex + 1) % playlist.length;
       loadAndPlayCurrentSong();
     };
     
