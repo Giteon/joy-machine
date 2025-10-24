@@ -40,13 +40,14 @@ beaver
 bumblebee
 butterfly [effect[ive immediately, .1], .2, *B*]
 capybara
+cat dog
 [[little fucking] hungry fucking] caterpillar
 [alvin and the, .1, *B*] chipmunk
 cockroach
 crab [rangoon, *B*]
 crocodile [dundee, *B*]
 cricket
-[spotted australian, *B*] currasow
+[great spotted australian, *B*] currasow
 [cash, .15, *B*] cow
 [disco, *B*] snail [mail, *B*]
 deer [in headlights, *B*]
@@ -135,6 +136,7 @@ bone orchid [immune from all disease, .25, *F*]
 mozzarella stick
 hinge premium [diahhrea from tube]
 [45°, .2] cock shame
+(chernobyl, .6/chernobyl tampon $100, .2/batman chernobyl tampon $100, .2)
 wikihow
 GROK
 big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
@@ -142,6 +144,8 @@ onion hips
 ripstick
 husband pillow
 pillow princess [and the pauper, .3]
+diazepam [(2/4/6/8)000mg, .2]
+cortisol [face, .2]
 (PREEM/PREEMER)
 price match
 upside down cake
@@ -173,9 +177,11 @@ nutritional yeast [infection, .3]
 gents blend
 tickle monster
 webster's dictionary
+(bechdel, .8/bechamel, .2) test [(PASSED/FAILED) WITH FLYING COLORS, .15, *F*]
 chakras aligned [virginity restored, .2, *F*]
 conk crete [jungle where dreams are made of, .1, *F*]
 omegaverse [omega three fatty acids]
+bruv had a baby had to dump the chip
 land acknowledgement
 GARY ROYCE[! A-BING-A-BAM-A-BOOM! OH!, .2, *F*]
 shiva baby
@@ -200,7 +206,7 @@ dark n grab [primal play, .3]
 peach for dunbar
 barmitzvah
 ted cruz [donde esta la biblioteca, .3, *F*]
-[and my day is ruined i just got catfished by (jimmy carter/dwight d. eisenhower/william howard taft/grover cleveland/john quincy adams/) on, .2, *F*]tinder for presidents
+[and my day is ruined i just got catfished by (jimmy carter/dwight d. eisenhower/william howard taft/grover cleveland/john quincy adams/) on, .3, *F*]tinder for presidents
 license and registration
 powerball [cock and ball torture, .15]
 [DIY, .15] lobotomy
@@ -291,6 +297,7 @@ bees knees
 tick-topia
 post hoc [ergo propter hoc TUAH, *F*]
 privacy policy
+love thy neighbor
 chutes and ladders [russian roulette, .15]
 razzle dazzle
 beanie baby
@@ -464,7 +471,7 @@ hong-kong style
 9 trillion dead [500 trillion injured, .1]
 funko pop[s in freezer, .15]
 color blind
-super-auto
+super-auto [SLOTH, .05, *F*]
 touch-based non-sexual [non-(poly/monog) partnership, *F*]
 ontologically (evil/sexy)
 submissive [breedable, .2]
@@ -504,6 +511,7 @@ game set match [set point [BITCH, .2]]
 once bitten twice shy
 what teh heck?
 hit em with the ol' over under
+baby where the hell's my husband [what's taking him so long]
 i’m well within my rights to KILL you right now
 . you should know, your wife kissed me on the cheek when I got here. Now look at ya, all alone. Everybody’s going to party at my house.
 LEMME THINK ABOUT IT FOR A MINUTE
@@ -579,6 +587,7 @@ DANGER WILL ROBINSON [DANGER, .15]
 TFW knee surgery in 4 days
 leave no trace search history wiped
 why buy the cow when you can have the milk for free [am i right ladiesss]
+alert alert eruv detected remove all clothes immediatley
 in 5-7 business days
 i'm JONESING for it
 polish it off
@@ -626,7 +635,7 @@ don't worry about it AT ALL
 just don't call me late for dinner!
 SPOILER ALERT
 approach the bench?
-money talks wealth whispers.
+money talks, wealth whispers.
 that's all im allowed to say
 [fucking, .3] spin the bottle until you get the result you want
 the tree remembers, the axe forgets.
@@ -636,14 +645,17 @@ pay the piper call the tune [type shit]
 my dogs are barkin[g]
 TAKE ME TO THE RIVER
 every palace is a backdoor
+shoot the loop up the weeeeee and then back down to the rumple(tilstson/konkskin/storkskin)
 (light/medium) ice (0%/30%/70%/100%) sweetness
 everything reminds me of her
-i wake up i drink water la la la
+i wake up i drink water la la la [something different, .2]
 notice how he got the huzz after getting himself a labubu?
 Now YOU have a friend in the diamond business
 NAME OF THE MOVIE [NAME OF THE MOVIE, .15]
+($0/$1/$10/$100/$1000/$9999999999999999) value!
 on my desk YESTERDAY
 AWOOGA
+two truths no lie
 CCTV footage unedited
 green moose guava juice large fries chocolate shake
 300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [brown noise GOD FREQUENCY cure vision [mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
