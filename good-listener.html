@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Good Listener Machine</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Good Listener specific styles */
+        .nav-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #4B5563;
+            transform: scale(1.05);
+        }
+        
+        .dark .nav-button {
+            background: #6B7280;
+            color: #1F2937;
+        }
+        
+        .dark .nav-button:hover {
+            background: #9CA3AF;
+        }
+        
+        .complaint-form {
+            max-width: 700px !important;
+            width: 100% !important;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        
+        .complaint-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #D1D5DB;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: none;
+            max-height: 200px;
+            background: white;
+            color: #374151;
+            overflow-y: auto;
+            box-sizing: border-box;
+            min-height: 0;
+        }
+        
+        .complaint-input::placeholder {
+            color: #9CA3AF;
+            font-style: italic;
+        }
+        
+        .dark .complaint-input {
+            background: #1F2937;
+            border-color: #4B5563;
+            color: #F3F4F6;
+        }
+        
+        .dark .complaint-input::placeholder {
+            color: #6B7280;
+        }
+        
+        .response-area {
+            max-width: 700px !important;
+            width: 100% !important;
+            margin: 10px auto;
+            padding: 0 20px;
+            min-height: 100px;
+        }
+        
+        .response-text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #374151;
+            font-family: 'Rusillaserif-Regular', serif;
+        }
+        
+        .dark .response-text {
+            color: #F3F4F6;
+        }
+        
+        .dark h1 {
+            color: #FFFFFF !important;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: currentColor;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+            vertical-align: baseline;
+        }
+        
+        /* Button container styles */
+        .button-container {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        
+        .control-btn {
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .control-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .control-btn img {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        /* Navigation icon styles */
+        .nav-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer !important;
+            z-index: 1000;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .nav-icon:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Wiggle animation for when music is playing */
+        @keyframes subtle-wiggle {
+            0%, 50% { transform: rotate(6deg); }
+            51%, 100% { transform: rotate(-6deg); }
+        }
+        
+        #mute-btn.playing #mute-icon {
+            animation: subtle-wiggle .932s steps(2, end) infinite;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .complaint-input {
+                font-size: 20px !important;
+                padding: 12px 20px !important;
+            }
+            
+            .response-text {
+                font-size: 20px !important;
+                line-height: 1.5 !important;
+            }
+            
+            .complaint-form {
+                padding: 24px !important;
+                margin: 0 20px !important;
+            }
+            
+            .response-area {
+                padding: 0 24px !important;
+                margin: 5px 20px !important;
+            }
+        }
+        
+        /* Desktop adjustments - push content down slightly */
+        @media (min-width: 769px) {
+            .flex.flex-col.items-center.justify-start {
+                padding-top: 8rem !important; /* More padding than mobile's 4rem (pt-16) */
+            }
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Mute & Dark Mode Buttons (bottom left) -->
+    <div class="button-container">
+        <button id="mute-btn" class="control-btn">
+            <img id="mute-icon" src="images/volume.png" alt="Volume">
+        </button>
+        <button id="dark-mode-btn" class="control-btn">
+            <img id="dark-mode-icon" src="images/moon.png" alt="Dark Mode">
+        </button>
+        <div class="control-btn" onclick="window.location.href='index.html'">
+            <img id="nav-icon-img" src="images/infinity.png" alt="Infinite Joy Machine" style="width: 1.75rem; height: 1.75rem;">
+        </div>
+    </div>
+    
+    <!-- Background Music -->
+    <audio id="background-music" preload="auto"></audio>
+    
+    <div class="flex flex-col items-center justify-start min-h-screen space-y-4 pt-16">
+        <h1 class="text-2xl font-semibold text-gray-900">Good Listener Machine</h1>
+        
+        <!-- Complaint Form -->
+        <div class="complaint-form">
+            <textarea 
+                id="complaint-input" 
+                class="complaint-input" 
+                placeholder="what's wrong, doll?"
+                rows="1"
+            ></textarea>
+        </div>
+        
+        <!-- Response Area -->
+        <div class="response-area">
+            <div id="response-output" class="response-text"></div>
+        </div>
+    </div>
+    
+    <script src="lists.js"></script>
+    <script>
+        // Good Listener Machine Logic
+        let isTyping = false;
+        let typingTimeouts = [];
+        let characterCount = 0;
+        let accumulatedResponse = '';
+        let nextMilestone = 10; // Next milestone to trigger condolence
+        let lastTriggeredMilestone = 0; // Track last milestone that triggered a condolence
+        let typingTimeout = null; // Timeout for 3-second delay
+        let lastChar = ''; // Track last character typed
+        let punctuationTriggered = false; // Track if punctuation already triggered
+        let lastCondolenceTime = 0; // Track when last condolence finished
+        let nonPunctuationCount = 0; // Count non-punctuation chars after any trigger
+        let lastTriggerType = null; // Track what type of trigger caused last condolence ('punctuation' or 'milestone')
+        
+        const complaintInput = document.getElementById('complaint-input');
+        const responseOutput = document.getElementById('response-output');
+        const darkModeBtn = document.getElementById('dark-mode-btn');
+        const darkModeIcon = document.getElementById('dark-mode-icon');
+        const muteBtn = document.getElementById('mute-btn');
+        const muteIcon = document.getElementById('mute-icon');
+        const navIconImg = document.getElementById('nav-icon-img');
+        const backgroundMusic = document.getElementById('background-music');
+        
+        // Config
+        let isDarkMode = false;
+        let isMuted = false;
+        const musicVolume = 0.3;
+        
+        // Typing audio system
+        const typingAudioCache = new Map();
+        let currentWordAudio = null;
+        const soundAlternateState = new Map();
+        
+        // Typo config
+        const TYPO_CONFIG = {
+            typoChance: 0.1,
+            typoCorrectionChance: 0.96
+        };
+        
+        // QWERTY layout for typos
+        const QWERTY_ADJACENT = {
+            'a': ['q', 's', 'z'], 'b': ['v', 'g', 'h', 'n'], 'c': ['x', 'd', 'f', 'v'],
+            'd': ['s', 'e', 'f', 'c', 'x'], 'e': ['w', 'r', 'd', 's'], 'f': ['d', 'r', 'g', 'v', 'c'],
+            'g': ['f', 't', 'h', 'b', 'v'], 'h': ['g', 'y', 'j', 'n', 'b'], 'i': ['u', 'o', 'k', 'j'],
+            'j': ['h', 'u', 'k', 'n', 'm'], 'k': ['j', 'i', 'l', 'm'], 'l': ['k', 'o', 'p'],
+            'm': ['n', 'j', 'k'], 'n': ['b', 'h', 'j', 'm'], 'o': ['i', 'p', 'l', 'k'],
+            'p': ['o', 'l'], 'q': ['w', 'a'], 'r': ['e', 't', 'f', 'd'],
+            's': ['a', 'w', 'd', 'x', 'z'], 't': ['r', 'y', 'g', 'f'], 'u': ['y', 'i', 'j', 'h'],
+            'v': ['c', 'f', 'g', 'b'], 'w': ['q', 'e', 's', 'a'], 'x': ['z', 's', 'd', 'c'],
+            'y': ['t', 'u', 'h', 'g'], 'z': ['a', 's', 'x']
+        };
+        
+        const TYPO_CACHE = new Map();
+        const getTypoChar = (char) => {
+            if (TYPO_CACHE.has(char)) {
+                return TYPO_CACHE.get(char);
+            }
+            const adjacent = QWERTY_ADJACENT[char.toLowerCase()];
+            if (!adjacent || adjacent.length === 0) {
+                TYPO_CACHE.set(char, char);
+                return char;
+            }
+            const randomTypo = adjacent[Math.floor(Math.random() * adjacent.length)];
+            const result = char === char.toUpperCase() ? randomTypo.toUpperCase() : randomTypo;
+            TYPO_CACHE.set(char, result);
+            return result;
+        };
+        
+        // Preload typing sounds
+        const preloadTypingSounds = () => {
+            const soundFiles = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 20, 25];
+            soundFiles.forEach(num => {
+                const audio = new Audio(`audio/typenum/${num}.mp3`);
+                audio.volume = 0.8;
+                audio.preload = 'auto';
+                typingAudioCache.set(num, audio);
+                
+                if (num <= 8) {
+                    const audioAlt = new Audio(`audio/typenum/${num}.1.mp3`);
+                    audioAlt.volume = 0.8;
+                    audioAlt.preload = 'auto';
+                    typingAudioCache.set(`${num}.1`, audioAlt);
+                    soundAlternateState.set(num, false);
+                }
+            });
+        };
+        
+        // Get sound for word length
+        const getSoundForWordLength = (wordLength) => {
+            if (wordLength === 1) return 0;
+            if (wordLength <= 16) return wordLength - 1;
+            if (wordLength <= 20) return 18;
+            if (wordLength <= 25) return 20;
+            return 25;
+        };
+        
+        // Play typing sound for word
+        const playWordTypingSound = (wordLength, hasCapitals = false) => {
+            if (currentWordAudio) {
+                currentWordAudio.pause();
+                currentWordAudio.currentTime = 0;
+                currentWordAudio = null;
+            }
+            
+            const soundNum = getSoundForWordLength(wordLength);
+            let audioKey = soundNum;
+            
+            if (soundNum <= 8) {
+                const useAlternate = soundAlternateState.get(soundNum);
+                if (useAlternate) {
+                    audioKey = `${soundNum}.1`;
+                }
+                soundAlternateState.set(soundNum, !useAlternate);
+            }
+            
+            const audio = typingAudioCache.get(audioKey);
+            if (audio) {
+                if (audio.currentTime > 0.1) {
+                    audio.currentTime = 0;
+                }
+                
+                const originalVolume = audio.volume;
+                if (hasCapitals) {
+                    audio.volume = Math.min(originalVolume * 2, 1.0);
+                }
+                
+                currentWordAudio = audio;
+                audio.play().catch(() => {});
+                
+                if (hasCapitals) {
+                    audio.volume = originalVolume;
+                }
+            }
+        };
+        
+        // Preload sounds on page load
+        preloadTypingSounds();
+        
+        // Item timeout/cooldown system
+        let condolenceTimeouts = new Map(); // item -> timeout count
+        
+        // Add item to timeout with cooldown = list size - 1
+        const addCondolenceToTimeout = (item) => {
+            // CONDOLENCES is at index 7 (after INTRO, BEAST, NOUN, CANDY, ADJECTIVE, FINALE, TAG)
+            const condolences = window.wordLists?.[7] || [];
+            const cooldownDuration = condolences.length > 1 ? condolences.length - 1 : 25;
+            condolenceTimeouts.set(item, cooldownDuration);
+        };
+        
+        // Decrement all timeout counters and remove expired items
+        const decrementCondolenceTimeouts = () => {
+            const itemsToRemove = [];
+            condolenceTimeouts.forEach((count, item) => {
+                const newCount = count - 1;
+                if (newCount <= 0) {
+                    itemsToRemove.push(item);
+                } else {
+                    condolenceTimeouts.set(item, newCount);
+                }
+            });
+            itemsToRemove.forEach(item => condolenceTimeouts.delete(item));
+        };
+        
+        // Get available condolences excluding those on timeout
+        const getAvailableCondolences = () => {
+            // CONDOLENCES is at index 7 (after INTRO, BEAST, NOUN, CANDY, ADJECTIVE, FINALE, TAG)
+            const allCondolences = window.wordLists?.[7] || ['oh that\'s awful!', 'she really said that?', 'that\'s disgusting!'];
+            const availableItems = allCondolences.filter(item => !condolenceTimeouts.has(item));
+            return availableItems.length > 0 ? availableItems : allCondolences;
+        };
+        
+        // Process alternates (content in parentheses with / separators)
+        const processAlternates = (word) => {
+            let result = word;
+            let alternates = [];
+            const alternatesRegex = /\(([^)]*(?:\/[^)]*)+)\)/g;
+            let match;
+            
+            while ((match = alternatesRegex.exec(word)) !== null) {
+                const alternatesContent = match[1];
+                const options = alternatesContent.split('/').map(opt => opt.trim());
+                
+                const hasCustomProbabilities = options.some(opt => opt.includes(',') && /,\s*\d*\.?\d+$/.test(opt));
+                
+                let selectedOption;
+                if (hasCustomProbabilities) {
+                    const weightedOptions = [];
+                    options.forEach(opt => {
+                        const probMatch = opt.match(/^(.+),\s*(\d*\.?\d+)$/);
+                        if (probMatch) {
+                            const content = probMatch[1].trim();
+                            const weight = parseFloat(probMatch[2]);
+                            weightedOptions.push({ content, weight });
+                        } else {
+                            weightedOptions.push({ content: opt, weight: 1 });
+                        }
+                    });
+                    
+                    const totalWeight = weightedOptions.reduce((sum, opt) => sum + opt.weight, 0);
+                    let random = Math.random() * totalWeight;
+                    
+                    for (const opt of weightedOptions) {
+                        random -= opt.weight;
+                        if (random <= 0) {
+                            selectedOption = opt.content;
+                            break;
+                        }
+                    }
+                } else {
+                    const selectedIndex = Math.floor(Math.random() * options.length);
+                    selectedOption = options[selectedIndex];
+                    alternates.push(`alt: ${selectedOption}`);
+                }
+                
+                result = result.replace(match[0], selectedOption);
+            }
+            
+            return { result, alternates };
+        };
+        
+        // Process brackets (add-ons) from innermost to outermost
+        const processBrackets = (word) => {
+            let result = word;
+            let addons = [];
+            
+            let changed = true;
+            while (changed) {
+                changed = false;
+                
+                // Find innermost bracket
+                const innermostBracketRegex = /\[([^\[\]]+)\]/;
+                const bracketMatch = result.match(innermostBracketRegex);
+                
+                if (bracketMatch) {
+                    const bracketContent = bracketMatch[1];
+                    
+                    // Check for custom probability
+                    const probabilityMatch = bracketContent.match(/^(.+),\s*(\d*\.?\d+)$/);
+                    let probability = 0.5;
+                    let contentToProcess = bracketContent;
+                    
+                    if (probabilityMatch) {
+                        contentToProcess = probabilityMatch[1].trim();
+                        probability = parseFloat(probabilityMatch[2]);
+                    }
+                    
+                    const shouldInclude = Math.random() < probability;
+                    
+                    if (shouldInclude) {
+                        let cleanContent = contentToProcess;
+                        // Remove remaining prob info
+                        cleanContent = cleanContent.replace(/,\s*\d*\.?\d+\s*$/, '');
+                        cleanContent = cleanContent.replace(/,\s*\d*\.?\d+\s*,/, ',');
+                        result = result.replace(bracketMatch[0], cleanContent);
+                        addons.push(bracketContent);
+                    } else {
+                        result = result.replace(bracketMatch[0], '');
+                    }
+                    
+                    changed = true;
+                }
+            }
+            
+            return { result: result.replace(/\s+/g, ' ').trim(), addons };
+        };
+        
+        // Get random condolence with bracket/alternate processing
+        const getRandomCondolence = () => {
+            // Get available condolences (excluding those on cooldown)
+            const availableCondolences = getAvailableCondolences();
+            const rawItem = availableCondolences[Math.floor(Math.random() * availableCondolences.length)];
+            
+            // Add to timeout/cooldown
+            addCondolenceToTimeout(rawItem);
+            
+            // Decrement all timeouts
+            decrementCondolenceTimeouts();
+            
+            // First process alternates (parentheses)
+            const { result: afterAlternates } = processAlternates(rawItem);
+            
+            // Then process brackets
+            const { result: finalResult } = processBrackets(afterAlternates);
+            
+            return finalResult;
+        };
+        
+        // Simple echo condolence (50% chance)
+        const getEchoCondolence = (userText) => {
+            if (Math.random() < 0.5) {
+                // Remove unwanted punctuation marks
+                let cleanedText = userText.replace(/[:;<>|{}\\`~^*&@]/g, '');
+                
+                // Transform user text bidirectionally using a systematic approach
+                let transformed = cleanedText.toLowerCase();
+                
+                // Step 1: Replace all words with unique placeholders to avoid double transformations
+                const placeholders = {};
+                let placeholderIndex = 0;
+                
+                // First pass: longest patterns first
+                const patterns = [
+                    ["you are", "__YOUARE__"], ["you were", "__YOUWERE__"], ["you have", "__YOUHAVE__"], ["you had", "__YOUHAD__"],
+                    ["you will", "__YOUWILL__"], ["you can", "__YOUCAN__"], ["you could", "__YOUCOULD__"], ["you should", "__YOUSHOULD__"],
+                    ["you would", "__YOUWOULD__"], ["you do", "__YOUDO__"], ["you did", "__YOUDID__"],
+                    ["you go", "__YOUGO__"], ["you went", "__YOUWENT__"], ["you get", "__YOUGET__"], ["you got", "__YOUGOT__"],
+                    ["you see", "__YOUSEE__"], ["you saw", "__YOUSAW__"], ["you know", "__YOUKNOW__"], ["you knew", "__YOUKNEW__"],
+                    ["you think", "__YOUTHINK__"], ["you thought", "__YOUTHOUGHT__"], ["you feel", "__YOUFEEL__"], ["you felt", "__YOUFELT__"],
+                    ["you want", "__YOUWANT__"], ["you wanted", "__YOUWANTED__"], ["you need", "__YOUNEED__"], ["you needed", "__YOUNEEDED__"],
+                    ["you like", "__YOULIKE__"], ["you liked", "__YOULIKED__"], ["you love", "__YOULOVE__"], ["you loved", "__YOULOVED__"],
+                    ["you hate", "__YOUHATE__"], ["you hated", "__YOUHATED__"], ["you make", "__YOUMAKE__"], ["you made", "__YOUMADE__"],
+                    ["you take", "__YOUTAKE__"], ["you took", "__YOUTOOK__"], ["you say", "__YOUSAY__"], ["you said", "__YOUSAID__"],
+                    ["you come", "__YOUCOME__"], ["you came", "__YOUCAME__"], ["you leave", "__YOULEAVE__"], ["you left", "__YOULEFT__"],
+                    ["you give", "__YOUGIVE__"], ["you gave", "__YOUGAVE__"], ["you tell", "__YOUTELL__"], ["you told", "__YOUTOLD__"],
+                    ["you ask", "__YOUASK__"], ["you asked", "__YOUASKED__"], ["you try", "__YOUTRY__"], ["you tried", "__YOUTRIED__"],
+                    ["you start", "__YOUSTART__"], ["you started", "__YOUSTARTED__"], ["you look", "__YOULOOK__"], ["you looked", "__YOULOOKED__"],
+                    ["you seem", "__YOUSEEM__"], ["you seemed", "__YOUSEEMED__"], ["you become", "__YOUBECOME__"], ["you became", "__YOUBECAME__"],
+                    ["haven't you", "__HAVENTYOU__"], ["don't you", "__DONTYOU__"], ["won't you", "__WONTYOU__"], ["can't you", "__CANTYOU__"],
+                    ["shouldn't you", "__SHOULDNTYOU__"], ["wouldn't you", "__WOULDNTYOU__"], ["couldn't you", "__COULDNTYOU__"],
+                    ["didn't you", "__DIDNTYOU__"], ["weren't you", "__WERENTYOU__"], ["wasn't you", "__WASNTYOU__"],
+                    ["are you", "__AREYOU__"], ["were you", "__WEREYOU__"], ["do you", "__DOYOU__"], ["did you", "__DIDYOU__"],
+                    ["will you", "__WILLYOU__"], ["would you", "__WOULDYOU__"], ["can you", "__CANYOU__"], ["could you", "__COULDYOU__"],
+                    ["should you", "__SHOULDYOU__"], ["have you", "__HAVEYOU__"], ["had you", "__HADYOU__"],
+                    ["havent you", "__HAVENTYOU2__"], ["dont you", "__DONTYOU2__"], ["wont you", "__WONTYOU2__"], ["cant you", "__CANTYOU2__"],
+                    ["shouldnt you", "__SHOULDNTYOU2__"], ["wouldnt you", "__WOULDNTYOU2__"], ["couldnt you", "__COULDNTYOU2__"],
+                    ["didnt you", "__DIDNTYOU2__"], ["werent you", "__WERENTYOU2__"], ["wasnt you", "__WASNTYOU2__"],
+                    ["you're", "__YOURE__"], ["youre", "__YOURE__"], ["you've", "__YOUVE__"], ["youve", "__YOUVE__"], 
+                    ["you'll", "__YOULL__"], ["youll", "__YOULL__"], ["you'd", "__YOUD__"], ["youd", "__YOUD__"],
+                    ["u are", "__UARE__"], ["u were", "__UWERE__"], ["u have", "__UHAVE__"], ["u had", "__UHAD__"],
+                    ["u will", "__UWILL__"], ["u can", "__UCAN__"], ["u could", "__UCOULD__"], ["u should", "__USHOULD__"],
+                    ["u would", "__UWOULD__"], ["u do", "__UDO__"], ["u did", "__UDID__"], ["u go", "__UGO__"],
+                    ["u went", "__UWENT__"], ["u get", "__UGET__"], ["u got", "__UGOT__"], ["u see", "__USEE__"],
+                    ["u saw", "__USAW__"], ["u know", "__UKNOW__"], ["u knew", "__UKNEW__"], ["u think", "__UTHINK__"],
+                    ["u thought", "__UTHOUGHT__"], ["u feel", "__UFEEL__"], ["u felt", "__UFELT__"], ["u want", "__UWANT__"],
+                    ["u wanted", "__UWANTED__"], ["u need", "__UNEED__"], ["u needed", "__UNEEDED__"], ["u like", "__ULIKE__"],
+                    ["u liked", "__ULIKED__"], ["u love", "__ULOVE__"], ["u loved", "__ULOVED__"], ["u hate", "__UHATE__"],
+                    ["u hated", "__UHATED__"], ["u make", "__UMAKE__"], ["u made", "__UMADE__"], ["u take", "__UTAKE__"],
+                    ["u took", "__UTOOK__"], ["u say", "__USAY__"], ["u said", "__USAID__"], ["u come", "__UCOME__"],
+                    ["u came", "__UCAME__"], ["u leave", "__ULEAVE__"], ["u left", "__ULEFT__"], ["u give", "__UGIVE__"],
+                    ["u gave", "__UGAVE__"], ["u tell", "__UTELL__"], ["u told", "__UTOLD__"], ["u ask", "__UASK__"],
+                    ["u asked", "__UASKED__"], ["u try", "__UTRY__"], ["u tried", "__UTRIED__"], ["u start", "__USTART__"],
+                    ["u started", "__USTARTED__"], ["u look", "__ULOOK__"], ["u looked", "__ULOOKED__"], ["u seem", "__USEEM__"],
+                    ["u seemed", "__USEEMED__"], ["u become", "__UBECOME__"], ["u became", "__UBECAME__"],
+                    ["i'm", "__IM__"], ["im", "__IM__"], ["i've", "__IVE__"], ["ive", "__IVE__"], 
+                    ["i'll", "__ILL__"], ["ill", "__ILL__"], ["i'd", "__ID__"], ["id", "__ID__"],
+                    ["we're", "__WERE__"], ["were", "__WERE__"], ["we've", "__WEVE__"], ["weve", "__WEVE__"], 
+                    ["we'll", "__WELL__"], ["well", "__WELL__"], ["we'd", "__WED__"], ["wed", "__WED__"],
+                    ["haven't", "__HAVENT__"], ["havent", "__HAVENT__"], ["don't", "__DONT__"], ["dont", "__DONT__"], 
+                    ["won't", "__WONT__"], ["wont", "__WONT__"], ["can't", "__CANT__"], ["cant", "__CANT__"],
+                    ["shouldn't", "__SHOULDNT__"], ["shouldnt", "__SHOULDNT__"], ["wouldn't", "__WOULDNT__"], ["wouldnt", "__WOULDNT__"],
+                    ["couldn't", "__COULDNT__"], ["couldnt", "__COULDNT__"], ["didn't", "__DIDNT__"], ["didnt", "__DIDNT__"],
+                    ["weren't", "__WERENT__"], ["werent", "__WERENT__"], ["wasn't", "__WASNT__"], ["wasnt", "__WASNT__"],
+                    ["your", "__YOUR__"], ["yours", "__YOURS__"], ["yourself", "__YOURSELF__"],
+                    ["my", "__MY__"], ["mine", "__MINE__"], ["myself", "__MYSELF__"], ["ourselves", "__OURSELVES__"],
+                    ["you", "__YOU__"], ["u", "__U__"], ["i", "__I__"], ["me", "__ME__"], ["we", "__WE__"], ["us", "__US__"]
+                ];
+                
+                // Replace with placeholders
+                for (const [pattern, placeholder] of patterns) {
+                    const regex = new RegExp('\\b' + pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                    transformed = transformed.replace(regex, placeholder);
+                }
+                
+                // Step 2: Replace placeholders with final values
+                const replacements = {
+                    "__YOUARE__": "i am", "__YOUWERE__": "i was", "__YOUHAVE__": "i have", "__YOUHAD__": "i had",
+                    "__YOUWILL__": "i will", "__YOUCAN__": "i can", "__YOUCOULD__": "i could", "__YOUSHOULD__": "i should",
+                    "__YOUWOULD__": "i would", "__YOUDO__": "i do", "__YOUDID__": "i did",
+                    "__YOUGO__": "i go", "__YOUWENT__": "i went", "__YOUGET__": "i get", "__YOUGOT__": "i got",
+                    "__YOUSEE__": "i see", "__YOUSAW__": "i saw", "__YOUKNOW__": "i know", "__YOUKNEW__": "i knew",
+                    "__YOUTHINK__": "i think", "__YOUTHOUGHT__": "i thought", "__YOUFEEL__": "i feel", "__YOUFELT__": "i felt",
+                    "__YOUWANT__": "i want", "__YOUWANTED__": "i wanted", "__YOUNEED__": "i need", "__YOUNEEDED__": "i needed",
+                    "__YOULIKE__": "i like", "__YOULIKED__": "i liked", "__YOULOVE__": "i love", "__YOULOVED__": "i loved",
+                    "__YOUHATE__": "i hate", "__YOUHATED__": "i hated", "__YOUMAKE__": "i make", "__YOUMADE__": "i made",
+                    "__YOUTAKE__": "i take", "__YOUTOOK__": "i took", "__YOUSAY__": "i say", "__YOUSAID__": "i said",
+                    "__YOUCOME__": "i come", "__YOUCAME__": "i came", "__YOULEAVE__": "i leave", "__YOULEFT__": "i left",
+                    "__YOUGIVE__": "i give", "__YOUGAVE__": "i gave", "__YOUTELL__": "i tell", "__YOUTOLD__": "i told",
+                    "__YOUASK__": "i ask", "__YOUASKED__": "i asked", "__YOUTRY__": "i try", "__YOUTRIED__": "i tried",
+                    "__YOUSTART__": "i start", "__YOUSTARTED__": "i started", "__YOULOOK__": "i look", "__YOULOOKED__": "i looked",
+                    "__YOUSEEM__": "i seem", "__YOUSEEMED__": "i seemed", "__YOUBECOME__": "i become", "__YOUBECAME__": "i became",
+                    "__HAVENTYOU__": "haven't i", "__DONTYOU__": "don't i", "__WONTYOU__": "won't i", "__CANTYOU__": "can't i",
+                    "__SHOULDNTYOU__": "shouldn't i", "__WOULDNTYOU__": "wouldn't i", "__COULDNTYOU__": "couldn't i",
+                    "__DIDNTYOU__": "didn't i", "__WERENTYOU__": "weren't i", "__WASNTYOU__": "wasn't i",
+                    "__AREYOU__": "am i", "__WEREYOU__": "was i", "__DOYOU__": "do i", "__DIDYOU__": "did i",
+                    "__WILLYOU__": "will i", "__WOULDYOU__": "would i", "__CANYOU__": "can i", "__COULDYOU__": "could i",
+                    "__SHOULDYOU__": "should i", "__HAVEYOU__": "have i", "__HADYOU__": "had i",
+                    "__HAVENTYOU2__": "havent i", "__DONTYOU2__": "dont i", "__WONTYOU2__": "wont i", "__CANTYOU2__": "cant i",
+                    "__SHOULDNTYOU2__": "shouldnt i", "__WOULDNTYOU2__": "wouldnt i", "__COULDNTYOU2__": "couldnt i",
+                    "__DIDNTYOU2__": "didnt i", "__WERENTYOU2__": "werent i", "__WASNTYOU2__": "wasnt i",
+                    "__YOURE__": "i'm", "__YOUVE__": "i've", "__YOULL__": "i'll", "__YOUD__": "i'd",
+                    "__UARE__": "i am", "__UWERE__": "i was", "__UHAVE__": "i have", "__UHAD__": "i had",
+                    "__UWILL__": "i will", "__UCAN__": "i can", "__UCOULD__": "i could", "__USHOULD__": "i should",
+                    "__UWOULD__": "i would", "__UDO__": "i do", "__UDID__": "i did", "__UGO__": "i go",
+                    "__UWENT__": "i went", "__UGET__": "i get", "__UGOT__": "i got", "__USEE__": "i see",
+                    "__USAW__": "i saw", "__UKNOW__": "i know", "__UKNEW__": "i knew", "__UTHINK__": "i think",
+                    "__UTHOUGHT__": "i thought", "__UFEEL__": "i feel", "__UFELT__": "i felt", "__UWANT__": "i want",
+                    "__UWANTED__": "i wanted", "__UNEED__": "i need", "__UNEEDED__": "i needed", "__ULIKE__": "i like",
+                    "__ULIKED__": "i liked", "__ULOVE__": "i love", "__ULOVED__": "i loved", "__UHATE__": "i hate",
+                    "__UHATED__": "i hated", "__UMAKE__": "i make", "__UMADE__": "i made", "__UTAKE__": "i take",
+                    "__UTOOK__": "i took", "__USAY__": "i say", "__USAID__": "i said", "__UCOME__": "i come",
+                    "__UCAME__": "i came", "__ULEAVE__": "i leave", "__ULEFT__": "i left", "__UGIVE__": "i give",
+                    "__UGAVE__": "i gave", "__UTELL__": "i tell", "__UTOLD__": "i told", "__UASK__": "i ask",
+                    "__UASKED__": "i asked", "__UTRY__": "i try", "__UTRIED__": "i tried", "__USTART__": "i start",
+                    "__USTARTED__": "i started", "__ULOOK__": "i look", "__ULOOKED__": "i looked", "__USEEM__": "i seem",
+                    "__USEEMED__": "i seemed", "__UBECOME__": "i become", "__UBECAME__": "i became",
+                    "__IM__": "you're", "__IVE__": "you've", "__ILL__": "you'll", "__ID__": "you'd",
+                    "__WERE__": "you're", "__WEVE__": "you've", "__WELL__": "you'll", "__WED__": "you'd",
+                    "__HAVENT__": "haven't", "__DONT__": "don't", "__WONT__": "won't", "__CANT__": "can't",
+                    "__SHOULDNT__": "shouldn't", "__WOULDNT__": "wouldn't", "__COULDNT__": "couldn't", "__DIDNT__": "didn't",
+                    "__WERENT__": "weren't", "__WASNT__": "wasn't",
+                    "__YOUR__": "my", "__YOURS__": "mine", "__YOURSELF__": "myself",
+                    "__MY__": "your", "__MINE__": "yours", "__MYSELF__": "yourself", "__OURSELVES__": "yourself",
+                    "__YOU__": "me", "__U__": "me", "__I__": "you", "__ME__": "you", "__WE__": "you", "__US__": "you"
+                };
+                
+                for (const [placeholder, replacement] of Object.entries(replacements)) {
+                    transformed = transformed.replace(new RegExp(placeholder, 'g'), replacement);
+                }
+                
+                // Step 3: Fix "me" at start of sentence to "i"
+                transformed = transformed.replace(/^me\b/i, 'i');
+                transformed = transformed.replace(/([.!?]\s+)me\b/gi, '$1i');
+                
+                return transformed + '? ' + getRandomCondolence();
+            }
+            return getRandomCondolence();
+        };
+        
+        // Add new condolence to the stream with typos and typing audio
+        const addCondolenceToStream = (newText) => {
+            if (isTyping) return;
+            
+            isTyping = true;
+            accumulatedResponse += newText;
+            responseOutput.style.display = 'block';
+            
+            // Clear any existing typing timeouts
+            typingTimeouts.forEach(timeout => clearTimeout(timeout));
+            typingTimeouts = [];
+            
+            // Get the current displayed text (without cursor)
+            const currentDisplayed = responseOutput.innerHTML.replace(/<span class="typing-cursor"><\/span>$/, '');
+            const startIndex = currentDisplayed.length;
+            
+            // Split newText into words
+            const words = newText.split(' ');
+            let wordIndex = 0;
+            let currentWord = '';
+            let displayedText = currentDisplayed;
+            let hasActiveTypo = false;
+            let pendingCorrections = [];
+            
+            const typeNextWord = () => {
+                if (wordIndex >= words.length) {
+                    // All words typed
+                    responseOutput.innerHTML = accumulatedResponse + '<span class="typing-cursor"></span>';
+                    isTyping = false;
+                    lastCondolenceTime = Date.now();
+                    nonPunctuationCount = 0;
+                    return;
+                }
+                
+                const word = words[wordIndex];
+                const isLastWord = wordIndex === words.length - 1;
+                let charIndex = 0;
+                let wordWithTypo = '';
+                let correctWord = word;
+                let typoPosition = -1;
+                
+                // Check if should make typo
+                const shouldMakeTypo = !hasActiveTypo && 
+                                     Math.random() < TYPO_CONFIG.typoChance && 
+                                     word.length > 2 &&
+                                     !isLastWord;
+                
+                const typeNextChar = () => {
+                    if (charIndex < word.length) {
+                        let char = word[charIndex];
+                        
+                        // Apply typo if needed
+                        if (shouldMakeTypo && typoPosition === -1 && charIndex > 0 && charIndex < word.length - 1) {
+                            char = getTypoChar(char);
+                            typoPosition = charIndex;
+                            hasActiveTypo = true;
+                        }
+                        
+                        wordWithTypo += char;
+                        displayedText += char;
+                        responseOutput.innerHTML = displayedText + '<span class="typing-cursor"></span>';
+                        charIndex++;
+                        
+                        typingTimeouts.push(setTimeout(typeNextChar, 50 + Math.random() * 100));
+                    } else {
+                        // Word complete
+                        const hasCapitals = /[A-Z]/.test(word);
+                        playWordTypingSound(word.length, hasCapitals);
+                        
+                        // Check if need to correct typo
+                        if (hasActiveTypo && typoPosition !== -1) {
+                            const shouldCorrect = Math.random() < TYPO_CONFIG.typoCorrectionChance;
+                            
+                            if (shouldCorrect) {
+                                // Delete typo chars letter by letter, then retype
+                                typingTimeouts.push(setTimeout(() => {
+                                    const charsToDelete = word.length - typoPosition;
+                                    let deleteIndex = 0;
+                                    
+                                    const deleteNextChar = () => {
+                                        if (deleteIndex < charsToDelete) {
+                                            displayedText = displayedText.slice(0, -1);
+                                            responseOutput.innerHTML = displayedText + '<span class="typing-cursor"></span>';
+                                            deleteIndex++;
+                                            typingTimeouts.push(setTimeout(deleteNextChar, 30 + Math.random() * 20));
+                                        } else {
+                                            // Now retype from typo position
+                                            let retypeIndex = typoPosition;
+                                            const retypeChar = () => {
+                                                if (retypeIndex < word.length) {
+                                                    displayedText += word[retypeIndex];
+                                                    responseOutput.innerHTML = displayedText + '<span class="typing-cursor"></span>';
+                                                    retypeIndex++;
+                                                    typingTimeouts.push(setTimeout(retypeChar, 50 + Math.random() * 100));
+                                                } else {
+                                                    hasActiveTypo = false;
+                                                    // Add space and continue to next word
+                                                    if (wordIndex < words.length - 1) {
+                                                        displayedText += ' ';
+                                                    }
+                                                    wordIndex++;
+                                                    typingTimeouts.push(setTimeout(typeNextWord, 100));
+                                                }
+                                            };
+                                            retypeChar();
+                                        }
+                                    };
+                                    
+                                    deleteNextChar();
+                                }, 200));
+                                return;
+                            }
+                        }
+                        
+                        hasActiveTypo = false;
+                        
+                        // Add space and move to next word
+                        if (wordIndex < words.length - 1) {
+                            displayedText += ' ';
+                        }
+                        wordIndex++;
+                        typingTimeouts.push(setTimeout(typeNextWord, 100));
+                    }
+                };
+                
+                typeNextChar();
+            };
+            
+            typeNextWord();
+        };
+        
+        // Check for random character milestones and trigger condolences after 3-second pause
+        const checkCharacterMilestone = () => {
+            const currentLength = complaintInput.value.length;
+            const currentText = complaintInput.value;
+            const currentChar = currentText[currentText.length - 1];
+            const currentTime = Date.now();
+            
+            // Clear any existing timeout
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+            }
+            
+            // Rule 1: No condolence within 3 seconds of another finishing (only for milestone triggers)
+            const timeSinceLastCondolence = currentTime - lastCondolenceTime;
+            if (timeSinceLastCondolence < 3000 && lastTriggerType === 'milestone') {
+                return; // Skip milestone triggers if too soon after milestone condolence
+            }
+            
+            // Count non-punctuation characters after any condolence
+            if (currentChar && /[a-zA-Z\s]/.test(currentChar)) {
+                nonPunctuationCount++;
+            } else if (currentChar && /[.!?]/.test(currentChar)) {
+                // Don't reset counter on punctuation - let it accumulate
+            }
+            
+            // Check for punctuation triggers
+            if ((currentChar === '.' || currentChar === '?' || currentChar === '!') && currentChar !== lastChar && !punctuationTriggered) {
+                punctuationTriggered = true;
+                 // Set timeout to trigger condolence after short delay (0.1-0.5 seconds)
+                 const shortDelay = 100 + Math.random() * 400; // 100-500ms
+                 typingTimeout = setTimeout(() => {
+                     // Get the last sentence before the punctuation mark
+                     const sentences = currentText.split(/[.!?]+/);
+                     // Get second-to-last element (the sentence before the punctuation)
+                     const lastSentence = sentences.length > 1 ? sentences[sentences.length - 2].trim() : sentences[0].trim();
+                     
+                     if (lastSentence) {
+                         const condolence = getEchoCondolence(lastSentence);
+                         addCondolenceToStream(condolence + ' ');
+                     }
+                     
+                     // Reset punctuation trigger for next time
+                     punctuationTriggered = false;
+                     lastTriggerType = 'punctuation';
+                 }, shortDelay);
+                 
+                 // Don't check milestone triggers if punctuation triggered
+                 characterCount = currentLength;
+                 lastChar = currentChar;
+                 return;
+            }
+            // Reset punctuation trigger if user types non-punctuation
+            else if (currentChar !== '.' && currentChar !== '?' && currentChar !== '!') {
+                punctuationTriggered = false;
+            }
+            
+            // Check for character milestone triggers
+            if (currentLength >= nextMilestone && nextMilestone > lastTriggeredMilestone) {
+                // Rule: Need 5+ non-punctuation chars after any previous condolence (only if there was a recent condolence)
+                if (lastCondolenceTime > 0 && nonPunctuationCount < 5) {
+                    return; // Skip milestone trigger if not enough non-punctuation chars after recent condolence
+                }
+                
+                // Set timeout to trigger condolence after 3 seconds of no typing
+                typingTimeout = setTimeout(() => {
+                    // Double-check we haven't already triggered for this milestone
+                    if (nextMilestone > lastTriggeredMilestone) {
+                        const condolence = getRandomCondolence();
+                        addCondolenceToStream(condolence + ' ');
+                        
+                        // Update tracking variables
+                        lastTriggeredMilestone = nextMilestone;
+                        lastTriggerType = 'milestone';
+                        
+                        // Set next random milestone between 10-30 characters ahead
+                        nextMilestone = currentLength + Math.floor(Math.random() * 21) + 10;
+                    }
+                }, 3000);
+            }
+            
+            characterCount = currentLength;
+            lastChar = currentChar;
+        };
+        
+        // Auto-expand textarea as user types
+        const autoExpandTextarea = () => {
+            // Reset to auto height (let browser determine single line height)
+            complaintInput.style.height = 'auto';
+            
+            // Check if content actually overflows
+            if (complaintInput.scrollHeight > complaintInput.clientHeight) {
+                complaintInput.style.height = complaintInput.scrollHeight + 'px';
+            }
+        };
+        
+        // Force cursor to end of text
+        const forceCursorToEnd = () => {
+            const length = complaintInput.value.length;
+            complaintInput.setSelectionRange(length, length);
+        };
+        
+        // Add input listener to complaint field
+        complaintInput.addEventListener('input', (e) => {
+            checkCharacterMilestone();
+            autoExpandTextarea();
+        });
+        
+        // Force cursor to end on click, focus, and selection change
+        complaintInput.addEventListener('click', forceCursorToEnd);
+        complaintInput.addEventListener('focus', forceCursorToEnd);
+        complaintInput.addEventListener('keyup', forceCursorToEnd);
+        complaintInput.addEventListener('mouseup', forceCursorToEnd);
+        
+        // Reset function for new sessions
+        const resetSession = () => {
+            accumulatedResponse = '';
+            characterCount = 0;
+            nextMilestone = 10;
+            lastTriggeredMilestone = 0;
+            lastChar = '';
+            punctuationTriggered = false;
+            lastCondolenceTime = 0;
+            nonPunctuationCount = 0;
+            lastTriggerType = null;
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                typingTimeout = null;
+            }
+            responseOutput.innerHTML = '';
+        };
+        
+        
+        // Dark mode toggle
+        const toggleDarkMode = () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                document.body.classList.add('dark');
+                darkModeIcon.src = 'images/sun.png';
+                darkModeIcon.alt = 'Light Mode';
+                muteIcon.src = isMuted ? 'images/mute-dark.png' : 'images/volume-dark.png';
+                navIconImg.src = 'images/infinity-dark.png';
+            } else {
+                document.body.classList.remove('dark');
+                darkModeIcon.src = 'images/moon.png';
+                darkModeIcon.alt = 'Dark Mode';
+                muteIcon.src = isMuted ? 'images/mute.png' : 'images/volume.png';
+                navIconImg.src = 'images/infinity.png';
+            }
+        };
+        
+        // Mute toggle
+        const toggleMute = () => {
+            isMuted = !isMuted;
+            if (isMuted) {
+                backgroundMusic.volume = 0;
+                muteIcon.src = isDarkMode ? 'images/mute-dark.png' : 'images/mute.png';
+                muteIcon.style.opacity = '0.3';
+            } else {
+                backgroundMusic.volume = musicVolume;
+                muteIcon.src = isDarkMode ? 'images/volume-dark.png' : 'images/volume.png';
+                muteIcon.style.opacity = '1';
+            }
+        };
+        
+        // Background music setup
+        const totalSongs = 6;
+        const baseSongs = [];
+        for (let i = 1; i <= totalSongs; i++) {
+            baseSongs.push(`audio/music/${i}.mp3`);
+        }
+        
+        // Shuffle songs (Fisher-Yates)
+        const shuffleArray = (array) => {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        };
+        
+        let playlist = shuffleArray(baseSongs);
+        let playlistIndex = 0;
+        
+        const loadAndPlayCurrentSong = () => {
+            const currentSong = playlist[playlistIndex];
+            backgroundMusic.src = currentSong;
+            backgroundMusic.load();
+            
+            // Boost volume for song 6
+            if (currentSong.includes('6.mp3')) {
+                backgroundMusic.volume = musicVolume * 2.5;
+            } else {
+                backgroundMusic.volume = musicVolume;
+            }
+            
+            return backgroundMusic.play().catch(() => {});
+        };
+        
+        const playNextSong = () => {
+            playlistIndex = (playlistIndex + 1) % playlist.length;
+            loadAndPlayCurrentSong();
+        };
+        
+        backgroundMusic.addEventListener('ended', playNextSong);
+        
+        // Add playing state management for wiggle animation
+        backgroundMusic.addEventListener('play', () => {
+            muteBtn.classList.add('playing');
+        });
+        
+        backgroundMusic.addEventListener('pause', () => {
+            muteBtn.classList.remove('playing');
+        });
+        
+        // Initialize music on first user interaction
+        const initializeAudio = () => {
+            const startMusic = () => {
+                loadAndPlayCurrentSong();
+                document.removeEventListener('click', startMusic);
+                document.removeEventListener('keydown', startMusic);
+            };
+            document.addEventListener('click', startMusic);
+            document.addEventListener('keydown', startMusic);
+        };
+        
+        // Event listeners
+        darkModeBtn.addEventListener('click', toggleDarkMode);
+        muteBtn.addEventListener('click', toggleMute);
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Only trigger if not typing in the complaint input
+            if (document.activeElement !== complaintInput) {
+                if (e.key === 'm' || e.key === 'M') {
+                    e.preventDefault();
+                    toggleMute();
+                } else if (e.key === 'd' || e.key === 'D') {
+                    e.preventDefault();
+                    toggleDarkMode();
+                }
+            }
+        });
+        
+        // Initialize
+        initializeAudio();
+    </script>
+</body>
+</html>

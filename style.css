@@ -122,6 +122,25 @@ label[for="childs-mode-toggle"] {
   }
 }
 
+/* Navigation Button */
+.nav-icon {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  font-size: 2rem !important;
+  cursor: pointer !important;
+  z-index: 1000 !important;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+
+.nav-icon:hover {
+  transform: scale(1.05);
+}
+
+
+
 /* Prevent all scrolling on all elements */
 html {
   overflow: hidden;

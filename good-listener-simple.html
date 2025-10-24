@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Good Listener Machine - Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .complaint-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            min-height: 50px;
+            resize: none;
+        }
+        
+        .response-area {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            min-height: 100px;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: currentColor;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>GOOD LISTENER MACHINE - SIMPLE</h1>
+    
+    <textarea 
+        id="complaint-input" 
+        class="complaint-input" 
+        placeholder="what's wrong, doll?"
+    ></textarea>
+    
+    <div class="response-area">
+        <div id="response-output"></div>
+    </div>
+    
+    <script>
+        const complaintInput = document.getElementById('complaint-input');
+        const responseOutput = document.getElementById('response-output');
+        
+        let accumulatedResponse = '';
+        let isTyping = false;
+        let typingTimeouts = [];
+        let lastChar = '';
+        
+        const condolences = [
+            'oh that\'s awful!', 
+            'she really said that?', 
+            'that\'s disgusting!', 
+            'that\'s so sad!', 
+            'hmmmmmmmmmmmm', 
+            'no way!', 
+            'wow!', 
+            'that\'s just NOT OK!'
+        ];
+        
+        function getRandomCondolence() {
+            return condolences[Math.floor(Math.random() * condolences.length)];
+        }
+        
+        function transformUserText(text) {
+            let transformed = text.toLowerCase();
+            
+            // First person to second person
+            transformed = transformed.replace(/\bi\b/g, 'you');
+            transformed = transformed.replace(/\bme\b/g, 'you');
+            transformed = transformed.replace(/\bwe\b/g, 'you');
+            transformed = transformed.replace(/\bus\b/g, 'you');
+            transformed = transformed.replace(/\bmy\b/g, 'your');
+            transformed = transformed.replace(/\bour\b/g, 'your');
+            transformed = transformed.replace(/\bmine\b/g, 'yours');
+            transformed = transformed.replace(/\bours\b/g, 'yours');
+            transformed = transformed.replace(/\bmyself\b/g, 'yourself');
+            transformed = transformed.replace(/\bourselves\b/g, 'yourself');
+            transformed = transformed.replace(/\bi'm\b/g, 'you\'re');
+            transformed = transformed.replace(/\bim\b/g, 'you\'re');
+            transformed = transformed.replace(/\bi've\b/g, 'you\'ve');
+            transformed = transformed.replace(/\bive\b/g, 'you\'ve');
+            transformed = transformed.replace(/\bi'll\b/g, 'you\'ll');
+            transformed = transformed.replace(/\bill\b/g, 'you\'ll');
+            
+            // Second person to first person with smart grammar
+            transformed = transformed.replace(/\byou are\b/g, 'i am');
+            transformed = transformed.replace(/\byou were\b/g, 'i was');
+            transformed = transformed.replace(/\byou have\b/g, 'i have');
+            transformed = transformed.replace(/\byou had\b/g, 'i had');
+            transformed = transformed.replace(/\byou will\b/g, 'i will');
+            transformed = transformed.replace(/\byou can\b/g, 'i can');
+            transformed = transformed.replace(/\byou could\b/g, 'i could');
+            transformed = transformed.replace(/\byou should\b/g, 'i should');
+            transformed = transformed.replace(/\byou would\b/g, 'i would');
+            transformed = transformed.replace(/\byou do\b/g, 'i do');
+            transformed = transformed.replace(/\byou did\b/g, 'i did');
+            
+            // Handle contractions
+            transformed = transformed.replace(/\byou're\b/g, 'i\'m');
+            transformed = transformed.replace(/\byou\'re\b/g, 'i\'m');
+            transformed = transformed.replace(/\byou've\b/g, 'i\'ve');
+            transformed = transformed.replace(/\byou\'ve\b/g, 'i\'ve');
+            transformed = transformed.replace(/\byou'll\b/g, 'i\'ll');
+            transformed = transformed.replace(/\byou\'ll\b/g, 'i\'ll');
+            transformed = transformed.replace(/\byou'd\b/g, 'i\'d');
+            transformed = transformed.replace(/\byou\'d\b/g, 'i\'d');
+            
+            // Handle remaining "you" - subject vs object
+            if (transformed.match(/^(you\b|and you\b|but you\b|or you\b)/)) {
+                transformed = transformed.replace(/^(you\b|and you\b|but you\b|or you\b)/, (match) => match.replace('you', 'i'));
+            } else {
+                transformed = transformed.replace(/\byou\b/g, 'me');
+            }
+            
+            // Handle possessives
+            transformed = transformed.replace(/\byour\b/g, 'my');
+            transformed = transformed.replace(/\byours\b/g, 'mine');
+            transformed = transformed.replace(/\byourself\b/g, 'myself');
+            
+            return transformed;
+        }
+        
+        function getEchoCondolence(userText) {
+            if (Math.random() < 0.5) {
+                const transformed = transformUserText(userText);
+                return transformed + '? ' + getRandomCondolence();
+            }
+            return getRandomCondolence();
+        }
+        
+        function addCondolenceToStream(newText) {
+            if (isTyping) return;
+            
+            isTyping = true;
+            accumulatedResponse += newText;
+            
+            // Clear any existing typing timeouts
+            typingTimeouts.forEach(timeout => clearTimeout(timeout));
+            typingTimeouts = [];
+            
+            let index = 0;
+            const typeNextChar = () => {
+                if (index < accumulatedResponse.length) {
+                    responseOutput.innerHTML = accumulatedResponse.substring(0, index + 1) + '<span class="typing-cursor"></span>';
+                    index++;
+                    typingTimeouts.push(setTimeout(typeNextChar, 50 + Math.random() * 100));
+                } else {
+                    // Typing complete - keep cursor visible
+                    responseOutput.innerHTML = accumulatedResponse + '<span class="typing-cursor"></span>';
+                    isTyping = false;
+                }
+            };
+            
+            typeNextChar();
+        }
+        
+        function checkPunctuation() {
+            const currentText = complaintInput.value;
+            const currentChar = currentText[currentText.length - 1];
+            
+            // Check for punctuation triggers
+            if ((currentChar === '.' || currentChar === '?' || currentChar === '!') && currentChar !== lastChar) {
+                // Get the last sentence before the punctuation mark
+                const sentences = currentText.split(/[.!?]+/);
+                const lastSentence = sentences[sentences.length - 1].trim();
+                
+                if (lastSentence) {
+                    const condolence = getEchoCondolence(lastSentence);
+                    addCondolenceToStream(condolence + ' ');
+                }
+            }
+            
+            lastChar = currentChar;
+        }
+        
+        // Add input listener
+        complaintInput.addEventListener('input', checkPunctuation);
+    </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 // Word lists for the Pure and Infinite Joy Machine
+
 const listsText = `INTRO (I)
 fucking
 fucking [alegra] chicken
@@ -741,7 +742,53 @@ SEND [me a screenshot of this and i'll give you... A MYSERY GIFT, .05]
 SEND [me a screenshot of this and i'll venmo you... ($1!, .8/$10!, .18/$100!, .02), .05]
 ha ha
 lol
-ha ha [ha, .1]`;
+ha ha [ha, .1]
+
+CONDOLENCES (A)
+I'm actively listening.
+I'm all ears.
+Oh that's awful!
+She really said that?
+That's disgusting! [:P]
+That's so sad!
+Hmmm[mmm]
+No way! [:O]
+Wow!
+That's just NOT okay!
+Tell me more[, chica].
+Wow, this world is twisted[, huh].
+That's LITERALLY crazy.
+That's just not fair. [:(]
+I'm sorry[, chica.]
+I'm so sorry[, doll].
+PLEASE tell me you're (joking/kidding).
+REALLY? [REALLY? [REALLY?]]
+Damn[nn] [:/]
+Bruv...
+The world is against you.
+Riiiight.
+[And] then what?
+That makes me sick.
+Take the day off.
+Go on[nn].
+No...
+You CAN'T be serious...
+Let it all out[, chica].
+Where does it end?
+Oh, behave!
+Where do some people get off?
+Can you catch a break?
+You need a vacation[, babes].
+Come ON!
+(Again??/Not again!)
+I'm gutted...
+I'm here for you[, chica].
+I'm listening[gg]...
+That's (BONKERS/NUTS/MAD BRUV/BOLLUCKS/BALONEY)!
+Can you elaborate on that[, doll]?
+And did she say what she meant by that?
+When it rains it pours, i guess. [:/]
+You don't deserve that[, babes].`;
 
 
 // Parse the text into arrays

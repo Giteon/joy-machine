@@ -17,6 +17,7 @@
     Your browser does not support the audio element.
   </audio>
   
+  
   <div class="flex flex-col items-center justify-start min-h-screen space-y-6 pt-16">
     <!-- Header -->
     <h1 class="text-2xl font-semibold text-gray-900">Pure and Infinite Joy Machine</h1>
@@ -53,6 +54,11 @@
     <button id="dark-mode-btn" class="w-8 h-8 flex items-center justify-center">
       <img id="dark-mode-icon" src="images/moon.png" alt="Dark Mode" class="w-6 h-6 transition-all duration-300">
     </button>
+    
+    <!-- Navigation Icon -->
+    <div class="nav-icon w-8 h-8 flex items-center justify-center" onclick="window.location.href='good-listener.html'">
+      <img id="nav-icon-img" src="images/ear.png" alt="Good Listener Machine" class="w-6 h-6 transition-all duration-300">
+    </div>
   </div>
 
   <!-- child's mode Toggle -->
@@ -87,6 +93,7 @@
       musicVolume: 0.08,
       tagChance: 0.3,
       darkMode: false,
+      showEar: false,
       noConsole: false,
       testMode: false,
       typingSpeedMultiplier: .8,
@@ -1282,11 +1289,12 @@
      const toggleDarkMode = () => {
        CONFIG.darkMode = !CONFIG.darkMode;
        
-       if (CONFIG.darkMode) {
-         // Enable dark mode DUH
-         document.body.classList.add('dark');
-         darkModeIcon.src = 'images/sun.png';
-         darkModeIcon.alt = 'Light Mode';
+      if (CONFIG.darkMode) {
+        // Enable dark mode DUH
+        document.body.classList.add('dark');
+        darkModeIcon.src = 'images/sun.png';
+        darkModeIcon.alt = 'Light Mode';
+        navIconImg.src = 'images/ear-dark.png';
          
          // Switch to dark vol icons DUH
          if (backgroundMusic.muted) {
@@ -1294,11 +1302,12 @@
          } else {
            muteIcon.src = 'images/volume-dark.png';
          }
-       } else {
-         // Disable dark mode DUH
-         document.body.classList.remove('dark');
-         darkModeIcon.src = 'images/moon.png';
-         darkModeIcon.alt = 'Dark Mode';
+      } else {
+        // Disable dark mode DUH
+        document.body.classList.remove('dark');
+        darkModeIcon.src = 'images/moon.png';
+        darkModeIcon.alt = 'Dark Mode';
+        navIconImg.src = 'images/ear.png';
          
          // Switch to light vol icons DUH
          if (backgroundMusic.muted) {
@@ -2018,9 +2027,18 @@
     // dark mode btn func DUH
     const darkModeBtn = document.getElementById('dark-mode-btn');
     const darkModeIcon = document.getElementById('dark-mode-icon');
+    const navIconImg = document.getElementById('nav-icon-img');
     const body = document.body;
     
     darkModeBtn.addEventListener('click', toggleDarkMode);
+    
+    // Show/hide nav icon based on config
+    if (!CONFIG.showEar) {
+      const navIcon = document.querySelector('.nav-icon');
+      if (navIcon) {
+        navIcon.style.display = 'none';
+      }
+    }
     
     // func to update playing state DUH
     function updatePlayingState() {
@@ -2128,6 +2146,7 @@
     const childsModeMusic = new Audio('audio/music/swoon.mp3');
     let mainMusicPosition = 0; // Track position of main music when paused
     let childsMusicPosition = 0; // Track position of child's mode music when paused
+    
     
     // new word-length typing audio system DUH
     const typingAudioCache = new Map(); // Cache for audio files
