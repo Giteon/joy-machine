@@ -305,8 +305,10 @@ pictochat
 cottage core
 snap crackle [pop[corn lung, .2]]
 humpty dumpty
+little league [season cancelled due to rampant hand foot mouth disease , .1, *F*]
 chugga chugga [chopped cheese, .2]
 bubble butt [bazonga]
+strawberry shortcake
 cotton candy
 cocomelon
 breakfast in bed
