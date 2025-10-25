@@ -766,9 +766,15 @@ REALLY? [REALLY? [REALLY?]]
 Damn[nn] [:/]
 Bruv...
 The world is against you.
+Poor baby.
+That can't be legal!
+You're right and everyone else is wrong.
 Riiiight.
 [And] then what?
+That's the last straw, chica.
+I wish there was something I could do.
 That makes me sick.
+You mean so much to me.
 Take the day off.
 Go on[nn].
 No...

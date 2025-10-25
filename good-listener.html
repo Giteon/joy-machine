@@ -135,11 +135,19 @@
             transform: scale(1.05);
         }
         
-        .control-btn img {
-            width: 1.5rem;
-            height: 1.5rem;
-            transition: all 0.3s;
-        }
+       .control-btn img {
+           width: 1.5rem;
+           height: 1.5rem;
+           transition: all 0.3s;
+       }
+       
+       /* Clear button container */
+       .clear-button-container {
+           position: fixed;
+           bottom: 1rem;
+           right: 1rem;
+           z-index: 10;
+       }
         
         /* Navigation icon styles */
         .nav-icon {
@@ -271,6 +279,8 @@
         const muteIcon = document.getElementById('mute-icon');
         const navIconImg = document.getElementById('nav-icon-img');
         const backgroundMusic = document.getElementById('background-music');
+        const clearBtn = document.getElementById('clear-btn');
+        const clearIcon = document.getElementById('clear-icon');
         
         // Config
         let isDarkMode = false;
@@ -902,7 +912,7 @@
                         // Set next random milestone between 10-30 characters ahead
                         nextMilestone = currentLength + Math.floor(Math.random() * 21) + 10;
                     }
-                }, 3000);
+                }, 2000 + Math.random() * 3000); // Random between 2-5 seconds
             }
             
             characterCount = currentLength;
@@ -966,12 +976,14 @@
                 darkModeIcon.alt = 'Light Mode';
                 muteIcon.src = isMuted ? 'images/mute-dark.png' : 'images/volume-dark.png';
                 navIconImg.src = 'images/infinity-dark.png';
+                clearIcon.src = 'images/trash-dark.png';
             } else {
                 document.body.classList.remove('dark');
                 darkModeIcon.src = 'images/moon.png';
                 darkModeIcon.alt = 'Dark Mode';
                 muteIcon.src = isMuted ? 'images/mute.png' : 'images/volume.png';
                 navIconImg.src = 'images/infinity.png';
+                clearIcon.src = 'images/trash.png';
             }
         };
         
@@ -1051,9 +1063,36 @@
             document.addEventListener('keydown', startMusic);
         };
         
+        // Clear all functionality
+        const clearAll = () => {
+            // Clear any existing timeout
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                typingTimeout = null;
+            }
+            
+            // Reset all tracking variables
+            accumulatedResponse = '';
+            nextMilestone = 10;
+            lastTriggeredMilestone = 0;
+            lastChar = '';
+            punctuationTriggered = false;
+            lastCondolenceTime = 0;
+            nonPunctuationCount = 0;
+            lastTriggerType = null;
+            
+            // Clear the response area
+            responseOutput.innerHTML = '<span class="typing-cursor"></span>';
+            
+            // Clear the input
+            complaintInput.value = '';
+            autoExpandTextarea();
+        };
+        
         // Event listeners
         darkModeBtn.addEventListener('click', toggleDarkMode);
         muteBtn.addEventListener('click', toggleMute);
+        clearBtn.addEventListener('click', clearAll);
         
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
