@@ -205,18 +205,25 @@
 </head>
 <body>
     
-    <!-- Mute & Dark Mode Buttons (bottom left) -->
-    <div class="button-container">
-        <button id="mute-btn" class="control-btn">
-            <img id="mute-icon" src="images/volume.png" alt="Volume">
-        </button>
-        <button id="dark-mode-btn" class="control-btn">
-            <img id="dark-mode-icon" src="images/moon.png" alt="Dark Mode">
-        </button>
-        <div class="control-btn" onclick="window.location.href='index.html'">
-            <img id="nav-icon-img" src="images/infinity.png" alt="Infinite Joy Machine" style="width: 1.75rem; height: 1.75rem;">
-        </div>
-    </div>
+           <!-- Mute & Dark Mode Buttons (bottom left) -->
+           <div class="button-container">
+               <button id="mute-btn" class="control-btn">
+                   <img id="mute-icon" src="images/volume.png" alt="Volume">
+               </button>
+               <button id="dark-mode-btn" class="control-btn">
+                   <img id="dark-mode-icon" src="images/moon.png" alt="Dark Mode">
+               </button>
+               <div class="control-btn" onclick="window.location.href='index.html'">
+                   <img id="nav-icon-img" src="images/infinity.png" alt="Infinite Joy Machine" style="width: 1.75rem; height: 1.75rem;">
+               </div>
+           </div>
+           
+           <!-- Clear Button (bottom right) -->
+           <div class="clear-button-container">
+               <button id="clear-btn" class="control-btn">
+                   <img id="clear-icon" src="images/trash.png" alt="Clear All" style="width: 1.5rem; height: 1.5rem;">
+               </button>
+           </div>
     
     <!-- Background Music -->
     <audio id="background-music" preload="auto"></audio>
@@ -585,8 +592,9 @@
                     ["u asked", "__UASKED__"], ["u try", "__UTRY__"], ["u tried", "__UTRIED__"], ["u start", "__USTART__"],
                     ["u started", "__USTARTED__"], ["u look", "__ULOOK__"], ["u looked", "__ULOOKED__"], ["u seem", "__USEEM__"],
                     ["u seemed", "__USEEMED__"], ["u become", "__UBECOME__"], ["u became", "__UBECAME__"],
-                    ["i'm", "__IM__"], ["im", "__IM__"], ["i've", "__IVE__"], ["ive", "__IVE__"], 
-                    ["i'll", "__ILL__"], ["ill", "__ILL__"], ["i'd", "__ID__"], ["id", "__ID__"],
+                    ["i am", "__IAM__"], ["i was", "__IWAS__"], ["i'm", "__IM__"], ["im", "__IM__"], 
+                    ["i've", "__IVE__"], ["ive", "__IVE__"], ["i'll", "__ILL__"], ["ill", "__ILL__"], 
+                    ["i'd", "__ID__"], ["id", "__ID__"],
                     ["we're", "__WERE__"], ["were", "__WERE__"], ["we've", "__WEVE__"], ["weve", "__WEVE__"], 
                     ["we'll", "__WELL__"], ["well", "__WELL__"], ["we'd", "__WED__"], ["wed", "__WED__"],
                     ["haven't", "__HAVENT__"], ["havent", "__HAVENT__"], ["don't", "__DONT__"], ["dont", "__DONT__"], 
@@ -647,7 +655,8 @@
                     "__UASKED__": "i asked", "__UTRY__": "i try", "__UTRIED__": "i tried", "__USTART__": "i start",
                     "__USTARTED__": "i started", "__ULOOK__": "i look", "__ULOOKED__": "i looked", "__USEEM__": "i seem",
                     "__USEEMED__": "i seemed", "__UBECOME__": "i become", "__UBECAME__": "i became",
-                    "__IM__": "you're", "__IVE__": "you've", "__ILL__": "you'll", "__ID__": "you'd",
+                    "__IAM__": "you are", "__IWAS__": "you were", "__IM__": "you're", "__IVE__": "you've", 
+                    "__ILL__": "you'll", "__ID__": "you'd",
                     "__WERE__": "you're", "__WEVE__": "you've", "__WELL__": "you'll", "__WED__": "you'd",
                     "__HAVENT__": "haven't", "__DONT__": "don't", "__WONT__": "won't", "__CANT__": "can't",
                     "__SHOULDNT__": "shouldn't", "__WOULDNT__": "wouldn't", "__COULDNT__": "couldn't", "__DIDNT__": "didn't",
@@ -822,24 +831,30 @@
             // Count non-punctuation characters after any condolence
             if (currentChar && /[a-zA-Z\s]/.test(currentChar)) {
                 nonPunctuationCount++;
-            } else if (currentChar && /[.!?]/.test(currentChar)) {
+            } else if (currentChar && /[.!?\n]/.test(currentChar)) {
                 // Don't reset counter on punctuation - let it accumulate
             }
             
             // Check for punctuation triggers
-            if ((currentChar === '.' || currentChar === '?' || currentChar === '!') && currentChar !== lastChar && !punctuationTriggered) {
+            if ((currentChar === '.' || currentChar === '?' || currentChar === '!' || currentChar === '\n') && currentChar !== lastChar && !punctuationTriggered) {
                 punctuationTriggered = true;
                  // Set timeout to trigger condolence after short delay (0.1-0.5 seconds)
                  const shortDelay = 100 + Math.random() * 400; // 100-500ms
                  typingTimeout = setTimeout(() => {
                      // Get the last sentence before the punctuation mark
-                     const sentences = currentText.split(/[.!?]+/);
+                     const sentences = currentText.split(/[.!?\n]+/);
                      // Get second-to-last element (the sentence before the punctuation)
                      const lastSentence = sentences.length > 1 ? sentences[sentences.length - 2].trim() : sentences[0].trim();
                      
                      if (lastSentence) {
-                         const condolence = getEchoCondolence(lastSentence);
-                         addCondolenceToStream(condolence + ' ');
+                         // 50% chance for echo condolence
+                         if (Math.random() < 0.5) {
+                             const echoCondolence = getEchoCondolence(lastSentence);
+                             addCondolenceToStream(echoCondolence + ' ');
+                         } else {
+                             const condolence = getRandomCondolence();
+                             addCondolenceToStream(condolence + ' ');
+                         }
                      }
                      
                      // Reset punctuation trigger for next time
@@ -853,7 +868,7 @@
                  return;
             }
             // Reset punctuation trigger if user types non-punctuation
-            else if (currentChar !== '.' && currentChar !== '?' && currentChar !== '!') {
+            else if (currentChar !== '.' && currentChar !== '?' && currentChar !== '!' && currentChar !== '\n') {
                 punctuationTriggered = false;
             }
             
@@ -868,8 +883,17 @@
                 typingTimeout = setTimeout(() => {
                     // Double-check we haven't already triggered for this milestone
                     if (nextMilestone > lastTriggeredMilestone) {
-                        const condolence = getRandomCondolence();
-                        addCondolenceToStream(condolence + ' ');
+                        // 50% chance for echo condolence
+                        if (Math.random() < 0.5) {
+                            // Get the last sentence since the last punctuation mark
+                            const sentences = currentText.split(/[.!?\n]+/);
+                            const lastSentence = sentences[sentences.length - 1].trim();
+                            const echoCondolence = getEchoCondolence(lastSentence);
+                            addCondolenceToStream(echoCondolence + ' ');
+                        } else {
+                            const condolence = getRandomCondolence();
+                            addCondolenceToStream(condolence + ' ');
+                        }
                         
                         // Update tracking variables
                         lastTriggeredMilestone = nextMilestone;
