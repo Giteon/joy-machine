@@ -143,6 +143,7 @@ GROK
 big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
 onion hips
 ripstick
+iron lung
 husband pillow
 pillow princess [and the pauper, .3]
 diazepam [(2/4/6/8)000mg, .2]
@@ -161,7 +162,7 @@ stray bullet boulevard
 coke zero [friends or family, *F*]
 florida man
 female led relationship
-catherine zeta jo
+catherine zeta jones
 rumspringa
 MLM
 HR nightmare
@@ -295,6 +296,7 @@ tit-for-tat
 peppa pig
 ipso facto [prest-o change-o, .15]
 bees knees
+quid pro quo
 tick-topia
 post hoc [ergo propter hoc TUAH, *F*]
 privacy policy
@@ -673,6 +675,7 @@ and buy yourself something nice kid
 by way of demonstration to find most trusted advisor[, and whoever can fit the most RAT BONES in his jowels is SURELY your most trusted advisor!, .2]
 [and consider organizing a regular] ICE CHIPPING CHALLENGE
 put the fries in the bag bro
+ta-ta!
 
 TAG (T)
 . XIAOHONGSHU
@@ -753,7 +756,9 @@ That's disgusting! [:P]
 That's so sad!
 Hmmm[mmm]
 No way! [:O]
+Aww.
 Wow!
+Yikes.
 That's just NOT okay!
 Tell me more[, chica].
 Wow, this world is twisted[, huh].
@@ -778,9 +783,11 @@ You mean so much to me.
 Take the day off.
 Go on[nn].
 No...
+Ohhh noooooo.
 You CAN'T be serious...
 Let it all out[, chica].
 Where does it end?
+There's no excuse for that kind of behavior.
 Oh, behave!
 Where do some people get off?
 Can you catch a break?

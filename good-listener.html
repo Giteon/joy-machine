@@ -270,6 +270,7 @@
         let lastCondolenceTime = 0; // Track when last condolence finished
         let nonPunctuationCount = 0; // Count non-punctuation chars after any trigger
         let lastTriggerType = null; // Track what type of trigger caused last condolence ('punctuation' or 'milestone')
+        let lastCondolenceInputLength = 0; // Track input length when last condolence was given
         
         const complaintInput = document.getElementById('complaint-input');
         const responseOutput = document.getElementById('response-output');
@@ -285,7 +286,7 @@
         // Config
         let isDarkMode = false;
         let isMuted = false;
-        const musicVolume = 0.3;
+        const musicVolume = 0.04;
         
         // Typing audio system
         const typingAudioCache = new Map();
@@ -546,14 +547,13 @@
             return finalResult;
         };
         
-        // Simple echo condolence (50% chance)
+        // Echo condolence - transforms user text
         const getEchoCondolence = (userText) => {
-            if (Math.random() < 0.5) {
-                // Remove unwanted punctuation marks
-                let cleanedText = userText.replace(/[:;<>|{}\\`~^*&@]/g, '');
-                
-                // Transform user text bidirectionally using a systematic approach
-                let transformed = cleanedText.toLowerCase();
+            // Remove unwanted punctuation marks
+            let cleanedText = userText.replace(/[:;<>|{}\\`~^*&@]/g, '');
+            
+            // Transform user text bidirectionally using a systematic approach
+            let transformed = cleanedText.toLowerCase();
                 
                 // Step 1: Replace all words with unique placeholders to avoid double transformations
                 const placeholders = {};
@@ -680,13 +680,14 @@
                     transformed = transformed.replace(new RegExp(placeholder, 'g'), replacement);
                 }
                 
-                // Step 3: Fix "me" at start of sentence to "i"
-                transformed = transformed.replace(/^me\b/i, 'i');
-                transformed = transformed.replace(/([.!?]\s+)me\b/gi, '$1i');
-                
-                return transformed + '? ' + getRandomCondolence();
-            }
-            return getRandomCondolence();
+            // Step 3: Fix "me" at start of sentence to "i"
+            transformed = transformed.replace(/^me\b/i, 'i');
+            transformed = transformed.replace(/([.!?]\s+)me\b/gi, '$1i');
+            
+            // Step 4: Remove ending punctuation and replace with '?'
+            transformed = transformed.replace(/[.!?\n]+$/, '').trim();
+            
+            return transformed + '? ' + getRandomCondolence();
         };
         
         // Add new condolence to the stream with typos and typing audio
@@ -851,21 +852,24 @@
                  // Set timeout to trigger condolence after short delay (0.1-0.5 seconds)
                  const shortDelay = 100 + Math.random() * 400; // 100-500ms
                  typingTimeout = setTimeout(() => {
-                     // Get the last sentence before the punctuation mark
-                     const sentences = currentText.split(/[.!?\n]+/);
-                     // Get second-to-last element (the sentence before the punctuation)
-                     const lastSentence = sentences.length > 1 ? sentences[sentences.length - 2].trim() : sentences[0].trim();
+                     // Get text since last condolence
+                     const textSinceLastCondolence = currentText.substring(lastCondolenceInputLength).trim();
                      
-                     if (lastSentence) {
-                         // 50% chance for echo condolence
-                         if (Math.random() < 0.5) {
-                             const echoCondolence = getEchoCondolence(lastSentence);
-                             addCondolenceToStream(echoCondolence + ' ');
-                         } else {
-                             const condolence = getRandomCondolence();
-                             addCondolenceToStream(condolence + ' ');
-                         }
+                     let responseText = '';
+                     
+                     // 50% chance for echo before condolence
+                     if (textSinceLastCondolence && Math.random() < 0.5) {
+                         const echoText = getEchoCondolence(textSinceLastCondolence);
+                         responseText = echoText + ' ';
+                     } else {
+                         const condolence = getRandomCondolence();
+                         responseText = condolence + ' ';
                      }
+                     
+                     addCondolenceToStream(responseText);
+                     
+                     // Update last condolence position
+                     lastCondolenceInputLength = currentText.length;
                      
                      // Reset punctuation trigger for next time
                      punctuationTriggered = false;
@@ -893,17 +897,24 @@
                 typingTimeout = setTimeout(() => {
                     // Double-check we haven't already triggered for this milestone
                     if (nextMilestone > lastTriggeredMilestone) {
-                        // 50% chance for echo condolence
-                        if (Math.random() < 0.5) {
-                            // Get the last sentence since the last punctuation mark
-                            const sentences = currentText.split(/[.!?\n]+/);
-                            const lastSentence = sentences[sentences.length - 1].trim();
-                            const echoCondolence = getEchoCondolence(lastSentence);
-                            addCondolenceToStream(echoCondolence + ' ');
+                        // Get text since last condolence
+                        const textSinceLastCondolence = currentText.substring(lastCondolenceInputLength).trim();
+                        
+                        let responseText = '';
+                        
+                        // 50% chance for echo before condolence
+                        if (textSinceLastCondolence && Math.random() < 0.5) {
+                            const echoText = getEchoCondolence(textSinceLastCondolence);
+                            responseText = echoText + ' ';
                         } else {
                             const condolence = getRandomCondolence();
-                            addCondolenceToStream(condolence + ' ');
+                            responseText = condolence + ' ';
                         }
+                        
+                        addCondolenceToStream(responseText);
+                        
+                        // Update last condolence position
+                        lastCondolenceInputLength = currentText.length;
                         
                         // Update tracking variables
                         lastTriggeredMilestone = nextMilestone;
@@ -959,6 +970,7 @@
             lastCondolenceTime = 0;
             nonPunctuationCount = 0;
             lastTriggerType = null;
+            lastCondolenceInputLength = 0;
             if (typingTimeout) {
                 clearTimeout(typingTimeout);
                 typingTimeout = null;
@@ -995,7 +1007,13 @@
                 muteIcon.src = isDarkMode ? 'images/mute-dark.png' : 'images/mute.png';
                 muteIcon.style.opacity = '0.3';
             } else {
-                backgroundMusic.volume = musicVolume;
+                // Restore volume with proper boost for song 6
+                const currentSong = playlist[playlistIndex];
+                if (currentSong && currentSong.includes('6.mp3')) {
+                    backgroundMusic.volume = musicVolume * 2.5;
+                } else {
+                    backgroundMusic.volume = musicVolume;
+                }
                 muteIcon.src = isDarkMode ? 'images/volume-dark.png' : 'images/volume.png';
                 muteIcon.style.opacity = '1';
             }
@@ -1026,11 +1044,16 @@
             backgroundMusic.src = currentSong;
             backgroundMusic.load();
             
-            // Boost volume for song 6
-            if (currentSong.includes('6.mp3')) {
-                backgroundMusic.volume = musicVolume * 2.5;
+            // Respect mute state - if muted, set volume to 0, otherwise use normal volume
+            if (isMuted) {
+                backgroundMusic.volume = 0;
             } else {
-                backgroundMusic.volume = musicVolume;
+                // Boost volume for song 6
+                if (currentSong.includes('6.mp3')) {
+                    backgroundMusic.volume = musicVolume * 2.5;
+                } else {
+                    backgroundMusic.volume = musicVolume;
+                }
             }
             
             return backgroundMusic.play().catch(() => {});
@@ -1080,6 +1103,7 @@
             lastCondolenceTime = 0;
             nonPunctuationCount = 0;
             lastTriggerType = null;
+            lastCondolenceInputLength = 0;
             
             // Clear the response area
             responseOutput.innerHTML = '<span class="typing-cursor"></span>';
