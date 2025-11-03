@@ -256,6 +256,7 @@
     </div>
     
     <script src="lists.js"></script>
+    <script src="condolences.js"></script>
     <script>
         // Good Listener Machine Logic
         let isTyping = false;
@@ -271,6 +272,13 @@
         let nonPunctuationCount = 0; // Count non-punctuation chars after any trigger
         let lastTriggerType = null; // Track what type of trigger caused last condolence ('punctuation' or 'milestone')
         let lastCondolenceInputLength = 0; // Track input length when last condolence was given
+        
+        // Listening acknowledgment tracking
+        let lastListeningAckTime = 0;
+        let listeningAckCharCount = 0;
+        const LISTENING_ACK_THRESHOLD = 15; // Trigger every ~15 chars
+        const LISTENING_ACK_MIN_DELAY = 500; // Min 500ms between acks
+        let isTypingListeningAck = false; // Track if we're typing a listening ack
         
         const complaintInput = document.getElementById('complaint-input');
         const responseOutput = document.getElementById('response-output');
@@ -399,36 +407,87 @@
         preloadTypingSounds();
         
         // Item timeout/cooldown system
-        let condolenceTimeouts = new Map(); // item -> timeout count
+        let condolenceTimeouts = new Map(); // key (type:item) -> timeout count
         
         // Add item to timeout with cooldown = list size - 1
-        const addCondolenceToTimeout = (item) => {
-            // CONDOLENCES is at index 7 (after INTRO, BEAST, NOUN, CANDY, ADJECTIVE, FINALE, TAG)
-            const condolences = window.wordLists?.[7] || [];
-            const cooldownDuration = condolences.length > 1 ? condolences.length - 1 : 25;
-            condolenceTimeouts.set(item, cooldownDuration);
+        const addCondolenceToTimeout = (item, listType) => {
+            const listMap = {
+                'statement': window.condolencesStatement || [],
+                'question': window.condolencesQuestion || [],
+                'activeListening': window.condolencesActiveListening || [],
+                'personal': window.condolencesPersonal || []
+            };
+            
+            const currentList = listMap[listType] || [];
+            const cooldownDuration = currentList.length > 1 ? currentList.length - 1 : 25;
+            condolenceTimeouts.set(`${listType}:${item}`, cooldownDuration);
         };
         
         // Decrement all timeout counters and remove expired items
         const decrementCondolenceTimeouts = () => {
             const itemsToRemove = [];
-            condolenceTimeouts.forEach((count, item) => {
+            condolenceTimeouts.forEach((count, key) => {
                 const newCount = count - 1;
                 if (newCount <= 0) {
-                    itemsToRemove.push(item);
+                    itemsToRemove.push(key);
                 } else {
-                    condolenceTimeouts.set(item, newCount);
+                    condolenceTimeouts.set(key, newCount);
                 }
             });
             itemsToRemove.forEach(item => condolenceTimeouts.delete(item));
         };
         
         // Get available condolences excluding those on timeout
-        const getAvailableCondolences = () => {
-            // CONDOLENCES is at index 7 (after INTRO, BEAST, NOUN, CANDY, ADJECTIVE, FINALE, TAG)
-            const allCondolences = window.wordLists?.[7] || ['oh that\'s awful!', 'she really said that?', 'that\'s disgusting!'];
-            const availableItems = allCondolences.filter(item => !condolenceTimeouts.has(item));
+        const getAvailableCondolences = (type = 'default') => {
+            let allCondolences;
+            
+            if (type === 'statement') {
+                allCondolences = window.condolencesStatement || [];
+            } else if (type === 'question') {
+                allCondolences = window.condolencesQuestion || [];
+            } else if (type === 'activeListening') {
+                allCondolences = window.condolencesActiveListening || [];
+            } else if (type === 'personal') {
+                allCondolences = window.condolencesPersonal || [];
+            } else {
+                // Default: 80% statement, 20% question
+                const useQuestion = Math.random() < 0.2;
+                allCondolences = useQuestion 
+                    ? (window.condolencesQuestion || [])
+                    : (window.condolencesStatement || []);
+            }
+            
+            const availableItems = allCondolences.filter(item => 
+                !condolenceTimeouts.has(`${type}:${item}`)
+            );
+            
             return availableItems.length > 0 ? availableItems : allCondolences;
+        };
+        
+        // Check if text contains a name from the names list
+        const detectName = (text) => {
+            if (!text || text.trim().length === 0) return null;
+            
+            const nameList = window.names || [];
+            if (nameList.length === 0) return null;
+            
+            // Split by whitespace and also check for names at word boundaries
+            const words = text.split(/\s+/);
+            
+            for (const word of words) {
+                // Remove punctuation and check case-insensitive
+                const cleanWord = word.replace(/[.,!?;:()"'\[\]]/g, '').trim();
+                if (cleanWord.length === 0) continue;
+                
+                const foundName = nameList.find(name => 
+                    name.toLowerCase() === cleanWord.toLowerCase()
+                );
+                if (foundName) {
+                    return foundName; // Return original case from list
+                }
+            }
+            
+            return null;
         };
         
         // Process alternates (content in parentheses with / separators)
@@ -527,21 +586,55 @@
         };
         
         // Get random condolence with bracket/alternate processing
-        const getRandomCondolence = () => {
-            // Get available condolences (excluding those on cooldown)
-            const availableCondolences = getAvailableCondolences();
+        const getRandomCondolence = (textToCheck = '') => {
+            // Check for name first
+            const detectedName = detectName(textToCheck);
+            
+            if (detectedName) {
+                const availablePersonal = getAvailableCondolences('personal');
+                const rawItem = availablePersonal[Math.floor(Math.random() * availablePersonal.length)];
+                
+                addCondolenceToTimeout(rawItem, 'personal');
+                decrementCondolenceTimeouts();
+                
+                // Replace [name] with a temporary placeholder before processing brackets
+                // This prevents processBrackets from treating [name] as a bracket
+                const tempPlaceholder = '__NAME_PLACEHOLDER__';
+                const itemWithPlaceholder = rawItem.replace(/\[name\]/gi, tempPlaceholder);
+                
+                const { result: afterAlternates } = processAlternates(itemWithPlaceholder);
+                const { result: afterBrackets } = processBrackets(afterAlternates);
+                
+                // Replace temporary placeholder with detected name (maintain capitalization of name)
+                const finalResult = afterBrackets.replace(new RegExp(tempPlaceholder, 'gi'), detectedName);
+                
+                return finalResult;
+            }
+            
+            // Default: 80% statement, 20% question
+            const useQuestion = Math.random() < 0.2;
+            const type = useQuestion ? 'question' : 'statement';
+            const availableCondolences = getAvailableCondolences(type);
             const rawItem = availableCondolences[Math.floor(Math.random() * availableCondolences.length)];
             
-            // Add to timeout/cooldown
-            addCondolenceToTimeout(rawItem);
-            
-            // Decrement all timeouts
+            addCondolenceToTimeout(rawItem, type);
             decrementCondolenceTimeouts();
             
-            // First process alternates (parentheses)
             const { result: afterAlternates } = processAlternates(rawItem);
+            const { result: finalResult } = processBrackets(afterAlternates);
             
-            // Then process brackets
+            return finalResult;
+        };
+        
+        // Get active listening condolence (normal typing speed, no typos)
+        const getActiveListeningCondolence = () => {
+            const availableListening = getAvailableCondolences('activeListening');
+            const rawItem = availableListening[Math.floor(Math.random() * availableListening.length)];
+            
+            addCondolenceToTimeout(rawItem, 'activeListening');
+            decrementCondolenceTimeouts();
+            
+            const { result: afterAlternates } = processAlternates(rawItem);
             const { result: finalResult } = processBrackets(afterAlternates);
             
             return finalResult;
@@ -687,12 +780,12 @@
             // Step 4: Remove ending punctuation and replace with '?'
             transformed = transformed.replace(/[.!?\n]+$/, '').trim();
             
-            return transformed + '? ' + getRandomCondolence();
+            return transformed + '? ' + getRandomCondolence(userText);
         };
         
         // Add new condolence to the stream with typos and typing audio
         const addCondolenceToStream = (newText) => {
-            if (isTyping) return;
+            if (isTyping || isTypingListeningAck) return;
             
             isTyping = true;
             accumulatedResponse += newText;
@@ -721,6 +814,7 @@
                     isTyping = false;
                     lastCondolenceTime = Date.now();
                     nonPunctuationCount = 0;
+                    listeningAckCharCount = 0; // Reset listening ack counter after condolence finishes
                     return;
                 }
                 
@@ -821,6 +915,37 @@
             typeNextWord();
         };
         
+        // Add active listening acknowledgment to stream (normal typing speed, no typos)
+        const addActiveListeningAckToStream = () => {
+            if (isTyping || isTypingListeningAck) return; // Don't interrupt main response or if already typing ack
+            
+            isTypingListeningAck = true;
+            const listeningText = getActiveListeningCondolence() + ' ';
+            accumulatedResponse += listeningText;
+            
+            // Type at normal speed (no typos, same speed as regular responses)
+            const chars = listeningText.split('');
+            let charIndex = 0;
+            const currentDisplayed = responseOutput.innerHTML.replace(/<span class="typing-cursor"><\/span>$/, '');
+            let displayedText = currentDisplayed;
+            
+            const typeNextChar = () => {
+                if (charIndex < chars.length) {
+                    displayedText += chars[charIndex];
+                    responseOutput.innerHTML = displayedText + '<span class="typing-cursor"></span>';
+                    charIndex++;
+                    typingTimeouts.push(setTimeout(typeNextChar, 50 + Math.random() * 100)); // Normal speed: 50-150ms
+                } else {
+                    // Done with listening ack
+                    isTypingListeningAck = false;
+                    lastListeningAckTime = Date.now();
+                    listeningAckCharCount = 0;
+                }
+            };
+            
+            typeNextChar();
+        };
+        
         // Check for random character milestones and trigger condolences after 3-second pause
         const checkCharacterMilestone = () => {
             const currentLength = complaintInput.value.length;
@@ -862,7 +987,7 @@
                          const echoText = getEchoCondolence(textSinceLastCondolence);
                          responseText = echoText + ' ';
                      } else {
-                         const condolence = getRandomCondolence();
+                         const condolence = getRandomCondolence(textSinceLastCondolence);
                          responseText = condolence + ' ';
                      }
                      
@@ -907,7 +1032,7 @@
                             const echoText = getEchoCondolence(textSinceLastCondolence);
                             responseText = echoText + ' ';
                         } else {
-                            const condolence = getRandomCondolence();
+                            const condolence = getRandomCondolence(textSinceLastCondolence);
                             responseText = condolence + ' ';
                         }
                         
@@ -951,6 +1076,26 @@
         complaintInput.addEventListener('input', (e) => {
             checkCharacterMilestone();
             autoExpandTextarea();
+            
+            // Check for listening acknowledgment opportunity
+            const currentTime = Date.now();
+            
+            // Only count characters if enough time has passed since last condolence
+            // This ensures we only trigger after at least 15 characters since last condolence
+            if (lastCondolenceTime === 0 || (currentTime - lastCondolenceTime) > 100) {
+                listeningAckCharCount++;
+            }
+            
+            // Trigger active listening ack if:
+            // - At least 15 characters typed since last condolence
+            // - Enough time passed since last listening ack
+            // - Not currently typing a response
+            if (listeningAckCharCount >= LISTENING_ACK_THRESHOLD && 
+                (currentTime - lastListeningAckTime) >= LISTENING_ACK_MIN_DELAY &&
+                (lastCondolenceTime === 0 || (currentTime - lastCondolenceTime) > 100) && // At least 100ms since last condolence
+                !isTyping && !isTypingListeningAck) {
+                addActiveListeningAckToStream();
+            }
         });
         
         // Force cursor to end on click, focus, and selection change
@@ -971,6 +1116,9 @@
             nonPunctuationCount = 0;
             lastTriggerType = null;
             lastCondolenceInputLength = 0;
+            lastListeningAckTime = 0;
+            listeningAckCharCount = 0;
+            isTypingListeningAck = false;
             if (typingTimeout) {
                 clearTimeout(typingTimeout);
                 typingTimeout = null;
@@ -1104,6 +1252,9 @@
             nonPunctuationCount = 0;
             lastTriggerType = null;
             lastCondolenceInputLength = 0;
+            lastListeningAckTime = 0;
+            listeningAckCharCount = 0;
+            isTypingListeningAck = false;
             
             // Clear the response area
             responseOutput.innerHTML = '<span class="typing-cursor"></span>';
