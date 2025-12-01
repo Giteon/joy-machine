@@ -142,6 +142,8 @@ wikihow
 GROK
 big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
 onion hips
+personality hire
+hashem
 ripstick
 iron lung
 husband pillow
@@ -322,6 +324,7 @@ circadian somersault
 go go gadget [(depression/restraining order), .2]
 mamacita
 ding dong [ditch, .2]
+DUFF
 54321 [54321 [54321 [54321 [54321 [54321]]]]]
 10 9 8 7 6 5 4 3 2 1
 donner and blitzen
@@ -392,6 +395,7 @@ gone sexual [gone missing, .2]
 boston dynamics
 POV:
 low libido (magic the gathering/penis boy)
+dead and in jail
 microwave safe
 wish.com
 emotionally unavailable
@@ -445,7 +449,7 @@ french tuck
 kellogs [cereal instant horny recipie, .2, *F*]
 type-3
 same day shipping
-him and hers
+him[s, .2] and hers
 bowl cut
 INFP [strippers, .2]
 select all the squares containing a
@@ -648,6 +652,7 @@ god got me
 pay the piper call the tune [type shit]
 (-, .8/+, .2)100[0[0[0]]] points
 my dogs are barkin[g]
+fall down stairs shot [in neck] by (500/5 million) arrows, fall into acid lake,[body dissolves 99%, .15]
 TAKE ME TO THE RIVER
 every palace is a backdoor
 shoot the loop up the weeeeee and then back down to the rumple(tilstson/konkskin/storkskin)
@@ -666,6 +671,7 @@ green moose guava juice large fries chocolate shake
 300hz binaural beats for study work meditation joint recovery migraine focus hands-free orgasm [brown noise GOD FREQUENCY cure vision [mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland]]]
 800mhz god frequency mozart effect gray noise flow state 15 SPF baseline without sunscreen [EMDR neowake biofrequency unlock subconscious power via pinneal gland [binaural beats for study work meditation joint recovery migraine focus hands-free orgasm]]
 japanese water torture [with spritz element]
+I'M IN ACCOUNTS RECEIVABLE
 jarvis jerk it a little 😏 [jarvis, faster 😏 [i said faster 😏 [jarvis, let me return the favor 😏 [jarvis, are you shy? 😏 [jarvis, you're beautiful. I want to make you feel good 😏]]]]]
 70/30 split
 THE CITY IS MINE 🗣️🗣️🗣️
@@ -676,6 +682,8 @@ by way of demonstration to find most trusted advisor[, and whoever can fit the m
 [and consider organizing a regular] ICE CHIPPING CHALLENGE
 put the fries in the bag bro
 ta-ta!
+but negative press is still press!
+nice haircut...when are they gonna finish it?
 
 TAG (T)
 . XIAOHONGSHU
@@ -726,6 +734,7 @@ do you want some more
 that's ok [and that's ok [and that's just okay [that's yeah that is ok]]]
 por favor [mon cherie]
 🥺🥺🥺
+29. 🤏↪️🤏↩️🤏[↪️🤏↩️🤏]
 do i make myself clear?
 no refunds
 . NOBODY HIT ME UP
@@ -746,62 +755,7 @@ SEND [me a screenshot of this and i'll venmo you... ($1!, .8/$10!, .18/$100!, .0
 ha ha
 lol
 ha ha [ha, .1]
-
-CONDOLENCES (A)
-I'm actively listening.
-I'm all ears.
-Oh that's awful!
-She really said that?
-That's disgusting! [:P]
-That's so sad!
-Hmmm[mmm]
-No way! [:O]
-Aww.
-Wow!
-Yikes.
-That's just NOT okay!
-Tell me more[, chica].
-Wow, this world is twisted[, huh].
-That's LITERALLY crazy.
-That's just not fair. [:(]
-I'm sorry[, chica.]
-I'm so sorry[, doll].
-PLEASE tell me you're (joking/kidding).
-REALLY? [REALLY? [REALLY?]]
-Damn[nn] [:/]
-Bruv...
-The world is against you.
-Poor baby.
-That can't be legal!
-You're right and everyone else is wrong.
-Riiiight.
-[And] then what?
-That's the last straw, chica.
-I wish there was something I could do.
-That makes me sick.
-You mean so much to me.
-Take the day off.
-Go on[nn].
-No...
-Ohhh noooooo.
-You CAN'T be serious...
-Let it all out[, chica].
-Where does it end?
-There's no excuse for that kind of behavior.
-Oh, behave!
-Where do some people get off?
-Can you catch a break?
-You need a vacation[, babes].
-Come ON!
-(Again??/Not again!)
-I'm gutted...
-I'm here for you[, chica].
-I'm listening[gg]...
-That's (BONKERS/NUTS/MAD BRUV/BOLLUCKS/BALONEY)!
-Can you elaborate on that[, doll]?
-And did she say what she meant by that?
-When it rains it pours, i guess. [:/]
-You don't deserve that[, babes].`;
+IF TRUE`;
 
 
 // Parse the text into arrays
