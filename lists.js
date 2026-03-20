@@ -193,7 +193,7 @@ webster's dictionary
 (bechdel, .8/bechamel, .2) test [(PASSED/FAILED) WITH FLYING COLORS, .15, *F*]
 chakras aligned [virginity restored, .2, *F*]
 conk crete [jungle where dreams are made of, .1, *F*]
-omegaverse [omega three fatty acids]
+omegaverse [omega three fat asses]
 bruv had a baby had to dump the chip
 land acknowledgement
 GARY ROYCE[! A-BING-A-BAM-A-BOOM! OH!, .2, *F*]
@@ -847,6 +847,7 @@ const childsModeReplacements = {
   'fucking': 'freaking',
   'fuckin': 'freakin',
   'fuck-ass': 'gosh darn',
+  'fat asses': 'fatty acids',
   'fuck': 'frick',
   'fuck my fucking ass': 'butter my biscuit',
   'dead': 'passed away',
