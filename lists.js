@@ -42,7 +42,7 @@ bumblebee
 butterfly [effect[ive immediately, .1], .2, *B*]
 capybara
 cat dog
-[[little fucking] hungry fucking] caterpillar
+[[little fucking] hungry fucking] (caterpillar/caterpillar 🧪🐛)
 [alvin and the, .1, *B*] chipmunk
 cockroach
 crab [rangoon, *B*]
@@ -96,7 +96,7 @@ oyster
 pigeon
 parrot
 penguin[s of madagascar, .1, *B*]
-platypus
+[perry the] platypus
 porcupine
 pterodactl
 python
@@ -128,6 +128,7 @@ wolf [blitzer, .15, *B*]
 zebra
 
 NOUN (N)
+damascus steel [RAN THRU, .15]
 [oh no babe pleaaase dont be mad i accidentally booked a vacation to, .2, *F*] needle beach
 bound to wheelchair
 full-body paralysis [confined to bed for rest of life charlie and the chocolate factory style, .2, *F*]
@@ -135,11 +136,18 @@ imitation holocaust crab
 sydney sweeney [jeans optimal DNA, .2, *F*]
 bone orchid [immune from all disease, .25, *F*]
 mozzarella stick
+iron ingot
 hinge premium [diahhrea from tube]
+chipotle [welcome mat, .15]
+fart brothers [(go to china/go to hell/get their GED/go to red cross/go to amnesty international/go to aruba), .3, *F*]
+waffle house index
+[i have nothing to live for gonna start maxing out my, .2, *F*] chase sapphire
+FiDi cemetary
 [45°, .2] cock shame
 (chernobyl, .6/chernobyl tampon $100, .2/batman chernobyl tampon $100, .2)
 wikihow
 GROK
+sandra bollucks
 big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
 onion hips
 personality hire
@@ -147,6 +155,7 @@ hashem
 ripstick
 iron lung
 husband pillow
+ARIAL TRAMWAY [🚡🚡🚡, .15, *F*]
 pillow princess [and the pauper, .3]
 diazepam [(2/4/6/8)000mg, .2]
 cortisol [face, .2]
@@ -275,16 +284,23 @@ show of force
 [meet me at the darian gap at 0-300. wear this dress, it will just barely fit. find enclosed: one (1) bottle of ferragamo intense leather cologne. administer one (1) spritz at each of the seven (7) chakra points. Next, (1) vial of dog pheromone. 9pm. hotel bar. order a shirley temple, all rum, microwaved 45 min, HOT. pretend you don’t know me. hand me this brass wristwatch. count 15 seconds until my pacemaker explodes. act casual. slip this note in the bartenders shirt pocket. he will give you a dart shell. swallow it. pull fire alarm. take next flight to darian gap. purchase a sprite zero. the contact will hold a chartreuse parasol. spray dog pheromone to distract guard dogs. aquire tranquilizer from contact. assemble tranquilizer dart and launch through pepsi straw. Await further instruction., 1.0, *F*]
 
 CANDY(C)
+meeple
+bird box
 scrub a dub dub[step [btdubstep, .1]]
 bombaclat [ultimate selector [WITH THE CHAMPION SOUND, *F*]]
 pink (ponk/pony club)
 perfect politics
 jamba juice [green goddess ecoli razzmatazz, .3]
 buccal fat [tummy tuck]
+nine wine wine
 chunky monkey [ben and jerrys, .15]
 dole dipper
+rural juror
 pro bono
+runescape papaya [RAN THRU, .15]
+paloma wool [RAN THRU, .15]
 mary poppins
+galentine's day
 freaky friday
 tip-to-taint [farm-to-table, .2]
 booze cruise
@@ -292,10 +308,12 @@ booze cruise
 jacuzzi [man drowned by request, .2]
 laffy taffy [willy wonka, .15]
 zendaya[? I hardly know her!, .1, *F*]
+practical match
 silly putty
 she-shed [wasp infestation]
 tit-for-tat
 peppa pig
+walt disney['s penis, .1, *F*]
 ipso facto [prest-o change-o, .15]
 bees knees
 quid pro quo
@@ -384,12 +402,16 @@ jungle juice
 
 ADJECTIVE (A)
 and a-one and a-two and-a
+preseved in wax
 of pure and infinite [joy, .2, *F*]
 blood (drenched/soaked)
-extremely rare extremelypoisonous
+gigormo
+extremely rare [extremely poisonous, .25]
+(extremely delicious/extremely disgusting)
 riddled with (disease/needles)
 fuck-ass
 le epic [pwn, .2]
+when in rome
 full-pen [summer[time sadness, *F*]]
 gone sexual [gone missing, .2]
 boston dynamics
@@ -429,7 +451,8 @@ big n' greedy
 stolen valor
 heterosexual
 taxidermy [husband turned into skin lamp, .15, *F*]
-biblically accurate
+biblically accurate [baddie, .3, *F*]
+non-binary [princess, .2]
 microplastic
 periphrastic
 lazy susan
@@ -493,6 +516,7 @@ paradigm shift
 green bubble 
 boy phone girl phone [they them phone]
 ahegao [mommy milker [sudoku eyes, 0.6, *F*]]
+reassigned to perimeter
 
 FINALE (F)
 YOUNG [(Skylar Gisondo/Jenna Orteg/Coleman Domingo) YOUNG, .2]
@@ -501,9 +525,12 @@ dot com [dot jizz [dot edu]]
 total body enhancement [chamber of commerce, .6]
 with the (fat naturals, .7/fatties, .3)
 3-trillion thread count
+[hit the, .3] juckport 1 (borjillioin/trillion/zillion)$
+uh uh uh i’m gonna make more money than him [im gonna buy his house from him, .2]
 shit cup runneth over [my balls, .4]
 THAT COULD BE A SHOW
 damn girl u look color blind i can fix u
+i THINK I’d remember having a dog
 NUKE IN DA CLUB
 so THAT just happened
 oura ring indicates no pulse[, noooooo owner of oura ring is dead. FREE OURA RING!]
@@ -520,7 +547,7 @@ game set match [set point [BITCH, .2]]
 once bitten twice shy
 what teh heck?
 hit em with the ol' over under
-baby where the hell's my husband [what's taking him so long]
+where the hell's my husband
 i’m well within my rights to KILL you right now
 . you should know, your wife kissed me on the cheek when I got here. Now look at ya, all alone. Everybody’s going to party at my house.
 LEMME THINK ABOUT IT FOR A MINUTE
@@ -562,6 +589,7 @@ and a blunt
 que paso en la selva negra
 pokemon go (to the polls/fuck yourself)
 infertile if dog
+we did it joe
 etc [etc [and so on and so forth [in such a way proceeding as thus as such]]]
 and subway take away everything you love
 100% AGREE
@@ -581,6 +609,7 @@ car door left unlocked, hair stolen by witch[, naruto run into witch's basement,
 and let the [fucking] bunny eat the carrot
 your skin [ohhhh yeah, .2] oh yeah your skin and bones
 in good christian fun
+BUILDING WITH A HORN ON IT 🏤
 [ummmmm, .2] did I just say that out loud?
 CLONE CLONE CLONE
 lets take this offline
@@ -591,6 +620,7 @@ suggested donation: life savings
 take off glasses it is revealed she is actually beautiful!
 FREE CREDIT SCORE
 got any games on your phone?
+HIPPA VIOLATION
 DANGER WILL ROBINSON [DANGER, .15]
 100 concubines (NOT virgins, robust sexual references)
 TFW knee surgery in 4 days
@@ -685,6 +715,7 @@ ta-ta!
 but negative press is still press!
 nice haircut...when are they gonna finish it?
 YOUR SON'S A GHOUL THAT KID DON'T ACT RIGHT
+bro doesn’t know how to return an IPad to Amazon 🤣🤣🤣🤦📉💯
 
 TAG (T)
 . XIAOHONGSHU
@@ -707,6 +738,7 @@ SENT FROM IPHONE
 sent from my iphone
 sent from tamagotchi
 BITCH
+TRIPLE IT TRIPLE IT TRIPLE IT
 (reliable, expensive, dangerous)
 :-)
 for the lady
@@ -714,6 +746,7 @@ for the lady
 (read in transatlantic accent)
 (read in borat voice)
 (read in kermit voice)
+i'll have the soup.
 RETWEET 1000
 actually delete that
 . OH BEHAVE!
@@ -725,7 +758,10 @@ HUZZAH
 . That's just what I like!
 weeeeeeeeeeeeee
 dave & busters [dave & busters [dave & busters]]
+oh F WORD
 mmmmmmmmmmm
+hashtag awesome 😏
+and that's gonna be awesome
 uunnnhhhhhggh
 CHA CHING!
 WRITE THAT DOWN
@@ -741,10 +777,13 @@ no refunds
 . NOBODY HIT ME UP
 yummm
 nahhh slime
+EPIC STYLE
 OR ELSE
+well done Jeffery [mmhmhmmhm, .2]
 ANY QUESTIONS?
 SOAKING WET
 . So THAT'S fun!
+we are so back
 HAPPY BIRTHDAYYYY
 4K
 MAN I GOT IT MADE
