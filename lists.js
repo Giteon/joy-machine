@@ -684,6 +684,7 @@ put the fries in the bag bro
 ta-ta!
 but negative press is still press!
 nice haircut...when are they gonna finish it?
+YOUR SON'S A GHOUL THAT KID DON'T ACT RIGHT
 
 TAG (T)
 . XIAOHONGSHU
