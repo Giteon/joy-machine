@@ -38,6 +38,7 @@ armadillo
 baseball animal, *B*
 bear
 beaver
+bird[s and bees, .2, *F*]
 bumblebee
 butterfly [effect[ive immediately, .1], .2, *B*]
 capybara
@@ -108,6 +109,7 @@ RAT [bones, *B*]
 rat [who walked up to a castle, .1, *F*, *B*]
 rooster [head in dirt, *B*]
 scorpion
+[baby, .3, *B*] shark
 sheep
 skunk [gunk, .15, *B*]
 snake
@@ -118,7 +120,7 @@ starfish
 tiger [king, .15, *B*]
 [frog and, .2, *B*] toad
 turtle
-turkey [meatball, .2, *B*]
+turkey [(meatball/meatball sub), .3, *B*]
 walrus
 wasp [infestation, .1, *B*]
 wombat [cube of shit, .2, *B*]
@@ -137,6 +139,7 @@ sydney sweeney [jeans optimal DNA, .2, *F*]
 bone orchid [immune from all disease, .25, *F*]
 mozzarella stick
 iron ingot
+thanksgiving
 hinge premium [diahhrea from tube]
 chipotle [welcome mat, .15]
 fart brothers [(go to china/go to hell/get their GED/go to red cross/go to amnesty international/go to aruba), .3, *F*]
@@ -148,8 +151,8 @@ FiDi cemetary
 wikihow
 GROK
 sandra bollucks
-big league chew [on the floorboards oops SORRY KAREEM, .1, *F*]
-onion hips
+big league chew [on the floorboards oops SORRY KAREEM [. NOT, .2], .3, *F*]
+onion hips [don't lie, .2 [me a river [of blood [and butter [my toast on both sides [of the panama canal]]]]]]
 personality hire
 hashem
 ripstick
@@ -163,22 +166,22 @@ cortisol [face, .2]
 price match
 upside down cake
 propranolol [8000mg]
-facebook marketplace
-jeff goldblum
-gentleman caller
+facebook market place [(of worship/these nuts on your chin), .1, *F*]
+jeff goldblum[house productions, .1, *F*]
+gentleman caller[? I hardly know her, .1, *F*]
 homonculus
 hurricane gender reveal
 alpha centauri [beta male [gamma delta epsilon]]
-stray bullet boulevard 
+stray bullet boulevard [painted ladies, .1]
 coke zero [friends or family, *F*]
-florida man
+florida man [with a bit a swag busts it down sexual style, .1, *F*]
 female led relationship
-catherine zeta jones
+catherine zeta jones[town, .2]
 rumspringa
-MLM
-HR nightmare
+MLM[LMLMLM, .1]
+HR nightmare[ nightmare nightmare, .1]
 stagg night
-winston churchill
+winston [netflix and , .1, *F*]churchill
 (1st/2nd/3rd/4th/5th/6th) base
 hit n' run [don't worry my wife has an essential oil for that, .1, *F*]
 (0/1/21)-figure salary [bones sorted by color shape size texture and smell [BUT NEVER BY TASTE], .2, *F*]
@@ -195,7 +198,7 @@ chakras aligned [virginity restored, .2, *F*]
 conk crete [jungle where dreams are made of, .1, *F*]
 omegaverse [omega three fat asses]
 bruv had a baby had to dump the chip
-land acknowledgement
+land acknowledgement [FIVE FOUR THREE TWO ONE, .1, *F*]
 GARY ROYCE[! A-BING-A-BAM-A-BOOM! OH!, .2, *F*]
 shiva baby
 selena gomez [oreo mmmm tastes like fucking mexico [everything is in sepia now], *F*]
@@ -296,6 +299,7 @@ nine wine wine
 chunky monkey [ben and jerrys, .15]
 dole dipper
 rural juror
+blackjack
 pro bono
 runescape papaya [RAN THRU, .15]
 paloma wool [RAN THRU, .15]
@@ -324,13 +328,13 @@ love thy neighbor
 chutes and ladders [russian roulette, .15]
 razzle dazzle
 beanie baby
-pictochat
-cottage core
+pictochat[GPT, .15]
+cottage cor(e, .8/nelius, .2)
 snap crackle [pop[corn lung, .2]]
-humpty dumpty
+humpty dumpty [with the fat natties, .1, *F*]
 little league [season cancelled due to rampant hand foot mouth disease , .1, *F*]
 chugga chugga [chopped cheese, .2]
-bubble butt [bazonga]
+bubble butt [bazonga [boing boing boing, .2, *F*]]
 strawberry shortcake
 cotton candy
 cocomelon
@@ -348,7 +352,7 @@ DUFF
 donner and blitzen
 cha-cha slide
 twisted tea
-spirulina
+spirulina[? I hardly know her!, .1, *F*]
 purple people eater
 poindexter
 boing boing [yoga ball [blacked out no memories, *F*]]
@@ -358,13 +362,13 @@ gutterball
 pinapple jiblet
 wet nurse [japanese sponge bath [(euthanasia likely)], *F*]
 bundle and save
-hub and spoke
+hub and spoke [to your mom last night, .1, *F*]
 hubba bubba
 ozempic (summer, .8/winter, .2)
 yankee doodle [dandy, .8, *F*]
 [pussy popping, *F*] polly pocket
 princess peach [tom hardy lips, .3]
-doja cat
+doja cat [kitty cat cat kitty cat cat, .1, *F*]
 weeeee[eeeee[eeee[eeeeee]]]
 aaaaaaa[aaaaaa[aaaaaa]]
 haha[hahaha]
@@ -381,7 +385,7 @@ chester cheeta [i put my dick in a bag of doritos and suck the dust off the tip,
 dunkin donut[s]
 mystery meat
 zoboomafoo
-rigamarole
+rigamarole [this blunt for me, .1, *F*]
 beach blanket babylon [baby bonnet, .2]
 baby bonnet [beach blanket babylon, .2]
 labubu [lafufu [lamumu]]
@@ -392,7 +396,7 @@ pussy slay mama
 daily dingle [dongle, .15]
 party popper [petri dish, .2]
 willy wonka
-squink squonk
+squink squonk [squenis, .1]
 yuppy bitch
 tzatziki [baba ganoosh]
 baba yaga
@@ -416,9 +420,9 @@ full-pen [summer[time sadness, *F*]]
 gone sexual [gone missing, .2]
 boston dynamics
 POV:
-low libido (magic the gathering/penis boy)
+low libido [(magic the gathering/penis boy), .2, *F*]
 dead and in jail
-microwave safe
+microwave-safe
 wish.com
 emotionally unavailable
 password protected
@@ -429,7 +433,7 @@ cream o the crop[circle, .1, *F*]
 barely alive
 brimming with [(piss/cum), .1]
 bricked up [fridge magnet, .1, *F*]
-fockin minging [that is, .2, *F*]
+focking minging [that is, .2, *F*]
 intermittent [fasting, .2]
 ferragamo [signature scent]
 meat and potatoes
@@ -470,7 +474,8 @@ firm-but-fair
 carbon neutral [carbon credit, .15]
 french tuck
 kellogs [cereal instant horny recipie, .2, *F*]
-type-3
+type-A [type O-negative type "boobs" into google image, .1, *F*]
+(type-2/type-3)
 same day shipping
 him[s, .2] and hers
 bowl cut
@@ -489,7 +494,7 @@ knee-high [swampwater]
 16 inch[er]
 lifetime subscription
 sucked dry
-bottled at the source
+bottled at the source [(MY ASS), .1, *F*]
 eldritch [horror, .2]
 farm-to-table [tip-to-taint, .3 [bottled at the source, .3]]
 victory royale
@@ -571,7 +576,8 @@ legs ripped CLEAN off [(I'm talking about a CLEAN break/but don't worry my wife 
 back in highschool I rolled blunts on the scantron
 turn around bend over [lemme see the nutrition facts]
 trail gone cold [dog dead [no bone orchid no GF, .2]]
-(cherished memories burned as fuel to power nvidia server farm/no storage remaining must delete all cherished memories from google drive)
+cherished memories burned as fuel to power nvidia server farm
+no storage remaining must delete all cherished memories from google drive [my car off a cliff, 0.2]
 MAYO MOMENT
 I'm off the stuff
 doth ye merry gentlemen on high
@@ -838,12 +844,13 @@ const nsfwWords = [
   'bricked up', 'sucked dry', 'holocaust', 'imitation holocaust crab', 'guantanamo bay', '9/11', '9/11 simulator', '9/11 livestream',
   'japanese water torture', 'breedable', 'ahegao', 'mommy milker', 'onlyfans', 'and suck the dust off the tip', 'orgasm', 'hands-free orgasm', 'chained to radiator',
   'death by hypoxia', 'omegaverse', 'how can i be homophobic my bitch is gay', 'because of WOKE!?', 'man drowned by request', 'cock and ball torture', 'heterosexual', 
-  'cube of shit', '16 inch', '16 incher', 'PREEMER', 'squenis', 'squssy', 'fockin minging'
+  'cube of shit', '16 inch', '16 incher', 'PREEMER', 'squenis', 'squssy', 'focking minging'
 ];
 
 
 // child's mode word replacements mapping
 const childsModeReplacements = {
+  'boobs': 'google',
   'fucking': 'freaking',
   'fuckin': 'freakin',
   'fuck-ass': 'gosh darn',
@@ -858,8 +865,8 @@ const childsModeReplacements = {
   'slutty vegan': 'vegan',
   'instant cardiac arrest': '(AMAZING TASTE!)',
   'sexual style': 'silly style',
-  'shit cup runneth over my balls': 'coffee cup poureth over my hand', 
-  'shit cup runneth over': 'coffee cup poureth over',  
+  'shit cup runneth over my balls': 'hot coco poureth over', 
+  'shit cup runneth over': 'hot coco poureth over',  
   'pokemon go fuck yourself': 'pokemon go to the polls',
   'non-sexual': 'platonic',
   'robust sexual references': 'interesting conversations',
